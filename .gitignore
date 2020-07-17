@@ -1,0 +1,5 @@
+backups
+.nexus
+node_modules
+.env
+.DS_Store

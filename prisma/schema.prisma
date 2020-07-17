@@ -1,0 +1,321 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model RelayId {
+  id      String @id
+  modelId String
+
+  @@map("_RelayId")
+}
+
+model BriefingBook {
+  briefingBookDescription   String?
+  briefingBookTitle         String                      @unique
+  createdAt                 DateTime                    @default(now())
+  id                        String                      @id
+  updatedAt                 DateTime                    @default(now())
+  mentionedDocuments        BriefingBookDocument[]
+  mentionedEvents           BriefingBookEvent[]
+  mentionedStakeholders     StakeholderBriefingBook[]
+}
+
+model BriefingBookDocument {
+  A            String
+  B            String
+  id           String       @id
+  BriefingBook BriefingBook @relation(fields: [A], references: [id])
+  Document     Document     @relation(fields: [B], references: [id])
+
+  @@index([A], name: "A")
+  @@index([B], name: "B")
+  @@unique([A, B], name: "AB_unique")
+}
+
+model BriefingBookEvent {
+  A            String
+  B            String
+  id           String       @id
+  Event        Event        @relation(fields: [A], references: [id])
+  BriefingBook BriefingBook @relation(fields: [B], references: [id])
+
+  @@index([A], name: "A")
+  @@index([B], name: "B")
+  @@unique([A, B], name: "AB_unique")
+}
+
+model ClassificationOnDocument {
+  A              String
+  B              String
+  id             String         @id
+  Classification Classification @relation(fields: [A], references: [id])
+  Document       Document       @relation(fields: [B], references: [id])
+
+  @@index([A], name: "A")
+  @@index([B], name: "B")
+  @@unique([A, B], name: "AB_unique")
+}
+
+model DocumentAuthor {
+  A           String
+  B           String
+  id          String      @id
+  Document    Document    @relation(fields: [A], references: [id])
+  Stakeholder Stakeholder @relation(fields: [B], references: [id])
+
+  @@index([A], name: "A")
+  @@index([B], name: "B")
+  @@unique([A, B], name: "AB_unique")
+}
+
+model DocumentEvent {
+  A        String
+  B        String
+  id       String   @id
+  Document Document @relation(fields: [A], references: [id])
+  Event    Event    @relation(fields: [B], references: [id])
+
+  @@index([A], name: "A")
+  @@index([B], name: "B")
+  @@unique([A, B], name: "AB_unique")
+}
+
+model DocumentFile {
+  A        String
+  B        String
+  id       String   @id
+  Document Document @relation(fields: [A], references: [id])
+  File     File     @relation(fields: [B], references: [id])
+
+  @@index([A], name: "A")
+  @@index([B], name: "B")
+  @@unique([A, B], name: "AB_unique")
+}
+
+model DocumentInvolvedStakeholder {
+  A           String
+  B           String
+  id          String      @id
+  Stakeholder Stakeholder @relation(fields: [A], references: [id])
+  Document    Document    @relation(fields: [B], references: [id])
+
+  @@index([A], name: "A")
+  @@index([B], name: "B")
+  @@unique([A, B], name: "AB_unique")
+}
+
+model DocumentLocation {
+  A        String
+  B        String
+  id       String   @id
+  Location Location @relation(fields: [A], references: [id])
+  Document Document @relation(fields: [B], references: [id])
+
+  @@index([A], name: "A")
+  @@index([B], name: "B")
+  @@unique([A, B], name: "AB_unique")
+}
+
+model KindOnDocument {
+  A        String
+  B        String
+  id       String   @id
+  Kind     Kind     @relation(fields: [A], references: [id])
+  Document Document @relation(fields: [B], references: [id])
+
+  @@index([A], name: "A")
+  @@index([B], name: "B")
+  @@unique([A, B], name: "AB_unique")
+}
+
+model LocationOnEvent {
+  A        String
+  B        String
+  id       String   @id
+  Location Location @relation(fields: [A], references: [id])
+  Event    Event    @relation(fields: [B], references: [id])
+
+  @@index([A], name: "A")
+  @@index([B], name: "B")
+  @@unique([A, B], name: "AB_unique")
+}
+
+model StakeholderBriefingBook {
+  A            String
+  B            String
+  id           String       @id
+  Stakeholder  Stakeholder  @relation(fields: [A], references: [id])
+  BriefingBook BriefingBook @relation(fields: [B], references: [id])
+
+  @@index([A], name: "A")
+  @@index([B], name: "B")
+  @@unique([A, B], name: "AB_unique")
+}
+
+model StakeholderEvent {
+  A           String
+  B           String
+  id          String      @id
+  Stakeholder Stakeholder @relation(fields: [A], references: [id])
+  Event       Event       @relation(fields: [B], references: [id])
+
+  @@index([A], name: "A")
+  @@index([B], name: "B")
+  @@unique([A, B], name: "AB_unique")
+}
+
+model TagOnDocument {
+  A        String
+  B        String
+  id       String   @id
+  Tag      Tag      @relation(fields: [A], references: [id])
+  Document Document @relation(fields: [B], references: [id])
+
+  @@index([A], name: "A")
+  @@index([B], name: "B")
+  @@unique([A, B], name: "AB_unique")
+}
+
+model TagOnEvent {
+  A     String
+  B     String
+  id    String @id
+  Tag   Tag    @relation(fields: [A], references: [id])
+  Event Event  @relation(fields: [B], references: [id])
+
+  @@index([A], name: "A")
+  @@index([B], name: "B")
+  @@unique([A, B], name: "AB_unique")
+}
+
+model Classification {
+  createdAt                   DateTime                    @default(now())
+  id                          String                      @id
+  name                        String                      @unique
+  updatedAt                   DateTime                    @default(now())
+  documentsWithClassification ClassificationOnDocument[]
+}
+
+model Document {
+  createdAt                                                       DateTime                    @default(now())
+  dnsaAbstract                                                    String?
+  dnsaCitation                                                    String?
+  dnsaCollection                                                  String?
+  dnsaFrom                                                        String?
+  dnsaItemNumber                                                  String?
+  dnsaOrigin                                                      String?
+  dnsaStakeholder                                                 String?
+  dnsaSubject                                                     String?
+  dnsaTo                                                          String?
+  dnsaURL                                                         String?
+  documentCreationDate                                            DateTime?
+  documentDescription                                             String?
+  documentMediaType                                               String
+  documentOriginalID                                              String
+  documentPublicationDate                                         DateTime?
+  documentTitle                                                   String
+  documentTranscript                                              String?
+  id                                                              String                      @id
+  sessionNumber                                                   Int?
+  updatedAt                                                       DateTime                    @default(now())
+  briefingBooksMentionedIn                                        BriefingBookDocument[]
+  documentClassification                                          ClassificationOnDocument[]
+  documentAuthors                                                 DocumentAuthor[]
+  mentionedEvents                                                 DocumentEvent[]
+  documentFiles                                                   DocumentFile[]
+  mentionedStakeholders                                           DocumentInvolvedStakeholder[]
+  mentionedLocations                                              DocumentLocation[]
+  documentKind                                                    KindOnDocument[]
+  documentTags                                                    TagOnDocument[]
+}
+
+model Event {
+  createdAt                 DateTime                    @default(now())
+  eventDescription          String?
+  eventEndDate              DateTime?
+  eventStartDate            DateTime
+  eventTitle                String
+  id                        String                      @id
+  updatedAt                 DateTime                    @default(now())
+  briefingBooksMentionedIn  BriefingBookEvent[]
+  documentsMentionedIn      DocumentEvent[]
+  eventLocations            LocationOnEvent[]
+  eventStakeholders         StakeholderEvent[]
+  eventTags                 TagOnEvent[]
+}
+
+model File {
+  contentType               String
+  createdAt                 DateTime                    @default(now())
+  id                        String                      @id
+  name                      String
+  secret                    String                      @unique
+  size                      Int
+  updatedAt                 DateTime                    @default(now())
+  url                       String                      @unique
+  documentsIncludedIn       DocumentFile[]
+}
+
+model Kind {
+  createdAt                 DateTime                    @default(now())
+  id                        String                      @id
+  name                      String                      @unique
+  updatedAt                 DateTime                    @default(now())
+  documentsWithKind         KindOnDocument[]
+}
+
+model Location {
+  createdAt                 DateTime                    @default(now())
+  id                        String                      @id
+  locationDescription       String?
+  locationLatitude          Int?
+  locationLongitude         Int?
+  locationName              String                      @unique
+  locationWikipediaUri      String?
+  updatedAt                 DateTime                    @default(now())
+  documentsMentionedIn      DocumentLocation[]
+  locationEvents            LocationOnEvent[]
+}
+
+model Stakeholder {
+  createdAt                 DateTime                    @default(now())
+  id                        String                      @id
+  isStakeholderInstitution  Boolean
+  stakeholderDescription    String?
+  stakeholderFullName       String                      @unique
+  stakeholderWikipediaUri   String?
+  updatedAt                 DateTime                    @default(now())
+  documents                 DocumentAuthor[]
+  documentsMentionedIn      DocumentInvolvedStakeholder[]
+  briefingBooksMentionedIn  StakeholderBriefingBook[]
+  eventsInvolvedIn          StakeholderEvent[]
+}
+
+model Tag {
+  createdAt                 DateTime                    @default(now())
+  description               String?
+  id                        String                      @id
+  name                      String                      @unique
+  tagWikipediaUri           String?                     @unique
+  type                      String?
+  updatedAt                 DateTime                    @default(now())
+  documentsWithTag          TagOnDocument[]
+  eventsWithTag             TagOnEvent[]
+}
+
+model User {
+  createdAt DateTime @default(now())
+  email     String?  @unique
+  firstName String?
+  id        String   @id
+  lastName  String?
+  password  String?
+  role      String?
+  updatedAt DateTime @default(now())
+  userName  String   @unique
+}

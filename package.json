@@ -1,0 +1,17 @@
+{
+  "name": "usiran-data-store",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {},
+  "dependencies": {
+    "nexus": "^0.25.0",
+    "nexus-plugin-prisma": "^0.16.1"
+  }
+}
