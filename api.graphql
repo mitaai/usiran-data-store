@@ -12,9 +12,20 @@ input BooleanFilter {
   not: Boolean
 }
 
+type BriefingBook {
+  briefingBookDescription: String
+  briefingBookTitle: String!
+  createdAt: DateTime!
+  id: String!
+  mentionedDocuments(after: BriefingBookDocumentWhereUniqueInput, before: BriefingBookDocumentWhereUniqueInput, first: Int, last: Int): [BriefingBookDocument!]!
+  mentionedEvents(after: BriefingBookEventWhereUniqueInput, before: BriefingBookEventWhereUniqueInput, first: Int, last: Int): [BriefingBookEvent!]!
+  mentionedStakeholders(after: StakeholderBriefingBookWhereUniqueInput, before: StakeholderBriefingBookWhereUniqueInput, first: Int, last: Int): [StakeholderBriefingBook!]!
+  updatedAt: DateTime!
+}
+
 type BriefingBookDocument {
-  A: String!
-  B: String!
+  BriefingBook: BriefingBook!
+  Document: Document!
   id: String!
 }
 
@@ -35,9 +46,16 @@ input BriefingBookDocumentWhereInput {
   OR: [BriefingBookDocumentWhereInput!]
 }
 
+input BriefingBookDocumentWhereUniqueInput {
+  A: String
+  AB_unique: AB_uniqueCompoundUniqueInput
+  B: String
+  id: String
+}
+
 type BriefingBookEvent {
-  A: String!
-  B: String!
+  BriefingBook: BriefingBook!
+  Event: Event!
   id: String!
 }
 
@@ -58,6 +76,13 @@ input BriefingBookEventWhereInput {
   OR: [BriefingBookEventWhereInput!]
 }
 
+input BriefingBookEventWhereUniqueInput {
+  A: String
+  AB_unique: AB_uniqueCompoundUniqueInput
+  B: String
+  id: String
+}
+
 input BriefingBookWhereInput {
   AND: [BriefingBookWhereInput!]
   briefingBookDescription: NullableStringFilter
@@ -72,9 +97,17 @@ input BriefingBookWhereInput {
   updatedAt: DateTimeFilter
 }
 
+type Classification {
+  createdAt: DateTime!
+  documentsWithClassification(after: ClassificationOnDocumentWhereUniqueInput, before: ClassificationOnDocumentWhereUniqueInput, first: Int, last: Int): [ClassificationOnDocument!]!
+  id: String!
+  name: String!
+  updatedAt: DateTime!
+}
+
 type ClassificationOnDocument {
-  A: String!
-  B: String!
+  Classification: Classification!
+  Document: Document!
   id: String!
 }
 
@@ -149,9 +182,9 @@ type Document {
 }
 
 type DocumentAuthor {
-  A: String!
-  B: String!
+  Document: Document!
   id: String!
+  Stakeholder: Stakeholder!
 }
 
 input DocumentAuthorFilter {
@@ -179,8 +212,8 @@ input DocumentAuthorWhereUniqueInput {
 }
 
 type DocumentEvent {
-  A: String!
-  B: String!
+  Document: Document!
+  Event: Event!
   id: String!
 }
 
@@ -202,8 +235,8 @@ input DocumentEventWhereInput {
 }
 
 type DocumentFile {
-  A: String!
-  B: String!
+  Document: Document!
+  File: File!
   id: String!
 }
 
@@ -232,9 +265,9 @@ input DocumentFileWhereUniqueInput {
 }
 
 type DocumentInvolvedStakeholder {
-  A: String!
-  B: String!
+  Document: Document!
   id: String!
+  Stakeholder: Stakeholder!
 }
 
 input DocumentInvolvedStakeholderFilter {
@@ -262,9 +295,9 @@ input DocumentInvolvedStakeholderWhereUniqueInput {
 }
 
 type DocumentLocation {
-  A: String!
-  B: String!
+  Document: Document!
   id: String!
+  Location: Location!
 }
 
 input DocumentLocationFilter {
@@ -450,10 +483,18 @@ The `JSON` scalar type represents JSON objects as specified by [ECMA-404](http:/
 """
 scalar Json
 
-type KindOnDocument {
-  A: String!
-  B: String!
+type Kind {
+  createdAt: DateTime!
+  documentsWithKind(after: KindOnDocumentWhereUniqueInput, before: KindOnDocumentWhereUniqueInput, first: Int, last: Int): [KindOnDocument!]!
   id: String!
+  name: String!
+  updatedAt: DateTime!
+}
+
+type KindOnDocument {
+  Document: Document!
+  id: String!
+  Kind: Kind!
 }
 
 input KindOnDocumentFilter {
@@ -501,9 +542,9 @@ type Location {
 }
 
 type LocationOnEvent {
-  A: String!
-  B: String!
+  Event: Event!
   id: String!
+  Location: Location!
 }
 
 input LocationOnEventFilter {
@@ -639,9 +680,9 @@ type Stakeholder {
 }
 
 type StakeholderBriefingBook {
-  A: String!
-  B: String!
+  BriefingBook: BriefingBook!
   id: String!
+  Stakeholder: Stakeholder!
 }
 
 input StakeholderBriefingBookFilter {
@@ -661,10 +702,17 @@ input StakeholderBriefingBookWhereInput {
   Stakeholder: StakeholderWhereInput
 }
 
+input StakeholderBriefingBookWhereUniqueInput {
+  A: String
+  AB_unique: AB_uniqueCompoundUniqueInput
+  B: String
+  id: String
+}
+
 type StakeholderEvent {
-  A: String!
-  B: String!
+  Event: Event!
   id: String!
+  Stakeholder: Stakeholder!
 }
 
 input StakeholderEventFilter {
@@ -737,10 +785,22 @@ input StringFilter {
   startsWith: String
 }
 
-type TagOnDocument {
-  A: String!
-  B: String!
+type Tag {
+  createdAt: DateTime!
+  description: String
+  documentsWithTag(after: TagOnDocumentWhereUniqueInput, before: TagOnDocumentWhereUniqueInput, first: Int, last: Int): [TagOnDocument!]!
+  eventsWithTag(after: TagOnEventWhereUniqueInput, before: TagOnEventWhereUniqueInput, first: Int, last: Int): [TagOnEvent!]!
   id: String!
+  name: String!
+  tagWikipediaUri: String
+  type: String
+  updatedAt: DateTime!
+}
+
+type TagOnDocument {
+  Document: Document!
+  id: String!
+  Tag: Tag!
 }
 
 input TagOnDocumentFilter {
@@ -768,9 +828,9 @@ input TagOnDocumentWhereUniqueInput {
 }
 
 type TagOnEvent {
-  A: String!
-  B: String!
+  Event: Event!
   id: String!
+  Tag: Tag!
 }
 
 input TagOnEventFilter {

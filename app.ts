@@ -104,14 +104,73 @@ schema.objectType({
   },
 })
 
+// Kind
+
+schema.objectType({
+  name: 'Kind',
+  definition(t) {
+    t.model.id()
+    t.model.name()
+    t.model.createdAt()
+    t.model.updatedAt()
+    t.model.documentsWithKind()
+  },
+})
+
+// Tag
+
+schema.objectType({
+  name: 'Tag',
+  definition(t) {
+    t.model.id()
+    t.model.name()
+    t.model.description()
+    t.model.tagWikipediaUri()
+    t.model.documentsWithTag()
+    t.model.eventsWithTag()
+    t.model.type()
+    t.model.createdAt()
+    t.model.updatedAt()
+  },
+})
+
+// BriefingBook
+
+schema.objectType({
+  name: 'BriefingBook',
+  definition(t) {
+    t.model.id()
+    t.model.briefingBookDescription()
+    t.model.briefingBookTitle()
+    t.model.mentionedDocuments()
+    t.model.mentionedEvents()
+    t.model.mentionedStakeholders()
+    t.model.createdAt()
+    t.model.updatedAt()
+  },
+})
+
+// Classification
+
+schema.objectType({
+  name: 'Classification',
+  definition(t) {
+    t.model.id()
+    t.model.name()
+    t.model.documentsWithClassification()
+    t.model.createdAt()
+    t.model.updatedAt()
+  },
+})
+
 // Relation tables
 
 schema.objectType({
   name: 'KindOnDocument',
   definition(t) {
     t.model.id()
-    t.model.A()
-    t.model.B()
+    t.model.Document()
+    t.model.Kind()
   }
 })
 
@@ -119,8 +178,8 @@ schema.objectType({
   name: 'TagOnDocument',
   definition(t){
     t.model.id()
-    t.model.A()
-    t.model.B()
+    t.model.Tag()
+    t.model.Document()
   }
 })
 
@@ -128,8 +187,8 @@ schema.objectType({
   name: 'BriefingBookDocument',
   definition(t) {
     t.model.id()
-    t.model.A()
-    t.model.B()
+    t.model.BriefingBook()
+    t.model.Document()
   }
 })
 
@@ -137,8 +196,8 @@ schema.objectType({
   name: 'BriefingBookEvent',
   definition(t){
     t.model.id()
-    t.model.A()
-    t.model.B()
+    t.model.BriefingBook()
+    t.model.Event()
   }
 })
 
@@ -146,8 +205,8 @@ schema.objectType({
   name: 'ClassificationOnDocument',
   definition(t) {
     t.model.id()
-    t.model.A()
-    t.model.B()
+    t.model.Classification()
+    t.model.Document()
   }
 })
 
@@ -155,8 +214,8 @@ schema.objectType({
   name: 'DocumentAuthor',
   definition(t){
     t.model.id()
-    t.model.A()
-    t.model.B()
+    t.model.Document()
+    t.model.Stakeholder()
   }
 })
 
@@ -164,8 +223,8 @@ schema.objectType({
   name: 'DocumentEvent',
   definition(t) {
     t.model.id()
-    t.model.A()
-    t.model.B()
+    t.model.Document()
+    t.model.Event()
   }
 })
 
@@ -173,8 +232,8 @@ schema.objectType({
   name: 'DocumentFile',
   definition(t){
     t.model.id()
-    t.model.A()
-    t.model.B()
+    t.model.Document()
+    t.model.File()
   }
 })
 
@@ -182,8 +241,8 @@ schema.objectType({
   name: 'DocumentInvolvedStakeholder',
   definition(t) {
     t.model.id()
-    t.model.A()
-    t.model.B()
+    t.model.Document()
+    t.model.Stakeholder()
   }
 })
 
@@ -191,8 +250,8 @@ schema.objectType({
   name: 'DocumentLocation',
   definition(t){
     t.model.id()
-    t.model.A()
-    t.model.B()
+    t.model.Document()
+    t.model.Location()
   }
 })
 
@@ -200,8 +259,8 @@ schema.objectType({
   name: 'LocationOnEvent',
   definition(t) {
     t.model.id()
-    t.model.A()
-    t.model.B()
+    t.model.Location()
+    t.model.Event()
   }
 })
 
@@ -209,8 +268,8 @@ schema.objectType({
   name: 'StakeholderBriefingBook',
   definition(t){
     t.model.id()
-    t.model.A()
-    t.model.B()
+    t.model.Stakeholder()
+    t.model.BriefingBook()
   }
 })
 
@@ -218,8 +277,8 @@ schema.objectType({
   name: 'StakeholderEvent',
   definition(t){
     t.model.id()
-    t.model.A()
-    t.model.B()
+    t.model.Stakeholder()
+    t.model.Event()
   }
 })
 
@@ -227,8 +286,8 @@ schema.objectType({
   name: 'TagOnEvent',
   definition(t){
     t.model.id()
-    t.model.A()
-    t.model.B()
+    t.model.Tag()
+    t.model.Event()
   }
 })
 
