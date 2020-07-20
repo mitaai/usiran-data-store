@@ -1,5 +1,8 @@
-import { use, schema } from 'nexus';
+import cors from 'cors';
+import { use, schema, server } from 'nexus';
 import { prisma } from 'nexus-plugin-prisma';
+
+server.express.use(cors())
 
 use(prisma({ 
   migrations: false,

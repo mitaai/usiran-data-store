@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": ".nexus/build/index.js",
-  "engines": { "node": "14.x" },
+  "engines": {
+    "node": "14.x"
+  },
   "scripts": {
     "build": "nexus build -d heroku",
     "start": "node .nexus/build",
@@ -12,8 +14,11 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {},
+  "devDependencies": {
+    "@types/cors": "^2.8.6"
+  },
   "dependencies": {
+    "cors": "^2.8.5",
     "nexus": "^0.25.0",
     "nexus-plugin-prisma": "^0.16.1"
   }
