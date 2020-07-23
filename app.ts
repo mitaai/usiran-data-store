@@ -58,6 +58,7 @@ schema.objectType({
     t.model.id()
     t.model.eventTitle()
     t.model.eventStartDate()
+    t.model.eventEndDate()
     t.model.eventTags()
     t.model.eventStakeholders()
     t.model.eventDescription()

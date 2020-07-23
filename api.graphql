@@ -390,6 +390,7 @@ input DocumentWhereUniqueInput {
 
 type Event {
   eventDescription: String
+  eventEndDate: DateTime
   eventLocations(after: LocationOnEventWhereUniqueInput, before: LocationOnEventWhereUniqueInput, first: Int, last: Int): [LocationOnEvent!]!
   eventStakeholders(after: StakeholderEventWhereUniqueInput, before: StakeholderEventWhereUniqueInput, first: Int, last: Int): [StakeholderEvent!]!
   eventStartDate: DateTime!
