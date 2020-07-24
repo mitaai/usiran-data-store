@@ -167,6 +167,7 @@ input DateTimeFilter {
 type Document {
   documentAuthors(after: DocumentAuthorWhereUniqueInput, before: DocumentAuthorWhereUniqueInput, first: Int, last: Int): [DocumentAuthor!]!
   documentClassification(after: ClassificationOnDocumentWhereUniqueInput, before: ClassificationOnDocumentWhereUniqueInput, first: Int, last: Int): [ClassificationOnDocument!]!
+  documentCount: Int
   documentCreationDate: DateTime
   documentDescription: String
   documentFiles(after: DocumentFileWhereUniqueInput, before: DocumentFileWhereUniqueInput, first: Int, last: Int): [DocumentFile!]!
@@ -389,6 +390,7 @@ input DocumentWhereUniqueInput {
 }
 
 type Event {
+  eventCount: Int
   eventDescription: String
   eventEndDate: DateTime
   eventLocations(after: LocationOnEventWhereUniqueInput, before: LocationOnEventWhereUniqueInput, first: Int, last: Int): [LocationOnEvent!]!
@@ -671,6 +673,7 @@ type Stakeholder {
   documentsMentionedIn(after: DocumentInvolvedStakeholderWhereUniqueInput, before: DocumentInvolvedStakeholderWhereUniqueInput, first: Int, last: Int): [DocumentInvolvedStakeholder!]!
   eventsInvolvedIn(after: StakeholderEventWhereUniqueInput, before: StakeholderEventWhereUniqueInput, first: Int, last: Int): [StakeholderEvent!]!
   id: String!
+  stakeholderCount: Int
   stakeholderDescription: String
   stakeholderFullName: String!
   stakeholderWikipediaUri: String

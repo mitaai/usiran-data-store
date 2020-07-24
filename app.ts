@@ -47,6 +47,12 @@ schema.objectType({
     t.model.documentClassification()
     t.model.documentPublicationDate()
     t.model.documentTranscript()
+    t.int('documentCount', {
+      async resolve(_parent, _args, ctx) {
+        const result = await ctx.db.document.count(_args);
+        return result;
+      }
+    })
   },
 })
 
@@ -63,6 +69,12 @@ schema.objectType({
     t.model.eventStakeholders()
     t.model.eventDescription()
     t.model.eventLocations()
+    t.int('eventCount', {
+      async resolve(_parent, _args, ctx) {
+        const result = await ctx.db.event.count(_args);
+        return result;
+      }
+    })
   },
 })
 
@@ -78,6 +90,12 @@ schema.objectType({
     t.model.documentsMentionedIn()
     t.model.eventsInvolvedIn()
     t.model.stakeholderWikipediaUri()
+    t.int('stakeholderCount', {
+      async resolve(_parent, _args, ctx) {
+        const result = await ctx.db.stakeholder.count(_args);
+        return result;
+      }
+    })
   },
 })
 
