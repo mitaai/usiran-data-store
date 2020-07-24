@@ -317,9 +317,7 @@ schema.queryType({
     t.crud.stakeholder()
     t.crud.stakeholders({
       pagination: true,
-      filtering: {
-        id: true,
-      },
+      filtering: true,
       ordering: true,
     })
     t.crud.location()
