@@ -167,7 +167,6 @@ input DateTimeFilter {
 type Document {
   documentAuthors(after: DocumentAuthorWhereUniqueInput, before: DocumentAuthorWhereUniqueInput, first: Int, last: Int): [DocumentAuthor!]!
   documentClassification(after: ClassificationOnDocumentWhereUniqueInput, before: ClassificationOnDocumentWhereUniqueInput, first: Int, last: Int): [ClassificationOnDocument!]!
-  documentCount: Int
   documentCreationDate: DateTime
   documentDescription: String
   documentFiles(after: DocumentFileWhereUniqueInput, before: DocumentFileWhereUniqueInput, first: Int, last: Int): [DocumentFile!]!
@@ -390,7 +389,6 @@ input DocumentWhereUniqueInput {
 }
 
 type Event {
-  eventCount: Int
   eventDescription: String
   eventEndDate: DateTime
   eventLocations(after: LocationOnEventWhereUniqueInput, before: LocationOnEventWhereUniqueInput, first: Int, last: Int): [LocationOnEvent!]!
@@ -656,14 +654,17 @@ enum OrderByArg {
 type Query {
   document(where: DocumentWhereUniqueInput!): Document
   documents(after: DocumentWhereUniqueInput, before: DocumentWhereUniqueInput, first: Int, last: Int, orderBy: DocumentOrderByInput, where: DocumentWhereInput): [Document!]!
+  documentsCount(where: DocumentWhereInput): Int
   event(where: EventWhereUniqueInput!): Event
   events(after: EventWhereUniqueInput, before: EventWhereUniqueInput, first: Int, last: Int, orderBy: EventOrderByInput, where: EventWhereInput): [Event!]!
+  eventsCount(where: EventWhereInput): Int
   file(where: FileWhereUniqueInput!): File
   files(after: FileWhereUniqueInput, before: FileWhereUniqueInput, first: Int, last: Int, orderBy: FileOrderByInput, where: FileWhereInput): [File!]!
   location(where: LocationWhereUniqueInput!): Location
   locations(after: LocationWhereUniqueInput, before: LocationWhereUniqueInput, first: Int, last: Int, orderBy: LocationOrderByInput, where: LocationWhereInput): [Location!]!
   stakeholder(where: StakeholderWhereUniqueInput!): Stakeholder
   stakeholders(after: StakeholderWhereUniqueInput, before: StakeholderWhereUniqueInput, first: Int, last: Int, orderBy: StakeholderOrderByInput, where: StakeholderWhereInput): [Stakeholder!]!
+  stakeholdersCount(where: StakeholderWhereInput): Int
   user(where: UserWhereUniqueInput!): User
   users(after: UserWhereUniqueInput, before: UserWhereUniqueInput, first: Int, last: Int, orderBy: UserOrderByInput, where: UserWhereInput): [User!]!
 }
@@ -673,7 +674,6 @@ type Stakeholder {
   documentsMentionedIn(after: DocumentInvolvedStakeholderWhereUniqueInput, before: DocumentInvolvedStakeholderWhereUniqueInput, first: Int, last: Int): [DocumentInvolvedStakeholder!]!
   eventsInvolvedIn(after: StakeholderEventWhereUniqueInput, before: StakeholderEventWhereUniqueInput, first: Int, last: Int): [StakeholderEvent!]!
   id: String!
-  stakeholderCount: Int
   stakeholderDescription: String
   stakeholderFullName: String!
   stakeholderWikipediaUri: String

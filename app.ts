@@ -1,6 +1,7 @@
 import cors from 'cors';
 import { use, schema, server } from 'nexus';
 import { prisma } from 'nexus-plugin-prisma';
+import { arg } from '@nexus/schema';
 
 server.express.use(cors())
 
@@ -47,12 +48,6 @@ schema.objectType({
     t.model.documentClassification()
     t.model.documentPublicationDate()
     t.model.documentTranscript()
-    t.int('documentCount', {
-      async resolve(_parent, _args, ctx) {
-        const result = await ctx.db.document.count(_args);
-        return result;
-      }
-    })
   },
 })
 
@@ -69,12 +64,6 @@ schema.objectType({
     t.model.eventStakeholders()
     t.model.eventDescription()
     t.model.eventLocations()
-    t.int('eventCount', {
-      async resolve(_parent, _args, ctx) {
-        const result = await ctx.db.event.count(_args);
-        return result;
-      }
-    })
   },
 })
 
@@ -90,12 +79,6 @@ schema.objectType({
     t.model.documentsMentionedIn()
     t.model.eventsInvolvedIn()
     t.model.stakeholderWikipediaUri()
-    t.int('stakeholderCount', {
-      async resolve(_parent, _args, ctx) {
-        const result = await ctx.db.stakeholder.count(_args);
-        return result;
-      }
-    })
   },
 })
 
@@ -326,17 +309,44 @@ schema.queryType({
       filtering: true,
       ordering: true,
     })
+    t.int('documentsCount', {
+      args: {
+        where: "DocumentWhereInput",
+      },
+      async resolve(_parent, args, ctx) {
+        const result = await ctx.db.document.count(args);
+        return result;
+      }
+    })
     t.crud.event()
     t.crud.events({
       pagination: true,
       filtering: true,
       ordering: true,
     })
+    t.int('eventsCount', {
+        args: {
+        where: "EventWhereInput",
+      },
+      async resolve(_parent, args, ctx) {
+        const result = await ctx.db.event.count(args);
+        return result;
+      }
+    })
     t.crud.stakeholder()
     t.crud.stakeholders({
       pagination: true,
       filtering: true,
       ordering: true,
+    })
+    t.int('stakeholdersCount', {
+        args: {
+        where: "StakeholderWhereInput",
+      },
+      async resolve(_parent, args, ctx) {
+        const result = await ctx.db.stakeholder.count(args);
+        return result;
+      }
     })
     t.crud.location()
     t.crud.locations({
