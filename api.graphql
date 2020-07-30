@@ -894,6 +894,7 @@ type User {
   firstName: String
   id: String!
   lastName: String
+  password: String
   role: String
   updatedAt: DateTime!
   userName: String!

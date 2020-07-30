@@ -31,6 +31,7 @@ schema.objectType({
   definition(t) {
     t.model.createdAt()
     t.model.email()
+    t.model.password()
     t.model.firstName()
     t.model.id()
     t.model.lastName()
