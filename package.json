@@ -15,7 +15,9 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@types/cors": "^2.8.6"
+    "@types/bcrypt": "^3.0.0",
+    "@types/cors": "^2.8.6",
+    "@types/jsonwebtoken": "^8.5.0"
   },
   "dependencies": {
     "bcrypt": "^5.0.0",

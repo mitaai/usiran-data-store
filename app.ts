@@ -3,13 +3,13 @@ import { use, schema, server } from 'nexus';
 import { prisma } from 'nexus-plugin-prisma';
 import { arg, stringArg } from '@nexus/schema';
 import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
+import { sign } from 'jsonwebtoken';
 
 server.express.use(cors())
 
 use(prisma({ 
   migrations: false,
-  client: { options: { log: ['query'] } },
+  client: { options: { log: ['query', 'info', 'warn', 'error'] } },
   features: {
     crud: true,
   }
@@ -434,7 +434,7 @@ schema.mutationType({
           throw new Error('Invalid Login');
         }
     
-        const token = jwt.sign(
+        const token = sign(
           {
             id: user.id,
             email: user.email,
