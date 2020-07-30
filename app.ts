@@ -418,15 +418,15 @@ schema.mutationType({
     t.field('createUser', {
       type: 'UserAuthPayload',
       args: {
-        name: stringArg(),
+        userName: stringArg(),
         email: stringArg({ nullable: false }),
         password: stringArg({ nullable: false }),
       },
-      resolve: async (_parent, { name, email, password }, ctx) => {
+      resolve: async (_parent, { userName, email, password }, ctx) => {
         const hashedPassword = await bcrypt.hash(password, 10);
         const user = await ctx.db.user.create({
           data: {
-            userName: name,
+            userName,
             email,
             password: hashedPassword,
           },
