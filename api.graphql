@@ -615,9 +615,9 @@ enum MediaType {
 }
 
 type Mutation {
-  createOneUser(data: UserCreateInput!): User!
+  createUser(email: String!, name: String, password: String!): UserAuthPayload
   deleteOneUser(where: UserWhereUniqueInput!): User
-  signinUser(email: String, password: String): SignInUserPayload
+  signinUser(email: String!, password: String!): UserAuthPayload
   updateOneUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
 }
 
@@ -678,11 +678,6 @@ type Query {
   stakeholdersCount(where: StakeholderWhereInput): Int
   user(where: UserWhereUniqueInput!): User
   users(after: UserWhereUniqueInput, before: UserWhereUniqueInput, first: Int, last: Int, orderBy: UserOrderByInput, where: UserWhereInput): [User!]!
-}
-
-type SignInUserPayload {
-  token: String
-  user: User
 }
 
 type Stakeholder {
@@ -900,16 +895,9 @@ type User {
   userName: String!
 }
 
-input UserCreateInput {
-  createdAt: DateTime
-  email: String
-  firstName: String
-  id: String!
-  lastName: String
-  password: String
-  role: String
-  updatedAt: DateTime
-  userName: String!
+type UserAuthPayload {
+  token: String
+  user: User
 }
 
 input UserOrderByInput {

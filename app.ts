@@ -42,7 +42,7 @@ schema.objectType({
 })
 
 schema.objectType({
-  name: 'SignInUserPayload',
+  name: 'UserAuthPayload',
   definition(t){
     t.string("token");
     t.field("user", { type: "User" });
@@ -412,15 +412,37 @@ schema.queryType({
 
 schema.mutationType({
   definition(t) {
-    t.crud.createOneUser()
     t.crud.updateOneUser()
     t.crud.deleteOneUser()
 
-    t.field('signinUser', {
-      type: 'SignInUserPayload',
+    t.field('createUser', {
+      type: 'UserAuthPayload',
       args: {
-        email: stringArg(),
-        password: stringArg(),
+        name: stringArg(),
+        email: stringArg({ nullable: false }),
+        password: stringArg({ nullable: false }),
+      },
+      resolve: async (_parent, { name, email, password }, ctx) => {
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const user = await ctx.db.user.create({
+          data: {
+            userName: name,
+            email,
+            password: hashedPassword,
+          },
+        })
+        return {
+          token: sign({ userId: user.id }, process.env.AUTH_SECRET),
+          user,
+        }
+      },
+    })
+
+    t.field('signinUser', {
+      type: 'UserAuthPayload',
+      args: {
+        email: stringArg({ nullable: false }),
+        password: stringArg({ nullable: false }),
       },
       resolve: async (_, { email, password }, ctx): Promise<any> => {
         const user = await ctx.db.user.findOne({ where: { email }});

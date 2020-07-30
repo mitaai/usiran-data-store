@@ -312,7 +312,7 @@ model User {
   createdAt DateTime @default(now())
   email     String?  @unique
   firstName String?
-  id        String   @id
+  id        String   @id @default(cuid())
   lastName  String?
   password  String?
   role      String?
