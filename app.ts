@@ -424,8 +424,6 @@ schema.mutationType({
       },
       resolve: async (_, { email, password }, ctx): Promise<any> => {
         const user = await ctx.db.user.findOne({ where: { email }});
-        console.log(email);
-        console.log(user);
         if (!user) {
           throw new Error('Invalid Login');
         }
