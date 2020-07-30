@@ -604,6 +604,16 @@ input LocationWhereUniqueInput {
   locationName: String
 }
 
+enum MediaType {
+  Audio
+  Embedd
+  Image
+  Markdown
+  Pdf
+  RawText
+  Video
+}
+
 type Mutation {
   createOneUser(data: UserCreateInput!): User!
   deleteOneUser(where: UserWhereUniqueInput!): User
@@ -667,6 +677,11 @@ type Query {
   stakeholdersCount(where: StakeholderWhereInput): Int
   user(where: UserWhereUniqueInput!): User
   users(after: UserWhereUniqueInput, before: UserWhereUniqueInput, first: Int, last: Int, orderBy: UserOrderByInput, where: UserWhereInput): [User!]!
+}
+
+type SignInUserPayload {
+  token: String
+  user: User
 }
 
 type Stakeholder {
@@ -905,6 +920,12 @@ input UserOrderByInput {
   role: OrderByArg
   updatedAt: OrderByArg
   userName: OrderByArg
+}
+
+enum UserRole {
+  Admin
+  Editor
+  Viewer
 }
 
 input UserUpdateInput {

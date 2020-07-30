@@ -13,6 +13,15 @@ use(prisma({
   }
 }))
 
+//                          _        _      
+//                         | |      | |     
+//    _ __ ___    ___    __| |  ___ | | ___ 
+//   | '_ ` _ \  / _ \  / _` | / _ \| |/ __|
+//   | | | | | || (_) || (_| ||  __/| |\__ \
+//   |_| |_| |_| \___/  \__,_| \___||_||___/
+//                                          
+// Models
+
 // User
 
 schema.objectType({
@@ -26,6 +35,14 @@ schema.objectType({
     t.model.role()
     t.model.updatedAt()
     t.model.userName()
+  },
+})
+
+schema.objectType({
+  name: 'SignInUserPayload',
+  definition(t){
+    t.string("token");
+    t.field("user", { type: "User" });
   },
 })
 
@@ -165,7 +182,14 @@ schema.objectType({
   },
 })
 
-// Relation tables
+
+//          .     .                 
+//          |     |   o             
+//  ;-. ,-. | ,-: |-  . ,-. ;-. ,-. 
+//  |   |-' | | | |   | | | | | `-. 
+//  '   `-' ' `-` `-' ' `-' ' ' `-' 
+//                                  
+// Relations
 
 schema.objectType({
   name: 'KindOnDocument',
@@ -293,7 +317,17 @@ schema.objectType({
   }
 })
 
-// Query
+
+//                             _            
+//                            (_)           
+//    __ _  _   _   ___  _ __  _   ___  ___ 
+//   / _` || | | | / _ \| '__|| | / _ \/ __|
+//  | (_| || |_| ||  __/| |   | ||  __/\__ \
+//   \__, | \__,_| \___||_|   |_| \___||___/
+//      | |                                 
+//      |_|                                 
+//
+// Queries
 
 schema.queryType({
   definition(t) {
@@ -363,7 +397,15 @@ schema.queryType({
   },
 })
 
-// Mutation
+//                      _          _    _                    
+//                     | |        | |  (_)                   
+//    _ __ ___   _   _ | |_  __ _ | |_  _   ___   _ __   ___ 
+//   | '_ ` _ \ | | | || __|/ _` || __|| | / _ \ | '_ \ / __|
+//   | | | | | || |_| || |_| (_| || |_ | || (_) || | | |\__ \
+//   |_| |_| |_| \__,_| \__|\__,_| \__||_| \___/ |_| |_||___/
+//                                                           
+//                                                           
+// Mutations
 
 schema.mutationType({
   definition(t) {
@@ -371,4 +413,23 @@ schema.mutationType({
     t.crud.updateOneUser()
     t.crud.deleteOneUser()
   },
+})
+
+//                                       
+//                                       
+//     ___  _ __   _   _  _ __ ___   ___ 
+//    / _ \| '_ \ | | | || '_ ` _ \ / __|
+//   |  __/| | | || |_| || | | | | |\__ \
+//    \___||_| |_| \__,_||_| |_| |_||___/
+//                                       
+// Enums
+
+schema.enumType({
+  name: 'MediaType',
+  members: ['RawText','Video','Image','Audio','Pdf','Embedd','Markdown'],
+})
+
+schema.enumType({
+  name: 'UserRole',
+  members: ['Admin', 'Editor', 'Viewer'],
 })
