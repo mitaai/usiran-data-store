@@ -1,7 +1,9 @@
 import cors from 'cors';
 import { use, schema, server } from 'nexus';
 import { prisma } from 'nexus-plugin-prisma';
-import { arg } from '@nexus/schema';
+import { arg, stringArg } from '@nexus/schema';
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
 server.express.use(cors())
 
@@ -412,6 +414,42 @@ schema.mutationType({
     t.crud.createOneUser()
     t.crud.updateOneUser()
     t.crud.deleteOneUser()
+
+    t.field('signinUser', {
+      type: 'SignInUserPayload',
+      args: {
+        email: stringArg(),
+        password: stringArg(),
+      },
+      resolve: async (_, { email, password }, ctx): Promise<any> => {
+        const user = await ctx.db.user.findOne({ where: { email }});
+
+        if (!user) {
+          throw new Error('Invalid Login');
+        }
+    
+        const passwordMatch = await bcrypt.compare(password, user.password);
+    
+        if (!passwordMatch) {
+          throw new Error('Invalid Login');
+        }
+    
+        const token = jwt.sign(
+          {
+            id: user.id,
+            email: user.email,
+          },
+          process.env.AUTH_SECRET,
+          {
+            expiresIn: '30d',
+          },
+        );
+    
+        console.log({ user, token });
+    
+        return { user, token };    
+      }
+    })
   },
 })
 

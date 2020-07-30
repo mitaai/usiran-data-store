@@ -617,6 +617,7 @@ enum MediaType {
 type Mutation {
   createOneUser(data: UserCreateInput!): User!
   deleteOneUser(where: UserWhereUniqueInput!): User
+  signinUser(email: String, password: String): SignInUserPayload
   updateOneUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
 }
 

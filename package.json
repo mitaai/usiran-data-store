@@ -18,7 +18,9 @@
     "@types/cors": "^2.8.6"
   },
   "dependencies": {
+    "bcrypt": "^5.0.0",
     "cors": "^2.8.5",
+    "jsonwebtoken": "^8.5.1",
     "nexus": "^0.25.0",
     "nexus-plugin-prisma": "^0.16.1"
   }
