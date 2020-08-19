@@ -32,9 +32,9 @@ model BriefingBookDocument {
   BriefingBook BriefingBook @relation(fields: [A], references: [id])
   Document     Document     @relation(fields: [B], references: [id])
 
-  @@index([A], name: "A")
-  @@index([B], name: "B")
-  @@unique([A, B], name: "AB_unique")
+  @@index([A], name: "BriefingBookDocument_A")
+  @@index([B], name: "BriefingBookDocument_B")
+  @@unique([A, B], name: "BriefingBookDocument_AB_unique")
 }
 
 model BriefingBookEvent {
@@ -44,9 +44,9 @@ model BriefingBookEvent {
   Event        Event        @relation(fields: [A], references: [id])
   BriefingBook BriefingBook @relation(fields: [B], references: [id])
 
-  @@index([A], name: "A")
-  @@index([B], name: "B")
-  @@unique([A, B], name: "AB_unique")
+  @@index([A], name: "BriefingBookEvent_A")
+  @@index([B], name: "BriefingBookEvent_B")
+  @@unique([A, B], name: "BriefingBookEvent_AB_unique")
 }
 
 model ClassificationOnDocument {
@@ -56,9 +56,9 @@ model ClassificationOnDocument {
   Classification Classification @relation(fields: [A], references: [id])
   Document       Document       @relation(fields: [B], references: [id])
 
-  @@index([A], name: "A")
-  @@index([B], name: "B")
-  @@unique([A, B], name: "AB_unique")
+  @@index([A], name: "ClassificationOnDocument_A")
+  @@index([B], name: "ClassificationOnDocument_B")
+  @@unique([A, B], name: "ClassificationOnDocument_AB_unique")
 }
 
 model DocumentAuthor {
@@ -68,9 +68,9 @@ model DocumentAuthor {
   Document    Document    @relation(fields: [A], references: [id])
   Stakeholder Stakeholder @relation(fields: [B], references: [id])
 
-  @@index([A], name: "A")
-  @@index([B], name: "B")
-  @@unique([A, B], name: "AB_unique")
+  @@index([A], name: "DocumentAuthor_A")
+  @@index([B], name: "DocumentAuthor_B")
+  @@unique([A, B], name: "DocumentAuthor_AB_unique")
 }
 
 model DocumentEvent {
@@ -80,9 +80,9 @@ model DocumentEvent {
   Document Document @relation(fields: [A], references: [id])
   Event    Event    @relation(fields: [B], references: [id])
 
-  @@index([A], name: "A")
-  @@index([B], name: "B")
-  @@unique([A, B], name: "AB_unique")
+  @@index([A], name: "DocumentEvent_A")
+  @@index([B], name: "DocumentEvent_B")
+  @@unique([A, B], name: "DocumentEvent_AB_unique")
 }
 
 model DocumentFile {
@@ -92,9 +92,9 @@ model DocumentFile {
   Document Document @relation(fields: [A], references: [id])
   File     File     @relation(fields: [B], references: [id])
 
-  @@index([A], name: "A")
-  @@index([B], name: "B")
-  @@unique([A, B], name: "AB_unique")
+  @@index([A], name: "DocumentFile_A")
+  @@index([B], name: "DocumentFile_B")
+  @@unique([A, B], name: "DocumentFile_AB_unique")
 }
 
 model DocumentInvolvedStakeholder {
@@ -104,9 +104,9 @@ model DocumentInvolvedStakeholder {
   Stakeholder Stakeholder @relation(fields: [A], references: [id])
   Document    Document    @relation(fields: [B], references: [id])
 
-  @@index([A], name: "A")
-  @@index([B], name: "B")
-  @@unique([A, B], name: "AB_unique")
+  @@index([A], name: "DocumentInvolvedStakeholder_A")
+  @@index([B], name: "DocumentInvolvedStakeholder_B")
+  @@unique([A, B], name: "DocumentInvolvedStakeholder_AB_unique")
 }
 
 model DocumentLocation {
@@ -116,9 +116,9 @@ model DocumentLocation {
   Location Location @relation(fields: [A], references: [id])
   Document Document @relation(fields: [B], references: [id])
 
-  @@index([A], name: "A")
-  @@index([B], name: "B")
-  @@unique([A, B], name: "AB_unique")
+  @@index([A], name: "DocumentLocation_A")
+  @@index([B], name: "DocumentLocation_B")
+  @@unique([A, B], name: "DocumentLocation_AB_unique")
 }
 
 model KindOnDocument {
@@ -128,9 +128,9 @@ model KindOnDocument {
   Kind     Kind     @relation(fields: [A], references: [id])
   Document Document @relation(fields: [B], references: [id])
 
-  @@index([A], name: "A")
-  @@index([B], name: "B")
-  @@unique([A, B], name: "AB_unique")
+  @@index([A], name: "KindOnDocument_A")
+  @@index([B], name: "KindOnDocument_B")
+  @@unique([A, B], name: "KindOnDocument_AB_unique")
 }
 
 model LocationOnEvent {
@@ -140,9 +140,9 @@ model LocationOnEvent {
   Location Location @relation(fields: [A], references: [id])
   Event    Event    @relation(fields: [B], references: [id])
 
-  @@index([A], name: "A")
-  @@index([B], name: "B")
-  @@unique([A, B], name: "AB_unique")
+  @@index([A], name: "LocationOnEvent_A")
+  @@index([B], name: "LocationOnEvent_B")
+  @@unique([A, B], name: "LocationOnEvent_AB_unique")
 }
 
 model StakeholderBriefingBook {
@@ -152,9 +152,9 @@ model StakeholderBriefingBook {
   Stakeholder  Stakeholder  @relation(fields: [A], references: [id])
   BriefingBook BriefingBook @relation(fields: [B], references: [id])
 
-  @@index([A], name: "A")
-  @@index([B], name: "B")
-  @@unique([A, B], name: "AB_unique")
+  @@index([A], name: "StakeholderBriefingBook_A")
+  @@index([B], name: "StakeholderBriefingBook_B")
+  @@unique([A, B], name: "StakeholderBriefingBook_AB_unique")
 }
 
 model StakeholderEvent {
@@ -164,9 +164,9 @@ model StakeholderEvent {
   Stakeholder Stakeholder @relation(fields: [A], references: [id])
   Event       Event       @relation(fields: [B], references: [id])
 
-  @@index([A], name: "A")
-  @@index([B], name: "B")
-  @@unique([A, B], name: "AB_unique")
+  @@index([A], name: "StakeholderEvent_A")
+  @@index([B], name: "StakeholderEvent_B")
+  @@unique([A, B], name: "StakeholderEvent_AB_unique")
 }
 
 model TagOnDocument {
@@ -176,9 +176,9 @@ model TagOnDocument {
   Tag      Tag      @relation(fields: [A], references: [id])
   Document Document @relation(fields: [B], references: [id])
 
-  @@index([A], name: "A")
-  @@index([B], name: "B")
-  @@unique([A, B], name: "AB_unique")
+  @@index([A], name: "TagOnDocument_A")
+  @@index([B], name: "TagOnDocument_B")
+  @@unique([A, B], name: "TagOnDocument_AB_unique")
 }
 
 model TagOnEvent {
@@ -188,9 +188,9 @@ model TagOnEvent {
   Tag   Tag    @relation(fields: [A], references: [id])
   Event Event  @relation(fields: [B], references: [id])
 
-  @@index([A], name: "A")
-  @@index([B], name: "B")
-  @@unique([A, B], name: "AB_unique")
+  @@index([A], name: "TagOnEvent_A")
+  @@index([B], name: "TagOnEvent_B")
+  @@unique([A, B], name: "TagOnEvent_AB_unique")
 }
 
 model Classification {
