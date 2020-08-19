@@ -2,11 +2,6 @@
 ### Do not make changes to this file directly
 
 
-input AB_uniqueCompoundUniqueInput {
-  A: String!
-  B: String!
-}
-
 input BooleanFilter {
   equals: Boolean
   not: Boolean
@@ -23,9 +18,79 @@ type BriefingBook {
   updatedAt: DateTime!
 }
 
+input BriefingBookCreateOneWithoutMentionedDocumentsInput {
+  connect: BriefingBookWhereUniqueInput
+  create: BriefingBookCreateWithoutMentionedDocumentsInput
+}
+
+input BriefingBookCreateOneWithoutMentionedEventsInput {
+  connect: BriefingBookWhereUniqueInput
+  create: BriefingBookCreateWithoutMentionedEventsInput
+}
+
+input BriefingBookCreateOneWithoutMentionedStakeholdersInput {
+  connect: BriefingBookWhereUniqueInput
+  create: BriefingBookCreateWithoutMentionedStakeholdersInput
+}
+
+input BriefingBookCreateWithoutMentionedDocumentsInput {
+  briefingBookDescription: String
+  briefingBookTitle: String!
+  createdAt: DateTime
+  id: String!
+  mentionedEvents: BriefingBookEventCreateManyWithoutBriefingBookInput
+  mentionedStakeholders: StakeholderBriefingBookCreateManyWithoutBriefingBookInput
+  updatedAt: DateTime
+}
+
+input BriefingBookCreateWithoutMentionedEventsInput {
+  briefingBookDescription: String
+  briefingBookTitle: String!
+  createdAt: DateTime
+  id: String!
+  mentionedDocuments: BriefingBookDocumentCreateManyWithoutBriefingBookInput
+  mentionedStakeholders: StakeholderBriefingBookCreateManyWithoutBriefingBookInput
+  updatedAt: DateTime
+}
+
+input BriefingBookCreateWithoutMentionedStakeholdersInput {
+  briefingBookDescription: String
+  briefingBookTitle: String!
+  createdAt: DateTime
+  id: String!
+  mentionedDocuments: BriefingBookDocumentCreateManyWithoutBriefingBookInput
+  mentionedEvents: BriefingBookEventCreateManyWithoutBriefingBookInput
+  updatedAt: DateTime
+}
+
 type BriefingBookDocument {
   BriefingBook: BriefingBook!
   Document: Document!
+  id: String!
+}
+
+input BriefingBookDocument_AB_uniqueCompoundUniqueInput {
+  A: String!
+  B: String!
+}
+
+input BriefingBookDocumentCreateManyWithoutBriefingBookInput {
+  connect: [BriefingBookDocumentWhereUniqueInput!]
+  create: [BriefingBookDocumentCreateWithoutBriefingBookInput!]
+}
+
+input BriefingBookDocumentCreateManyWithoutDocumentInput {
+  connect: [BriefingBookDocumentWhereUniqueInput!]
+  create: [BriefingBookDocumentCreateWithoutDocumentInput!]
+}
+
+input BriefingBookDocumentCreateWithoutBriefingBookInput {
+  Document: DocumentCreateOneWithoutBriefingBooksMentionedInInput!
+  id: String!
+}
+
+input BriefingBookDocumentCreateWithoutDocumentInput {
+  BriefingBook: BriefingBookCreateOneWithoutMentionedDocumentsInput!
   id: String!
 }
 
@@ -33,6 +98,80 @@ input BriefingBookDocumentFilter {
   every: BriefingBookDocumentWhereInput
   none: BriefingBookDocumentWhereInput
   some: BriefingBookDocumentWhereInput
+}
+
+input BriefingBookDocumentScalarWhereInput {
+  A: StringFilter
+  AND: [BriefingBookDocumentScalarWhereInput!]
+  B: StringFilter
+  id: StringFilter
+  NOT: [BriefingBookDocumentScalarWhereInput!]
+  OR: [BriefingBookDocumentScalarWhereInput!]
+}
+
+input BriefingBookDocumentUpdateManyDataInput {
+  id: String
+}
+
+input BriefingBookDocumentUpdateManyWithoutBriefingBookInput {
+  connect: [BriefingBookDocumentWhereUniqueInput!]
+  create: [BriefingBookDocumentCreateWithoutBriefingBookInput!]
+  delete: [BriefingBookDocumentWhereUniqueInput!]
+  deleteMany: [BriefingBookDocumentScalarWhereInput!]
+  disconnect: [BriefingBookDocumentWhereUniqueInput!]
+  set: [BriefingBookDocumentWhereUniqueInput!]
+  update: [BriefingBookDocumentUpdateWithWhereUniqueWithoutBriefingBookInput!]
+  updateMany: [BriefingBookDocumentUpdateManyWithWhereNestedInput!]
+  upsert: [BriefingBookDocumentUpsertWithWhereUniqueWithoutBriefingBookInput!]
+}
+
+input BriefingBookDocumentUpdateManyWithoutDocumentInput {
+  connect: [BriefingBookDocumentWhereUniqueInput!]
+  create: [BriefingBookDocumentCreateWithoutDocumentInput!]
+  delete: [BriefingBookDocumentWhereUniqueInput!]
+  deleteMany: [BriefingBookDocumentScalarWhereInput!]
+  disconnect: [BriefingBookDocumentWhereUniqueInput!]
+  set: [BriefingBookDocumentWhereUniqueInput!]
+  update: [BriefingBookDocumentUpdateWithWhereUniqueWithoutDocumentInput!]
+  updateMany: [BriefingBookDocumentUpdateManyWithWhereNestedInput!]
+  upsert: [BriefingBookDocumentUpsertWithWhereUniqueWithoutDocumentInput!]
+}
+
+input BriefingBookDocumentUpdateManyWithWhereNestedInput {
+  data: BriefingBookDocumentUpdateManyDataInput!
+  where: BriefingBookDocumentScalarWhereInput!
+}
+
+input BriefingBookDocumentUpdateWithoutBriefingBookDataInput {
+  Document: DocumentUpdateOneRequiredWithoutBriefingBooksMentionedInInput
+  id: String
+}
+
+input BriefingBookDocumentUpdateWithoutDocumentDataInput {
+  BriefingBook: BriefingBookUpdateOneRequiredWithoutMentionedDocumentsInput
+  id: String
+}
+
+input BriefingBookDocumentUpdateWithWhereUniqueWithoutBriefingBookInput {
+  data: BriefingBookDocumentUpdateWithoutBriefingBookDataInput!
+  where: BriefingBookDocumentWhereUniqueInput!
+}
+
+input BriefingBookDocumentUpdateWithWhereUniqueWithoutDocumentInput {
+  data: BriefingBookDocumentUpdateWithoutDocumentDataInput!
+  where: BriefingBookDocumentWhereUniqueInput!
+}
+
+input BriefingBookDocumentUpsertWithWhereUniqueWithoutBriefingBookInput {
+  create: BriefingBookDocumentCreateWithoutBriefingBookInput!
+  update: BriefingBookDocumentUpdateWithoutBriefingBookDataInput!
+  where: BriefingBookDocumentWhereUniqueInput!
+}
+
+input BriefingBookDocumentUpsertWithWhereUniqueWithoutDocumentInput {
+  create: BriefingBookDocumentCreateWithoutDocumentInput!
+  update: BriefingBookDocumentUpdateWithoutDocumentDataInput!
+  where: BriefingBookDocumentWhereUniqueInput!
 }
 
 input BriefingBookDocumentWhereInput {
@@ -48,8 +187,8 @@ input BriefingBookDocumentWhereInput {
 
 input BriefingBookDocumentWhereUniqueInput {
   A: String
-  AB_unique: AB_uniqueCompoundUniqueInput
   B: String
+  BriefingBookDocument_AB_unique: BriefingBookDocument_AB_uniqueCompoundUniqueInput
   id: String
 }
 
@@ -59,10 +198,109 @@ type BriefingBookEvent {
   id: String!
 }
 
+input BriefingBookEvent_AB_uniqueCompoundUniqueInput {
+  A: String!
+  B: String!
+}
+
+input BriefingBookEventCreateManyWithoutBriefingBookInput {
+  connect: [BriefingBookEventWhereUniqueInput!]
+  create: [BriefingBookEventCreateWithoutBriefingBookInput!]
+}
+
+input BriefingBookEventCreateManyWithoutEventInput {
+  connect: [BriefingBookEventWhereUniqueInput!]
+  create: [BriefingBookEventCreateWithoutEventInput!]
+}
+
+input BriefingBookEventCreateWithoutBriefingBookInput {
+  Event: EventCreateOneWithoutBriefingBooksMentionedInInput!
+  id: String!
+}
+
+input BriefingBookEventCreateWithoutEventInput {
+  BriefingBook: BriefingBookCreateOneWithoutMentionedEventsInput!
+  id: String!
+}
+
 input BriefingBookEventFilter {
   every: BriefingBookEventWhereInput
   none: BriefingBookEventWhereInput
   some: BriefingBookEventWhereInput
+}
+
+input BriefingBookEventScalarWhereInput {
+  A: StringFilter
+  AND: [BriefingBookEventScalarWhereInput!]
+  B: StringFilter
+  id: StringFilter
+  NOT: [BriefingBookEventScalarWhereInput!]
+  OR: [BriefingBookEventScalarWhereInput!]
+}
+
+input BriefingBookEventUpdateManyDataInput {
+  id: String
+}
+
+input BriefingBookEventUpdateManyWithoutBriefingBookInput {
+  connect: [BriefingBookEventWhereUniqueInput!]
+  create: [BriefingBookEventCreateWithoutBriefingBookInput!]
+  delete: [BriefingBookEventWhereUniqueInput!]
+  deleteMany: [BriefingBookEventScalarWhereInput!]
+  disconnect: [BriefingBookEventWhereUniqueInput!]
+  set: [BriefingBookEventWhereUniqueInput!]
+  update: [BriefingBookEventUpdateWithWhereUniqueWithoutBriefingBookInput!]
+  updateMany: [BriefingBookEventUpdateManyWithWhereNestedInput!]
+  upsert: [BriefingBookEventUpsertWithWhereUniqueWithoutBriefingBookInput!]
+}
+
+input BriefingBookEventUpdateManyWithoutEventInput {
+  connect: [BriefingBookEventWhereUniqueInput!]
+  create: [BriefingBookEventCreateWithoutEventInput!]
+  delete: [BriefingBookEventWhereUniqueInput!]
+  deleteMany: [BriefingBookEventScalarWhereInput!]
+  disconnect: [BriefingBookEventWhereUniqueInput!]
+  set: [BriefingBookEventWhereUniqueInput!]
+  update: [BriefingBookEventUpdateWithWhereUniqueWithoutEventInput!]
+  updateMany: [BriefingBookEventUpdateManyWithWhereNestedInput!]
+  upsert: [BriefingBookEventUpsertWithWhereUniqueWithoutEventInput!]
+}
+
+input BriefingBookEventUpdateManyWithWhereNestedInput {
+  data: BriefingBookEventUpdateManyDataInput!
+  where: BriefingBookEventScalarWhereInput!
+}
+
+input BriefingBookEventUpdateWithoutBriefingBookDataInput {
+  Event: EventUpdateOneRequiredWithoutBriefingBooksMentionedInInput
+  id: String
+}
+
+input BriefingBookEventUpdateWithoutEventDataInput {
+  BriefingBook: BriefingBookUpdateOneRequiredWithoutMentionedEventsInput
+  id: String
+}
+
+input BriefingBookEventUpdateWithWhereUniqueWithoutBriefingBookInput {
+  data: BriefingBookEventUpdateWithoutBriefingBookDataInput!
+  where: BriefingBookEventWhereUniqueInput!
+}
+
+input BriefingBookEventUpdateWithWhereUniqueWithoutEventInput {
+  data: BriefingBookEventUpdateWithoutEventDataInput!
+  where: BriefingBookEventWhereUniqueInput!
+}
+
+input BriefingBookEventUpsertWithWhereUniqueWithoutBriefingBookInput {
+  create: BriefingBookEventCreateWithoutBriefingBookInput!
+  update: BriefingBookEventUpdateWithoutBriefingBookDataInput!
+  where: BriefingBookEventWhereUniqueInput!
+}
+
+input BriefingBookEventUpsertWithWhereUniqueWithoutEventInput {
+  create: BriefingBookEventCreateWithoutEventInput!
+  update: BriefingBookEventUpdateWithoutEventDataInput!
+  where: BriefingBookEventWhereUniqueInput!
 }
 
 input BriefingBookEventWhereInput {
@@ -78,9 +316,75 @@ input BriefingBookEventWhereInput {
 
 input BriefingBookEventWhereUniqueInput {
   A: String
-  AB_unique: AB_uniqueCompoundUniqueInput
   B: String
+  BriefingBookEvent_AB_unique: BriefingBookEvent_AB_uniqueCompoundUniqueInput
   id: String
+}
+
+input BriefingBookUpdateOneRequiredWithoutMentionedDocumentsInput {
+  connect: BriefingBookWhereUniqueInput
+  create: BriefingBookCreateWithoutMentionedDocumentsInput
+  update: BriefingBookUpdateWithoutMentionedDocumentsDataInput
+  upsert: BriefingBookUpsertWithoutMentionedDocumentsInput
+}
+
+input BriefingBookUpdateOneRequiredWithoutMentionedEventsInput {
+  connect: BriefingBookWhereUniqueInput
+  create: BriefingBookCreateWithoutMentionedEventsInput
+  update: BriefingBookUpdateWithoutMentionedEventsDataInput
+  upsert: BriefingBookUpsertWithoutMentionedEventsInput
+}
+
+input BriefingBookUpdateOneRequiredWithoutMentionedStakeholdersInput {
+  connect: BriefingBookWhereUniqueInput
+  create: BriefingBookCreateWithoutMentionedStakeholdersInput
+  update: BriefingBookUpdateWithoutMentionedStakeholdersDataInput
+  upsert: BriefingBookUpsertWithoutMentionedStakeholdersInput
+}
+
+input BriefingBookUpdateWithoutMentionedDocumentsDataInput {
+  briefingBookDescription: String
+  briefingBookTitle: String
+  createdAt: DateTime
+  id: String
+  mentionedEvents: BriefingBookEventUpdateManyWithoutBriefingBookInput
+  mentionedStakeholders: StakeholderBriefingBookUpdateManyWithoutBriefingBookInput
+  updatedAt: DateTime
+}
+
+input BriefingBookUpdateWithoutMentionedEventsDataInput {
+  briefingBookDescription: String
+  briefingBookTitle: String
+  createdAt: DateTime
+  id: String
+  mentionedDocuments: BriefingBookDocumentUpdateManyWithoutBriefingBookInput
+  mentionedStakeholders: StakeholderBriefingBookUpdateManyWithoutBriefingBookInput
+  updatedAt: DateTime
+}
+
+input BriefingBookUpdateWithoutMentionedStakeholdersDataInput {
+  briefingBookDescription: String
+  briefingBookTitle: String
+  createdAt: DateTime
+  id: String
+  mentionedDocuments: BriefingBookDocumentUpdateManyWithoutBriefingBookInput
+  mentionedEvents: BriefingBookEventUpdateManyWithoutBriefingBookInput
+  updatedAt: DateTime
+}
+
+input BriefingBookUpsertWithoutMentionedDocumentsInput {
+  create: BriefingBookCreateWithoutMentionedDocumentsInput!
+  update: BriefingBookUpdateWithoutMentionedDocumentsDataInput!
+}
+
+input BriefingBookUpsertWithoutMentionedEventsInput {
+  create: BriefingBookCreateWithoutMentionedEventsInput!
+  update: BriefingBookUpdateWithoutMentionedEventsDataInput!
+}
+
+input BriefingBookUpsertWithoutMentionedStakeholdersInput {
+  create: BriefingBookCreateWithoutMentionedStakeholdersInput!
+  update: BriefingBookUpdateWithoutMentionedStakeholdersDataInput!
 }
 
 input BriefingBookWhereInput {
@@ -97,6 +401,11 @@ input BriefingBookWhereInput {
   updatedAt: DateTimeFilter
 }
 
+input BriefingBookWhereUniqueInput {
+  briefingBookTitle: String
+  id: String
+}
+
 type Classification {
   createdAt: DateTime!
   documentsWithClassification(after: ClassificationOnDocumentWhereUniqueInput, before: ClassificationOnDocumentWhereUniqueInput, first: Int, last: Int): [ClassificationOnDocument!]!
@@ -105,9 +414,36 @@ type Classification {
   updatedAt: DateTime!
 }
 
+input ClassificationCreateOneWithoutDocumentsWithClassificationInput {
+  connect: ClassificationWhereUniqueInput
+  create: ClassificationCreateWithoutDocumentsWithClassificationInput
+}
+
+input ClassificationCreateWithoutDocumentsWithClassificationInput {
+  createdAt: DateTime
+  id: String!
+  name: String!
+  updatedAt: DateTime
+}
+
 type ClassificationOnDocument {
   Classification: Classification!
   Document: Document!
+  id: String!
+}
+
+input ClassificationOnDocument_AB_uniqueCompoundUniqueInput {
+  A: String!
+  B: String!
+}
+
+input ClassificationOnDocumentCreateManyWithoutDocumentInput {
+  connect: [ClassificationOnDocumentWhereUniqueInput!]
+  create: [ClassificationOnDocumentCreateWithoutDocumentInput!]
+}
+
+input ClassificationOnDocumentCreateWithoutDocumentInput {
+  Classification: ClassificationCreateOneWithoutDocumentsWithClassificationInput!
   id: String!
 }
 
@@ -115,6 +451,52 @@ input ClassificationOnDocumentFilter {
   every: ClassificationOnDocumentWhereInput
   none: ClassificationOnDocumentWhereInput
   some: ClassificationOnDocumentWhereInput
+}
+
+input ClassificationOnDocumentScalarWhereInput {
+  A: StringFilter
+  AND: [ClassificationOnDocumentScalarWhereInput!]
+  B: StringFilter
+  id: StringFilter
+  NOT: [ClassificationOnDocumentScalarWhereInput!]
+  OR: [ClassificationOnDocumentScalarWhereInput!]
+}
+
+input ClassificationOnDocumentUpdateManyDataInput {
+  id: String
+}
+
+input ClassificationOnDocumentUpdateManyWithoutDocumentInput {
+  connect: [ClassificationOnDocumentWhereUniqueInput!]
+  create: [ClassificationOnDocumentCreateWithoutDocumentInput!]
+  delete: [ClassificationOnDocumentWhereUniqueInput!]
+  deleteMany: [ClassificationOnDocumentScalarWhereInput!]
+  disconnect: [ClassificationOnDocumentWhereUniqueInput!]
+  set: [ClassificationOnDocumentWhereUniqueInput!]
+  update: [ClassificationOnDocumentUpdateWithWhereUniqueWithoutDocumentInput!]
+  updateMany: [ClassificationOnDocumentUpdateManyWithWhereNestedInput!]
+  upsert: [ClassificationOnDocumentUpsertWithWhereUniqueWithoutDocumentInput!]
+}
+
+input ClassificationOnDocumentUpdateManyWithWhereNestedInput {
+  data: ClassificationOnDocumentUpdateManyDataInput!
+  where: ClassificationOnDocumentScalarWhereInput!
+}
+
+input ClassificationOnDocumentUpdateWithoutDocumentDataInput {
+  Classification: ClassificationUpdateOneRequiredWithoutDocumentsWithClassificationInput
+  id: String
+}
+
+input ClassificationOnDocumentUpdateWithWhereUniqueWithoutDocumentInput {
+  data: ClassificationOnDocumentUpdateWithoutDocumentDataInput!
+  where: ClassificationOnDocumentWhereUniqueInput!
+}
+
+input ClassificationOnDocumentUpsertWithWhereUniqueWithoutDocumentInput {
+  create: ClassificationOnDocumentCreateWithoutDocumentInput!
+  update: ClassificationOnDocumentUpdateWithoutDocumentDataInput!
+  where: ClassificationOnDocumentWhereUniqueInput!
 }
 
 input ClassificationOnDocumentWhereInput {
@@ -130,9 +512,28 @@ input ClassificationOnDocumentWhereInput {
 
 input ClassificationOnDocumentWhereUniqueInput {
   A: String
-  AB_unique: AB_uniqueCompoundUniqueInput
   B: String
+  ClassificationOnDocument_AB_unique: ClassificationOnDocument_AB_uniqueCompoundUniqueInput
   id: String
+}
+
+input ClassificationUpdateOneRequiredWithoutDocumentsWithClassificationInput {
+  connect: ClassificationWhereUniqueInput
+  create: ClassificationCreateWithoutDocumentsWithClassificationInput
+  update: ClassificationUpdateWithoutDocumentsWithClassificationDataInput
+  upsert: ClassificationUpsertWithoutDocumentsWithClassificationInput
+}
+
+input ClassificationUpdateWithoutDocumentsWithClassificationDataInput {
+  createdAt: DateTime
+  id: String
+  name: String
+  updatedAt: DateTime
+}
+
+input ClassificationUpsertWithoutDocumentsWithClassificationInput {
+  create: ClassificationCreateWithoutDocumentsWithClassificationInput!
+  update: ClassificationUpdateWithoutDocumentsWithClassificationDataInput!
 }
 
 input ClassificationWhereInput {
@@ -144,6 +545,11 @@ input ClassificationWhereInput {
   NOT: [ClassificationWhereInput!]
   OR: [ClassificationWhereInput!]
   updatedAt: DateTimeFilter
+}
+
+input ClassificationWhereUniqueInput {
+  id: String
+  name: String
 }
 
 """
@@ -187,10 +593,109 @@ type DocumentAuthor {
   Stakeholder: Stakeholder!
 }
 
+input DocumentAuthor_AB_uniqueCompoundUniqueInput {
+  A: String!
+  B: String!
+}
+
+input DocumentAuthorCreateManyWithoutDocumentInput {
+  connect: [DocumentAuthorWhereUniqueInput!]
+  create: [DocumentAuthorCreateWithoutDocumentInput!]
+}
+
+input DocumentAuthorCreateManyWithoutStakeholderInput {
+  connect: [DocumentAuthorWhereUniqueInput!]
+  create: [DocumentAuthorCreateWithoutStakeholderInput!]
+}
+
+input DocumentAuthorCreateWithoutDocumentInput {
+  id: String!
+  Stakeholder: StakeholderCreateOneWithoutDocumentsInput!
+}
+
+input DocumentAuthorCreateWithoutStakeholderInput {
+  Document: DocumentCreateOneWithoutDocumentAuthorsInput!
+  id: String!
+}
+
 input DocumentAuthorFilter {
   every: DocumentAuthorWhereInput
   none: DocumentAuthorWhereInput
   some: DocumentAuthorWhereInput
+}
+
+input DocumentAuthorScalarWhereInput {
+  A: StringFilter
+  AND: [DocumentAuthorScalarWhereInput!]
+  B: StringFilter
+  id: StringFilter
+  NOT: [DocumentAuthorScalarWhereInput!]
+  OR: [DocumentAuthorScalarWhereInput!]
+}
+
+input DocumentAuthorUpdateManyDataInput {
+  id: String
+}
+
+input DocumentAuthorUpdateManyWithoutDocumentInput {
+  connect: [DocumentAuthorWhereUniqueInput!]
+  create: [DocumentAuthorCreateWithoutDocumentInput!]
+  delete: [DocumentAuthorWhereUniqueInput!]
+  deleteMany: [DocumentAuthorScalarWhereInput!]
+  disconnect: [DocumentAuthorWhereUniqueInput!]
+  set: [DocumentAuthorWhereUniqueInput!]
+  update: [DocumentAuthorUpdateWithWhereUniqueWithoutDocumentInput!]
+  updateMany: [DocumentAuthorUpdateManyWithWhereNestedInput!]
+  upsert: [DocumentAuthorUpsertWithWhereUniqueWithoutDocumentInput!]
+}
+
+input DocumentAuthorUpdateManyWithoutStakeholderInput {
+  connect: [DocumentAuthorWhereUniqueInput!]
+  create: [DocumentAuthorCreateWithoutStakeholderInput!]
+  delete: [DocumentAuthorWhereUniqueInput!]
+  deleteMany: [DocumentAuthorScalarWhereInput!]
+  disconnect: [DocumentAuthorWhereUniqueInput!]
+  set: [DocumentAuthorWhereUniqueInput!]
+  update: [DocumentAuthorUpdateWithWhereUniqueWithoutStakeholderInput!]
+  updateMany: [DocumentAuthorUpdateManyWithWhereNestedInput!]
+  upsert: [DocumentAuthorUpsertWithWhereUniqueWithoutStakeholderInput!]
+}
+
+input DocumentAuthorUpdateManyWithWhereNestedInput {
+  data: DocumentAuthorUpdateManyDataInput!
+  where: DocumentAuthorScalarWhereInput!
+}
+
+input DocumentAuthorUpdateWithoutDocumentDataInput {
+  id: String
+  Stakeholder: StakeholderUpdateOneRequiredWithoutDocumentsInput
+}
+
+input DocumentAuthorUpdateWithoutStakeholderDataInput {
+  Document: DocumentUpdateOneRequiredWithoutDocumentAuthorsInput
+  id: String
+}
+
+input DocumentAuthorUpdateWithWhereUniqueWithoutDocumentInput {
+  data: DocumentAuthorUpdateWithoutDocumentDataInput!
+  where: DocumentAuthorWhereUniqueInput!
+}
+
+input DocumentAuthorUpdateWithWhereUniqueWithoutStakeholderInput {
+  data: DocumentAuthorUpdateWithoutStakeholderDataInput!
+  where: DocumentAuthorWhereUniqueInput!
+}
+
+input DocumentAuthorUpsertWithWhereUniqueWithoutDocumentInput {
+  create: DocumentAuthorCreateWithoutDocumentInput!
+  update: DocumentAuthorUpdateWithoutDocumentDataInput!
+  where: DocumentAuthorWhereUniqueInput!
+}
+
+input DocumentAuthorUpsertWithWhereUniqueWithoutStakeholderInput {
+  create: DocumentAuthorCreateWithoutStakeholderInput!
+  update: DocumentAuthorUpdateWithoutStakeholderDataInput!
+  where: DocumentAuthorWhereUniqueInput!
 }
 
 input DocumentAuthorWhereInput {
@@ -206,9 +711,231 @@ input DocumentAuthorWhereInput {
 
 input DocumentAuthorWhereUniqueInput {
   A: String
-  AB_unique: AB_uniqueCompoundUniqueInput
   B: String
+  DocumentAuthor_AB_unique: DocumentAuthor_AB_uniqueCompoundUniqueInput
   id: String
+}
+
+input DocumentCreateOneWithoutBriefingBooksMentionedInInput {
+  connect: DocumentWhereUniqueInput
+  create: DocumentCreateWithoutBriefingBooksMentionedInInput
+}
+
+input DocumentCreateOneWithoutDocumentAuthorsInput {
+  connect: DocumentWhereUniqueInput
+  create: DocumentCreateWithoutDocumentAuthorsInput
+}
+
+input DocumentCreateOneWithoutDocumentTagsInput {
+  connect: DocumentWhereUniqueInput
+  create: DocumentCreateWithoutDocumentTagsInput
+}
+
+input DocumentCreateOneWithoutMentionedEventsInput {
+  connect: DocumentWhereUniqueInput
+  create: DocumentCreateWithoutMentionedEventsInput
+}
+
+input DocumentCreateOneWithoutMentionedLocationsInput {
+  connect: DocumentWhereUniqueInput
+  create: DocumentCreateWithoutMentionedLocationsInput
+}
+
+input DocumentCreateOneWithoutMentionedStakeholdersInput {
+  connect: DocumentWhereUniqueInput
+  create: DocumentCreateWithoutMentionedStakeholdersInput
+}
+
+input DocumentCreateWithoutBriefingBooksMentionedInInput {
+  createdAt: DateTime
+  dnsaAbstract: String
+  dnsaCitation: String
+  dnsaCollection: String
+  dnsaFrom: String
+  dnsaItemNumber: String
+  dnsaOrigin: String
+  dnsaStakeholder: String
+  dnsaSubject: String
+  dnsaTo: String
+  dnsaURL: String
+  documentAuthors: DocumentAuthorCreateManyWithoutDocumentInput
+  documentClassification: ClassificationOnDocumentCreateManyWithoutDocumentInput
+  documentCreationDate: DateTime
+  documentDescription: String
+  documentFiles: DocumentFileCreateManyWithoutDocumentInput
+  documentKind: KindOnDocumentCreateManyWithoutDocumentInput
+  documentMediaType: String!
+  documentOriginalID: String!
+  documentPublicationDate: DateTime
+  documentTags: TagOnDocumentCreateManyWithoutDocumentInput
+  documentTitle: String!
+  documentTranscript: String
+  id: String!
+  mentionedEvents: DocumentEventCreateManyWithoutDocumentInput
+  mentionedLocations: DocumentLocationCreateManyWithoutDocumentInput
+  mentionedStakeholders: DocumentInvolvedStakeholderCreateManyWithoutDocumentInput
+  sessionNumber: Int
+  updatedAt: DateTime
+}
+
+input DocumentCreateWithoutDocumentAuthorsInput {
+  briefingBooksMentionedIn: BriefingBookDocumentCreateManyWithoutDocumentInput
+  createdAt: DateTime
+  dnsaAbstract: String
+  dnsaCitation: String
+  dnsaCollection: String
+  dnsaFrom: String
+  dnsaItemNumber: String
+  dnsaOrigin: String
+  dnsaStakeholder: String
+  dnsaSubject: String
+  dnsaTo: String
+  dnsaURL: String
+  documentClassification: ClassificationOnDocumentCreateManyWithoutDocumentInput
+  documentCreationDate: DateTime
+  documentDescription: String
+  documentFiles: DocumentFileCreateManyWithoutDocumentInput
+  documentKind: KindOnDocumentCreateManyWithoutDocumentInput
+  documentMediaType: String!
+  documentOriginalID: String!
+  documentPublicationDate: DateTime
+  documentTags: TagOnDocumentCreateManyWithoutDocumentInput
+  documentTitle: String!
+  documentTranscript: String
+  id: String!
+  mentionedEvents: DocumentEventCreateManyWithoutDocumentInput
+  mentionedLocations: DocumentLocationCreateManyWithoutDocumentInput
+  mentionedStakeholders: DocumentInvolvedStakeholderCreateManyWithoutDocumentInput
+  sessionNumber: Int
+  updatedAt: DateTime
+}
+
+input DocumentCreateWithoutDocumentTagsInput {
+  briefingBooksMentionedIn: BriefingBookDocumentCreateManyWithoutDocumentInput
+  createdAt: DateTime
+  dnsaAbstract: String
+  dnsaCitation: String
+  dnsaCollection: String
+  dnsaFrom: String
+  dnsaItemNumber: String
+  dnsaOrigin: String
+  dnsaStakeholder: String
+  dnsaSubject: String
+  dnsaTo: String
+  dnsaURL: String
+  documentAuthors: DocumentAuthorCreateManyWithoutDocumentInput
+  documentClassification: ClassificationOnDocumentCreateManyWithoutDocumentInput
+  documentCreationDate: DateTime
+  documentDescription: String
+  documentFiles: DocumentFileCreateManyWithoutDocumentInput
+  documentKind: KindOnDocumentCreateManyWithoutDocumentInput
+  documentMediaType: String!
+  documentOriginalID: String!
+  documentPublicationDate: DateTime
+  documentTitle: String!
+  documentTranscript: String
+  id: String!
+  mentionedEvents: DocumentEventCreateManyWithoutDocumentInput
+  mentionedLocations: DocumentLocationCreateManyWithoutDocumentInput
+  mentionedStakeholders: DocumentInvolvedStakeholderCreateManyWithoutDocumentInput
+  sessionNumber: Int
+  updatedAt: DateTime
+}
+
+input DocumentCreateWithoutMentionedEventsInput {
+  briefingBooksMentionedIn: BriefingBookDocumentCreateManyWithoutDocumentInput
+  createdAt: DateTime
+  dnsaAbstract: String
+  dnsaCitation: String
+  dnsaCollection: String
+  dnsaFrom: String
+  dnsaItemNumber: String
+  dnsaOrigin: String
+  dnsaStakeholder: String
+  dnsaSubject: String
+  dnsaTo: String
+  dnsaURL: String
+  documentAuthors: DocumentAuthorCreateManyWithoutDocumentInput
+  documentClassification: ClassificationOnDocumentCreateManyWithoutDocumentInput
+  documentCreationDate: DateTime
+  documentDescription: String
+  documentFiles: DocumentFileCreateManyWithoutDocumentInput
+  documentKind: KindOnDocumentCreateManyWithoutDocumentInput
+  documentMediaType: String!
+  documentOriginalID: String!
+  documentPublicationDate: DateTime
+  documentTags: TagOnDocumentCreateManyWithoutDocumentInput
+  documentTitle: String!
+  documentTranscript: String
+  id: String!
+  mentionedLocations: DocumentLocationCreateManyWithoutDocumentInput
+  mentionedStakeholders: DocumentInvolvedStakeholderCreateManyWithoutDocumentInput
+  sessionNumber: Int
+  updatedAt: DateTime
+}
+
+input DocumentCreateWithoutMentionedLocationsInput {
+  briefingBooksMentionedIn: BriefingBookDocumentCreateManyWithoutDocumentInput
+  createdAt: DateTime
+  dnsaAbstract: String
+  dnsaCitation: String
+  dnsaCollection: String
+  dnsaFrom: String
+  dnsaItemNumber: String
+  dnsaOrigin: String
+  dnsaStakeholder: String
+  dnsaSubject: String
+  dnsaTo: String
+  dnsaURL: String
+  documentAuthors: DocumentAuthorCreateManyWithoutDocumentInput
+  documentClassification: ClassificationOnDocumentCreateManyWithoutDocumentInput
+  documentCreationDate: DateTime
+  documentDescription: String
+  documentFiles: DocumentFileCreateManyWithoutDocumentInput
+  documentKind: KindOnDocumentCreateManyWithoutDocumentInput
+  documentMediaType: String!
+  documentOriginalID: String!
+  documentPublicationDate: DateTime
+  documentTags: TagOnDocumentCreateManyWithoutDocumentInput
+  documentTitle: String!
+  documentTranscript: String
+  id: String!
+  mentionedEvents: DocumentEventCreateManyWithoutDocumentInput
+  mentionedStakeholders: DocumentInvolvedStakeholderCreateManyWithoutDocumentInput
+  sessionNumber: Int
+  updatedAt: DateTime
+}
+
+input DocumentCreateWithoutMentionedStakeholdersInput {
+  briefingBooksMentionedIn: BriefingBookDocumentCreateManyWithoutDocumentInput
+  createdAt: DateTime
+  dnsaAbstract: String
+  dnsaCitation: String
+  dnsaCollection: String
+  dnsaFrom: String
+  dnsaItemNumber: String
+  dnsaOrigin: String
+  dnsaStakeholder: String
+  dnsaSubject: String
+  dnsaTo: String
+  dnsaURL: String
+  documentAuthors: DocumentAuthorCreateManyWithoutDocumentInput
+  documentClassification: ClassificationOnDocumentCreateManyWithoutDocumentInput
+  documentCreationDate: DateTime
+  documentDescription: String
+  documentFiles: DocumentFileCreateManyWithoutDocumentInput
+  documentKind: KindOnDocumentCreateManyWithoutDocumentInput
+  documentMediaType: String!
+  documentOriginalID: String!
+  documentPublicationDate: DateTime
+  documentTags: TagOnDocumentCreateManyWithoutDocumentInput
+  documentTitle: String!
+  documentTranscript: String
+  id: String!
+  mentionedEvents: DocumentEventCreateManyWithoutDocumentInput
+  mentionedLocations: DocumentLocationCreateManyWithoutDocumentInput
+  sessionNumber: Int
+  updatedAt: DateTime
 }
 
 type DocumentEvent {
@@ -217,10 +944,109 @@ type DocumentEvent {
   id: String!
 }
 
+input DocumentEvent_AB_uniqueCompoundUniqueInput {
+  A: String!
+  B: String!
+}
+
+input DocumentEventCreateManyWithoutDocumentInput {
+  connect: [DocumentEventWhereUniqueInput!]
+  create: [DocumentEventCreateWithoutDocumentInput!]
+}
+
+input DocumentEventCreateManyWithoutEventInput {
+  connect: [DocumentEventWhereUniqueInput!]
+  create: [DocumentEventCreateWithoutEventInput!]
+}
+
+input DocumentEventCreateWithoutDocumentInput {
+  Event: EventCreateOneWithoutDocumentsMentionedInInput!
+  id: String!
+}
+
+input DocumentEventCreateWithoutEventInput {
+  Document: DocumentCreateOneWithoutMentionedEventsInput!
+  id: String!
+}
+
 input DocumentEventFilter {
   every: DocumentEventWhereInput
   none: DocumentEventWhereInput
   some: DocumentEventWhereInput
+}
+
+input DocumentEventScalarWhereInput {
+  A: StringFilter
+  AND: [DocumentEventScalarWhereInput!]
+  B: StringFilter
+  id: StringFilter
+  NOT: [DocumentEventScalarWhereInput!]
+  OR: [DocumentEventScalarWhereInput!]
+}
+
+input DocumentEventUpdateManyDataInput {
+  id: String
+}
+
+input DocumentEventUpdateManyWithoutDocumentInput {
+  connect: [DocumentEventWhereUniqueInput!]
+  create: [DocumentEventCreateWithoutDocumentInput!]
+  delete: [DocumentEventWhereUniqueInput!]
+  deleteMany: [DocumentEventScalarWhereInput!]
+  disconnect: [DocumentEventWhereUniqueInput!]
+  set: [DocumentEventWhereUniqueInput!]
+  update: [DocumentEventUpdateWithWhereUniqueWithoutDocumentInput!]
+  updateMany: [DocumentEventUpdateManyWithWhereNestedInput!]
+  upsert: [DocumentEventUpsertWithWhereUniqueWithoutDocumentInput!]
+}
+
+input DocumentEventUpdateManyWithoutEventInput {
+  connect: [DocumentEventWhereUniqueInput!]
+  create: [DocumentEventCreateWithoutEventInput!]
+  delete: [DocumentEventWhereUniqueInput!]
+  deleteMany: [DocumentEventScalarWhereInput!]
+  disconnect: [DocumentEventWhereUniqueInput!]
+  set: [DocumentEventWhereUniqueInput!]
+  update: [DocumentEventUpdateWithWhereUniqueWithoutEventInput!]
+  updateMany: [DocumentEventUpdateManyWithWhereNestedInput!]
+  upsert: [DocumentEventUpsertWithWhereUniqueWithoutEventInput!]
+}
+
+input DocumentEventUpdateManyWithWhereNestedInput {
+  data: DocumentEventUpdateManyDataInput!
+  where: DocumentEventScalarWhereInput!
+}
+
+input DocumentEventUpdateWithoutDocumentDataInput {
+  Event: EventUpdateOneRequiredWithoutDocumentsMentionedInInput
+  id: String
+}
+
+input DocumentEventUpdateWithoutEventDataInput {
+  Document: DocumentUpdateOneRequiredWithoutMentionedEventsInput
+  id: String
+}
+
+input DocumentEventUpdateWithWhereUniqueWithoutDocumentInput {
+  data: DocumentEventUpdateWithoutDocumentDataInput!
+  where: DocumentEventWhereUniqueInput!
+}
+
+input DocumentEventUpdateWithWhereUniqueWithoutEventInput {
+  data: DocumentEventUpdateWithoutEventDataInput!
+  where: DocumentEventWhereUniqueInput!
+}
+
+input DocumentEventUpsertWithWhereUniqueWithoutDocumentInput {
+  create: DocumentEventCreateWithoutDocumentInput!
+  update: DocumentEventUpdateWithoutDocumentDataInput!
+  where: DocumentEventWhereUniqueInput!
+}
+
+input DocumentEventUpsertWithWhereUniqueWithoutEventInput {
+  create: DocumentEventCreateWithoutEventInput!
+  update: DocumentEventUpdateWithoutEventDataInput!
+  where: DocumentEventWhereUniqueInput!
 }
 
 input DocumentEventWhereInput {
@@ -234,9 +1060,31 @@ input DocumentEventWhereInput {
   OR: [DocumentEventWhereInput!]
 }
 
+input DocumentEventWhereUniqueInput {
+  A: String
+  B: String
+  DocumentEvent_AB_unique: DocumentEvent_AB_uniqueCompoundUniqueInput
+  id: String
+}
+
 type DocumentFile {
   Document: Document!
   File: File!
+  id: String!
+}
+
+input DocumentFile_AB_uniqueCompoundUniqueInput {
+  A: String!
+  B: String!
+}
+
+input DocumentFileCreateManyWithoutDocumentInput {
+  connect: [DocumentFileWhereUniqueInput!]
+  create: [DocumentFileCreateWithoutDocumentInput!]
+}
+
+input DocumentFileCreateWithoutDocumentInput {
+  File: FileCreateOneWithoutDocumentsIncludedInInput!
   id: String!
 }
 
@@ -244,6 +1092,52 @@ input DocumentFileFilter {
   every: DocumentFileWhereInput
   none: DocumentFileWhereInput
   some: DocumentFileWhereInput
+}
+
+input DocumentFileScalarWhereInput {
+  A: StringFilter
+  AND: [DocumentFileScalarWhereInput!]
+  B: StringFilter
+  id: StringFilter
+  NOT: [DocumentFileScalarWhereInput!]
+  OR: [DocumentFileScalarWhereInput!]
+}
+
+input DocumentFileUpdateManyDataInput {
+  id: String
+}
+
+input DocumentFileUpdateManyWithoutDocumentInput {
+  connect: [DocumentFileWhereUniqueInput!]
+  create: [DocumentFileCreateWithoutDocumentInput!]
+  delete: [DocumentFileWhereUniqueInput!]
+  deleteMany: [DocumentFileScalarWhereInput!]
+  disconnect: [DocumentFileWhereUniqueInput!]
+  set: [DocumentFileWhereUniqueInput!]
+  update: [DocumentFileUpdateWithWhereUniqueWithoutDocumentInput!]
+  updateMany: [DocumentFileUpdateManyWithWhereNestedInput!]
+  upsert: [DocumentFileUpsertWithWhereUniqueWithoutDocumentInput!]
+}
+
+input DocumentFileUpdateManyWithWhereNestedInput {
+  data: DocumentFileUpdateManyDataInput!
+  where: DocumentFileScalarWhereInput!
+}
+
+input DocumentFileUpdateWithoutDocumentDataInput {
+  File: FileUpdateOneRequiredWithoutDocumentsIncludedInInput
+  id: String
+}
+
+input DocumentFileUpdateWithWhereUniqueWithoutDocumentInput {
+  data: DocumentFileUpdateWithoutDocumentDataInput!
+  where: DocumentFileWhereUniqueInput!
+}
+
+input DocumentFileUpsertWithWhereUniqueWithoutDocumentInput {
+  create: DocumentFileCreateWithoutDocumentInput!
+  update: DocumentFileUpdateWithoutDocumentDataInput!
+  where: DocumentFileWhereUniqueInput!
 }
 
 input DocumentFileWhereInput {
@@ -259,8 +1153,8 @@ input DocumentFileWhereInput {
 
 input DocumentFileWhereUniqueInput {
   A: String
-  AB_unique: AB_uniqueCompoundUniqueInput
   B: String
+  DocumentFile_AB_unique: DocumentFile_AB_uniqueCompoundUniqueInput
   id: String
 }
 
@@ -270,10 +1164,109 @@ type DocumentInvolvedStakeholder {
   Stakeholder: Stakeholder!
 }
 
+input DocumentInvolvedStakeholder_AB_uniqueCompoundUniqueInput {
+  A: String!
+  B: String!
+}
+
+input DocumentInvolvedStakeholderCreateManyWithoutDocumentInput {
+  connect: [DocumentInvolvedStakeholderWhereUniqueInput!]
+  create: [DocumentInvolvedStakeholderCreateWithoutDocumentInput!]
+}
+
+input DocumentInvolvedStakeholderCreateManyWithoutStakeholderInput {
+  connect: [DocumentInvolvedStakeholderWhereUniqueInput!]
+  create: [DocumentInvolvedStakeholderCreateWithoutStakeholderInput!]
+}
+
+input DocumentInvolvedStakeholderCreateWithoutDocumentInput {
+  id: String!
+  Stakeholder: StakeholderCreateOneWithoutDocumentsMentionedInInput!
+}
+
+input DocumentInvolvedStakeholderCreateWithoutStakeholderInput {
+  Document: DocumentCreateOneWithoutMentionedStakeholdersInput!
+  id: String!
+}
+
 input DocumentInvolvedStakeholderFilter {
   every: DocumentInvolvedStakeholderWhereInput
   none: DocumentInvolvedStakeholderWhereInput
   some: DocumentInvolvedStakeholderWhereInput
+}
+
+input DocumentInvolvedStakeholderScalarWhereInput {
+  A: StringFilter
+  AND: [DocumentInvolvedStakeholderScalarWhereInput!]
+  B: StringFilter
+  id: StringFilter
+  NOT: [DocumentInvolvedStakeholderScalarWhereInput!]
+  OR: [DocumentInvolvedStakeholderScalarWhereInput!]
+}
+
+input DocumentInvolvedStakeholderUpdateManyDataInput {
+  id: String
+}
+
+input DocumentInvolvedStakeholderUpdateManyWithoutDocumentInput {
+  connect: [DocumentInvolvedStakeholderWhereUniqueInput!]
+  create: [DocumentInvolvedStakeholderCreateWithoutDocumentInput!]
+  delete: [DocumentInvolvedStakeholderWhereUniqueInput!]
+  deleteMany: [DocumentInvolvedStakeholderScalarWhereInput!]
+  disconnect: [DocumentInvolvedStakeholderWhereUniqueInput!]
+  set: [DocumentInvolvedStakeholderWhereUniqueInput!]
+  update: [DocumentInvolvedStakeholderUpdateWithWhereUniqueWithoutDocumentInput!]
+  updateMany: [DocumentInvolvedStakeholderUpdateManyWithWhereNestedInput!]
+  upsert: [DocumentInvolvedStakeholderUpsertWithWhereUniqueWithoutDocumentInput!]
+}
+
+input DocumentInvolvedStakeholderUpdateManyWithoutStakeholderInput {
+  connect: [DocumentInvolvedStakeholderWhereUniqueInput!]
+  create: [DocumentInvolvedStakeholderCreateWithoutStakeholderInput!]
+  delete: [DocumentInvolvedStakeholderWhereUniqueInput!]
+  deleteMany: [DocumentInvolvedStakeholderScalarWhereInput!]
+  disconnect: [DocumentInvolvedStakeholderWhereUniqueInput!]
+  set: [DocumentInvolvedStakeholderWhereUniqueInput!]
+  update: [DocumentInvolvedStakeholderUpdateWithWhereUniqueWithoutStakeholderInput!]
+  updateMany: [DocumentInvolvedStakeholderUpdateManyWithWhereNestedInput!]
+  upsert: [DocumentInvolvedStakeholderUpsertWithWhereUniqueWithoutStakeholderInput!]
+}
+
+input DocumentInvolvedStakeholderUpdateManyWithWhereNestedInput {
+  data: DocumentInvolvedStakeholderUpdateManyDataInput!
+  where: DocumentInvolvedStakeholderScalarWhereInput!
+}
+
+input DocumentInvolvedStakeholderUpdateWithoutDocumentDataInput {
+  id: String
+  Stakeholder: StakeholderUpdateOneRequiredWithoutDocumentsMentionedInInput
+}
+
+input DocumentInvolvedStakeholderUpdateWithoutStakeholderDataInput {
+  Document: DocumentUpdateOneRequiredWithoutMentionedStakeholdersInput
+  id: String
+}
+
+input DocumentInvolvedStakeholderUpdateWithWhereUniqueWithoutDocumentInput {
+  data: DocumentInvolvedStakeholderUpdateWithoutDocumentDataInput!
+  where: DocumentInvolvedStakeholderWhereUniqueInput!
+}
+
+input DocumentInvolvedStakeholderUpdateWithWhereUniqueWithoutStakeholderInput {
+  data: DocumentInvolvedStakeholderUpdateWithoutStakeholderDataInput!
+  where: DocumentInvolvedStakeholderWhereUniqueInput!
+}
+
+input DocumentInvolvedStakeholderUpsertWithWhereUniqueWithoutDocumentInput {
+  create: DocumentInvolvedStakeholderCreateWithoutDocumentInput!
+  update: DocumentInvolvedStakeholderUpdateWithoutDocumentDataInput!
+  where: DocumentInvolvedStakeholderWhereUniqueInput!
+}
+
+input DocumentInvolvedStakeholderUpsertWithWhereUniqueWithoutStakeholderInput {
+  create: DocumentInvolvedStakeholderCreateWithoutStakeholderInput!
+  update: DocumentInvolvedStakeholderUpdateWithoutStakeholderDataInput!
+  where: DocumentInvolvedStakeholderWhereUniqueInput!
 }
 
 input DocumentInvolvedStakeholderWhereInput {
@@ -289,8 +1282,8 @@ input DocumentInvolvedStakeholderWhereInput {
 
 input DocumentInvolvedStakeholderWhereUniqueInput {
   A: String
-  AB_unique: AB_uniqueCompoundUniqueInput
   B: String
+  DocumentInvolvedStakeholder_AB_unique: DocumentInvolvedStakeholder_AB_uniqueCompoundUniqueInput
   id: String
 }
 
@@ -300,10 +1293,109 @@ type DocumentLocation {
   Location: Location!
 }
 
+input DocumentLocation_AB_uniqueCompoundUniqueInput {
+  A: String!
+  B: String!
+}
+
+input DocumentLocationCreateManyWithoutDocumentInput {
+  connect: [DocumentLocationWhereUniqueInput!]
+  create: [DocumentLocationCreateWithoutDocumentInput!]
+}
+
+input DocumentLocationCreateManyWithoutLocationInput {
+  connect: [DocumentLocationWhereUniqueInput!]
+  create: [DocumentLocationCreateWithoutLocationInput!]
+}
+
+input DocumentLocationCreateWithoutDocumentInput {
+  id: String!
+  Location: LocationCreateOneWithoutDocumentsMentionedInInput!
+}
+
+input DocumentLocationCreateWithoutLocationInput {
+  Document: DocumentCreateOneWithoutMentionedLocationsInput!
+  id: String!
+}
+
 input DocumentLocationFilter {
   every: DocumentLocationWhereInput
   none: DocumentLocationWhereInput
   some: DocumentLocationWhereInput
+}
+
+input DocumentLocationScalarWhereInput {
+  A: StringFilter
+  AND: [DocumentLocationScalarWhereInput!]
+  B: StringFilter
+  id: StringFilter
+  NOT: [DocumentLocationScalarWhereInput!]
+  OR: [DocumentLocationScalarWhereInput!]
+}
+
+input DocumentLocationUpdateManyDataInput {
+  id: String
+}
+
+input DocumentLocationUpdateManyWithoutDocumentInput {
+  connect: [DocumentLocationWhereUniqueInput!]
+  create: [DocumentLocationCreateWithoutDocumentInput!]
+  delete: [DocumentLocationWhereUniqueInput!]
+  deleteMany: [DocumentLocationScalarWhereInput!]
+  disconnect: [DocumentLocationWhereUniqueInput!]
+  set: [DocumentLocationWhereUniqueInput!]
+  update: [DocumentLocationUpdateWithWhereUniqueWithoutDocumentInput!]
+  updateMany: [DocumentLocationUpdateManyWithWhereNestedInput!]
+  upsert: [DocumentLocationUpsertWithWhereUniqueWithoutDocumentInput!]
+}
+
+input DocumentLocationUpdateManyWithoutLocationInput {
+  connect: [DocumentLocationWhereUniqueInput!]
+  create: [DocumentLocationCreateWithoutLocationInput!]
+  delete: [DocumentLocationWhereUniqueInput!]
+  deleteMany: [DocumentLocationScalarWhereInput!]
+  disconnect: [DocumentLocationWhereUniqueInput!]
+  set: [DocumentLocationWhereUniqueInput!]
+  update: [DocumentLocationUpdateWithWhereUniqueWithoutLocationInput!]
+  updateMany: [DocumentLocationUpdateManyWithWhereNestedInput!]
+  upsert: [DocumentLocationUpsertWithWhereUniqueWithoutLocationInput!]
+}
+
+input DocumentLocationUpdateManyWithWhereNestedInput {
+  data: DocumentLocationUpdateManyDataInput!
+  where: DocumentLocationScalarWhereInput!
+}
+
+input DocumentLocationUpdateWithoutDocumentDataInput {
+  id: String
+  Location: LocationUpdateOneRequiredWithoutDocumentsMentionedInInput
+}
+
+input DocumentLocationUpdateWithoutLocationDataInput {
+  Document: DocumentUpdateOneRequiredWithoutMentionedLocationsInput
+  id: String
+}
+
+input DocumentLocationUpdateWithWhereUniqueWithoutDocumentInput {
+  data: DocumentLocationUpdateWithoutDocumentDataInput!
+  where: DocumentLocationWhereUniqueInput!
+}
+
+input DocumentLocationUpdateWithWhereUniqueWithoutLocationInput {
+  data: DocumentLocationUpdateWithoutLocationDataInput!
+  where: DocumentLocationWhereUniqueInput!
+}
+
+input DocumentLocationUpsertWithWhereUniqueWithoutDocumentInput {
+  create: DocumentLocationCreateWithoutDocumentInput!
+  update: DocumentLocationUpdateWithoutDocumentDataInput!
+  where: DocumentLocationWhereUniqueInput!
+}
+
+input DocumentLocationUpsertWithWhereUniqueWithoutLocationInput {
+  create: DocumentLocationCreateWithoutLocationInput!
+  update: DocumentLocationUpdateWithoutLocationDataInput!
+  where: DocumentLocationWhereUniqueInput!
 }
 
 input DocumentLocationWhereInput {
@@ -319,8 +1411,8 @@ input DocumentLocationWhereInput {
 
 input DocumentLocationWhereUniqueInput {
   A: String
-  AB_unique: AB_uniqueCompoundUniqueInput
   B: String
+  DocumentLocation_AB_unique: DocumentLocation_AB_uniqueCompoundUniqueInput
   id: String
 }
 
@@ -346,6 +1438,303 @@ input DocumentOrderByInput {
   id: OrderByArg
   sessionNumber: OrderByArg
   updatedAt: OrderByArg
+}
+
+input DocumentUpdateInput {
+  briefingBooksMentionedIn: BriefingBookDocumentUpdateManyWithoutDocumentInput
+  createdAt: DateTime
+  dnsaAbstract: String
+  dnsaCitation: String
+  dnsaCollection: String
+  dnsaFrom: String
+  dnsaItemNumber: String
+  dnsaOrigin: String
+  dnsaStakeholder: String
+  dnsaSubject: String
+  dnsaTo: String
+  dnsaURL: String
+  documentAuthors: DocumentAuthorUpdateManyWithoutDocumentInput
+  documentClassification: ClassificationOnDocumentUpdateManyWithoutDocumentInput
+  documentCreationDate: DateTime
+  documentDescription: String
+  documentFiles: DocumentFileUpdateManyWithoutDocumentInput
+  documentKind: KindOnDocumentUpdateManyWithoutDocumentInput
+  documentMediaType: String
+  documentOriginalID: String
+  documentPublicationDate: DateTime
+  documentTags: TagOnDocumentUpdateManyWithoutDocumentInput
+  documentTitle: String
+  documentTranscript: String
+  id: String
+  mentionedEvents: DocumentEventUpdateManyWithoutDocumentInput
+  mentionedLocations: DocumentLocationUpdateManyWithoutDocumentInput
+  mentionedStakeholders: DocumentInvolvedStakeholderUpdateManyWithoutDocumentInput
+  sessionNumber: Int
+  updatedAt: DateTime
+}
+
+input DocumentUpdateOneRequiredWithoutBriefingBooksMentionedInInput {
+  connect: DocumentWhereUniqueInput
+  create: DocumentCreateWithoutBriefingBooksMentionedInInput
+  update: DocumentUpdateWithoutBriefingBooksMentionedInDataInput
+  upsert: DocumentUpsertWithoutBriefingBooksMentionedInInput
+}
+
+input DocumentUpdateOneRequiredWithoutDocumentAuthorsInput {
+  connect: DocumentWhereUniqueInput
+  create: DocumentCreateWithoutDocumentAuthorsInput
+  update: DocumentUpdateWithoutDocumentAuthorsDataInput
+  upsert: DocumentUpsertWithoutDocumentAuthorsInput
+}
+
+input DocumentUpdateOneRequiredWithoutDocumentTagsInput {
+  connect: DocumentWhereUniqueInput
+  create: DocumentCreateWithoutDocumentTagsInput
+  update: DocumentUpdateWithoutDocumentTagsDataInput
+  upsert: DocumentUpsertWithoutDocumentTagsInput
+}
+
+input DocumentUpdateOneRequiredWithoutMentionedEventsInput {
+  connect: DocumentWhereUniqueInput
+  create: DocumentCreateWithoutMentionedEventsInput
+  update: DocumentUpdateWithoutMentionedEventsDataInput
+  upsert: DocumentUpsertWithoutMentionedEventsInput
+}
+
+input DocumentUpdateOneRequiredWithoutMentionedLocationsInput {
+  connect: DocumentWhereUniqueInput
+  create: DocumentCreateWithoutMentionedLocationsInput
+  update: DocumentUpdateWithoutMentionedLocationsDataInput
+  upsert: DocumentUpsertWithoutMentionedLocationsInput
+}
+
+input DocumentUpdateOneRequiredWithoutMentionedStakeholdersInput {
+  connect: DocumentWhereUniqueInput
+  create: DocumentCreateWithoutMentionedStakeholdersInput
+  update: DocumentUpdateWithoutMentionedStakeholdersDataInput
+  upsert: DocumentUpsertWithoutMentionedStakeholdersInput
+}
+
+input DocumentUpdateWithoutBriefingBooksMentionedInDataInput {
+  createdAt: DateTime
+  dnsaAbstract: String
+  dnsaCitation: String
+  dnsaCollection: String
+  dnsaFrom: String
+  dnsaItemNumber: String
+  dnsaOrigin: String
+  dnsaStakeholder: String
+  dnsaSubject: String
+  dnsaTo: String
+  dnsaURL: String
+  documentAuthors: DocumentAuthorUpdateManyWithoutDocumentInput
+  documentClassification: ClassificationOnDocumentUpdateManyWithoutDocumentInput
+  documentCreationDate: DateTime
+  documentDescription: String
+  documentFiles: DocumentFileUpdateManyWithoutDocumentInput
+  documentKind: KindOnDocumentUpdateManyWithoutDocumentInput
+  documentMediaType: String
+  documentOriginalID: String
+  documentPublicationDate: DateTime
+  documentTags: TagOnDocumentUpdateManyWithoutDocumentInput
+  documentTitle: String
+  documentTranscript: String
+  id: String
+  mentionedEvents: DocumentEventUpdateManyWithoutDocumentInput
+  mentionedLocations: DocumentLocationUpdateManyWithoutDocumentInput
+  mentionedStakeholders: DocumentInvolvedStakeholderUpdateManyWithoutDocumentInput
+  sessionNumber: Int
+  updatedAt: DateTime
+}
+
+input DocumentUpdateWithoutDocumentAuthorsDataInput {
+  briefingBooksMentionedIn: BriefingBookDocumentUpdateManyWithoutDocumentInput
+  createdAt: DateTime
+  dnsaAbstract: String
+  dnsaCitation: String
+  dnsaCollection: String
+  dnsaFrom: String
+  dnsaItemNumber: String
+  dnsaOrigin: String
+  dnsaStakeholder: String
+  dnsaSubject: String
+  dnsaTo: String
+  dnsaURL: String
+  documentClassification: ClassificationOnDocumentUpdateManyWithoutDocumentInput
+  documentCreationDate: DateTime
+  documentDescription: String
+  documentFiles: DocumentFileUpdateManyWithoutDocumentInput
+  documentKind: KindOnDocumentUpdateManyWithoutDocumentInput
+  documentMediaType: String
+  documentOriginalID: String
+  documentPublicationDate: DateTime
+  documentTags: TagOnDocumentUpdateManyWithoutDocumentInput
+  documentTitle: String
+  documentTranscript: String
+  id: String
+  mentionedEvents: DocumentEventUpdateManyWithoutDocumentInput
+  mentionedLocations: DocumentLocationUpdateManyWithoutDocumentInput
+  mentionedStakeholders: DocumentInvolvedStakeholderUpdateManyWithoutDocumentInput
+  sessionNumber: Int
+  updatedAt: DateTime
+}
+
+input DocumentUpdateWithoutDocumentTagsDataInput {
+  briefingBooksMentionedIn: BriefingBookDocumentUpdateManyWithoutDocumentInput
+  createdAt: DateTime
+  dnsaAbstract: String
+  dnsaCitation: String
+  dnsaCollection: String
+  dnsaFrom: String
+  dnsaItemNumber: String
+  dnsaOrigin: String
+  dnsaStakeholder: String
+  dnsaSubject: String
+  dnsaTo: String
+  dnsaURL: String
+  documentAuthors: DocumentAuthorUpdateManyWithoutDocumentInput
+  documentClassification: ClassificationOnDocumentUpdateManyWithoutDocumentInput
+  documentCreationDate: DateTime
+  documentDescription: String
+  documentFiles: DocumentFileUpdateManyWithoutDocumentInput
+  documentKind: KindOnDocumentUpdateManyWithoutDocumentInput
+  documentMediaType: String
+  documentOriginalID: String
+  documentPublicationDate: DateTime
+  documentTitle: String
+  documentTranscript: String
+  id: String
+  mentionedEvents: DocumentEventUpdateManyWithoutDocumentInput
+  mentionedLocations: DocumentLocationUpdateManyWithoutDocumentInput
+  mentionedStakeholders: DocumentInvolvedStakeholderUpdateManyWithoutDocumentInput
+  sessionNumber: Int
+  updatedAt: DateTime
+}
+
+input DocumentUpdateWithoutMentionedEventsDataInput {
+  briefingBooksMentionedIn: BriefingBookDocumentUpdateManyWithoutDocumentInput
+  createdAt: DateTime
+  dnsaAbstract: String
+  dnsaCitation: String
+  dnsaCollection: String
+  dnsaFrom: String
+  dnsaItemNumber: String
+  dnsaOrigin: String
+  dnsaStakeholder: String
+  dnsaSubject: String
+  dnsaTo: String
+  dnsaURL: String
+  documentAuthors: DocumentAuthorUpdateManyWithoutDocumentInput
+  documentClassification: ClassificationOnDocumentUpdateManyWithoutDocumentInput
+  documentCreationDate: DateTime
+  documentDescription: String
+  documentFiles: DocumentFileUpdateManyWithoutDocumentInput
+  documentKind: KindOnDocumentUpdateManyWithoutDocumentInput
+  documentMediaType: String
+  documentOriginalID: String
+  documentPublicationDate: DateTime
+  documentTags: TagOnDocumentUpdateManyWithoutDocumentInput
+  documentTitle: String
+  documentTranscript: String
+  id: String
+  mentionedLocations: DocumentLocationUpdateManyWithoutDocumentInput
+  mentionedStakeholders: DocumentInvolvedStakeholderUpdateManyWithoutDocumentInput
+  sessionNumber: Int
+  updatedAt: DateTime
+}
+
+input DocumentUpdateWithoutMentionedLocationsDataInput {
+  briefingBooksMentionedIn: BriefingBookDocumentUpdateManyWithoutDocumentInput
+  createdAt: DateTime
+  dnsaAbstract: String
+  dnsaCitation: String
+  dnsaCollection: String
+  dnsaFrom: String
+  dnsaItemNumber: String
+  dnsaOrigin: String
+  dnsaStakeholder: String
+  dnsaSubject: String
+  dnsaTo: String
+  dnsaURL: String
+  documentAuthors: DocumentAuthorUpdateManyWithoutDocumentInput
+  documentClassification: ClassificationOnDocumentUpdateManyWithoutDocumentInput
+  documentCreationDate: DateTime
+  documentDescription: String
+  documentFiles: DocumentFileUpdateManyWithoutDocumentInput
+  documentKind: KindOnDocumentUpdateManyWithoutDocumentInput
+  documentMediaType: String
+  documentOriginalID: String
+  documentPublicationDate: DateTime
+  documentTags: TagOnDocumentUpdateManyWithoutDocumentInput
+  documentTitle: String
+  documentTranscript: String
+  id: String
+  mentionedEvents: DocumentEventUpdateManyWithoutDocumentInput
+  mentionedStakeholders: DocumentInvolvedStakeholderUpdateManyWithoutDocumentInput
+  sessionNumber: Int
+  updatedAt: DateTime
+}
+
+input DocumentUpdateWithoutMentionedStakeholdersDataInput {
+  briefingBooksMentionedIn: BriefingBookDocumentUpdateManyWithoutDocumentInput
+  createdAt: DateTime
+  dnsaAbstract: String
+  dnsaCitation: String
+  dnsaCollection: String
+  dnsaFrom: String
+  dnsaItemNumber: String
+  dnsaOrigin: String
+  dnsaStakeholder: String
+  dnsaSubject: String
+  dnsaTo: String
+  dnsaURL: String
+  documentAuthors: DocumentAuthorUpdateManyWithoutDocumentInput
+  documentClassification: ClassificationOnDocumentUpdateManyWithoutDocumentInput
+  documentCreationDate: DateTime
+  documentDescription: String
+  documentFiles: DocumentFileUpdateManyWithoutDocumentInput
+  documentKind: KindOnDocumentUpdateManyWithoutDocumentInput
+  documentMediaType: String
+  documentOriginalID: String
+  documentPublicationDate: DateTime
+  documentTags: TagOnDocumentUpdateManyWithoutDocumentInput
+  documentTitle: String
+  documentTranscript: String
+  id: String
+  mentionedEvents: DocumentEventUpdateManyWithoutDocumentInput
+  mentionedLocations: DocumentLocationUpdateManyWithoutDocumentInput
+  sessionNumber: Int
+  updatedAt: DateTime
+}
+
+input DocumentUpsertWithoutBriefingBooksMentionedInInput {
+  create: DocumentCreateWithoutBriefingBooksMentionedInInput!
+  update: DocumentUpdateWithoutBriefingBooksMentionedInDataInput!
+}
+
+input DocumentUpsertWithoutDocumentAuthorsInput {
+  create: DocumentCreateWithoutDocumentAuthorsInput!
+  update: DocumentUpdateWithoutDocumentAuthorsDataInput!
+}
+
+input DocumentUpsertWithoutDocumentTagsInput {
+  create: DocumentCreateWithoutDocumentTagsInput!
+  update: DocumentUpdateWithoutDocumentTagsDataInput!
+}
+
+input DocumentUpsertWithoutMentionedEventsInput {
+  create: DocumentCreateWithoutMentionedEventsInput!
+  update: DocumentUpdateWithoutMentionedEventsDataInput!
+}
+
+input DocumentUpsertWithoutMentionedLocationsInput {
+  create: DocumentCreateWithoutMentionedLocationsInput!
+  update: DocumentUpdateWithoutMentionedLocationsDataInput!
+}
+
+input DocumentUpsertWithoutMentionedStakeholdersInput {
+  create: DocumentCreateWithoutMentionedStakeholdersInput!
+  update: DocumentUpdateWithoutMentionedStakeholdersDataInput!
 }
 
 input DocumentWhereInput {
@@ -399,6 +1788,101 @@ type Event {
   id: String!
 }
 
+input EventCreateOneWithoutBriefingBooksMentionedInInput {
+  connect: EventWhereUniqueInput
+  create: EventCreateWithoutBriefingBooksMentionedInInput
+}
+
+input EventCreateOneWithoutDocumentsMentionedInInput {
+  connect: EventWhereUniqueInput
+  create: EventCreateWithoutDocumentsMentionedInInput
+}
+
+input EventCreateOneWithoutEventLocationsInput {
+  connect: EventWhereUniqueInput
+  create: EventCreateWithoutEventLocationsInput
+}
+
+input EventCreateOneWithoutEventStakeholdersInput {
+  connect: EventWhereUniqueInput
+  create: EventCreateWithoutEventStakeholdersInput
+}
+
+input EventCreateOneWithoutEventTagsInput {
+  connect: EventWhereUniqueInput
+  create: EventCreateWithoutEventTagsInput
+}
+
+input EventCreateWithoutBriefingBooksMentionedInInput {
+  createdAt: DateTime
+  documentsMentionedIn: DocumentEventCreateManyWithoutEventInput
+  eventDescription: String
+  eventEndDate: DateTime
+  eventLocations: LocationOnEventCreateManyWithoutEventInput
+  eventStakeholders: StakeholderEventCreateManyWithoutEventInput
+  eventStartDate: DateTime!
+  eventTags: TagOnEventCreateManyWithoutEventInput
+  eventTitle: String!
+  id: String!
+  updatedAt: DateTime
+}
+
+input EventCreateWithoutDocumentsMentionedInInput {
+  briefingBooksMentionedIn: BriefingBookEventCreateManyWithoutEventInput
+  createdAt: DateTime
+  eventDescription: String
+  eventEndDate: DateTime
+  eventLocations: LocationOnEventCreateManyWithoutEventInput
+  eventStakeholders: StakeholderEventCreateManyWithoutEventInput
+  eventStartDate: DateTime!
+  eventTags: TagOnEventCreateManyWithoutEventInput
+  eventTitle: String!
+  id: String!
+  updatedAt: DateTime
+}
+
+input EventCreateWithoutEventLocationsInput {
+  briefingBooksMentionedIn: BriefingBookEventCreateManyWithoutEventInput
+  createdAt: DateTime
+  documentsMentionedIn: DocumentEventCreateManyWithoutEventInput
+  eventDescription: String
+  eventEndDate: DateTime
+  eventStakeholders: StakeholderEventCreateManyWithoutEventInput
+  eventStartDate: DateTime!
+  eventTags: TagOnEventCreateManyWithoutEventInput
+  eventTitle: String!
+  id: String!
+  updatedAt: DateTime
+}
+
+input EventCreateWithoutEventStakeholdersInput {
+  briefingBooksMentionedIn: BriefingBookEventCreateManyWithoutEventInput
+  createdAt: DateTime
+  documentsMentionedIn: DocumentEventCreateManyWithoutEventInput
+  eventDescription: String
+  eventEndDate: DateTime
+  eventLocations: LocationOnEventCreateManyWithoutEventInput
+  eventStartDate: DateTime!
+  eventTags: TagOnEventCreateManyWithoutEventInput
+  eventTitle: String!
+  id: String!
+  updatedAt: DateTime
+}
+
+input EventCreateWithoutEventTagsInput {
+  briefingBooksMentionedIn: BriefingBookEventCreateManyWithoutEventInput
+  createdAt: DateTime
+  documentsMentionedIn: DocumentEventCreateManyWithoutEventInput
+  eventDescription: String
+  eventEndDate: DateTime
+  eventLocations: LocationOnEventCreateManyWithoutEventInput
+  eventStakeholders: StakeholderEventCreateManyWithoutEventInput
+  eventStartDate: DateTime!
+  eventTitle: String!
+  id: String!
+  updatedAt: DateTime
+}
+
 input EventOrderByInput {
   createdAt: OrderByArg
   eventDescription: OrderByArg
@@ -407,6 +1891,151 @@ input EventOrderByInput {
   eventTitle: OrderByArg
   id: OrderByArg
   updatedAt: OrderByArg
+}
+
+input EventUpdateInput {
+  briefingBooksMentionedIn: BriefingBookEventUpdateManyWithoutEventInput
+  createdAt: DateTime
+  documentsMentionedIn: DocumentEventUpdateManyWithoutEventInput
+  eventDescription: String
+  eventEndDate: DateTime
+  eventLocations: LocationOnEventUpdateManyWithoutEventInput
+  eventStakeholders: StakeholderEventUpdateManyWithoutEventInput
+  eventStartDate: DateTime
+  eventTags: TagOnEventUpdateManyWithoutEventInput
+  eventTitle: String
+  id: String
+  updatedAt: DateTime
+}
+
+input EventUpdateOneRequiredWithoutBriefingBooksMentionedInInput {
+  connect: EventWhereUniqueInput
+  create: EventCreateWithoutBriefingBooksMentionedInInput
+  update: EventUpdateWithoutBriefingBooksMentionedInDataInput
+  upsert: EventUpsertWithoutBriefingBooksMentionedInInput
+}
+
+input EventUpdateOneRequiredWithoutDocumentsMentionedInInput {
+  connect: EventWhereUniqueInput
+  create: EventCreateWithoutDocumentsMentionedInInput
+  update: EventUpdateWithoutDocumentsMentionedInDataInput
+  upsert: EventUpsertWithoutDocumentsMentionedInInput
+}
+
+input EventUpdateOneRequiredWithoutEventLocationsInput {
+  connect: EventWhereUniqueInput
+  create: EventCreateWithoutEventLocationsInput
+  update: EventUpdateWithoutEventLocationsDataInput
+  upsert: EventUpsertWithoutEventLocationsInput
+}
+
+input EventUpdateOneRequiredWithoutEventStakeholdersInput {
+  connect: EventWhereUniqueInput
+  create: EventCreateWithoutEventStakeholdersInput
+  update: EventUpdateWithoutEventStakeholdersDataInput
+  upsert: EventUpsertWithoutEventStakeholdersInput
+}
+
+input EventUpdateOneRequiredWithoutEventTagsInput {
+  connect: EventWhereUniqueInput
+  create: EventCreateWithoutEventTagsInput
+  update: EventUpdateWithoutEventTagsDataInput
+  upsert: EventUpsertWithoutEventTagsInput
+}
+
+input EventUpdateWithoutBriefingBooksMentionedInDataInput {
+  createdAt: DateTime
+  documentsMentionedIn: DocumentEventUpdateManyWithoutEventInput
+  eventDescription: String
+  eventEndDate: DateTime
+  eventLocations: LocationOnEventUpdateManyWithoutEventInput
+  eventStakeholders: StakeholderEventUpdateManyWithoutEventInput
+  eventStartDate: DateTime
+  eventTags: TagOnEventUpdateManyWithoutEventInput
+  eventTitle: String
+  id: String
+  updatedAt: DateTime
+}
+
+input EventUpdateWithoutDocumentsMentionedInDataInput {
+  briefingBooksMentionedIn: BriefingBookEventUpdateManyWithoutEventInput
+  createdAt: DateTime
+  eventDescription: String
+  eventEndDate: DateTime
+  eventLocations: LocationOnEventUpdateManyWithoutEventInput
+  eventStakeholders: StakeholderEventUpdateManyWithoutEventInput
+  eventStartDate: DateTime
+  eventTags: TagOnEventUpdateManyWithoutEventInput
+  eventTitle: String
+  id: String
+  updatedAt: DateTime
+}
+
+input EventUpdateWithoutEventLocationsDataInput {
+  briefingBooksMentionedIn: BriefingBookEventUpdateManyWithoutEventInput
+  createdAt: DateTime
+  documentsMentionedIn: DocumentEventUpdateManyWithoutEventInput
+  eventDescription: String
+  eventEndDate: DateTime
+  eventStakeholders: StakeholderEventUpdateManyWithoutEventInput
+  eventStartDate: DateTime
+  eventTags: TagOnEventUpdateManyWithoutEventInput
+  eventTitle: String
+  id: String
+  updatedAt: DateTime
+}
+
+input EventUpdateWithoutEventStakeholdersDataInput {
+  briefingBooksMentionedIn: BriefingBookEventUpdateManyWithoutEventInput
+  createdAt: DateTime
+  documentsMentionedIn: DocumentEventUpdateManyWithoutEventInput
+  eventDescription: String
+  eventEndDate: DateTime
+  eventLocations: LocationOnEventUpdateManyWithoutEventInput
+  eventStartDate: DateTime
+  eventTags: TagOnEventUpdateManyWithoutEventInput
+  eventTitle: String
+  id: String
+  updatedAt: DateTime
+}
+
+input EventUpdateWithoutEventTagsDataInput {
+  briefingBooksMentionedIn: BriefingBookEventUpdateManyWithoutEventInput
+  createdAt: DateTime
+  documentsMentionedIn: DocumentEventUpdateManyWithoutEventInput
+  eventDescription: String
+  eventEndDate: DateTime
+  eventLocations: LocationOnEventUpdateManyWithoutEventInput
+  eventStakeholders: StakeholderEventUpdateManyWithoutEventInput
+  eventStartDate: DateTime
+  eventTitle: String
+  id: String
+  updatedAt: DateTime
+}
+
+input EventUpsertWithoutBriefingBooksMentionedInInput {
+  create: EventCreateWithoutBriefingBooksMentionedInInput!
+  update: EventUpdateWithoutBriefingBooksMentionedInDataInput!
+}
+
+input EventUpsertWithoutDocumentsMentionedInInput {
+  create: EventCreateWithoutDocumentsMentionedInInput!
+  update: EventUpdateWithoutDocumentsMentionedInDataInput!
+}
+
+input EventUpsertWithoutEventLocationsInput {
+  create: EventCreateWithoutEventLocationsInput!
+  update: EventUpdateWithoutEventLocationsDataInput!
+}
+
+input EventUpsertWithoutEventStakeholdersInput {
+  create: EventCreateWithoutEventStakeholdersInput!
+  update: EventUpdateWithoutEventStakeholdersDataInput!
+}
+
+input EventUpsertWithoutEventTagsInput {
+  create: EventCreateWithoutEventTagsInput!
+  update: EventUpdateWithoutEventTagsDataInput!
 }
 
 input EventWhereInput {
@@ -436,6 +2065,22 @@ type File {
   url: String!
 }
 
+input FileCreateOneWithoutDocumentsIncludedInInput {
+  connect: FileWhereUniqueInput
+  create: FileCreateWithoutDocumentsIncludedInInput
+}
+
+input FileCreateWithoutDocumentsIncludedInInput {
+  contentType: String!
+  createdAt: DateTime
+  id: String!
+  name: String!
+  secret: String!
+  size: Int!
+  updatedAt: DateTime
+  url: String!
+}
+
 input FileOrderByInput {
   contentType: OrderByArg
   createdAt: OrderByArg
@@ -445,6 +2090,29 @@ input FileOrderByInput {
   size: OrderByArg
   updatedAt: OrderByArg
   url: OrderByArg
+}
+
+input FileUpdateOneRequiredWithoutDocumentsIncludedInInput {
+  connect: FileWhereUniqueInput
+  create: FileCreateWithoutDocumentsIncludedInInput
+  update: FileUpdateWithoutDocumentsIncludedInDataInput
+  upsert: FileUpsertWithoutDocumentsIncludedInInput
+}
+
+input FileUpdateWithoutDocumentsIncludedInDataInput {
+  contentType: String
+  createdAt: DateTime
+  id: String
+  name: String
+  secret: String
+  size: Int
+  updatedAt: DateTime
+  url: String
+}
+
+input FileUpsertWithoutDocumentsIncludedInInput {
+  create: FileCreateWithoutDocumentsIncludedInInput!
+  update: FileUpdateWithoutDocumentsIncludedInDataInput!
 }
 
 input FileWhereInput {
@@ -492,16 +2160,89 @@ type Kind {
   updatedAt: DateTime!
 }
 
+input KindCreateOneWithoutDocumentsWithKindInput {
+  connect: KindWhereUniqueInput
+  create: KindCreateWithoutDocumentsWithKindInput
+}
+
+input KindCreateWithoutDocumentsWithKindInput {
+  createdAt: DateTime
+  id: String!
+  name: String!
+  updatedAt: DateTime
+}
+
 type KindOnDocument {
   Document: Document!
   id: String!
   Kind: Kind!
 }
 
+input KindOnDocument_AB_uniqueCompoundUniqueInput {
+  A: String!
+  B: String!
+}
+
+input KindOnDocumentCreateManyWithoutDocumentInput {
+  connect: [KindOnDocumentWhereUniqueInput!]
+  create: [KindOnDocumentCreateWithoutDocumentInput!]
+}
+
+input KindOnDocumentCreateWithoutDocumentInput {
+  id: String!
+  Kind: KindCreateOneWithoutDocumentsWithKindInput!
+}
+
 input KindOnDocumentFilter {
   every: KindOnDocumentWhereInput
   none: KindOnDocumentWhereInput
   some: KindOnDocumentWhereInput
+}
+
+input KindOnDocumentScalarWhereInput {
+  A: StringFilter
+  AND: [KindOnDocumentScalarWhereInput!]
+  B: StringFilter
+  id: StringFilter
+  NOT: [KindOnDocumentScalarWhereInput!]
+  OR: [KindOnDocumentScalarWhereInput!]
+}
+
+input KindOnDocumentUpdateManyDataInput {
+  id: String
+}
+
+input KindOnDocumentUpdateManyWithoutDocumentInput {
+  connect: [KindOnDocumentWhereUniqueInput!]
+  create: [KindOnDocumentCreateWithoutDocumentInput!]
+  delete: [KindOnDocumentWhereUniqueInput!]
+  deleteMany: [KindOnDocumentScalarWhereInput!]
+  disconnect: [KindOnDocumentWhereUniqueInput!]
+  set: [KindOnDocumentWhereUniqueInput!]
+  update: [KindOnDocumentUpdateWithWhereUniqueWithoutDocumentInput!]
+  updateMany: [KindOnDocumentUpdateManyWithWhereNestedInput!]
+  upsert: [KindOnDocumentUpsertWithWhereUniqueWithoutDocumentInput!]
+}
+
+input KindOnDocumentUpdateManyWithWhereNestedInput {
+  data: KindOnDocumentUpdateManyDataInput!
+  where: KindOnDocumentScalarWhereInput!
+}
+
+input KindOnDocumentUpdateWithoutDocumentDataInput {
+  id: String
+  Kind: KindUpdateOneRequiredWithoutDocumentsWithKindInput
+}
+
+input KindOnDocumentUpdateWithWhereUniqueWithoutDocumentInput {
+  data: KindOnDocumentUpdateWithoutDocumentDataInput!
+  where: KindOnDocumentWhereUniqueInput!
+}
+
+input KindOnDocumentUpsertWithWhereUniqueWithoutDocumentInput {
+  create: KindOnDocumentCreateWithoutDocumentInput!
+  update: KindOnDocumentUpdateWithoutDocumentDataInput!
+  where: KindOnDocumentWhereUniqueInput!
 }
 
 input KindOnDocumentWhereInput {
@@ -517,9 +2258,28 @@ input KindOnDocumentWhereInput {
 
 input KindOnDocumentWhereUniqueInput {
   A: String
-  AB_unique: AB_uniqueCompoundUniqueInput
   B: String
   id: String
+  KindOnDocument_AB_unique: KindOnDocument_AB_uniqueCompoundUniqueInput
+}
+
+input KindUpdateOneRequiredWithoutDocumentsWithKindInput {
+  connect: KindWhereUniqueInput
+  create: KindCreateWithoutDocumentsWithKindInput
+  update: KindUpdateWithoutDocumentsWithKindDataInput
+  upsert: KindUpsertWithoutDocumentsWithKindInput
+}
+
+input KindUpdateWithoutDocumentsWithKindDataInput {
+  createdAt: DateTime
+  id: String
+  name: String
+  updatedAt: DateTime
+}
+
+input KindUpsertWithoutDocumentsWithKindInput {
+  create: KindCreateWithoutDocumentsWithKindInput!
+  update: KindUpdateWithoutDocumentsWithKindDataInput!
 }
 
 input KindWhereInput {
@@ -533,6 +2293,11 @@ input KindWhereInput {
   updatedAt: DateTimeFilter
 }
 
+input KindWhereUniqueInput {
+  id: String
+  name: String
+}
+
 type Location {
   documentsMentionedIn(after: DocumentLocationWhereUniqueInput, before: DocumentLocationWhereUniqueInput, first: Int, last: Int): [DocumentLocation!]!
   id: String!
@@ -542,16 +2307,149 @@ type Location {
   locationWikipediaUri: String
 }
 
+input LocationCreateOneWithoutDocumentsMentionedInInput {
+  connect: LocationWhereUniqueInput
+  create: LocationCreateWithoutDocumentsMentionedInInput
+}
+
+input LocationCreateOneWithoutLocationEventsInput {
+  connect: LocationWhereUniqueInput
+  create: LocationCreateWithoutLocationEventsInput
+}
+
+input LocationCreateWithoutDocumentsMentionedInInput {
+  createdAt: DateTime
+  id: String!
+  locationDescription: String
+  locationEvents: LocationOnEventCreateManyWithoutLocationInput
+  locationLatitude: Int
+  locationLongitude: Int
+  locationName: String!
+  locationWikipediaUri: String
+  updatedAt: DateTime
+}
+
+input LocationCreateWithoutLocationEventsInput {
+  createdAt: DateTime
+  documentsMentionedIn: DocumentLocationCreateManyWithoutLocationInput
+  id: String!
+  locationDescription: String
+  locationLatitude: Int
+  locationLongitude: Int
+  locationName: String!
+  locationWikipediaUri: String
+  updatedAt: DateTime
+}
+
 type LocationOnEvent {
   Event: Event!
   id: String!
   Location: Location!
 }
 
+input LocationOnEvent_AB_uniqueCompoundUniqueInput {
+  A: String!
+  B: String!
+}
+
+input LocationOnEventCreateManyWithoutEventInput {
+  connect: [LocationOnEventWhereUniqueInput!]
+  create: [LocationOnEventCreateWithoutEventInput!]
+}
+
+input LocationOnEventCreateManyWithoutLocationInput {
+  connect: [LocationOnEventWhereUniqueInput!]
+  create: [LocationOnEventCreateWithoutLocationInput!]
+}
+
+input LocationOnEventCreateWithoutEventInput {
+  id: String!
+  Location: LocationCreateOneWithoutLocationEventsInput!
+}
+
+input LocationOnEventCreateWithoutLocationInput {
+  Event: EventCreateOneWithoutEventLocationsInput!
+  id: String!
+}
+
 input LocationOnEventFilter {
   every: LocationOnEventWhereInput
   none: LocationOnEventWhereInput
   some: LocationOnEventWhereInput
+}
+
+input LocationOnEventScalarWhereInput {
+  A: StringFilter
+  AND: [LocationOnEventScalarWhereInput!]
+  B: StringFilter
+  id: StringFilter
+  NOT: [LocationOnEventScalarWhereInput!]
+  OR: [LocationOnEventScalarWhereInput!]
+}
+
+input LocationOnEventUpdateManyDataInput {
+  id: String
+}
+
+input LocationOnEventUpdateManyWithoutEventInput {
+  connect: [LocationOnEventWhereUniqueInput!]
+  create: [LocationOnEventCreateWithoutEventInput!]
+  delete: [LocationOnEventWhereUniqueInput!]
+  deleteMany: [LocationOnEventScalarWhereInput!]
+  disconnect: [LocationOnEventWhereUniqueInput!]
+  set: [LocationOnEventWhereUniqueInput!]
+  update: [LocationOnEventUpdateWithWhereUniqueWithoutEventInput!]
+  updateMany: [LocationOnEventUpdateManyWithWhereNestedInput!]
+  upsert: [LocationOnEventUpsertWithWhereUniqueWithoutEventInput!]
+}
+
+input LocationOnEventUpdateManyWithoutLocationInput {
+  connect: [LocationOnEventWhereUniqueInput!]
+  create: [LocationOnEventCreateWithoutLocationInput!]
+  delete: [LocationOnEventWhereUniqueInput!]
+  deleteMany: [LocationOnEventScalarWhereInput!]
+  disconnect: [LocationOnEventWhereUniqueInput!]
+  set: [LocationOnEventWhereUniqueInput!]
+  update: [LocationOnEventUpdateWithWhereUniqueWithoutLocationInput!]
+  updateMany: [LocationOnEventUpdateManyWithWhereNestedInput!]
+  upsert: [LocationOnEventUpsertWithWhereUniqueWithoutLocationInput!]
+}
+
+input LocationOnEventUpdateManyWithWhereNestedInput {
+  data: LocationOnEventUpdateManyDataInput!
+  where: LocationOnEventScalarWhereInput!
+}
+
+input LocationOnEventUpdateWithoutEventDataInput {
+  id: String
+  Location: LocationUpdateOneRequiredWithoutLocationEventsInput
+}
+
+input LocationOnEventUpdateWithoutLocationDataInput {
+  Event: EventUpdateOneRequiredWithoutEventLocationsInput
+  id: String
+}
+
+input LocationOnEventUpdateWithWhereUniqueWithoutEventInput {
+  data: LocationOnEventUpdateWithoutEventDataInput!
+  where: LocationOnEventWhereUniqueInput!
+}
+
+input LocationOnEventUpdateWithWhereUniqueWithoutLocationInput {
+  data: LocationOnEventUpdateWithoutLocationDataInput!
+  where: LocationOnEventWhereUniqueInput!
+}
+
+input LocationOnEventUpsertWithWhereUniqueWithoutEventInput {
+  create: LocationOnEventCreateWithoutEventInput!
+  update: LocationOnEventUpdateWithoutEventDataInput!
+  where: LocationOnEventWhereUniqueInput!
+}
+
+input LocationOnEventUpsertWithWhereUniqueWithoutLocationInput {
+  create: LocationOnEventCreateWithoutLocationInput!
+  update: LocationOnEventUpdateWithoutLocationDataInput!
+  where: LocationOnEventWhereUniqueInput!
 }
 
 input LocationOnEventWhereInput {
@@ -567,9 +2465,9 @@ input LocationOnEventWhereInput {
 
 input LocationOnEventWhereUniqueInput {
   A: String
-  AB_unique: AB_uniqueCompoundUniqueInput
   B: String
   id: String
+  LocationOnEvent_AB_unique: LocationOnEvent_AB_uniqueCompoundUniqueInput
 }
 
 input LocationOrderByInput {
@@ -581,6 +2479,54 @@ input LocationOrderByInput {
   locationName: OrderByArg
   locationWikipediaUri: OrderByArg
   updatedAt: OrderByArg
+}
+
+input LocationUpdateOneRequiredWithoutDocumentsMentionedInInput {
+  connect: LocationWhereUniqueInput
+  create: LocationCreateWithoutDocumentsMentionedInInput
+  update: LocationUpdateWithoutDocumentsMentionedInDataInput
+  upsert: LocationUpsertWithoutDocumentsMentionedInInput
+}
+
+input LocationUpdateOneRequiredWithoutLocationEventsInput {
+  connect: LocationWhereUniqueInput
+  create: LocationCreateWithoutLocationEventsInput
+  update: LocationUpdateWithoutLocationEventsDataInput
+  upsert: LocationUpsertWithoutLocationEventsInput
+}
+
+input LocationUpdateWithoutDocumentsMentionedInDataInput {
+  createdAt: DateTime
+  id: String
+  locationDescription: String
+  locationEvents: LocationOnEventUpdateManyWithoutLocationInput
+  locationLatitude: Int
+  locationLongitude: Int
+  locationName: String
+  locationWikipediaUri: String
+  updatedAt: DateTime
+}
+
+input LocationUpdateWithoutLocationEventsDataInput {
+  createdAt: DateTime
+  documentsMentionedIn: DocumentLocationUpdateManyWithoutLocationInput
+  id: String
+  locationDescription: String
+  locationLatitude: Int
+  locationLongitude: Int
+  locationName: String
+  locationWikipediaUri: String
+  updatedAt: DateTime
+}
+
+input LocationUpsertWithoutDocumentsMentionedInInput {
+  create: LocationCreateWithoutDocumentsMentionedInInput!
+  update: LocationUpdateWithoutDocumentsMentionedInDataInput!
+}
+
+input LocationUpsertWithoutLocationEventsInput {
+  create: LocationCreateWithoutLocationEventsInput!
+  update: LocationUpdateWithoutLocationEventsDataInput!
 }
 
 input LocationWhereInput {
@@ -618,6 +2564,9 @@ type Mutation {
   createUser(email: String!, password: String!, userName: String): UserAuthPayload
   deleteOneUser(where: UserWhereUniqueInput!): User
   signinUser(email: String!, password: String!): UserAuthPayload
+  updateOneDocument(data: DocumentUpdateInput!, where: DocumentWhereUniqueInput!): Document
+  updateOneEvent(data: EventUpdateInput!, where: EventWhereUniqueInput!): Event
+  updateOneStakeholder(data: StakeholderUpdateInput!, where: StakeholderWhereUniqueInput!): Stakeholder
   updateOneUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
 }
 
@@ -696,10 +2645,109 @@ type StakeholderBriefingBook {
   Stakeholder: Stakeholder!
 }
 
+input StakeholderBriefingBook_AB_uniqueCompoundUniqueInput {
+  A: String!
+  B: String!
+}
+
+input StakeholderBriefingBookCreateManyWithoutBriefingBookInput {
+  connect: [StakeholderBriefingBookWhereUniqueInput!]
+  create: [StakeholderBriefingBookCreateWithoutBriefingBookInput!]
+}
+
+input StakeholderBriefingBookCreateManyWithoutStakeholderInput {
+  connect: [StakeholderBriefingBookWhereUniqueInput!]
+  create: [StakeholderBriefingBookCreateWithoutStakeholderInput!]
+}
+
+input StakeholderBriefingBookCreateWithoutBriefingBookInput {
+  id: String!
+  Stakeholder: StakeholderCreateOneWithoutBriefingBooksMentionedInInput!
+}
+
+input StakeholderBriefingBookCreateWithoutStakeholderInput {
+  BriefingBook: BriefingBookCreateOneWithoutMentionedStakeholdersInput!
+  id: String!
+}
+
 input StakeholderBriefingBookFilter {
   every: StakeholderBriefingBookWhereInput
   none: StakeholderBriefingBookWhereInput
   some: StakeholderBriefingBookWhereInput
+}
+
+input StakeholderBriefingBookScalarWhereInput {
+  A: StringFilter
+  AND: [StakeholderBriefingBookScalarWhereInput!]
+  B: StringFilter
+  id: StringFilter
+  NOT: [StakeholderBriefingBookScalarWhereInput!]
+  OR: [StakeholderBriefingBookScalarWhereInput!]
+}
+
+input StakeholderBriefingBookUpdateManyDataInput {
+  id: String
+}
+
+input StakeholderBriefingBookUpdateManyWithoutBriefingBookInput {
+  connect: [StakeholderBriefingBookWhereUniqueInput!]
+  create: [StakeholderBriefingBookCreateWithoutBriefingBookInput!]
+  delete: [StakeholderBriefingBookWhereUniqueInput!]
+  deleteMany: [StakeholderBriefingBookScalarWhereInput!]
+  disconnect: [StakeholderBriefingBookWhereUniqueInput!]
+  set: [StakeholderBriefingBookWhereUniqueInput!]
+  update: [StakeholderBriefingBookUpdateWithWhereUniqueWithoutBriefingBookInput!]
+  updateMany: [StakeholderBriefingBookUpdateManyWithWhereNestedInput!]
+  upsert: [StakeholderBriefingBookUpsertWithWhereUniqueWithoutBriefingBookInput!]
+}
+
+input StakeholderBriefingBookUpdateManyWithoutStakeholderInput {
+  connect: [StakeholderBriefingBookWhereUniqueInput!]
+  create: [StakeholderBriefingBookCreateWithoutStakeholderInput!]
+  delete: [StakeholderBriefingBookWhereUniqueInput!]
+  deleteMany: [StakeholderBriefingBookScalarWhereInput!]
+  disconnect: [StakeholderBriefingBookWhereUniqueInput!]
+  set: [StakeholderBriefingBookWhereUniqueInput!]
+  update: [StakeholderBriefingBookUpdateWithWhereUniqueWithoutStakeholderInput!]
+  updateMany: [StakeholderBriefingBookUpdateManyWithWhereNestedInput!]
+  upsert: [StakeholderBriefingBookUpsertWithWhereUniqueWithoutStakeholderInput!]
+}
+
+input StakeholderBriefingBookUpdateManyWithWhereNestedInput {
+  data: StakeholderBriefingBookUpdateManyDataInput!
+  where: StakeholderBriefingBookScalarWhereInput!
+}
+
+input StakeholderBriefingBookUpdateWithoutBriefingBookDataInput {
+  id: String
+  Stakeholder: StakeholderUpdateOneRequiredWithoutBriefingBooksMentionedInInput
+}
+
+input StakeholderBriefingBookUpdateWithoutStakeholderDataInput {
+  BriefingBook: BriefingBookUpdateOneRequiredWithoutMentionedStakeholdersInput
+  id: String
+}
+
+input StakeholderBriefingBookUpdateWithWhereUniqueWithoutBriefingBookInput {
+  data: StakeholderBriefingBookUpdateWithoutBriefingBookDataInput!
+  where: StakeholderBriefingBookWhereUniqueInput!
+}
+
+input StakeholderBriefingBookUpdateWithWhereUniqueWithoutStakeholderInput {
+  data: StakeholderBriefingBookUpdateWithoutStakeholderDataInput!
+  where: StakeholderBriefingBookWhereUniqueInput!
+}
+
+input StakeholderBriefingBookUpsertWithWhereUniqueWithoutBriefingBookInput {
+  create: StakeholderBriefingBookCreateWithoutBriefingBookInput!
+  update: StakeholderBriefingBookUpdateWithoutBriefingBookDataInput!
+  where: StakeholderBriefingBookWhereUniqueInput!
+}
+
+input StakeholderBriefingBookUpsertWithWhereUniqueWithoutStakeholderInput {
+  create: StakeholderBriefingBookCreateWithoutStakeholderInput!
+  update: StakeholderBriefingBookUpdateWithoutStakeholderDataInput!
+  where: StakeholderBriefingBookWhereUniqueInput!
 }
 
 input StakeholderBriefingBookWhereInput {
@@ -715,9 +2763,81 @@ input StakeholderBriefingBookWhereInput {
 
 input StakeholderBriefingBookWhereUniqueInput {
   A: String
-  AB_unique: AB_uniqueCompoundUniqueInput
   B: String
   id: String
+  StakeholderBriefingBook_AB_unique: StakeholderBriefingBook_AB_uniqueCompoundUniqueInput
+}
+
+input StakeholderCreateOneWithoutBriefingBooksMentionedInInput {
+  connect: StakeholderWhereUniqueInput
+  create: StakeholderCreateWithoutBriefingBooksMentionedInInput
+}
+
+input StakeholderCreateOneWithoutDocumentsInput {
+  connect: StakeholderWhereUniqueInput
+  create: StakeholderCreateWithoutDocumentsInput
+}
+
+input StakeholderCreateOneWithoutDocumentsMentionedInInput {
+  connect: StakeholderWhereUniqueInput
+  create: StakeholderCreateWithoutDocumentsMentionedInInput
+}
+
+input StakeholderCreateOneWithoutEventsInvolvedInInput {
+  connect: StakeholderWhereUniqueInput
+  create: StakeholderCreateWithoutEventsInvolvedInInput
+}
+
+input StakeholderCreateWithoutBriefingBooksMentionedInInput {
+  createdAt: DateTime
+  documents: DocumentAuthorCreateManyWithoutStakeholderInput
+  documentsMentionedIn: DocumentInvolvedStakeholderCreateManyWithoutStakeholderInput
+  eventsInvolvedIn: StakeholderEventCreateManyWithoutStakeholderInput
+  id: String!
+  isStakeholderInstitution: Boolean!
+  stakeholderDescription: String
+  stakeholderFullName: String!
+  stakeholderWikipediaUri: String
+  updatedAt: DateTime
+}
+
+input StakeholderCreateWithoutDocumentsInput {
+  briefingBooksMentionedIn: StakeholderBriefingBookCreateManyWithoutStakeholderInput
+  createdAt: DateTime
+  documentsMentionedIn: DocumentInvolvedStakeholderCreateManyWithoutStakeholderInput
+  eventsInvolvedIn: StakeholderEventCreateManyWithoutStakeholderInput
+  id: String!
+  isStakeholderInstitution: Boolean!
+  stakeholderDescription: String
+  stakeholderFullName: String!
+  stakeholderWikipediaUri: String
+  updatedAt: DateTime
+}
+
+input StakeholderCreateWithoutDocumentsMentionedInInput {
+  briefingBooksMentionedIn: StakeholderBriefingBookCreateManyWithoutStakeholderInput
+  createdAt: DateTime
+  documents: DocumentAuthorCreateManyWithoutStakeholderInput
+  eventsInvolvedIn: StakeholderEventCreateManyWithoutStakeholderInput
+  id: String!
+  isStakeholderInstitution: Boolean!
+  stakeholderDescription: String
+  stakeholderFullName: String!
+  stakeholderWikipediaUri: String
+  updatedAt: DateTime
+}
+
+input StakeholderCreateWithoutEventsInvolvedInInput {
+  briefingBooksMentionedIn: StakeholderBriefingBookCreateManyWithoutStakeholderInput
+  createdAt: DateTime
+  documents: DocumentAuthorCreateManyWithoutStakeholderInput
+  documentsMentionedIn: DocumentInvolvedStakeholderCreateManyWithoutStakeholderInput
+  id: String!
+  isStakeholderInstitution: Boolean!
+  stakeholderDescription: String
+  stakeholderFullName: String!
+  stakeholderWikipediaUri: String
+  updatedAt: DateTime
 }
 
 type StakeholderEvent {
@@ -726,10 +2846,109 @@ type StakeholderEvent {
   Stakeholder: Stakeholder!
 }
 
+input StakeholderEvent_AB_uniqueCompoundUniqueInput {
+  A: String!
+  B: String!
+}
+
+input StakeholderEventCreateManyWithoutEventInput {
+  connect: [StakeholderEventWhereUniqueInput!]
+  create: [StakeholderEventCreateWithoutEventInput!]
+}
+
+input StakeholderEventCreateManyWithoutStakeholderInput {
+  connect: [StakeholderEventWhereUniqueInput!]
+  create: [StakeholderEventCreateWithoutStakeholderInput!]
+}
+
+input StakeholderEventCreateWithoutEventInput {
+  id: String!
+  Stakeholder: StakeholderCreateOneWithoutEventsInvolvedInInput!
+}
+
+input StakeholderEventCreateWithoutStakeholderInput {
+  Event: EventCreateOneWithoutEventStakeholdersInput!
+  id: String!
+}
+
 input StakeholderEventFilter {
   every: StakeholderEventWhereInput
   none: StakeholderEventWhereInput
   some: StakeholderEventWhereInput
+}
+
+input StakeholderEventScalarWhereInput {
+  A: StringFilter
+  AND: [StakeholderEventScalarWhereInput!]
+  B: StringFilter
+  id: StringFilter
+  NOT: [StakeholderEventScalarWhereInput!]
+  OR: [StakeholderEventScalarWhereInput!]
+}
+
+input StakeholderEventUpdateManyDataInput {
+  id: String
+}
+
+input StakeholderEventUpdateManyWithoutEventInput {
+  connect: [StakeholderEventWhereUniqueInput!]
+  create: [StakeholderEventCreateWithoutEventInput!]
+  delete: [StakeholderEventWhereUniqueInput!]
+  deleteMany: [StakeholderEventScalarWhereInput!]
+  disconnect: [StakeholderEventWhereUniqueInput!]
+  set: [StakeholderEventWhereUniqueInput!]
+  update: [StakeholderEventUpdateWithWhereUniqueWithoutEventInput!]
+  updateMany: [StakeholderEventUpdateManyWithWhereNestedInput!]
+  upsert: [StakeholderEventUpsertWithWhereUniqueWithoutEventInput!]
+}
+
+input StakeholderEventUpdateManyWithoutStakeholderInput {
+  connect: [StakeholderEventWhereUniqueInput!]
+  create: [StakeholderEventCreateWithoutStakeholderInput!]
+  delete: [StakeholderEventWhereUniqueInput!]
+  deleteMany: [StakeholderEventScalarWhereInput!]
+  disconnect: [StakeholderEventWhereUniqueInput!]
+  set: [StakeholderEventWhereUniqueInput!]
+  update: [StakeholderEventUpdateWithWhereUniqueWithoutStakeholderInput!]
+  updateMany: [StakeholderEventUpdateManyWithWhereNestedInput!]
+  upsert: [StakeholderEventUpsertWithWhereUniqueWithoutStakeholderInput!]
+}
+
+input StakeholderEventUpdateManyWithWhereNestedInput {
+  data: StakeholderEventUpdateManyDataInput!
+  where: StakeholderEventScalarWhereInput!
+}
+
+input StakeholderEventUpdateWithoutEventDataInput {
+  id: String
+  Stakeholder: StakeholderUpdateOneRequiredWithoutEventsInvolvedInInput
+}
+
+input StakeholderEventUpdateWithoutStakeholderDataInput {
+  Event: EventUpdateOneRequiredWithoutEventStakeholdersInput
+  id: String
+}
+
+input StakeholderEventUpdateWithWhereUniqueWithoutEventInput {
+  data: StakeholderEventUpdateWithoutEventDataInput!
+  where: StakeholderEventWhereUniqueInput!
+}
+
+input StakeholderEventUpdateWithWhereUniqueWithoutStakeholderInput {
+  data: StakeholderEventUpdateWithoutStakeholderDataInput!
+  where: StakeholderEventWhereUniqueInput!
+}
+
+input StakeholderEventUpsertWithWhereUniqueWithoutEventInput {
+  create: StakeholderEventCreateWithoutEventInput!
+  update: StakeholderEventUpdateWithoutEventDataInput!
+  where: StakeholderEventWhereUniqueInput!
+}
+
+input StakeholderEventUpsertWithWhereUniqueWithoutStakeholderInput {
+  create: StakeholderEventCreateWithoutStakeholderInput!
+  update: StakeholderEventUpdateWithoutStakeholderDataInput!
+  where: StakeholderEventWhereUniqueInput!
 }
 
 input StakeholderEventWhereInput {
@@ -745,9 +2964,9 @@ input StakeholderEventWhereInput {
 
 input StakeholderEventWhereUniqueInput {
   A: String
-  AB_unique: AB_uniqueCompoundUniqueInput
   B: String
   id: String
+  StakeholderEvent_AB_unique: StakeholderEvent_AB_uniqueCompoundUniqueInput
 }
 
 input StakeholderOrderByInput {
@@ -758,6 +2977,120 @@ input StakeholderOrderByInput {
   stakeholderFullName: OrderByArg
   stakeholderWikipediaUri: OrderByArg
   updatedAt: OrderByArg
+}
+
+input StakeholderUpdateInput {
+  briefingBooksMentionedIn: StakeholderBriefingBookUpdateManyWithoutStakeholderInput
+  createdAt: DateTime
+  documents: DocumentAuthorUpdateManyWithoutStakeholderInput
+  documentsMentionedIn: DocumentInvolvedStakeholderUpdateManyWithoutStakeholderInput
+  eventsInvolvedIn: StakeholderEventUpdateManyWithoutStakeholderInput
+  id: String
+  isStakeholderInstitution: Boolean
+  stakeholderDescription: String
+  stakeholderFullName: String
+  stakeholderWikipediaUri: String
+  updatedAt: DateTime
+}
+
+input StakeholderUpdateOneRequiredWithoutBriefingBooksMentionedInInput {
+  connect: StakeholderWhereUniqueInput
+  create: StakeholderCreateWithoutBriefingBooksMentionedInInput
+  update: StakeholderUpdateWithoutBriefingBooksMentionedInDataInput
+  upsert: StakeholderUpsertWithoutBriefingBooksMentionedInInput
+}
+
+input StakeholderUpdateOneRequiredWithoutDocumentsInput {
+  connect: StakeholderWhereUniqueInput
+  create: StakeholderCreateWithoutDocumentsInput
+  update: StakeholderUpdateWithoutDocumentsDataInput
+  upsert: StakeholderUpsertWithoutDocumentsInput
+}
+
+input StakeholderUpdateOneRequiredWithoutDocumentsMentionedInInput {
+  connect: StakeholderWhereUniqueInput
+  create: StakeholderCreateWithoutDocumentsMentionedInInput
+  update: StakeholderUpdateWithoutDocumentsMentionedInDataInput
+  upsert: StakeholderUpsertWithoutDocumentsMentionedInInput
+}
+
+input StakeholderUpdateOneRequiredWithoutEventsInvolvedInInput {
+  connect: StakeholderWhereUniqueInput
+  create: StakeholderCreateWithoutEventsInvolvedInInput
+  update: StakeholderUpdateWithoutEventsInvolvedInDataInput
+  upsert: StakeholderUpsertWithoutEventsInvolvedInInput
+}
+
+input StakeholderUpdateWithoutBriefingBooksMentionedInDataInput {
+  createdAt: DateTime
+  documents: DocumentAuthorUpdateManyWithoutStakeholderInput
+  documentsMentionedIn: DocumentInvolvedStakeholderUpdateManyWithoutStakeholderInput
+  eventsInvolvedIn: StakeholderEventUpdateManyWithoutStakeholderInput
+  id: String
+  isStakeholderInstitution: Boolean
+  stakeholderDescription: String
+  stakeholderFullName: String
+  stakeholderWikipediaUri: String
+  updatedAt: DateTime
+}
+
+input StakeholderUpdateWithoutDocumentsDataInput {
+  briefingBooksMentionedIn: StakeholderBriefingBookUpdateManyWithoutStakeholderInput
+  createdAt: DateTime
+  documentsMentionedIn: DocumentInvolvedStakeholderUpdateManyWithoutStakeholderInput
+  eventsInvolvedIn: StakeholderEventUpdateManyWithoutStakeholderInput
+  id: String
+  isStakeholderInstitution: Boolean
+  stakeholderDescription: String
+  stakeholderFullName: String
+  stakeholderWikipediaUri: String
+  updatedAt: DateTime
+}
+
+input StakeholderUpdateWithoutDocumentsMentionedInDataInput {
+  briefingBooksMentionedIn: StakeholderBriefingBookUpdateManyWithoutStakeholderInput
+  createdAt: DateTime
+  documents: DocumentAuthorUpdateManyWithoutStakeholderInput
+  eventsInvolvedIn: StakeholderEventUpdateManyWithoutStakeholderInput
+  id: String
+  isStakeholderInstitution: Boolean
+  stakeholderDescription: String
+  stakeholderFullName: String
+  stakeholderWikipediaUri: String
+  updatedAt: DateTime
+}
+
+input StakeholderUpdateWithoutEventsInvolvedInDataInput {
+  briefingBooksMentionedIn: StakeholderBriefingBookUpdateManyWithoutStakeholderInput
+  createdAt: DateTime
+  documents: DocumentAuthorUpdateManyWithoutStakeholderInput
+  documentsMentionedIn: DocumentInvolvedStakeholderUpdateManyWithoutStakeholderInput
+  id: String
+  isStakeholderInstitution: Boolean
+  stakeholderDescription: String
+  stakeholderFullName: String
+  stakeholderWikipediaUri: String
+  updatedAt: DateTime
+}
+
+input StakeholderUpsertWithoutBriefingBooksMentionedInInput {
+  create: StakeholderCreateWithoutBriefingBooksMentionedInInput!
+  update: StakeholderUpdateWithoutBriefingBooksMentionedInDataInput!
+}
+
+input StakeholderUpsertWithoutDocumentsInput {
+  create: StakeholderCreateWithoutDocumentsInput!
+  update: StakeholderUpdateWithoutDocumentsDataInput!
+}
+
+input StakeholderUpsertWithoutDocumentsMentionedInInput {
+  create: StakeholderCreateWithoutDocumentsMentionedInInput!
+  update: StakeholderUpdateWithoutDocumentsMentionedInDataInput!
+}
+
+input StakeholderUpsertWithoutEventsInvolvedInInput {
+  create: StakeholderCreateWithoutEventsInvolvedInInput!
+  update: StakeholderUpdateWithoutEventsInvolvedInDataInput!
 }
 
 input StakeholderWhereInput {
@@ -808,16 +3141,147 @@ type Tag {
   updatedAt: DateTime!
 }
 
+input TagCreateOneWithoutDocumentsWithTagInput {
+  connect: TagWhereUniqueInput
+  create: TagCreateWithoutDocumentsWithTagInput
+}
+
+input TagCreateOneWithoutEventsWithTagInput {
+  connect: TagWhereUniqueInput
+  create: TagCreateWithoutEventsWithTagInput
+}
+
+input TagCreateWithoutDocumentsWithTagInput {
+  createdAt: DateTime
+  description: String
+  eventsWithTag: TagOnEventCreateManyWithoutTagInput
+  id: String!
+  name: String!
+  tagWikipediaUri: String
+  type: String
+  updatedAt: DateTime
+}
+
+input TagCreateWithoutEventsWithTagInput {
+  createdAt: DateTime
+  description: String
+  documentsWithTag: TagOnDocumentCreateManyWithoutTagInput
+  id: String!
+  name: String!
+  tagWikipediaUri: String
+  type: String
+  updatedAt: DateTime
+}
+
 type TagOnDocument {
   Document: Document!
   id: String!
   Tag: Tag!
 }
 
+input TagOnDocument_AB_uniqueCompoundUniqueInput {
+  A: String!
+  B: String!
+}
+
+input TagOnDocumentCreateManyWithoutDocumentInput {
+  connect: [TagOnDocumentWhereUniqueInput!]
+  create: [TagOnDocumentCreateWithoutDocumentInput!]
+}
+
+input TagOnDocumentCreateManyWithoutTagInput {
+  connect: [TagOnDocumentWhereUniqueInput!]
+  create: [TagOnDocumentCreateWithoutTagInput!]
+}
+
+input TagOnDocumentCreateWithoutDocumentInput {
+  id: String!
+  Tag: TagCreateOneWithoutDocumentsWithTagInput!
+}
+
+input TagOnDocumentCreateWithoutTagInput {
+  Document: DocumentCreateOneWithoutDocumentTagsInput!
+  id: String!
+}
+
 input TagOnDocumentFilter {
   every: TagOnDocumentWhereInput
   none: TagOnDocumentWhereInput
   some: TagOnDocumentWhereInput
+}
+
+input TagOnDocumentScalarWhereInput {
+  A: StringFilter
+  AND: [TagOnDocumentScalarWhereInput!]
+  B: StringFilter
+  id: StringFilter
+  NOT: [TagOnDocumentScalarWhereInput!]
+  OR: [TagOnDocumentScalarWhereInput!]
+}
+
+input TagOnDocumentUpdateManyDataInput {
+  id: String
+}
+
+input TagOnDocumentUpdateManyWithoutDocumentInput {
+  connect: [TagOnDocumentWhereUniqueInput!]
+  create: [TagOnDocumentCreateWithoutDocumentInput!]
+  delete: [TagOnDocumentWhereUniqueInput!]
+  deleteMany: [TagOnDocumentScalarWhereInput!]
+  disconnect: [TagOnDocumentWhereUniqueInput!]
+  set: [TagOnDocumentWhereUniqueInput!]
+  update: [TagOnDocumentUpdateWithWhereUniqueWithoutDocumentInput!]
+  updateMany: [TagOnDocumentUpdateManyWithWhereNestedInput!]
+  upsert: [TagOnDocumentUpsertWithWhereUniqueWithoutDocumentInput!]
+}
+
+input TagOnDocumentUpdateManyWithoutTagInput {
+  connect: [TagOnDocumentWhereUniqueInput!]
+  create: [TagOnDocumentCreateWithoutTagInput!]
+  delete: [TagOnDocumentWhereUniqueInput!]
+  deleteMany: [TagOnDocumentScalarWhereInput!]
+  disconnect: [TagOnDocumentWhereUniqueInput!]
+  set: [TagOnDocumentWhereUniqueInput!]
+  update: [TagOnDocumentUpdateWithWhereUniqueWithoutTagInput!]
+  updateMany: [TagOnDocumentUpdateManyWithWhereNestedInput!]
+  upsert: [TagOnDocumentUpsertWithWhereUniqueWithoutTagInput!]
+}
+
+input TagOnDocumentUpdateManyWithWhereNestedInput {
+  data: TagOnDocumentUpdateManyDataInput!
+  where: TagOnDocumentScalarWhereInput!
+}
+
+input TagOnDocumentUpdateWithoutDocumentDataInput {
+  id: String
+  Tag: TagUpdateOneRequiredWithoutDocumentsWithTagInput
+}
+
+input TagOnDocumentUpdateWithoutTagDataInput {
+  Document: DocumentUpdateOneRequiredWithoutDocumentTagsInput
+  id: String
+}
+
+input TagOnDocumentUpdateWithWhereUniqueWithoutDocumentInput {
+  data: TagOnDocumentUpdateWithoutDocumentDataInput!
+  where: TagOnDocumentWhereUniqueInput!
+}
+
+input TagOnDocumentUpdateWithWhereUniqueWithoutTagInput {
+  data: TagOnDocumentUpdateWithoutTagDataInput!
+  where: TagOnDocumentWhereUniqueInput!
+}
+
+input TagOnDocumentUpsertWithWhereUniqueWithoutDocumentInput {
+  create: TagOnDocumentCreateWithoutDocumentInput!
+  update: TagOnDocumentUpdateWithoutDocumentDataInput!
+  where: TagOnDocumentWhereUniqueInput!
+}
+
+input TagOnDocumentUpsertWithWhereUniqueWithoutTagInput {
+  create: TagOnDocumentCreateWithoutTagInput!
+  update: TagOnDocumentUpdateWithoutTagDataInput!
+  where: TagOnDocumentWhereUniqueInput!
 }
 
 input TagOnDocumentWhereInput {
@@ -833,9 +3297,9 @@ input TagOnDocumentWhereInput {
 
 input TagOnDocumentWhereUniqueInput {
   A: String
-  AB_unique: AB_uniqueCompoundUniqueInput
   B: String
   id: String
+  TagOnDocument_AB_unique: TagOnDocument_AB_uniqueCompoundUniqueInput
 }
 
 type TagOnEvent {
@@ -844,10 +3308,109 @@ type TagOnEvent {
   Tag: Tag!
 }
 
+input TagOnEvent_AB_uniqueCompoundUniqueInput {
+  A: String!
+  B: String!
+}
+
+input TagOnEventCreateManyWithoutEventInput {
+  connect: [TagOnEventWhereUniqueInput!]
+  create: [TagOnEventCreateWithoutEventInput!]
+}
+
+input TagOnEventCreateManyWithoutTagInput {
+  connect: [TagOnEventWhereUniqueInput!]
+  create: [TagOnEventCreateWithoutTagInput!]
+}
+
+input TagOnEventCreateWithoutEventInput {
+  id: String!
+  Tag: TagCreateOneWithoutEventsWithTagInput!
+}
+
+input TagOnEventCreateWithoutTagInput {
+  Event: EventCreateOneWithoutEventTagsInput!
+  id: String!
+}
+
 input TagOnEventFilter {
   every: TagOnEventWhereInput
   none: TagOnEventWhereInput
   some: TagOnEventWhereInput
+}
+
+input TagOnEventScalarWhereInput {
+  A: StringFilter
+  AND: [TagOnEventScalarWhereInput!]
+  B: StringFilter
+  id: StringFilter
+  NOT: [TagOnEventScalarWhereInput!]
+  OR: [TagOnEventScalarWhereInput!]
+}
+
+input TagOnEventUpdateManyDataInput {
+  id: String
+}
+
+input TagOnEventUpdateManyWithoutEventInput {
+  connect: [TagOnEventWhereUniqueInput!]
+  create: [TagOnEventCreateWithoutEventInput!]
+  delete: [TagOnEventWhereUniqueInput!]
+  deleteMany: [TagOnEventScalarWhereInput!]
+  disconnect: [TagOnEventWhereUniqueInput!]
+  set: [TagOnEventWhereUniqueInput!]
+  update: [TagOnEventUpdateWithWhereUniqueWithoutEventInput!]
+  updateMany: [TagOnEventUpdateManyWithWhereNestedInput!]
+  upsert: [TagOnEventUpsertWithWhereUniqueWithoutEventInput!]
+}
+
+input TagOnEventUpdateManyWithoutTagInput {
+  connect: [TagOnEventWhereUniqueInput!]
+  create: [TagOnEventCreateWithoutTagInput!]
+  delete: [TagOnEventWhereUniqueInput!]
+  deleteMany: [TagOnEventScalarWhereInput!]
+  disconnect: [TagOnEventWhereUniqueInput!]
+  set: [TagOnEventWhereUniqueInput!]
+  update: [TagOnEventUpdateWithWhereUniqueWithoutTagInput!]
+  updateMany: [TagOnEventUpdateManyWithWhereNestedInput!]
+  upsert: [TagOnEventUpsertWithWhereUniqueWithoutTagInput!]
+}
+
+input TagOnEventUpdateManyWithWhereNestedInput {
+  data: TagOnEventUpdateManyDataInput!
+  where: TagOnEventScalarWhereInput!
+}
+
+input TagOnEventUpdateWithoutEventDataInput {
+  id: String
+  Tag: TagUpdateOneRequiredWithoutEventsWithTagInput
+}
+
+input TagOnEventUpdateWithoutTagDataInput {
+  Event: EventUpdateOneRequiredWithoutEventTagsInput
+  id: String
+}
+
+input TagOnEventUpdateWithWhereUniqueWithoutEventInput {
+  data: TagOnEventUpdateWithoutEventDataInput!
+  where: TagOnEventWhereUniqueInput!
+}
+
+input TagOnEventUpdateWithWhereUniqueWithoutTagInput {
+  data: TagOnEventUpdateWithoutTagDataInput!
+  where: TagOnEventWhereUniqueInput!
+}
+
+input TagOnEventUpsertWithWhereUniqueWithoutEventInput {
+  create: TagOnEventCreateWithoutEventInput!
+  update: TagOnEventUpdateWithoutEventDataInput!
+  where: TagOnEventWhereUniqueInput!
+}
+
+input TagOnEventUpsertWithWhereUniqueWithoutTagInput {
+  create: TagOnEventCreateWithoutTagInput!
+  update: TagOnEventUpdateWithoutTagDataInput!
+  where: TagOnEventWhereUniqueInput!
 }
 
 input TagOnEventWhereInput {
@@ -863,9 +3426,55 @@ input TagOnEventWhereInput {
 
 input TagOnEventWhereUniqueInput {
   A: String
-  AB_unique: AB_uniqueCompoundUniqueInput
   B: String
   id: String
+  TagOnEvent_AB_unique: TagOnEvent_AB_uniqueCompoundUniqueInput
+}
+
+input TagUpdateOneRequiredWithoutDocumentsWithTagInput {
+  connect: TagWhereUniqueInput
+  create: TagCreateWithoutDocumentsWithTagInput
+  update: TagUpdateWithoutDocumentsWithTagDataInput
+  upsert: TagUpsertWithoutDocumentsWithTagInput
+}
+
+input TagUpdateOneRequiredWithoutEventsWithTagInput {
+  connect: TagWhereUniqueInput
+  create: TagCreateWithoutEventsWithTagInput
+  update: TagUpdateWithoutEventsWithTagDataInput
+  upsert: TagUpsertWithoutEventsWithTagInput
+}
+
+input TagUpdateWithoutDocumentsWithTagDataInput {
+  createdAt: DateTime
+  description: String
+  eventsWithTag: TagOnEventUpdateManyWithoutTagInput
+  id: String
+  name: String
+  tagWikipediaUri: String
+  type: String
+  updatedAt: DateTime
+}
+
+input TagUpdateWithoutEventsWithTagDataInput {
+  createdAt: DateTime
+  description: String
+  documentsWithTag: TagOnDocumentUpdateManyWithoutTagInput
+  id: String
+  name: String
+  tagWikipediaUri: String
+  type: String
+  updatedAt: DateTime
+}
+
+input TagUpsertWithoutDocumentsWithTagInput {
+  create: TagCreateWithoutDocumentsWithTagInput!
+  update: TagUpdateWithoutDocumentsWithTagDataInput!
+}
+
+input TagUpsertWithoutEventsWithTagInput {
+  create: TagCreateWithoutEventsWithTagInput!
+  update: TagUpdateWithoutEventsWithTagDataInput!
 }
 
 input TagWhereInput {
@@ -881,6 +3490,12 @@ input TagWhereInput {
   tagWikipediaUri: NullableStringFilter
   type: NullableStringFilter
   updatedAt: DateTimeFilter
+}
+
+input TagWhereUniqueInput {
+  id: String
+  name: String
+  tagWikipediaUri: String
 }
 
 type User {

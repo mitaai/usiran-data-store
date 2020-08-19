@@ -472,6 +472,9 @@ schema.mutationType({
         return { user, token };    
       }
     })
+    t.crud.updateOneDocument()
+    t.crud.updateOneStakeholder()
+    t.crud.updateOneEvent()
   },
 })
 
