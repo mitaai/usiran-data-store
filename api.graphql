@@ -371,6 +371,14 @@ input BriefingBookEventWhereUniqueInput {
   id: String
 }
 
+input BriefingBookOrderByInput {
+  briefingBookDescription: OrderByArg
+  briefingBookTitle: OrderByArg
+  createdAt: OrderByArg
+  id: OrderByArg
+  updatedAt: OrderByArg
+}
+
 input BriefingBookUpdateOneRequiredWithoutMentionedDocumentsInput {
   connect: BriefingBookWhereUniqueInput
   connectOrCreate: BriefingBookCreateOrConnectWithoutBriefingBookDocumentInput
@@ -813,6 +821,12 @@ input DocumentCreateOneWithoutDocumentAuthorsInput {
   create: DocumentCreateWithoutDocumentAuthorsInput
 }
 
+input DocumentCreateOneWithoutDocumentKindInput {
+  connect: DocumentWhereUniqueInput
+  connectOrCreate: DocumentCreateOrConnectWithoutKindOnDocumentInput
+  create: DocumentCreateWithoutDocumentKindInput
+}
+
 input DocumentCreateOneWithoutDocumentTagsInput {
   connect: DocumentWhereUniqueInput
   connectOrCreate: DocumentCreateOrConnectWithoutTagOnDocumentInput
@@ -859,6 +873,11 @@ input DocumentCreateOrConnectWithoutDocumentInvolvedStakeholderInput {
 
 input DocumentCreateOrConnectWithoutDocumentLocationInput {
   create: DocumentCreateWithoutMentionedLocationsInput!
+  where: DocumentWhereUniqueInput!
+}
+
+input DocumentCreateOrConnectWithoutKindOnDocumentInput {
+  create: DocumentCreateWithoutDocumentKindInput!
   where: DocumentWhereUniqueInput!
 }
 
@@ -917,6 +936,38 @@ input DocumentCreateWithoutDocumentAuthorsInput {
   documentDescription: String
   documentFiles: DocumentFileCreateManyWithoutDocumentInput
   documentKind: KindOnDocumentCreateManyWithoutDocumentInput
+  documentMediaType: String!
+  documentOriginalID: String!
+  documentPublicationDate: DateTime
+  documentTags: TagOnDocumentCreateManyWithoutDocumentInput
+  documentTitle: String!
+  documentTranscript: String
+  id: String!
+  mentionedEvents: DocumentEventCreateManyWithoutDocumentInput
+  mentionedLocations: DocumentLocationCreateManyWithoutDocumentInput
+  mentionedStakeholders: DocumentInvolvedStakeholderCreateManyWithoutDocumentInput
+  sessionNumber: Int
+  updatedAt: DateTime
+}
+
+input DocumentCreateWithoutDocumentKindInput {
+  briefingBooksMentionedIn: BriefingBookDocumentCreateManyWithoutDocumentInput
+  createdAt: DateTime
+  dnsaAbstract: String
+  dnsaCitation: String
+  dnsaCollection: String
+  dnsaFrom: String
+  dnsaItemNumber: String
+  dnsaOrigin: String
+  dnsaStakeholder: String
+  dnsaSubject: String
+  dnsaTo: String
+  dnsaURL: String
+  documentAuthors: DocumentAuthorCreateManyWithoutDocumentInput
+  documentClassification: ClassificationOnDocumentCreateManyWithoutDocumentInput
+  documentCreationDate: DateTime
+  documentDescription: String
+  documentFiles: DocumentFileCreateManyWithoutDocumentInput
   documentMediaType: String!
   documentOriginalID: String!
   documentPublicationDate: DateTime
@@ -2417,6 +2468,12 @@ input KindOnDocument_AB_uniqueCompoundUniqueInput {
   B: String!
 }
 
+input KindOnDocumentCreateInput {
+  Document: DocumentCreateOneWithoutDocumentKindInput!
+  id: String
+  Kind: KindCreateOneWithoutDocumentsWithKindInput!
+}
+
 input KindOnDocumentCreateManyWithoutDocumentInput {
   connect: [KindOnDocumentWhereUniqueInput!]
   connectOrCreate: [KindOnDocumentCreateOrConnectWithoutDocumentInput!]
@@ -2437,6 +2494,12 @@ input KindOnDocumentFilter {
   every: KindOnDocumentWhereInput
   none: KindOnDocumentWhereInput
   some: KindOnDocumentWhereInput
+}
+
+input KindOnDocumentOrderByInput {
+  A: OrderByArg
+  B: OrderByArg
+  id: OrderByArg
 }
 
 input KindOnDocumentScalarWhereInput {
@@ -2502,6 +2565,13 @@ input KindOnDocumentWhereUniqueInput {
   B: String
   id: String
   KindOnDocument_AB_unique: KindOnDocument_AB_uniqueCompoundUniqueInput
+}
+
+input KindOrderByInput {
+  createdAt: OrderByArg
+  id: OrderByArg
+  name: OrderByArg
+  updatedAt: OrderByArg
 }
 
 input KindUpdateOneRequiredWithoutDocumentsWithKindInput {
@@ -2833,6 +2903,7 @@ enum MediaType {
 }
 
 type Mutation {
+  createOneKindOnDocument(data: KindOnDocumentCreateInput!): KindOnDocument!
   createUser(email: String!, password: String!, userName: String): UserAuthPayload
   deleteOneUser(where: UserWhereUniqueInput!): User
   signinUser(email: String!, password: String!): UserAuthPayload
@@ -2884,6 +2955,8 @@ enum OrderByArg {
 }
 
 type Query {
+  briefingBook(where: BriefingBookWhereUniqueInput!): BriefingBook
+  briefingBooks(after: BriefingBookWhereUniqueInput, before: BriefingBookWhereUniqueInput, first: Int, last: Int, orderBy: BriefingBookOrderByInput, where: BriefingBookWhereInput): [BriefingBook!]!
   document(where: DocumentWhereUniqueInput!): Document
   documents(after: DocumentWhereUniqueInput, before: DocumentWhereUniqueInput, first: Int, last: Int, orderBy: DocumentOrderByInput, where: DocumentWhereInput): [Document!]!
   documentsCount(where: DocumentWhereInput): Int
@@ -2892,11 +2965,17 @@ type Query {
   eventsCount(where: EventWhereInput): Int
   file(where: FileWhereUniqueInput!): File
   files(after: FileWhereUniqueInput, before: FileWhereUniqueInput, first: Int, last: Int, orderBy: FileOrderByInput, where: FileWhereInput): [File!]!
+  kind(where: KindWhereUniqueInput!): Kind
+  kindOnDocument(where: KindOnDocumentWhereUniqueInput!): KindOnDocument
+  kindOnDocuments(after: KindOnDocumentWhereUniqueInput, before: KindOnDocumentWhereUniqueInput, first: Int, last: Int, orderBy: KindOnDocumentOrderByInput, where: KindOnDocumentWhereInput): [KindOnDocument!]!
+  kinds(after: KindWhereUniqueInput, before: KindWhereUniqueInput, first: Int, last: Int, orderBy: KindOrderByInput, where: KindWhereInput): [Kind!]!
   location(where: LocationWhereUniqueInput!): Location
   locations(after: LocationWhereUniqueInput, before: LocationWhereUniqueInput, first: Int, last: Int, orderBy: LocationOrderByInput, where: LocationWhereInput): [Location!]!
   stakeholder(where: StakeholderWhereUniqueInput!): Stakeholder
   stakeholders(after: StakeholderWhereUniqueInput, before: StakeholderWhereUniqueInput, first: Int, last: Int, orderBy: StakeholderOrderByInput, where: StakeholderWhereInput): [Stakeholder!]!
   stakeholdersCount(where: StakeholderWhereInput): Int
+  tag(where: TagWhereUniqueInput!): Tag
+  tags(after: TagWhereUniqueInput, before: TagWhereUniqueInput, first: Int, last: Int, orderBy: TagOrderByInput, where: TagWhereInput): [Tag!]!
   user(where: UserWhereUniqueInput!): User
   users(after: UserWhereUniqueInput, before: UserWhereUniqueInput, first: Int, last: Int, orderBy: UserOrderByInput, where: UserWhereInput): [User!]!
 }
@@ -3805,6 +3884,16 @@ input TagOnEventWhereUniqueInput {
   B: String
   id: String
   TagOnEvent_AB_unique: TagOnEvent_AB_uniqueCompoundUniqueInput
+}
+
+input TagOrderByInput {
+  createdAt: OrderByArg
+  description: OrderByArg
+  id: OrderByArg
+  name: OrderByArg
+  tagWikipediaUri: OrderByArg
+  type: OrderByArg
+  updatedAt: OrderByArg
 }
 
 input TagUpdateOneRequiredWithoutDocumentsWithTagInput {

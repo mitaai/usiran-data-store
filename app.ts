@@ -425,6 +425,30 @@ schema.queryType({
       filtering: true,
       ordering: true,
     })
+    t.crud.kind()
+    t.crud.kinds({
+      pagination: true,
+      filtering: true,
+      ordering: true,
+    })
+    t.crud.kindOnDocument()
+    t.crud.kindOnDocuments({
+      pagination: true,
+      filtering: true,
+      ordering: true,
+    })
+    t.crud.tag()
+    t.crud.tags({
+      pagination: true,
+      filtering: true,
+      ordering: true,
+    })
+    t.crud.briefingBook()
+    t.crud.briefingBooks({
+      pagination: true,
+      filtering: true,
+      ordering: true,
+    })
   },
 })
 
@@ -501,6 +525,7 @@ schema.mutationType({
       }
     })
     t.crud.updateOneDocument()
+    t.crud.createOneKindOnDocument()
     t.crud.updateOneStakeholder()
     t.crud.updateOneEvent()
   },
