@@ -31,7 +31,7 @@ model BriefingBook {
 model BriefingBookDocument {
   A            String       @map(name:"BriefingBookId")
   B            String       @map(name:"DocumentId")
-  id           String       @id
+  id           String       @id @default(cuid())
   BriefingBook BriefingBook @relation(fields: [A], references: [id])
   Document     Document     @relation(fields: [B], references: [id])
 
@@ -43,7 +43,7 @@ model BriefingBookDocument {
 model BriefingBookEvent {
   A            String       @map(name:"EventId")
   B            String       @map(name:"BriefingBookId")
-  id           String       @id
+  id           String       @id @default(cuid())
   Event        Event        @relation(fields: [A], references: [id])
   BriefingBook BriefingBook @relation(fields: [B], references: [id])
 
@@ -55,7 +55,7 @@ model BriefingBookEvent {
 model ClassificationOnDocument {
   A              String         @map(name:"ClassificationId")
   B              String         @map(name:"DocumentId")
-  id             String         @id
+  id             String         @id @default(cuid())
   Classification Classification @relation(fields: [A], references: [id])
   Document       Document       @relation(fields: [B], references: [id])
 
@@ -67,7 +67,7 @@ model ClassificationOnDocument {
 model DocumentAuthor {
   A           String      @map(name:"DocumentId")
   B           String      @map(name:"StakeholderId")
-  id          String      @id
+  id          String      @id @default(cuid())
   Document    Document    @relation(fields: [A], references: [id])
   Stakeholder Stakeholder @relation(fields: [B], references: [id])
 
@@ -79,7 +79,7 @@ model DocumentAuthor {
 model DocumentEvent {
   A        String   @map(name:"DocumentId")
   B        String   @map(name:"EventId")
-  id       String   @id
+  id       String   @id @default(cuid())
   Document Document @relation(fields: [A], references: [id])
   Event    Event    @relation(fields: [B], references: [id])
 
@@ -91,7 +91,7 @@ model DocumentEvent {
 model DocumentFile {
   A        String   @map(name:"DocumentId")
   B        String   @map(name:"FileId")
-  id       String   @id
+  id       String   @id @default(cuid())
   Document Document @relation(fields: [A], references: [id])
   File     File     @relation(fields: [B], references: [id])
 
@@ -103,7 +103,7 @@ model DocumentFile {
 model DocumentInvolvedStakeholder {
   A           String      @map(name:"StakeholderId")
   B           String      @map(name:"DocumentId")
-  id          String      @id
+  id          String      @id @default(cuid())
   Stakeholder Stakeholder @relation(fields: [A], references: [id])
   Document    Document    @relation(fields: [B], references: [id])
 
@@ -115,7 +115,7 @@ model DocumentInvolvedStakeholder {
 model DocumentLocation {
   A        String   @map(name:"LocationId")
   B        String   @map(name:"DocumentId")
-  id       String   @id
+  id       String   @id @default(cuid())
   Location Location @relation(fields: [A], references: [id])
   Document Document @relation(fields: [B], references: [id])
 
@@ -127,7 +127,7 @@ model DocumentLocation {
 model KindOnDocument {
   A        String   @map(name:"KindId")
   B        String   @map(name:"DocumentId")
-  id       String   @id
+  id       String   @id @default(cuid())
   Kind     Kind     @relation(fields: [A], references: [id])
   Document Document @relation(fields: [B], references: [id])
 
@@ -139,7 +139,7 @@ model KindOnDocument {
 model LocationOnEvent {
   A        String   @map(name:"LocationId")
   B        String   @map(name:"EventId")
-  id       String   @id
+  id       String   @id @default(cuid())
   Location Location @relation(fields: [A], references: [id])
   Event    Event    @relation(fields: [B], references: [id])
 
@@ -151,7 +151,7 @@ model LocationOnEvent {
 model StakeholderBriefingBook {
   A            String       @map(name:"StakeholderId")
   B            String       @map(name:"BriefingBookId")
-  id           String       @id
+  id           String       @id @default(cuid())
   Stakeholder  Stakeholder  @relation(fields: [A], references: [id])
   BriefingBook BriefingBook @relation(fields: [B], references: [id])
 
@@ -163,7 +163,7 @@ model StakeholderBriefingBook {
 model StakeholderEvent {
   A           String      @map(name:"StakeholderId")
   B           String      @map(name:"EventId")
-  id          String      @id
+  id          String      @id @default(cuid())
   Stakeholder Stakeholder @relation(fields: [A], references: [id])
   Event       Event       @relation(fields: [B], references: [id])
 
@@ -175,7 +175,7 @@ model StakeholderEvent {
 model TagOnDocument {
   A        String   @map(name:"TagId")
   B        String   @map(name:"DocumentId")
-  id       String   @id
+  id       String   @id @default(cuid())
   Tag      Tag      @relation(fields: [A], references: [id])
   Document Document @relation(fields: [B], references: [id])
 
@@ -187,7 +187,7 @@ model TagOnDocument {
 model TagOnEvent {
   A     String @map(name:"TagId")
   B     String @map(name:"EventId")
-  id    String @id
+  id    String @id @default(cuid())
   Tag   Tag    @relation(fields: [A], references: [id])
   Event Event  @relation(fields: [B], references: [id])
 

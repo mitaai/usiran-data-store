@@ -195,28 +195,6 @@ schema.objectType({
 // Relations
 
 schema.objectType({
-  name: 'KindOnDocument',
-  definition(t) {
-    t.model.id()
-    t.model.A({alias:"KindId"})
-    t.model.B({alias:"DocumentId"})
-    t.model.Kind()
-    t.model.Document()
-  }
-})
-
-schema.objectType({
-  name: 'TagOnDocument',
-  definition(t){
-    t.model.id()
-    t.model.A({alias:"TagId"})
-    t.model.B({alias:"DocumentId"})
-    t.model.Tag()
-    t.model.Document()
-  }
-})
-
-schema.objectType({
   name: 'BriefingBookDocument',
   definition(t) {
     t.model.id()
@@ -305,6 +283,17 @@ schema.objectType({
 })
 
 schema.objectType({
+  name: 'KindOnDocument',
+  definition(t) {
+    t.model.id()
+    t.model.A({alias:"KindId"})
+    t.model.B({alias:"DocumentId"})
+    t.model.Kind()
+    t.model.Document()
+  }
+})
+
+schema.objectType({
   name: 'LocationOnEvent',
   definition(t) {
     t.model.id()
@@ -334,6 +323,17 @@ schema.objectType({
     t.model.B({alias: "EventId"})
     t.model.Stakeholder()
     t.model.Event()
+  }
+})
+
+schema.objectType({
+  name: 'TagOnDocument',
+  definition(t){
+    t.model.id()
+    t.model.A({alias:"TagId"})
+    t.model.B({alias:"DocumentId"})
+    t.model.Tag()
+    t.model.Document()
   }
 })
 

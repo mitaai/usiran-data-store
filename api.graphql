@@ -118,12 +118,12 @@ input BriefingBookDocumentCreateOrConnectWithoutDocumentInput {
 
 input BriefingBookDocumentCreateWithoutBriefingBookInput {
   Document: DocumentCreateOneWithoutBriefingBooksMentionedInInput!
-  id: String!
+  id: String
 }
 
 input BriefingBookDocumentCreateWithoutDocumentInput {
   BriefingBook: BriefingBookCreateOneWithoutMentionedDocumentsInput!
-  id: String!
+  id: String
 }
 
 input BriefingBookDocumentFilter {
@@ -263,12 +263,12 @@ input BriefingBookEventCreateOrConnectWithoutEventInput {
 
 input BriefingBookEventCreateWithoutBriefingBookInput {
   Event: EventCreateOneWithoutBriefingBooksMentionedInInput!
-  id: String!
+  id: String
 }
 
 input BriefingBookEventCreateWithoutEventInput {
   BriefingBook: BriefingBookCreateOneWithoutMentionedEventsInput!
-  id: String!
+  id: String
 }
 
 input BriefingBookEventFilter {
@@ -511,7 +511,7 @@ input ClassificationOnDocumentCreateOrConnectWithoutDocumentInput {
 
 input ClassificationOnDocumentCreateWithoutDocumentInput {
   Classification: ClassificationCreateOneWithoutDocumentsWithClassificationInput!
-  id: String!
+  id: String
 }
 
 input ClassificationOnDocumentFilter {
@@ -692,13 +692,13 @@ input DocumentAuthorCreateOrConnectWithoutStakeholderInput {
 }
 
 input DocumentAuthorCreateWithoutDocumentInput {
-  id: String!
+  id: String
   Stakeholder: StakeholderCreateOneWithoutDocumentsInput!
 }
 
 input DocumentAuthorCreateWithoutStakeholderInput {
   Document: DocumentCreateOneWithoutDocumentAuthorsInput!
-  id: String!
+  id: String
 }
 
 input DocumentAuthorFilter {
@@ -1096,12 +1096,12 @@ input DocumentEventCreateOrConnectWithoutEventInput {
 
 input DocumentEventCreateWithoutDocumentInput {
   Event: EventCreateOneWithoutDocumentsMentionedInInput!
-  id: String!
+  id: String
 }
 
 input DocumentEventCreateWithoutEventInput {
   Document: DocumentCreateOneWithoutMentionedEventsInput!
-  id: String!
+  id: String
 }
 
 input DocumentEventFilter {
@@ -1230,7 +1230,7 @@ input DocumentFileCreateOrConnectWithoutDocumentInput {
 
 input DocumentFileCreateWithoutDocumentInput {
   File: FileCreateOneWithoutDocumentsIncludedInInput!
-  id: String!
+  id: String
 }
 
 input DocumentFileFilter {
@@ -1340,13 +1340,13 @@ input DocumentInvolvedStakeholderCreateOrConnectWithoutStakeholderInput {
 }
 
 input DocumentInvolvedStakeholderCreateWithoutDocumentInput {
-  id: String!
+  id: String
   Stakeholder: StakeholderCreateOneWithoutDocumentsMentionedInInput!
 }
 
 input DocumentInvolvedStakeholderCreateWithoutStakeholderInput {
   Document: DocumentCreateOneWithoutMentionedStakeholdersInput!
-  id: String!
+  id: String
 }
 
 input DocumentInvolvedStakeholderFilter {
@@ -1485,13 +1485,13 @@ input DocumentLocationCreateOrConnectWithoutLocationInput {
 }
 
 input DocumentLocationCreateWithoutDocumentInput {
-  id: String!
+  id: String
   Location: LocationCreateOneWithoutDocumentsMentionedInInput!
 }
 
 input DocumentLocationCreateWithoutLocationInput {
   Document: DocumentCreateOneWithoutMentionedLocationsInput!
-  id: String!
+  id: String
 }
 
 input DocumentLocationFilter {
@@ -2429,7 +2429,7 @@ input KindOnDocumentCreateOrConnectWithoutDocumentInput {
 }
 
 input KindOnDocumentCreateWithoutDocumentInput {
-  id: String!
+  id: String
   Kind: KindCreateOneWithoutDocumentsWithKindInput!
 }
 
@@ -2631,13 +2631,13 @@ input LocationOnEventCreateOrConnectWithoutLocationInput {
 }
 
 input LocationOnEventCreateWithoutEventInput {
-  id: String!
+  id: String
   Location: LocationCreateOneWithoutLocationEventsInput!
 }
 
 input LocationOnEventCreateWithoutLocationInput {
   Event: EventCreateOneWithoutEventLocationsInput!
-  id: String!
+  id: String
 }
 
 input LocationOnEventFilter {
@@ -2947,13 +2947,13 @@ input StakeholderBriefingBookCreateOrConnectWithoutStakeholderInput {
 }
 
 input StakeholderBriefingBookCreateWithoutBriefingBookInput {
-  id: String!
+  id: String
   Stakeholder: StakeholderCreateOneWithoutBriefingBooksMentionedInInput!
 }
 
 input StakeholderBriefingBookCreateWithoutStakeholderInput {
   BriefingBook: BriefingBookCreateOneWithoutMentionedStakeholdersInput!
-  id: String!
+  id: String
 }
 
 input StakeholderBriefingBookFilter {
@@ -3188,13 +3188,13 @@ input StakeholderEventCreateOrConnectWithoutStakeholderInput {
 }
 
 input StakeholderEventCreateWithoutEventInput {
-  id: String!
+  id: String
   Stakeholder: StakeholderCreateOneWithoutEventsInvolvedInInput!
 }
 
 input StakeholderEventCreateWithoutStakeholderInput {
   Event: EventCreateOneWithoutEventStakeholdersInput!
-  id: String!
+  id: String
 }
 
 input StakeholderEventFilter {
@@ -3553,13 +3553,13 @@ input TagOnDocumentCreateOrConnectWithoutTagInput {
 }
 
 input TagOnDocumentCreateWithoutDocumentInput {
-  id: String!
+  id: String
   Tag: TagCreateOneWithoutDocumentsWithTagInput!
 }
 
 input TagOnDocumentCreateWithoutTagInput {
   Document: DocumentCreateOneWithoutDocumentTagsInput!
-  id: String!
+  id: String
 }
 
 input TagOnDocumentFilter {
@@ -3698,13 +3698,13 @@ input TagOnEventCreateOrConnectWithoutTagInput {
 }
 
 input TagOnEventCreateWithoutEventInput {
-  id: String!
+  id: String
   Tag: TagCreateOneWithoutEventsWithTagInput!
 }
 
 input TagOnEventCreateWithoutTagInput {
   Event: EventCreateOneWithoutEventTagsInput!
-  id: String!
+  id: String
 }
 
 input TagOnEventFilter {
