@@ -1,6 +1,9 @@
 generator client {
   provider = "prisma-client-js"
+  experimentalFeatures = ["connectOrCreate"]
+  previewFeatures = ["connectOrCreate","insensitiveFilters"]
 }
+// ^ Change to previewFeatures after 2.5.0 integration
 
 datasource db {
   provider = "postgresql"
