@@ -65,7 +65,9 @@ input BriefingBookCreateWithoutMentionedStakeholdersInput {
 
 type BriefingBookDocument {
   BriefingBook: BriefingBook!
+  BriefingBookId: String!
   Document: Document!
+  DocumentId: String!
   id: String!
 }
 
@@ -194,7 +196,9 @@ input BriefingBookDocumentWhereUniqueInput {
 
 type BriefingBookEvent {
   BriefingBook: BriefingBook!
+  BriefingBookId: String!
   Event: Event!
+  EventId: String!
   id: String!
 }
 
@@ -428,7 +432,9 @@ input ClassificationCreateWithoutDocumentsWithClassificationInput {
 
 type ClassificationOnDocument {
   Classification: Classification!
+  ClassificationId: String!
   Document: Document!
+  DocumentId: String!
   id: String!
 }
 
@@ -589,8 +595,10 @@ type Document {
 
 type DocumentAuthor {
   Document: Document!
+  DocumentId: String!
   id: String!
   Stakeholder: Stakeholder!
+  StakeholderId: String!
 }
 
 input DocumentAuthor_AB_uniqueCompoundUniqueInput {
@@ -940,7 +948,9 @@ input DocumentCreateWithoutMentionedStakeholdersInput {
 
 type DocumentEvent {
   Document: Document!
+  DocumentId: String!
   Event: Event!
+  EventId: String!
   id: String!
 }
 
@@ -1069,7 +1079,9 @@ input DocumentEventWhereUniqueInput {
 
 type DocumentFile {
   Document: Document!
+  DocumentId: String!
   File: File!
+  FileId: String!
   id: String!
 }
 
@@ -1160,8 +1172,10 @@ input DocumentFileWhereUniqueInput {
 
 type DocumentInvolvedStakeholder {
   Document: Document!
+  DocumentId: String!
   id: String!
   Stakeholder: Stakeholder!
+  StakeholderId: String!
 }
 
 input DocumentInvolvedStakeholder_AB_uniqueCompoundUniqueInput {
@@ -1289,8 +1303,10 @@ input DocumentInvolvedStakeholderWhereUniqueInput {
 
 type DocumentLocation {
   Document: Document!
+  DocumentId: String!
   id: String!
   Location: Location!
+  LocationId: String!
 }
 
 input DocumentLocation_AB_uniqueCompoundUniqueInput {
@@ -2174,8 +2190,10 @@ input KindCreateWithoutDocumentsWithKindInput {
 
 type KindOnDocument {
   Document: Document!
+  DocumentId: String!
   id: String!
   Kind: Kind!
+  KindId: String!
 }
 
 input KindOnDocument_AB_uniqueCompoundUniqueInput {
@@ -2343,8 +2361,10 @@ input LocationCreateWithoutLocationEventsInput {
 
 type LocationOnEvent {
   Event: Event!
+  EventId: String!
   id: String!
   Location: Location!
+  LocationId: String!
 }
 
 input LocationOnEvent_AB_uniqueCompoundUniqueInput {
@@ -2641,8 +2661,10 @@ type Stakeholder {
 
 type StakeholderBriefingBook {
   BriefingBook: BriefingBook!
+  BriefingBookId: String!
   id: String!
   Stakeholder: Stakeholder!
+  StakeholderId: String!
 }
 
 input StakeholderBriefingBook_AB_uniqueCompoundUniqueInput {
@@ -2842,8 +2864,10 @@ input StakeholderCreateWithoutEventsInvolvedInInput {
 
 type StakeholderEvent {
   Event: Event!
+  EventId: String!
   id: String!
   Stakeholder: Stakeholder!
+  StakeholderId: String!
 }
 
 input StakeholderEvent_AB_uniqueCompoundUniqueInput {
@@ -3175,8 +3199,10 @@ input TagCreateWithoutEventsWithTagInput {
 
 type TagOnDocument {
   Document: Document!
+  DocumentId: String!
   id: String!
   Tag: Tag!
+  TagId: String!
 }
 
 input TagOnDocument_AB_uniqueCompoundUniqueInput {
@@ -3304,8 +3330,10 @@ input TagOnDocumentWhereUniqueInput {
 
 type TagOnEvent {
   Event: Event!
+  EventId: String!
   id: String!
   Tag: Tag!
+  TagId: String!
 }
 
 input TagOnEvent_AB_uniqueCompoundUniqueInput {
