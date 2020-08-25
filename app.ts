@@ -526,14 +526,16 @@ schema.mutationType({
     })
     t.crud.updateOneDocument({
       async resolve(root, args, ctx, info, originalResolve) {
-        await ctx.db.queryRaw(`DELETE FROM "KindOnDocument" WHERE "B" = '${args.where.id}';`)
-          .then(await ctx.db.queryRaw(`DELETE FROM "ClassificationOnDocument" WHERE "B" = '${args.where.id}';`))
+        if(args.data.documentKind) await ctx.db.queryRaw(`DELETE FROM "KindOnDocument" WHERE "B" = '${args.where.id}';`)
+        if(args.data.documentClassification) await ctx.db.queryRaw(`DELETE FROM "ClassificationOnDocument" WHERE "B" = '${args.where.id}';`)
+        if(args.data.documentTags) await ctx.db.queryRaw(`DELETE FROM "TagOnDocument" WHERE "B" = '${args.where.id}';`)
         const res = await originalResolve(root, args, ctx, info)
         return res
       }
     })
     t.crud.createOneKindOnDocument()
     t.crud.createOneClassificationOnDocument()
+    t.crud.createOneTagOnDocument()
     t.crud.updateOneStakeholder()
     t.crud.updateOneEvent()
   },
