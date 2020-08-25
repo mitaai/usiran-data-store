@@ -506,6 +506,12 @@ input ClassificationOnDocument_AB_uniqueCompoundUniqueInput {
   B: String!
 }
 
+input ClassificationOnDocumentCreateInput {
+  Classification: ClassificationCreateOneWithoutDocumentsWithClassificationInput!
+  Document: DocumentCreateOneWithoutDocumentClassificationInput!
+  id: String
+}
+
 input ClassificationOnDocumentCreateManyWithoutDocumentInput {
   connect: [ClassificationOnDocumentWhereUniqueInput!]
   connectOrCreate: [ClassificationOnDocumentCreateOrConnectWithoutDocumentInput!]
@@ -821,6 +827,12 @@ input DocumentCreateOneWithoutDocumentAuthorsInput {
   create: DocumentCreateWithoutDocumentAuthorsInput
 }
 
+input DocumentCreateOneWithoutDocumentClassificationInput {
+  connect: DocumentWhereUniqueInput
+  connectOrCreate: DocumentCreateOrConnectWithoutClassificationOnDocumentInput
+  create: DocumentCreateWithoutDocumentClassificationInput
+}
+
 input DocumentCreateOneWithoutDocumentKindInput {
   connect: DocumentWhereUniqueInput
   connectOrCreate: DocumentCreateOrConnectWithoutKindOnDocumentInput
@@ -853,6 +865,11 @@ input DocumentCreateOneWithoutMentionedStakeholdersInput {
 
 input DocumentCreateOrConnectWithoutBriefingBookDocumentInput {
   create: DocumentCreateWithoutBriefingBooksMentionedInInput!
+  where: DocumentWhereUniqueInput!
+}
+
+input DocumentCreateOrConnectWithoutClassificationOnDocumentInput {
+  create: DocumentCreateWithoutDocumentClassificationInput!
   where: DocumentWhereUniqueInput!
 }
 
@@ -932,6 +949,38 @@ input DocumentCreateWithoutDocumentAuthorsInput {
   dnsaTo: String
   dnsaURL: String
   documentClassification: ClassificationOnDocumentCreateManyWithoutDocumentInput
+  documentCreationDate: DateTime
+  documentDescription: String
+  documentFiles: DocumentFileCreateManyWithoutDocumentInput
+  documentKind: KindOnDocumentCreateManyWithoutDocumentInput
+  documentMediaType: String!
+  documentOriginalID: String!
+  documentPublicationDate: DateTime
+  documentTags: TagOnDocumentCreateManyWithoutDocumentInput
+  documentTitle: String!
+  documentTranscript: String
+  id: String!
+  mentionedEvents: DocumentEventCreateManyWithoutDocumentInput
+  mentionedLocations: DocumentLocationCreateManyWithoutDocumentInput
+  mentionedStakeholders: DocumentInvolvedStakeholderCreateManyWithoutDocumentInput
+  sessionNumber: Int
+  updatedAt: DateTime
+}
+
+input DocumentCreateWithoutDocumentClassificationInput {
+  briefingBooksMentionedIn: BriefingBookDocumentCreateManyWithoutDocumentInput
+  createdAt: DateTime
+  dnsaAbstract: String
+  dnsaCitation: String
+  dnsaCollection: String
+  dnsaFrom: String
+  dnsaItemNumber: String
+  dnsaOrigin: String
+  dnsaStakeholder: String
+  dnsaSubject: String
+  dnsaTo: String
+  dnsaURL: String
+  documentAuthors: DocumentAuthorCreateManyWithoutDocumentInput
   documentCreationDate: DateTime
   documentDescription: String
   documentFiles: DocumentFileCreateManyWithoutDocumentInput
@@ -2903,6 +2952,7 @@ enum MediaType {
 }
 
 type Mutation {
+  createOneClassificationOnDocument(data: ClassificationOnDocumentCreateInput!): ClassificationOnDocument!
   createOneKindOnDocument(data: KindOnDocumentCreateInput!): KindOnDocument!
   createUser(email: String!, password: String!, userName: String): UserAuthPayload
   deleteOneUser(where: UserWhereUniqueInput!): User
