@@ -537,7 +537,14 @@ schema.mutationType({
     t.crud.createOneClassificationOnDocument()
     t.crud.createOneTagOnDocument()
     t.crud.updateOneStakeholder()
-    t.crud.updateOneEvent()
+    t.crud.updateOneEvent({
+      async resolve(root, args, ctx, info, originalResolve) {
+        if(args.data.eventTags) await ctx.db.queryRaw(`DELETE FROM "TagOnEvent" WHERE "B" = '${args.where.id}';`)
+        const res = await originalResolve(root, args, ctx, info)
+        return res
+      }
+    })
+    t.crud.createOneTagOnEvent()
   },
 })
 

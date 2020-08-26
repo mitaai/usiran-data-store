@@ -2955,6 +2955,7 @@ type Mutation {
   createOneClassificationOnDocument(data: ClassificationOnDocumentCreateInput!): ClassificationOnDocument!
   createOneKindOnDocument(data: KindOnDocumentCreateInput!): KindOnDocument!
   createOneTagOnDocument(data: TagOnDocumentCreateInput!): TagOnDocument!
+  createOneTagOnEvent(data: TagOnEventCreateInput!): TagOnEvent!
   createUser(email: String!, password: String!, userName: String): UserAuthPayload
   deleteOneUser(where: UserWhereUniqueInput!): User
   signinUser(email: String!, password: String!): UserAuthPayload
@@ -3809,6 +3810,12 @@ type TagOnEvent {
 input TagOnEvent_AB_uniqueCompoundUniqueInput {
   A: String!
   B: String!
+}
+
+input TagOnEventCreateInput {
+  Event: EventCreateOneWithoutEventTagsInput!
+  id: String
+  Tag: TagCreateOneWithoutEventsWithTagInput!
 }
 
 input TagOnEventCreateManyWithoutEventInput {
