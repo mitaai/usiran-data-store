@@ -3610,7 +3610,7 @@ input TagCreateInput {
   description: String
   documentsWithTag: TagOnDocumentCreateManyWithoutTagInput
   eventsWithTag: TagOnEventCreateManyWithoutTagInput
-  id: String!
+  id: String
   name: String!
   tagWikipediaUri: String
   type: String
@@ -3643,7 +3643,7 @@ input TagCreateWithoutDocumentsWithTagInput {
   createdAt: DateTime
   description: String
   eventsWithTag: TagOnEventCreateManyWithoutTagInput
-  id: String!
+  id: String
   name: String!
   tagWikipediaUri: String
   type: String
@@ -3654,7 +3654,7 @@ input TagCreateWithoutEventsWithTagInput {
   createdAt: DateTime
   description: String
   documentsWithTag: TagOnDocumentCreateManyWithoutTagInput
-  id: String!
+  id: String
   name: String!
   tagWikipediaUri: String
   type: String

@@ -302,7 +302,7 @@ model Stakeholder {
 model Tag {
   createdAt                 DateTime                    @default(now())
   description               String?
-  id                        String                      @id
+  id                        String                      @id @default(cuid())
   name                      String                      @unique
   tagWikipediaUri           String?                     @unique
   type                      String?
