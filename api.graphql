@@ -2954,6 +2954,7 @@ enum MediaType {
 type Mutation {
   createOneClassificationOnDocument(data: ClassificationOnDocumentCreateInput!): ClassificationOnDocument!
   createOneKindOnDocument(data: KindOnDocumentCreateInput!): KindOnDocument!
+  createOneTag(data: TagCreateInput!): Tag!
   createOneTagOnDocument(data: TagOnDocumentCreateInput!): TagOnDocument!
   createOneTagOnEvent(data: TagOnEventCreateInput!): TagOnEvent!
   createUser(email: String!, password: String!, userName: String): UserAuthPayload
@@ -3602,6 +3603,18 @@ type Tag {
   tagWikipediaUri: String
   type: String
   updatedAt: DateTime!
+}
+
+input TagCreateInput {
+  createdAt: DateTime
+  description: String
+  documentsWithTag: TagOnDocumentCreateManyWithoutTagInput
+  eventsWithTag: TagOnEventCreateManyWithoutTagInput
+  id: String!
+  name: String!
+  tagWikipediaUri: String
+  type: String
+  updatedAt: DateTime
 }
 
 input TagCreateOneWithoutDocumentsWithTagInput {

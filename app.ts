@@ -535,6 +535,7 @@ schema.mutationType({
     })
     t.crud.createOneKindOnDocument()
     t.crud.createOneClassificationOnDocument()
+    t.crud.createOneTag()
     t.crud.createOneTagOnDocument()
     t.crud.updateOneStakeholder()
     t.crud.updateOneEvent({
