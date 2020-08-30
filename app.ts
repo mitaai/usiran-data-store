@@ -530,6 +530,7 @@ schema.mutationType({
         if(args.data.documentClassification) await ctx.db.queryRaw(`DELETE FROM "ClassificationOnDocument" WHERE "B" = '${args.where.id}';`)
         if(args.data.documentTags) await ctx.db.queryRaw(`DELETE FROM "TagOnDocument" WHERE "B" = '${args.where.id}';`)
         if(args.data.documentAuthors) await ctx.db.queryRaw(`DELETE FROM "DocumentAuthor" WHERE "A" = '${args.where.id}';`)
+        if(args.data.mentionedStakeholders) await ctx.db.queryRaw(`DELETE FROM "DocumentInvolvedStakeholder" WHERE "B" = '${args.where.id}';`)
         const res = await originalResolve(root, args, ctx, info)
         return res
       }
@@ -537,6 +538,7 @@ schema.mutationType({
     t.crud.createOneKindOnDocument()
     t.crud.createOneClassificationOnDocument()
     t.crud.createOneDocumentAuthor()
+    t.crud.createOneDocumentInvolvedStakeholder()
     t.crud.createOneTag()
     t.crud.createOneTagOnDocument()
     t.crud.updateOneStakeholder()

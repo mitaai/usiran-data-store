@@ -1423,6 +1423,12 @@ input DocumentInvolvedStakeholder_AB_uniqueCompoundUniqueInput {
   B: String!
 }
 
+input DocumentInvolvedStakeholderCreateInput {
+  Document: DocumentCreateOneWithoutMentionedStakeholdersInput!
+  id: String
+  Stakeholder: StakeholderCreateOneWithoutDocumentsMentionedInInput!
+}
+
 input DocumentInvolvedStakeholderCreateManyWithoutDocumentInput {
   connect: [DocumentInvolvedStakeholderWhereUniqueInput!]
   connectOrCreate: [DocumentInvolvedStakeholderCreateOrConnectWithoutDocumentInput!]
@@ -2960,6 +2966,7 @@ enum MediaType {
 type Mutation {
   createOneClassificationOnDocument(data: ClassificationOnDocumentCreateInput!): ClassificationOnDocument!
   createOneDocumentAuthor(data: DocumentAuthorCreateInput!): DocumentAuthor!
+  createOneDocumentInvolvedStakeholder(data: DocumentInvolvedStakeholderCreateInput!): DocumentInvolvedStakeholder!
   createOneKindOnDocument(data: KindOnDocumentCreateInput!): KindOnDocument!
   createOneTag(data: TagCreateInput!): Tag!
   createOneTagOnDocument(data: TagOnDocumentCreateInput!): TagOnDocument!
