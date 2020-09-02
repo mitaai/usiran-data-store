@@ -2695,7 +2695,7 @@ type Location {
 input LocationCreateInput {
   createdAt: DateTime
   documentsMentionedIn: DocumentLocationCreateManyWithoutLocationInput
-  id: String!
+  id: String
   locationDescription: String
   locationEvents: LocationOnEventCreateManyWithoutLocationInput
   locationLatitude: Int
@@ -2729,7 +2729,7 @@ input LocationCreateOrConnectWithoutLocationOnEventInput {
 
 input LocationCreateWithoutDocumentsMentionedInInput {
   createdAt: DateTime
-  id: String!
+  id: String
   locationDescription: String
   locationEvents: LocationOnEventCreateManyWithoutLocationInput
   locationLatitude: Int
@@ -2742,7 +2742,7 @@ input LocationCreateWithoutDocumentsMentionedInInput {
 input LocationCreateWithoutLocationEventsInput {
   createdAt: DateTime
   documentsMentionedIn: DocumentLocationCreateManyWithoutLocationInput
-  id: String!
+  id: String
   locationDescription: String
   locationLatitude: Int
   locationLongitude: Int
