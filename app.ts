@@ -544,7 +544,15 @@ schema.mutationType({
     t.crud.createOneDocumentLocation();
     t.crud.createOneTag()
     t.crud.createOneTagOnDocument()
-    t.crud.updateOneStakeholder()
+    t.crud.updateOneStakeholder({
+      async resolve(root, args, ctx, info, originalResolve) {
+        if(args.data.documentsMentionedIn) await ctx.db.queryRaw(`DELETE FROM "DocumentInvolvedStakeholder" WHERE "A" = '${args.where.id}';`)
+        if(args.data.documents) await ctx.db.queryRaw(`DELETE FROM "DocumentAuthor" WHERE "B" = '${args.where.id}';`)
+        if(args.data.eventsInvolvedIn) await ctx.db.queryRaw(`DELETE FROM "StakeholderEvent" WHERE "A" = '${args.where.id}';`)
+        const res = await originalResolve(root, args, ctx, info)
+        return res
+      }
+    })
     t.crud.updateOneEvent({
       async resolve(root, args, ctx, info, originalResolve) {
         if(args.data.eventTags) await ctx.db.queryRaw(`DELETE FROM "TagOnEvent" WHERE "B" = '${args.where.id}';`)
