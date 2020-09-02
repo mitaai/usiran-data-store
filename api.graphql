@@ -2947,6 +2947,19 @@ input LocationOrderByInput {
   updatedAt: SortOrder
 }
 
+input LocationUpdateInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  documentsMentionedIn: DocumentLocationUpdateManyWithoutLocationInput
+  id: StringFieldUpdateOperationsInput
+  locationDescription: NullableStringFieldUpdateOperationsInput
+  locationEvents: LocationOnEventUpdateManyWithoutLocationInput
+  locationLatitude: NullableIntFieldUpdateOperationsInput
+  locationLongitude: NullableIntFieldUpdateOperationsInput
+  locationName: StringFieldUpdateOperationsInput
+  locationWikipediaUri: NullableStringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
 input LocationUpdateOneRequiredWithoutDocumentsMentionedInInput {
   connect: LocationWhereUniqueInput
   connectOrCreate: LocationCreateOrConnectWithoutDocumentLocationInput
@@ -3046,6 +3059,7 @@ type Mutation {
   signinUser(email: String!, password: String!): UserAuthPayload
   updateOneDocument(data: DocumentUpdateInput!, where: DocumentWhereUniqueInput!): Document
   updateOneEvent(data: EventUpdateInput!, where: EventWhereUniqueInput!): Event
+  updateOneLocation(data: LocationUpdateInput!, where: LocationWhereUniqueInput!): Location
   updateOneStakeholder(data: StakeholderUpdateInput!, where: StakeholderWhereUniqueInput!): Stakeholder
   updateOneUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
 }
