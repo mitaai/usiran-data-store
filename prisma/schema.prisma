@@ -274,7 +274,7 @@ model Kind {
 
 model Location {
   createdAt                 DateTime                    @default(now())
-  id                        String                      @id
+  id                        String                      @id @default(cuid())
   locationDescription       String?
   locationLatitude          Int?
   locationLongitude         Int?
