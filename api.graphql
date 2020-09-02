@@ -1178,6 +1178,12 @@ input DocumentEvent_AB_uniqueCompoundUniqueInput {
   B: String!
 }
 
+input DocumentEventCreateInput {
+  Document: DocumentCreateOneWithoutMentionedEventsInput!
+  Event: EventCreateOneWithoutDocumentsMentionedInInput!
+  id: String
+}
+
 input DocumentEventCreateManyWithoutDocumentInput {
   connect: [DocumentEventWhereUniqueInput!]
   connectOrCreate: [DocumentEventCreateOrConnectWithoutDocumentInput!]
@@ -1572,6 +1578,12 @@ type DocumentLocation {
 input DocumentLocation_AB_uniqueCompoundUniqueInput {
   A: String!
   B: String!
+}
+
+input DocumentLocationCreateInput {
+  Document: DocumentCreateOneWithoutMentionedLocationsInput!
+  id: String
+  Location: LocationCreateOneWithoutDocumentsMentionedInInput!
 }
 
 input DocumentLocationCreateManyWithoutDocumentInput {
@@ -2680,6 +2692,19 @@ type Location {
   locationWikipediaUri: String
 }
 
+input LocationCreateInput {
+  createdAt: DateTime
+  documentsMentionedIn: DocumentLocationCreateManyWithoutLocationInput
+  id: String!
+  locationDescription: String
+  locationEvents: LocationOnEventCreateManyWithoutLocationInput
+  locationLatitude: Int
+  locationLongitude: Int
+  locationName: String!
+  locationWikipediaUri: String
+  updatedAt: DateTime
+}
+
 input LocationCreateOneWithoutDocumentsMentionedInInput {
   connect: LocationWhereUniqueInput
   connectOrCreate: LocationCreateOrConnectWithoutDocumentLocationInput
@@ -2737,6 +2762,12 @@ type LocationOnEvent {
 input LocationOnEvent_AB_uniqueCompoundUniqueInput {
   A: String!
   B: String!
+}
+
+input LocationOnEventCreateInput {
+  Event: EventCreateOneWithoutEventLocationsInput!
+  id: String
+  Location: LocationCreateOneWithoutLocationEventsInput!
 }
 
 input LocationOnEventCreateManyWithoutEventInput {
@@ -2966,8 +2997,13 @@ enum MediaType {
 type Mutation {
   createOneClassificationOnDocument(data: ClassificationOnDocumentCreateInput!): ClassificationOnDocument!
   createOneDocumentAuthor(data: DocumentAuthorCreateInput!): DocumentAuthor!
+  createOneDocumentEvent(data: DocumentEventCreateInput!): DocumentEvent!
   createOneDocumentInvolvedStakeholder(data: DocumentInvolvedStakeholderCreateInput!): DocumentInvolvedStakeholder!
+  createOneDocumentLocation(data: DocumentLocationCreateInput!): DocumentLocation!
   createOneKindOnDocument(data: KindOnDocumentCreateInput!): KindOnDocument!
+  createOneLocation(data: LocationCreateInput!): Location!
+  createOneLocationOnEvent(data: LocationOnEventCreateInput!): LocationOnEvent!
+  createOneStakeholderEvent(data: StakeholderEventCreateInput!): StakeholderEvent!
   createOneTag(data: TagCreateInput!): Tag!
   createOneTagOnDocument(data: TagOnDocumentCreateInput!): TagOnDocument!
   createOneTagOnEvent(data: TagOnEventCreateInput!): TagOnEvent!
@@ -3309,6 +3345,12 @@ type StakeholderEvent {
 input StakeholderEvent_AB_uniqueCompoundUniqueInput {
   A: String!
   B: String!
+}
+
+input StakeholderEventCreateInput {
+  Event: EventCreateOneWithoutEventStakeholdersInput!
+  id: String
+  Stakeholder: StakeholderCreateOneWithoutEventsInvolvedInInput!
 }
 
 input StakeholderEventCreateManyWithoutEventInput {
