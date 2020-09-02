@@ -548,6 +548,8 @@ schema.mutationType({
     t.crud.updateOneEvent({
       async resolve(root, args, ctx, info, originalResolve) {
         if(args.data.eventTags) await ctx.db.queryRaw(`DELETE FROM "TagOnEvent" WHERE "B" = '${args.where.id}';`)
+        if(args.data.eventStakeholders) await ctx.db.queryRaw(`DELETE FROM "StakeholderEvent" WHERE "B" = '${args.where.id}';`)
+        if(args.data.eventLocations) await ctx.db.queryRaw(`DELETE FROM "LocationOnEvent" WHERE "B" = '${args.where.id}';`)
         const res = await originalResolve(root, args, ctx, info)
         return res
       }
