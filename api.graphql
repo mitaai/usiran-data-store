@@ -3059,7 +3059,6 @@ type Mutation {
   deleteOneEvent(where: EventWhereUniqueInput!): Event
   deleteOneLocation(where: LocationWhereUniqueInput!): Location
   deleteOneStakeholder(where: StakeholderWhereUniqueInput!): Stakeholder
-  deleteOneTag(where: TagWhereUniqueInput!): Tag
   deleteOneUser(where: UserWhereUniqueInput!): User
   signinUser(email: String!, password: String!): UserAuthPayload
   updateOneDocument(data: DocumentUpdateInput!, where: DocumentWhereUniqueInput!): Document
