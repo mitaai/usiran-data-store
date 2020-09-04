@@ -574,6 +574,11 @@ schema.mutationType({
         return res
       }
     })
+    t.crud.deleteOneLocation()
+    t.crud.deleteOneStakeholder()
+    t.crud.deleteOneDocument()
+    t.crud.deleteOneEvent()
+    t.crud.deleteOneTag()
   },
 })
 
