@@ -464,8 +464,26 @@ schema.queryType({
 
 schema.mutationType({
   definition(t) {
-    t.crud.updateOneUser()
-    t.crud.deleteOneUser()
+    //     ___                  _        
+    //    / __| _ _  ___  __ _ | |_  ___ 
+    //   | (__ | '_|/ -_)/ _` ||  _|/ -_)
+    //    \___||_|  \___|\__,_| \__|\___|
+    //                                   
+    // Create
+
+    t.crud.createOneLocation()
+    t.crud.createOneTag()
+
+    t.crud.createOneClassificationOnDocument()
+    t.crud.createOneDocumentAuthor()
+    t.crud.createOneDocumentEvent()
+    t.crud.createOneDocumentInvolvedStakeholder()
+    t.crud.createOneDocumentLocation()
+    t.crud.createOneKindOnDocument()
+    t.crud.createOneLocationOnEvent()
+    t.crud.createOneStakeholderEvent()
+    t.crud.createOneTagOnDocument()
+    t.crud.createOneTagOnEvent()
 
     t.field('createUser', {
       type: 'UserAuthPayload',
@@ -490,40 +508,14 @@ schema.mutationType({
       },
     })
 
-    t.field('signinUser', {
-      type: 'UserAuthPayload',
-      args: {
-        email: stringArg({ nullable: false }),
-        password: stringArg({ nullable: false }),
-      },
-      resolve: async (_, { email, password }, ctx): Promise<any> => {
-        const user = await ctx.db.user.findOne({ where: { email }});
-        if (!user) {
-          throw new Error('Invalid Login');
-        }
-    
-        const passwordMatch = await bcrypt.compare(password, user.password);
-    
-        if (!passwordMatch) {
-          throw new Error('Invalid Login');
-        }
-    
-        const token = sign(
-          {
-            id: user.id,
-            email: user.email,
-          },
-          process.env.AUTH_SECRET,
-          {
-            expiresIn: '30d',
-          },
-        );
-    
-        console.log({ user, token });
-    
-        return { user, token };    
-      }
-    })
+    //    _   _           _        _        
+    //   | | | | _ __  __| | __ _ | |_  ___ 
+    //   | |_| || '_ \/ _` |/ _` ||  _|/ -_)
+    //    \___/ | .__/\__,_|\__,_| \__|\___|
+    //          |_|                         
+    // Update
+
+    t.crud.updateOneUser()
     t.crud.updateOneDocument({
       async resolve(root, args, ctx, info, originalResolve) {
         if(args.data.documentKind) await ctx.db.queryRaw(`DELETE FROM "KindOnDocument" WHERE "B" = '${args.where.id}';`)
@@ -536,14 +528,6 @@ schema.mutationType({
         return res
       }
     })
-    t.crud.createOneKindOnDocument()
-    t.crud.createOneClassificationOnDocument()
-    t.crud.createOneDocumentAuthor()
-    t.crud.createOneDocumentInvolvedStakeholder()
-    t.crud.createOneLocation()
-    t.crud.createOneDocumentLocation();
-    t.crud.createOneTag()
-    t.crud.createOneTagOnDocument()
     t.crud.updateOneEvent({
       async resolve(root, args, ctx, info, originalResolve) {
         if(args.data.eventTags) await ctx.db.queryRaw(`DELETE FROM "TagOnEvent" WHERE "B" = '${args.where.id}';`)
@@ -553,10 +537,6 @@ schema.mutationType({
         return res
       }
     })
-    t.crud.createOneTagOnEvent()
-    t.crud.createOneStakeholderEvent();
-    t.crud.createOneLocationOnEvent();
-    t.crud.createOneDocumentEvent();
     t.crud.updateOneStakeholder({
       async resolve(root, args, ctx, info, originalResolve) {
         if(args.data.documentsMentionedIn) await ctx.db.queryRaw(`DELETE FROM "DocumentInvolvedStakeholder" WHERE "A" = '${args.where.id}';`)
@@ -575,8 +555,14 @@ schema.mutationType({
       }
     })
 
-    // Deletions
+    //    ___        _       _        
+    //   |   \  ___ | | ___ | |_  ___ 
+    //   | |) |/ -_)| |/ -_)|  _|/ -_)
+    //   |___/ \___||_|\___| \__|\___|
+    //                                
+    // Delete
 
+    t.crud.deleteOneUser()
     t.crud.deleteOneDocument({
       async resolve(root, args, ctx, info, originalResolve) {
         await ctx.db.queryRaw(`DELETE FROM "BriefingBookDocument" WHERE "B" = '${args.where.id}';`)
@@ -619,6 +605,48 @@ schema.mutationType({
         await ctx.db.queryRaw(`DELETE FROM "StakeholderEvent" WHERE "A" = '${args.where.id}';`)
         const res = await originalResolve(root, args, ctx, info)
         return res
+      }
+    })
+
+    //     ___           _               
+    //    / __|_  _  ___| |_  ___  _ __  
+    //   | (__| || |(_-<|  _|/ _ \| '  \ 
+    //    \___|\_,_|/__/ \__|\___/|_|_|_|
+    //                                   
+    // Custom mutations
+
+    t.field('signinUser', {
+      type: 'UserAuthPayload',
+      args: {
+        email: stringArg({ nullable: false }),
+        password: stringArg({ nullable: false }),
+      },
+      resolve: async (_, { email, password }, ctx): Promise<any> => {
+        const user = await ctx.db.user.findOne({ where: { email }});
+        if (!user) {
+          throw new Error('Invalid Login');
+        }
+    
+        const passwordMatch = await bcrypt.compare(password, user.password);
+    
+        if (!passwordMatch) {
+          throw new Error('Invalid Login');
+        }
+    
+        const token = sign(
+          {
+            id: user.id,
+            email: user.email,
+          },
+          process.env.AUTH_SECRET,
+          {
+            expiresIn: '30d',
+          },
+        );
+    
+        console.log({ user, token });
+    
+        return { user, token };    
       }
     })
   },
