@@ -840,6 +840,39 @@ input DocumentAuthorWhereUniqueInput {
   id: String
 }
 
+input DocumentCreateInput {
+  briefingBooksMentionedIn: BriefingBookDocumentCreateManyWithoutDocumentInput
+  createdAt: DateTime
+  dnsaAbstract: String
+  dnsaCitation: String
+  dnsaCollection: String
+  dnsaFrom: String
+  dnsaItemNumber: String
+  dnsaOrigin: String
+  dnsaStakeholder: String
+  dnsaSubject: String
+  dnsaTo: String
+  dnsaURL: String
+  documentAuthors: DocumentAuthorCreateManyWithoutDocumentInput
+  documentClassification: ClassificationOnDocumentCreateManyWithoutDocumentInput
+  documentCreationDate: DateTime
+  documentDescription: String
+  documentFiles: DocumentFileCreateManyWithoutDocumentInput
+  documentKind: KindOnDocumentCreateManyWithoutDocumentInput
+  documentMediaType: String!
+  documentOriginalID: String!
+  documentPublicationDate: DateTime
+  documentTags: TagOnDocumentCreateManyWithoutDocumentInput
+  documentTitle: String!
+  documentTranscript: String
+  id: String!
+  mentionedEvents: DocumentEventCreateManyWithoutDocumentInput
+  mentionedLocations: DocumentLocationCreateManyWithoutDocumentInput
+  mentionedStakeholders: DocumentInvolvedStakeholderCreateManyWithoutDocumentInput
+  sessionNumber: Int
+  updatedAt: DateTime
+}
+
 input DocumentCreateOneWithoutBriefingBooksMentionedInInput {
   connect: DocumentWhereUniqueInput
   connectOrCreate: DocumentCreateOrConnectWithoutBriefingBookDocumentInput
@@ -2115,6 +2148,21 @@ type Event {
   id: String!
 }
 
+input EventCreateInput {
+  briefingBooksMentionedIn: BriefingBookEventCreateManyWithoutEventInput
+  createdAt: DateTime
+  documentsMentionedIn: DocumentEventCreateManyWithoutEventInput
+  eventDescription: String
+  eventEndDate: DateTime
+  eventLocations: LocationOnEventCreateManyWithoutEventInput
+  eventStakeholders: StakeholderEventCreateManyWithoutEventInput
+  eventStartDate: DateTime!
+  eventTags: TagOnEventCreateManyWithoutEventInput
+  eventTitle: String!
+  id: String!
+  updatedAt: DateTime
+}
+
 input EventCreateOneWithoutBriefingBooksMentionedInInput {
   connect: EventWhereUniqueInput
   connectOrCreate: EventCreateOrConnectWithoutBriefingBookEventInput
@@ -3043,13 +3091,16 @@ enum MediaType {
 
 type Mutation {
   createOneClassificationOnDocument(data: ClassificationOnDocumentCreateInput!): ClassificationOnDocument!
+  createOneDocument(data: DocumentCreateInput!): Document!
   createOneDocumentAuthor(data: DocumentAuthorCreateInput!): DocumentAuthor!
   createOneDocumentEvent(data: DocumentEventCreateInput!): DocumentEvent!
   createOneDocumentInvolvedStakeholder(data: DocumentInvolvedStakeholderCreateInput!): DocumentInvolvedStakeholder!
   createOneDocumentLocation(data: DocumentLocationCreateInput!): DocumentLocation!
+  createOneEvent(data: EventCreateInput!): Event!
   createOneKindOnDocument(data: KindOnDocumentCreateInput!): KindOnDocument!
   createOneLocation(data: LocationCreateInput!): Location!
   createOneLocationOnEvent(data: LocationOnEventCreateInput!): LocationOnEvent!
+  createOneStakeholder(data: StakeholderCreateInput!): Stakeholder!
   createOneStakeholderEvent(data: StakeholderEventCreateInput!): StakeholderEvent!
   createOneTag(data: TagCreateInput!): Tag!
   createOneTagOnDocument(data: TagOnDocumentCreateInput!): TagOnDocument!
@@ -3346,6 +3397,20 @@ input StakeholderBriefingBookWhereUniqueInput {
   B: String
   id: String
   StakeholderBriefingBook_AB_unique: StakeholderBriefingBook_AB_uniqueCompoundUniqueInput
+}
+
+input StakeholderCreateInput {
+  briefingBooksMentionedIn: StakeholderBriefingBookCreateManyWithoutStakeholderInput
+  createdAt: DateTime
+  documents: DocumentAuthorCreateManyWithoutStakeholderInput
+  documentsMentionedIn: DocumentInvolvedStakeholderCreateManyWithoutStakeholderInput
+  eventsInvolvedIn: StakeholderEventCreateManyWithoutStakeholderInput
+  id: String!
+  isStakeholderInstitution: Boolean!
+  stakeholderDescription: String
+  stakeholderFullName: String!
+  stakeholderWikipediaUri: String
+  updatedAt: DateTime
 }
 
 input StakeholderCreateOneWithoutBriefingBooksMentionedInInput {

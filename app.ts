@@ -471,7 +471,10 @@ schema.mutationType({
     //                                   
     // Create
 
+    t.crud.createOneDocument()
+    t.crud.createOneEvent()
     t.crud.createOneLocation()
+    t.crud.createOneStakeholder()
     t.crud.createOneTag()
 
     t.crud.createOneClassificationOnDocument()
