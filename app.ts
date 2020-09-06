@@ -502,6 +502,7 @@ schema.mutationType({
             userName,
             email,
             password: hashedPassword,
+            role: 'Viewer',
           },
         })
         return {
