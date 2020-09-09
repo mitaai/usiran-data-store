@@ -3105,7 +3105,7 @@ type Mutation {
   createOneTag(data: TagCreateInput!): Tag!
   createOneTagOnDocument(data: TagOnDocumentCreateInput!): TagOnDocument!
   createOneTagOnEvent(data: TagOnEventCreateInput!): TagOnEvent!
-  createUser(email: String!, password: String!, userName: String): UserAuthPayload
+  createUser(email: String!, password: String!, role: String!, userName: String): UserAuthPayload
   deleteOneDocument(where: DocumentWhereUniqueInput!): Document
   deleteOneEvent(where: EventWhereUniqueInput!): Event
   deleteOneLocation(where: LocationWhereUniqueInput!): Location

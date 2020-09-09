@@ -494,15 +494,16 @@ schema.mutationType({
         userName: stringArg(),
         email: stringArg({ nullable: false }),
         password: stringArg({ nullable: false }),
+        role: stringArg({ nullable: false }),
       },
-      resolve: async (_parent, { userName, email, password }, ctx) => {
+      resolve: async (_parent, { userName, email, password, role }, ctx) => {
         const hashedPassword = await bcrypt.hash(password, 10);
         const user = await ctx.db.user.create({
           data: {
             userName,
             email,
             password: hashedPassword,
-            role: 'Viewer',
+            role,
           },
         })
         return {
