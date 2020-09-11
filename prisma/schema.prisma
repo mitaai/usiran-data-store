@@ -285,7 +285,7 @@ model Location {
 
 model Stakeholder {
   createdAt                 DateTime                    @default(now())
-  id                        String                      @id
+  id                        String                      @id @default(cuid())
   isStakeholderInstitution  Boolean
   stakeholderDescription    String?
   stakeholderFullName       String                      @unique

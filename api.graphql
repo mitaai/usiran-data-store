@@ -3405,7 +3405,7 @@ input StakeholderCreateInput {
   documents: DocumentAuthorCreateManyWithoutStakeholderInput
   documentsMentionedIn: DocumentInvolvedStakeholderCreateManyWithoutStakeholderInput
   eventsInvolvedIn: StakeholderEventCreateManyWithoutStakeholderInput
-  id: String!
+  id: String
   isStakeholderInstitution: Boolean!
   stakeholderDescription: String
   stakeholderFullName: String!
@@ -3462,7 +3462,7 @@ input StakeholderCreateWithoutBriefingBooksMentionedInInput {
   documents: DocumentAuthorCreateManyWithoutStakeholderInput
   documentsMentionedIn: DocumentInvolvedStakeholderCreateManyWithoutStakeholderInput
   eventsInvolvedIn: StakeholderEventCreateManyWithoutStakeholderInput
-  id: String!
+  id: String
   isStakeholderInstitution: Boolean!
   stakeholderDescription: String
   stakeholderFullName: String!
@@ -3475,7 +3475,7 @@ input StakeholderCreateWithoutDocumentsInput {
   createdAt: DateTime
   documentsMentionedIn: DocumentInvolvedStakeholderCreateManyWithoutStakeholderInput
   eventsInvolvedIn: StakeholderEventCreateManyWithoutStakeholderInput
-  id: String!
+  id: String
   isStakeholderInstitution: Boolean!
   stakeholderDescription: String
   stakeholderFullName: String!
@@ -3488,7 +3488,7 @@ input StakeholderCreateWithoutDocumentsMentionedInInput {
   createdAt: DateTime
   documents: DocumentAuthorCreateManyWithoutStakeholderInput
   eventsInvolvedIn: StakeholderEventCreateManyWithoutStakeholderInput
-  id: String!
+  id: String
   isStakeholderInstitution: Boolean!
   stakeholderDescription: String
   stakeholderFullName: String!
@@ -3501,7 +3501,7 @@ input StakeholderCreateWithoutEventsInvolvedInInput {
   createdAt: DateTime
   documents: DocumentAuthorCreateManyWithoutStakeholderInput
   documentsMentionedIn: DocumentInvolvedStakeholderCreateManyWithoutStakeholderInput
-  id: String!
+  id: String
   isStakeholderInstitution: Boolean!
   stakeholderDescription: String
   stakeholderFullName: String!
