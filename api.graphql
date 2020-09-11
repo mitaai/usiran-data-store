@@ -3249,6 +3249,7 @@ type Stakeholder {
   documentsMentionedIn(after: DocumentInvolvedStakeholderWhereUniqueInput, before: DocumentInvolvedStakeholderWhereUniqueInput, first: Int, last: Int): [DocumentInvolvedStakeholder!]!
   eventsInvolvedIn(after: StakeholderEventWhereUniqueInput, before: StakeholderEventWhereUniqueInput, first: Int, last: Int): [StakeholderEvent!]!
   id: String!
+  isStakeholderInstitution: Boolean!
   stakeholderDescription: String
   stakeholderFullName: String!
   stakeholderWikipediaUri: String

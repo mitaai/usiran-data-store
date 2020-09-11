@@ -99,6 +99,7 @@ schema.objectType({
     t.model.documentsMentionedIn()
     t.model.eventsInvolvedIn()
     t.model.stakeholderWikipediaUri()
+    t.model.isStakeholderInstitution()
   },
 })
 
