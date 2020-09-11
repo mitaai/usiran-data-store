@@ -216,7 +216,7 @@ model Document {
   dnsaURL                                                         String?
   documentCreationDate                                            DateTime?
   documentDescription                                             String?
-  documentMediaType                                               String
+  documentMediaType                                               String                      @default("RawText")
   documentOriginalID                                              String
   documentPublicationDate                                         DateTime?
   documentTitle                                                   String
