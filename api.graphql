@@ -2,15 +2,6 @@
 ### Do not make changes to this file directly
 
 
-input BoolFieldUpdateOperationsInput {
-  set: Boolean
-}
-
-input BoolFilter {
-  equals: Boolean
-  not: NestedBoolFilter
-}
-
 type BriefingBook {
   briefingBookDescription: String
   briefingBookTitle: String!
@@ -3119,11 +3110,6 @@ type Mutation {
   updateOneUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
 }
 
-input NestedBoolFilter {
-  equals: Boolean
-  not: NestedBoolFilter
-}
-
 input NestedDateTimeFilter {
   equals: DateTime
   gt: DateTime
@@ -3249,7 +3235,7 @@ type Stakeholder {
   documentsMentionedIn(after: DocumentInvolvedStakeholderWhereUniqueInput, before: DocumentInvolvedStakeholderWhereUniqueInput, first: Int, last: Int): [DocumentInvolvedStakeholder!]!
   eventsInvolvedIn(after: StakeholderEventWhereUniqueInput, before: StakeholderEventWhereUniqueInput, first: Int, last: Int): [StakeholderEvent!]!
   id: String!
-  isStakeholderInstitution: Boolean!
+  isStakeholderInstitution: Int!
   stakeholderDescription: String
   stakeholderFullName: String!
   stakeholderWikipediaUri: String
@@ -3407,7 +3393,7 @@ input StakeholderCreateInput {
   documentsMentionedIn: DocumentInvolvedStakeholderCreateManyWithoutStakeholderInput
   eventsInvolvedIn: StakeholderEventCreateManyWithoutStakeholderInput
   id: String
-  isStakeholderInstitution: Boolean!
+  isStakeholderInstitution: Int
   stakeholderDescription: String
   stakeholderFullName: String!
   stakeholderWikipediaUri: String
@@ -3464,7 +3450,7 @@ input StakeholderCreateWithoutBriefingBooksMentionedInInput {
   documentsMentionedIn: DocumentInvolvedStakeholderCreateManyWithoutStakeholderInput
   eventsInvolvedIn: StakeholderEventCreateManyWithoutStakeholderInput
   id: String
-  isStakeholderInstitution: Boolean!
+  isStakeholderInstitution: Int
   stakeholderDescription: String
   stakeholderFullName: String!
   stakeholderWikipediaUri: String
@@ -3477,7 +3463,7 @@ input StakeholderCreateWithoutDocumentsInput {
   documentsMentionedIn: DocumentInvolvedStakeholderCreateManyWithoutStakeholderInput
   eventsInvolvedIn: StakeholderEventCreateManyWithoutStakeholderInput
   id: String
-  isStakeholderInstitution: Boolean!
+  isStakeholderInstitution: Int
   stakeholderDescription: String
   stakeholderFullName: String!
   stakeholderWikipediaUri: String
@@ -3490,7 +3476,7 @@ input StakeholderCreateWithoutDocumentsMentionedInInput {
   documents: DocumentAuthorCreateManyWithoutStakeholderInput
   eventsInvolvedIn: StakeholderEventCreateManyWithoutStakeholderInput
   id: String
-  isStakeholderInstitution: Boolean!
+  isStakeholderInstitution: Int
   stakeholderDescription: String
   stakeholderFullName: String!
   stakeholderWikipediaUri: String
@@ -3503,7 +3489,7 @@ input StakeholderCreateWithoutEventsInvolvedInInput {
   documents: DocumentAuthorCreateManyWithoutStakeholderInput
   documentsMentionedIn: DocumentInvolvedStakeholderCreateManyWithoutStakeholderInput
   id: String
-  isStakeholderInstitution: Boolean!
+  isStakeholderInstitution: Int
   stakeholderDescription: String
   stakeholderFullName: String!
   stakeholderWikipediaUri: String
@@ -3678,7 +3664,7 @@ input StakeholderUpdateInput {
   documentsMentionedIn: DocumentInvolvedStakeholderUpdateManyWithoutStakeholderInput
   eventsInvolvedIn: StakeholderEventUpdateManyWithoutStakeholderInput
   id: StringFieldUpdateOperationsInput
-  isStakeholderInstitution: BoolFieldUpdateOperationsInput
+  isStakeholderInstitution: IntFieldUpdateOperationsInput
   stakeholderDescription: NullableStringFieldUpdateOperationsInput
   stakeholderFullName: StringFieldUpdateOperationsInput
   stakeholderWikipediaUri: NullableStringFieldUpdateOperationsInput
@@ -3723,7 +3709,7 @@ input StakeholderUpdateWithoutBriefingBooksMentionedInDataInput {
   documentsMentionedIn: DocumentInvolvedStakeholderUpdateManyWithoutStakeholderInput
   eventsInvolvedIn: StakeholderEventUpdateManyWithoutStakeholderInput
   id: StringFieldUpdateOperationsInput
-  isStakeholderInstitution: BoolFieldUpdateOperationsInput
+  isStakeholderInstitution: IntFieldUpdateOperationsInput
   stakeholderDescription: NullableStringFieldUpdateOperationsInput
   stakeholderFullName: StringFieldUpdateOperationsInput
   stakeholderWikipediaUri: NullableStringFieldUpdateOperationsInput
@@ -3736,7 +3722,7 @@ input StakeholderUpdateWithoutDocumentsDataInput {
   documentsMentionedIn: DocumentInvolvedStakeholderUpdateManyWithoutStakeholderInput
   eventsInvolvedIn: StakeholderEventUpdateManyWithoutStakeholderInput
   id: StringFieldUpdateOperationsInput
-  isStakeholderInstitution: BoolFieldUpdateOperationsInput
+  isStakeholderInstitution: IntFieldUpdateOperationsInput
   stakeholderDescription: NullableStringFieldUpdateOperationsInput
   stakeholderFullName: StringFieldUpdateOperationsInput
   stakeholderWikipediaUri: NullableStringFieldUpdateOperationsInput
@@ -3749,7 +3735,7 @@ input StakeholderUpdateWithoutDocumentsMentionedInDataInput {
   documents: DocumentAuthorUpdateManyWithoutStakeholderInput
   eventsInvolvedIn: StakeholderEventUpdateManyWithoutStakeholderInput
   id: StringFieldUpdateOperationsInput
-  isStakeholderInstitution: BoolFieldUpdateOperationsInput
+  isStakeholderInstitution: IntFieldUpdateOperationsInput
   stakeholderDescription: NullableStringFieldUpdateOperationsInput
   stakeholderFullName: StringFieldUpdateOperationsInput
   stakeholderWikipediaUri: NullableStringFieldUpdateOperationsInput
@@ -3762,7 +3748,7 @@ input StakeholderUpdateWithoutEventsInvolvedInDataInput {
   documents: DocumentAuthorUpdateManyWithoutStakeholderInput
   documentsMentionedIn: DocumentInvolvedStakeholderUpdateManyWithoutStakeholderInput
   id: StringFieldUpdateOperationsInput
-  isStakeholderInstitution: BoolFieldUpdateOperationsInput
+  isStakeholderInstitution: IntFieldUpdateOperationsInput
   stakeholderDescription: NullableStringFieldUpdateOperationsInput
   stakeholderFullName: StringFieldUpdateOperationsInput
   stakeholderWikipediaUri: NullableStringFieldUpdateOperationsInput
@@ -3797,7 +3783,7 @@ input StakeholderWhereInput {
   documentsMentionedIn: DocumentInvolvedStakeholderListRelationFilter
   eventsInvolvedIn: StakeholderEventListRelationFilter
   id: StringFilter
-  isStakeholderInstitution: BoolFilter
+  isStakeholderInstitution: IntFilter
   NOT: [StakeholderWhereInput!]
   OR: [StakeholderWhereInput!]
   stakeholderDescription: StringNullableFilter
