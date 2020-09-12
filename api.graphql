@@ -2279,6 +2279,10 @@ input EventCreateWithoutEventTagsInput {
   updatedAt: DateTime
 }
 
+type EventIdSeq {
+  id: Int!
+}
+
 input EventOrderByInput {
   createdAt: SortOrder
   eventDescription: SortOrder

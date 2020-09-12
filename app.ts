@@ -86,6 +86,12 @@ schema.objectType({
     t.model.eventLocations()
   },
 })
+schema.objectType({
+  name: 'EventIdSeq',
+  definition(t) {
+    t.model.id()
+  },
+})
 
 // Stakeholder
 
