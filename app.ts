@@ -474,7 +474,21 @@ schema.mutationType({
     // Create
 
     t.crud.createOneDocument()
-    t.crud.createOneEvent()
+    t.crud.createOneEvent({
+      async resolve(root, args, ctx, info, originalResolve) {
+        const res = await originalResolve(root, args, ctx, info)
+        const id = `9-${res.eventIdSeq}`;
+        const newRes = await ctx.db.event.update({
+          where: {
+            id: res.id,
+          },
+          data: {
+            id: { set: id },
+          },
+        })
+        return newRes
+      }
+    })
     t.crud.createOneLocation()
     t.crud.createOneStakeholder()
     t.crud.createOneTag()

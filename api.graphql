@@ -2152,7 +2152,7 @@ input EventCreateInput {
   eventStartDate: DateTime!
   eventTags: TagOnEventCreateManyWithoutEventInput
   eventTitle: String!
-  id: String!
+  id: String
   updatedAt: DateTime
 }
 
@@ -2222,7 +2222,7 @@ input EventCreateWithoutBriefingBooksMentionedInInput {
   eventStartDate: DateTime!
   eventTags: TagOnEventCreateManyWithoutEventInput
   eventTitle: String!
-  id: String!
+  id: String
   updatedAt: DateTime
 }
 
@@ -2237,7 +2237,7 @@ input EventCreateWithoutDocumentsMentionedInInput {
   eventStartDate: DateTime!
   eventTags: TagOnEventCreateManyWithoutEventInput
   eventTitle: String!
-  id: String!
+  id: String
   updatedAt: DateTime
 }
 
@@ -2252,7 +2252,7 @@ input EventCreateWithoutEventLocationsInput {
   eventStartDate: DateTime!
   eventTags: TagOnEventCreateManyWithoutEventInput
   eventTitle: String!
-  id: String!
+  id: String
   updatedAt: DateTime
 }
 
@@ -2267,7 +2267,7 @@ input EventCreateWithoutEventStakeholdersInput {
   eventStartDate: DateTime!
   eventTags: TagOnEventCreateManyWithoutEventInput
   eventTitle: String!
-  id: String!
+  id: String
   updatedAt: DateTime
 }
 
@@ -2282,7 +2282,7 @@ input EventCreateWithoutEventTagsInput {
   eventStakeholders: StakeholderEventCreateManyWithoutEventInput
   eventStartDate: DateTime!
   eventTitle: String!
-  id: String!
+  id: String
   updatedAt: DateTime
 }
 

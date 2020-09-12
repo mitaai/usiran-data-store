@@ -241,7 +241,7 @@ model Event {
   eventEndDate              DateTime?
   eventStartDate            DateTime
   eventTitle                String
-  id                        String                      @id
+  id                        String                      @id @default(cuid())
   eventIdSeq                Int                         @default(autoincrement())
   updatedAt                 DateTime                    @default(now())
   briefingBooksMentionedIn  BriefingBookEvent[]
