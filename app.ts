@@ -477,7 +477,7 @@ schema.mutationType({
     t.crud.createOneEvent({
       async resolve(root, args, ctx, info, originalResolve) {
         const res = await originalResolve(root, args, ctx, info)
-        const id = `9-${res.eventIdSeq}`;
+        const id = `9-${res.eventIdSeq-1573}`;
         const newRes = await ctx.db.event.update({
           where: {
             id: res.id,
