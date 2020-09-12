@@ -1,3 +1,4 @@
 # Prisma Migrate lockfile v1
 
 20200912194952-add-event-id-seq
+20200912201445-move-event-id-seq-into-event

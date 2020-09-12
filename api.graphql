@@ -2131,6 +2131,7 @@ input DocumentWhereUniqueInput {
 type Event {
   eventDescription: String
   eventEndDate: DateTime
+  eventIdSeq: Int!
   eventLocations(after: LocationOnEventWhereUniqueInput, before: LocationOnEventWhereUniqueInput, first: Int, last: Int): [LocationOnEvent!]!
   eventStakeholders(after: StakeholderEventWhereUniqueInput, before: StakeholderEventWhereUniqueInput, first: Int, last: Int): [StakeholderEvent!]!
   eventStartDate: DateTime!
@@ -2145,6 +2146,7 @@ input EventCreateInput {
   documentsMentionedIn: DocumentEventCreateManyWithoutEventInput
   eventDescription: String
   eventEndDate: DateTime
+  eventIdSeq: Int
   eventLocations: LocationOnEventCreateManyWithoutEventInput
   eventStakeholders: StakeholderEventCreateManyWithoutEventInput
   eventStartDate: DateTime!
@@ -2214,6 +2216,7 @@ input EventCreateWithoutBriefingBooksMentionedInInput {
   documentsMentionedIn: DocumentEventCreateManyWithoutEventInput
   eventDescription: String
   eventEndDate: DateTime
+  eventIdSeq: Int
   eventLocations: LocationOnEventCreateManyWithoutEventInput
   eventStakeholders: StakeholderEventCreateManyWithoutEventInput
   eventStartDate: DateTime!
@@ -2228,6 +2231,7 @@ input EventCreateWithoutDocumentsMentionedInInput {
   createdAt: DateTime
   eventDescription: String
   eventEndDate: DateTime
+  eventIdSeq: Int
   eventLocations: LocationOnEventCreateManyWithoutEventInput
   eventStakeholders: StakeholderEventCreateManyWithoutEventInput
   eventStartDate: DateTime!
@@ -2243,6 +2247,7 @@ input EventCreateWithoutEventLocationsInput {
   documentsMentionedIn: DocumentEventCreateManyWithoutEventInput
   eventDescription: String
   eventEndDate: DateTime
+  eventIdSeq: Int
   eventStakeholders: StakeholderEventCreateManyWithoutEventInput
   eventStartDate: DateTime!
   eventTags: TagOnEventCreateManyWithoutEventInput
@@ -2257,6 +2262,7 @@ input EventCreateWithoutEventStakeholdersInput {
   documentsMentionedIn: DocumentEventCreateManyWithoutEventInput
   eventDescription: String
   eventEndDate: DateTime
+  eventIdSeq: Int
   eventLocations: LocationOnEventCreateManyWithoutEventInput
   eventStartDate: DateTime!
   eventTags: TagOnEventCreateManyWithoutEventInput
@@ -2271,6 +2277,7 @@ input EventCreateWithoutEventTagsInput {
   documentsMentionedIn: DocumentEventCreateManyWithoutEventInput
   eventDescription: String
   eventEndDate: DateTime
+  eventIdSeq: Int
   eventLocations: LocationOnEventCreateManyWithoutEventInput
   eventStakeholders: StakeholderEventCreateManyWithoutEventInput
   eventStartDate: DateTime!
@@ -2279,14 +2286,11 @@ input EventCreateWithoutEventTagsInput {
   updatedAt: DateTime
 }
 
-type EventIdSeq {
-  id: Int!
-}
-
 input EventOrderByInput {
   createdAt: SortOrder
   eventDescription: SortOrder
   eventEndDate: SortOrder
+  eventIdSeq: SortOrder
   eventStartDate: SortOrder
   eventTitle: SortOrder
   id: SortOrder
@@ -2299,6 +2303,7 @@ input EventUpdateInput {
   documentsMentionedIn: DocumentEventUpdateManyWithoutEventInput
   eventDescription: NullableStringFieldUpdateOperationsInput
   eventEndDate: NullableDateTimeFieldUpdateOperationsInput
+  eventIdSeq: IntFieldUpdateOperationsInput
   eventLocations: LocationOnEventUpdateManyWithoutEventInput
   eventStakeholders: StakeholderEventUpdateManyWithoutEventInput
   eventStartDate: DateTimeFieldUpdateOperationsInput
@@ -2353,6 +2358,7 @@ input EventUpdateWithoutBriefingBooksMentionedInDataInput {
   documentsMentionedIn: DocumentEventUpdateManyWithoutEventInput
   eventDescription: NullableStringFieldUpdateOperationsInput
   eventEndDate: NullableDateTimeFieldUpdateOperationsInput
+  eventIdSeq: IntFieldUpdateOperationsInput
   eventLocations: LocationOnEventUpdateManyWithoutEventInput
   eventStakeholders: StakeholderEventUpdateManyWithoutEventInput
   eventStartDate: DateTimeFieldUpdateOperationsInput
@@ -2367,6 +2373,7 @@ input EventUpdateWithoutDocumentsMentionedInDataInput {
   createdAt: DateTimeFieldUpdateOperationsInput
   eventDescription: NullableStringFieldUpdateOperationsInput
   eventEndDate: NullableDateTimeFieldUpdateOperationsInput
+  eventIdSeq: IntFieldUpdateOperationsInput
   eventLocations: LocationOnEventUpdateManyWithoutEventInput
   eventStakeholders: StakeholderEventUpdateManyWithoutEventInput
   eventStartDate: DateTimeFieldUpdateOperationsInput
@@ -2382,6 +2389,7 @@ input EventUpdateWithoutEventLocationsDataInput {
   documentsMentionedIn: DocumentEventUpdateManyWithoutEventInput
   eventDescription: NullableStringFieldUpdateOperationsInput
   eventEndDate: NullableDateTimeFieldUpdateOperationsInput
+  eventIdSeq: IntFieldUpdateOperationsInput
   eventStakeholders: StakeholderEventUpdateManyWithoutEventInput
   eventStartDate: DateTimeFieldUpdateOperationsInput
   eventTags: TagOnEventUpdateManyWithoutEventInput
@@ -2396,6 +2404,7 @@ input EventUpdateWithoutEventStakeholdersDataInput {
   documentsMentionedIn: DocumentEventUpdateManyWithoutEventInput
   eventDescription: NullableStringFieldUpdateOperationsInput
   eventEndDate: NullableDateTimeFieldUpdateOperationsInput
+  eventIdSeq: IntFieldUpdateOperationsInput
   eventLocations: LocationOnEventUpdateManyWithoutEventInput
   eventStartDate: DateTimeFieldUpdateOperationsInput
   eventTags: TagOnEventUpdateManyWithoutEventInput
@@ -2410,6 +2419,7 @@ input EventUpdateWithoutEventTagsDataInput {
   documentsMentionedIn: DocumentEventUpdateManyWithoutEventInput
   eventDescription: NullableStringFieldUpdateOperationsInput
   eventEndDate: NullableDateTimeFieldUpdateOperationsInput
+  eventIdSeq: IntFieldUpdateOperationsInput
   eventLocations: LocationOnEventUpdateManyWithoutEventInput
   eventStakeholders: StakeholderEventUpdateManyWithoutEventInput
   eventStartDate: DateTimeFieldUpdateOperationsInput
@@ -2450,6 +2460,7 @@ input EventWhereInput {
   documentsMentionedIn: DocumentEventListRelationFilter
   eventDescription: StringNullableFilter
   eventEndDate: DateTimeNullableFilter
+  eventIdSeq: IntFilter
   eventLocations: LocationOnEventListRelationFilter
   eventStakeholders: StakeholderEventListRelationFilter
   eventStartDate: DateTimeFilter

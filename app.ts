@@ -77,6 +77,7 @@ schema.objectType({
   name: 'Event',
   definition(t) {
     t.model.id()
+    t.model.eventIdSeq()
     t.model.eventTitle()
     t.model.eventStartDate()
     t.model.eventEndDate()
@@ -84,12 +85,6 @@ schema.objectType({
     t.model.eventStakeholders()
     t.model.eventDescription()
     t.model.eventLocations()
-  },
-})
-schema.objectType({
-  name: 'EventIdSeq',
-  definition(t) {
-    t.model.id()
   },
 })
 
