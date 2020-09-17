@@ -68,6 +68,16 @@ schema.objectType({
     t.model.documentClassification()
     t.model.documentPublicationDate()
     t.model.documentTranscript()
+    t.model.dnsaAbstract()
+    t.model.dnsaCitation()
+    t.model.dnsaCollection()
+    t.model.dnsaFrom()
+    t.model.dnsaItemNumber()
+    t.model.dnsaOrigin()
+    t.model.dnsaStakeholder()
+    t.model.dnsaSubject()
+    t.model.dnsaTo()
+    t.model.dnsaURL()
   },
 })
 

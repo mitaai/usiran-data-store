@@ -664,6 +664,16 @@ input DateTimeNullableFilter {
 }
 
 type Document {
+  dnsaAbstract: String
+  dnsaCitation: String
+  dnsaCollection: String
+  dnsaFrom: String
+  dnsaItemNumber: String
+  dnsaOrigin: String
+  dnsaStakeholder: String
+  dnsaSubject: String
+  dnsaTo: String
+  dnsaURL: String
   documentAuthors(after: DocumentAuthorWhereUniqueInput, before: DocumentAuthorWhereUniqueInput, first: Int, last: Int): [DocumentAuthor!]!
   documentClassification(after: ClassificationOnDocumentWhereUniqueInput, before: ClassificationOnDocumentWhereUniqueInput, first: Int, last: Int): [ClassificationOnDocument!]!
   documentCreationDate: DateTime
