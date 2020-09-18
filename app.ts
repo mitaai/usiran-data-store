@@ -53,8 +53,8 @@ schema.objectType({
 
 // Helper functions
 
-async function getUserId(context) {
-  const Authorization = await context.request.get('Authorization')
+function getUserId(context) {
+  const Authorization = context.req.get('Authorization')
   if (Authorization) {
     const token = Authorization.replace('Bearer ', '')
     const verified = verify(token, process.env.AUTH_SECRET) as NexusPrismaFields<"User">
