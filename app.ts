@@ -16,6 +16,27 @@ use(prisma({
   }
 }))
 
+
+// Helper functions
+
+function getUserRole(context) {
+  const Authorization = context.req.get('Authorization')
+  if (Authorization) {
+    const token = Authorization.replace('Bearer ', '')
+    const verified = verify(token, process.env.AUTH_SECRET) as NexusPrismaFields<"User">
+    const { role } = verified
+    return role.toString()
+  }
+  throw new Error('Not authenticated')
+}
+
+function userIsEditor(context) {
+  if (['Editor', 'Admin'].includes(getUserRole(context)))
+    return true
+  throw new Error('Not authenticated')
+}
+
+
 //                          _        _      
 //                         | |      | |     
 //    _ __ ___    ___    __| |  ___ | | ___ 
@@ -42,7 +63,6 @@ const User = schema.objectType({
   },
 })
 
-
 schema.objectType({
   name: 'UserAuthPayload',
   definition(t){
@@ -51,19 +71,6 @@ schema.objectType({
   },
 })
 
-// Helper functions
-
-function getUserId(context) {
-  const Authorization = context.req.get('Authorization')
-  if (Authorization) {
-    const token = Authorization.replace('Bearer ', '')
-    const verified = verify(token, process.env.AUTH_SECRET) as NexusPrismaFields<"User">
-    const { id } = verified
-    return id
-  }
-
-  throw new Error('Not authenticated')
-}
 // Document
 
 schema.objectType({
@@ -576,13 +583,13 @@ schema.mutationType({
     })
     t.crud.updateOneEvent({
       async resolve(root, args, ctx, info, originalResolve) {
-        console.log(getUserId(ctx))
         if(args.data.eventTags) await ctx.db.queryRaw(`DELETE FROM "TagOnEvent" WHERE "B" = '${args.where.id}';`)
         if(args.data.eventStakeholders) await ctx.db.queryRaw(`DELETE FROM "StakeholderEvent" WHERE "B" = '${args.where.id}';`)
         if(args.data.eventLocations) await ctx.db.queryRaw(`DELETE FROM "LocationOnEvent" WHERE "B" = '${args.where.id}';`)
         const res = await originalResolve(root, args, ctx, info)
         return res
-      }
+      },
+      authorize: (root, args, ctx) => userIsEditor(ctx)
     })
     t.crud.updateOneStakeholder({
       async resolve(root, args, ctx, info, originalResolve) {
