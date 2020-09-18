@@ -18,22 +18,34 @@ use(prisma({
 
 
 // Helper functions
+interface JWTData {
+  userId: string;
+}
+const isJWTData = (input: object | string): input is JWTData => { return typeof input === "object" && "userId" in input; };  
 
-function getUserRole(context) {
+function getUserId(context) {
   const Authorization = context.req.get('Authorization')
   if (Authorization) {
     const token = Authorization.replace('Bearer ', '')
-    const verified = verify(token, process.env.AUTH_SECRET) as NexusPrismaFields<"User">
-    const { role } = verified
-    return role.toString()
+    const verified = verify(token, process.env.AUTH_SECRET)
+    if(isJWTData(verified)) {
+      const { userId } = verified
+      return userId
+    }
   }
   throw new Error('Not authenticated')
 }
 
+function getUserRole(context) {
+  const id = getUserId(context)
+  const user = context.db.user.findOne({ where: { id } })
+  if (user) return user.role
+  throw new Error('User not found')
+}
+
 function userIsEditor(context) {
-  if (['Editor', 'Admin'].includes(getUserRole(context)))
-    return true
-  throw new Error('Not authenticated')
+  if (['Editor', 'Admin'].includes(getUserRole(context))) return true
+  throw new Error('Not authorized')
 }
 
 
