@@ -39,14 +39,14 @@ function getUserId(context) {
 async function getUserRole(context) {
   const id = getUserId(context)
   const user = await context.db.user.findOne({ where: { id } })
-  if (user) throw new Error(`${JSON.stringify(user)}, ${user.toString()}`)
-  return user.role
+  if (user) return user.role
   throw new Error('User not found')
 }
 
 async function userIsEditor(context) {
-  if (['Editor', 'Admin'].includes(await getUserRole(context))) return true
-  throw new Error('Not authorized')
+  const role = await getUserRole(context);
+  if (['Editor', 'Admin'].includes(role)) return true
+  throw new Error(`Not authorized, user has role: ${role}`)
 }
 
 
