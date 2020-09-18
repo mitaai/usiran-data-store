@@ -31,7 +31,7 @@ function getUserId(context) {
     if(isJWTData(verified)) {
       const { userId } = verified
       return userId
-    }
+    } throw new Error(`JWT Data does not include userId property: ${JSON.stringify(verified)}`)
   }
   throw new Error('Not authenticated')
 }
