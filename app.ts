@@ -19,9 +19,9 @@ use(prisma({
 
 // Helper functions
 interface JWTData {
-  userId: string;
+  id: string;
 }
-const isJWTData = (input: object | string): input is JWTData => { return typeof input === "object" && "userId" in input; };  
+const isJWTData = (input: object | string): input is JWTData => { return typeof input === "object" && "id" in input; };  
 
 function getUserId(context) {
   const Authorization = context.req.get('Authorization')
@@ -29,9 +29,9 @@ function getUserId(context) {
     const token = Authorization.replace('Bearer ', '')
     const verified = verify(token, process.env.AUTH_SECRET)
     if(isJWTData(verified)) {
-      const { userId } = verified
-      return userId
-    } throw new Error(`JWT Data does not include userId property: ${JSON.stringify(verified)}`)
+      const { id } = verified
+      return id
+    } throw new Error(`JWT Data invalid: ${JSON.stringify(verified)}`)
   }
   throw new Error('Not authenticated')
 }
