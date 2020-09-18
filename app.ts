@@ -3,7 +3,8 @@ import { use, schema, server } from 'nexus';
 import { prisma } from 'nexus-plugin-prisma';
 import { arg, stringArg } from '@nexus/schema';
 import bcrypt from 'bcrypt';
-import { sign } from 'jsonwebtoken';
+import { sign, verify } from 'jsonwebtoken';
+import { NexusPrismaFields } from 'nexus-plugin-prisma/typegen';
 
 server.express.use(cors())
 
@@ -26,7 +27,7 @@ use(prisma({
 
 // User
 
-schema.objectType({
+const User = schema.objectType({
   name: 'User',
   definition(t) {
     t.model.createdAt()
@@ -41,6 +42,7 @@ schema.objectType({
   },
 })
 
+
 schema.objectType({
   name: 'UserAuthPayload',
   definition(t){
@@ -49,6 +51,19 @@ schema.objectType({
   },
 })
 
+// Helper functions
+
+function getUserId(context) {
+  const Authorization = context.request.get('Authorization')
+  if (Authorization) {
+    const token = Authorization.replace('Bearer ', '')
+    const verified = verify(token, process.env.AUTH_SECRET) as NexusPrismaFields<"User">
+    const { id } = verified
+    return id
+  }
+
+  throw new Error('Not authenticated')
+}
 // Document
 
 schema.objectType({
@@ -561,6 +576,7 @@ schema.mutationType({
     })
     t.crud.updateOneEvent({
       async resolve(root, args, ctx, info, originalResolve) {
+        console.log(getUserId(ctx))
         if(args.data.eventTags) await ctx.db.queryRaw(`DELETE FROM "TagOnEvent" WHERE "B" = '${args.where.id}';`)
         if(args.data.eventStakeholders) await ctx.db.queryRaw(`DELETE FROM "StakeholderEvent" WHERE "B" = '${args.where.id}';`)
         if(args.data.eventLocations) await ctx.db.queryRaw(`DELETE FROM "LocationOnEvent" WHERE "B" = '${args.where.id}';`)
@@ -701,3 +717,4 @@ schema.enumType({
   name: 'UserRole',
   members: ['Admin', 'Editor', 'Viewer'],
 })
+
