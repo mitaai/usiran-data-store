@@ -39,6 +39,7 @@ function getUserId(context) {
 function getUserRole(context) {
   const id = getUserId(context)
   const user = context.db.user.findOne({ where: { id } })
+  throw new Error(JSON.stringify(user))
   if (user) return user.role
   throw new Error('User not found')
 }
