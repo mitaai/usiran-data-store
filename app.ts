@@ -36,16 +36,16 @@ function getUserId(context) {
   throw new Error('Not authenticated')
 }
 
-function getUserRole(context) {
+async function getUserRole(context) {
   const id = getUserId(context)
-  const user = context.db.user.findOne({ where: { id } })
-  throw new Error(JSON.stringify(user))
-  if (user) return user.role
+  const user = await context.db.user.findOne({ where: { id } })
+  if (user) throw new Error(`${JSON.stringify(user)}, ${user.toString()}`)
+  return user.role
   throw new Error('User not found')
 }
 
-function userIsEditor(context) {
-  if (['Editor', 'Admin'].includes(getUserRole(context))) return true
+async function userIsEditor(context) {
+  if (['Editor', 'Admin'].includes(await getUserRole(context))) return true
   throw new Error('Not authorized')
 }
 
