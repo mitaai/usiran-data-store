@@ -4,7 +4,6 @@ import { prisma } from 'nexus-plugin-prisma';
 import { arg, stringArg } from '@nexus/schema';
 import bcrypt from 'bcrypt';
 import { sign, verify } from 'jsonwebtoken';
-import { NexusPrismaFields } from 'nexus-plugin-prisma/typegen';
 
 server.express.use(cors())
 
