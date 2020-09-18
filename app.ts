@@ -17,7 +17,8 @@ use(prisma({
 }))
 
 
-// Helper functions
+// Authentication and authorization logic
+
 interface JWTData {
   id: string;
 }
@@ -46,6 +47,12 @@ async function getUserRole(context) {
 async function userIsEditor(context) {
   const role = await getUserRole(context);
   if (['Editor', 'Admin'].includes(role)) return true
+  throw new Error(`Not authorized, user has role: ${role}`)
+}
+
+async function userIsAdmin(context) {
+  const role = await getUserRole(context);
+  if (role === 'Admin') return true
   throw new Error(`Not authorized, user has role: ${role}`)
 }
 
@@ -518,7 +525,9 @@ schema.mutationType({
     //                                   
     // Create
 
-    t.crud.createOneDocument()
+    t.crud.createOneDocument({
+      authorize: (root, args, ctx) => userIsEditor(ctx)
+    })
     t.crud.createOneEvent({
       async resolve(root, args, ctx, info, originalResolve) {
         const res = await originalResolve(root, args, ctx, info)
@@ -532,22 +541,49 @@ schema.mutationType({
           },
         })
         return newRes
-      }
+      },
+      authorize: (root, args, ctx) => userIsEditor(ctx)
     })
-    t.crud.createOneLocation()
-    t.crud.createOneStakeholder()
-    t.crud.createOneTag()
+    t.crud.createOneLocation({
+      authorize: (root, args, ctx) => userIsEditor(ctx)
+    })
+    t.crud.createOneStakeholder({
+      authorize: (root, args, ctx) => userIsEditor(ctx)
+    })
+    t.crud.createOneTag({
+      authorize: (root, args, ctx) => userIsEditor(ctx)
+    })
 
-    t.crud.createOneClassificationOnDocument()
-    t.crud.createOneDocumentAuthor()
-    t.crud.createOneDocumentEvent()
-    t.crud.createOneDocumentInvolvedStakeholder()
-    t.crud.createOneDocumentLocation()
-    t.crud.createOneKindOnDocument()
-    t.crud.createOneLocationOnEvent()
-    t.crud.createOneStakeholderEvent()
-    t.crud.createOneTagOnDocument()
-    t.crud.createOneTagOnEvent()
+    t.crud.createOneClassificationOnDocument({
+      authorize: (root, args, ctx) => userIsEditor(ctx)
+    })
+    t.crud.createOneDocumentAuthor({
+      authorize: (root, args, ctx) => userIsEditor(ctx)
+    })
+    t.crud.createOneDocumentEvent({
+      authorize: (root, args, ctx) => userIsEditor(ctx)
+    })
+    t.crud.createOneDocumentInvolvedStakeholder({
+      authorize: (root, args, ctx) => userIsEditor(ctx)
+    })
+    t.crud.createOneDocumentLocation({
+      authorize: (root, args, ctx) => userIsEditor(ctx)
+    })
+    t.crud.createOneKindOnDocument({
+      authorize: (root, args, ctx) => userIsEditor(ctx)
+    })
+    t.crud.createOneLocationOnEvent({
+      authorize: (root, args, ctx) => userIsEditor(ctx)
+    })
+    t.crud.createOneStakeholderEvent({
+      authorize: (root, args, ctx) => userIsEditor(ctx)
+    })
+    t.crud.createOneTagOnDocument({
+      authorize: (root, args, ctx) => userIsEditor(ctx)
+    })
+    t.crud.createOneTagOnEvent({
+      authorize: (root, args, ctx) => userIsEditor(ctx)
+    })
 
     t.field('createUser', {
       type: 'UserAuthPayload',
@@ -581,7 +617,9 @@ schema.mutationType({
     //          |_|                         
     // Update
 
-    t.crud.updateOneUser()
+    t.crud.updateOneUser({
+      authorize: (root, args, ctx) => userIsAdmin(ctx)
+    })
     t.crud.updateOneDocument({
       async resolve(root, args, ctx, info, originalResolve) {
         if(args.data.documentKind) await ctx.db.queryRaw(`DELETE FROM "KindOnDocument" WHERE "B" = '${args.where.id}';`)
@@ -592,7 +630,8 @@ schema.mutationType({
         if(args.data.mentionedLocations) await ctx.db.queryRaw(`DELETE FROM "DocumentLocation" WHERE "B" = '${args.where.id}';`);
         const res = await originalResolve(root, args, ctx, info)
         return res
-      }
+      },
+      authorize: (root, args, ctx) => userIsEditor(ctx)
     })
     t.crud.updateOneEvent({
       async resolve(root, args, ctx, info, originalResolve) {
@@ -611,7 +650,8 @@ schema.mutationType({
         if(args.data.eventsInvolvedIn) await ctx.db.queryRaw(`DELETE FROM "StakeholderEvent" WHERE "A" = '${args.where.id}';`)
         const res = await originalResolve(root, args, ctx, info)
         return res
-      }
+      },
+      authorize: (root, args, ctx) => userIsEditor(ctx)
     })
     t.crud.updateOneLocation({
       async resolve(root, args, ctx, info, originalResolve) {
@@ -619,7 +659,8 @@ schema.mutationType({
         if(args.data.locationEvents) await ctx.db.queryRaw(`DELETE FROM "LocationOnEvent" WHERE "A" = '${args.where.id}';`)
         const res = await originalResolve(root, args, ctx, info)
         return res
-      }
+      },
+      authorize: (root, args, ctx) => userIsEditor(ctx)
     })
 
     //    ___        _       _        
@@ -629,7 +670,9 @@ schema.mutationType({
     //                                
     // Delete
 
-    t.crud.deleteOneUser()
+    t.crud.deleteOneUser({
+      authorize: (root, args, ctx) => userIsAdmin(ctx)
+    })
     t.crud.deleteOneDocument({
       async resolve(root, args, ctx, info, originalResolve) {
         await ctx.db.queryRaw(`DELETE FROM "BriefingBookDocument" WHERE "B" = '${args.where.id}';`)
@@ -643,7 +686,8 @@ schema.mutationType({
         await ctx.db.queryRaw(`DELETE FROM "TagOnDocument" WHERE "B" = '${args.where.id}';`)
         const res = await originalResolve(root, args, ctx, info)
         return res
-      }
+      },
+      authorize: (root, args, ctx) => userIsEditor(ctx)
     })
     t.crud.deleteOneEvent({
       async resolve(root, args, ctx, info, originalResolve) {
@@ -654,7 +698,8 @@ schema.mutationType({
         await ctx.db.queryRaw(`DELETE FROM "TagOnEvent" WHERE "B" = '${args.where.id}';`)
         const res = await originalResolve(root, args, ctx, info)
         return res
-      }
+      },
+      authorize: (root, args, ctx) => userIsEditor(ctx)
     })
     t.crud.deleteOneLocation({
       async resolve(root, args, ctx, info, originalResolve) {
@@ -662,7 +707,8 @@ schema.mutationType({
         await ctx.db.queryRaw(`DELETE FROM "LocationOnEvent" WHERE "A" = '${args.where.id}';`)
         const res = await originalResolve(root, args, ctx, info)
         return res
-      }
+      },
+      authorize: (root, args, ctx) => userIsEditor(ctx)
     })
     t.crud.deleteOneStakeholder({
       async resolve(root, args, ctx, info, originalResolve) {
@@ -672,7 +718,8 @@ schema.mutationType({
         await ctx.db.queryRaw(`DELETE FROM "StakeholderEvent" WHERE "A" = '${args.where.id}';`)
         const res = await originalResolve(root, args, ctx, info)
         return res
-      }
+      },
+      authorize: (root, args, ctx) => userIsEditor(ctx)
     })
 
     //     ___           _               
