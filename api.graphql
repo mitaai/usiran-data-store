@@ -892,6 +892,12 @@ input DocumentCreateOneWithoutDocumentClassificationInput {
   create: DocumentCreateWithoutDocumentClassificationInput
 }
 
+input DocumentCreateOneWithoutDocumentFilesInput {
+  connect: DocumentWhereUniqueInput
+  connectOrCreate: DocumentCreateOrConnectWithoutDocumentFileInput
+  create: DocumentCreateWithoutDocumentFilesInput
+}
+
 input DocumentCreateOneWithoutDocumentKindInput {
   connect: DocumentWhereUniqueInput
   connectOrCreate: DocumentCreateOrConnectWithoutKindOnDocumentInput
@@ -939,6 +945,11 @@ input DocumentCreateOrConnectWithoutDocumentAuthorInput {
 
 input DocumentCreateOrConnectWithoutDocumentEventInput {
   create: DocumentCreateWithoutMentionedEventsInput!
+  where: DocumentWhereUniqueInput!
+}
+
+input DocumentCreateOrConnectWithoutDocumentFileInput {
+  create: DocumentCreateWithoutDocumentFilesInput!
   where: DocumentWhereUniqueInput!
 }
 
@@ -1043,6 +1054,38 @@ input DocumentCreateWithoutDocumentClassificationInput {
   documentCreationDate: DateTime
   documentDescription: String
   documentFiles: DocumentFileCreateManyWithoutDocumentInput
+  documentKind: KindOnDocumentCreateManyWithoutDocumentInput
+  documentMediaType: String
+  documentOriginalID: String!
+  documentPublicationDate: DateTime
+  documentTags: TagOnDocumentCreateManyWithoutDocumentInput
+  documentTitle: String!
+  documentTranscript: String
+  id: String!
+  mentionedEvents: DocumentEventCreateManyWithoutDocumentInput
+  mentionedLocations: DocumentLocationCreateManyWithoutDocumentInput
+  mentionedStakeholders: DocumentInvolvedStakeholderCreateManyWithoutDocumentInput
+  sessionNumber: Int
+  updatedAt: DateTime
+}
+
+input DocumentCreateWithoutDocumentFilesInput {
+  briefingBooksMentionedIn: BriefingBookDocumentCreateManyWithoutDocumentInput
+  createdAt: DateTime
+  dnsaAbstract: String
+  dnsaCitation: String
+  dnsaCollection: String
+  dnsaFrom: String
+  dnsaItemNumber: String
+  dnsaOrigin: String
+  dnsaStakeholder: String
+  dnsaSubject: String
+  dnsaTo: String
+  dnsaURL: String
+  documentAuthors: DocumentAuthorCreateManyWithoutDocumentInput
+  documentClassification: ClassificationOnDocumentCreateManyWithoutDocumentInput
+  documentCreationDate: DateTime
+  documentDescription: String
   documentKind: KindOnDocumentCreateManyWithoutDocumentInput
   documentMediaType: String
   documentOriginalID: String!
@@ -1382,10 +1425,22 @@ input DocumentFile_AB_uniqueCompoundUniqueInput {
   B: String!
 }
 
+input DocumentFileCreateInput {
+  Document: DocumentCreateOneWithoutDocumentFilesInput!
+  File: FileCreateOneWithoutDocumentsIncludedInInput!
+  id: String
+}
+
 input DocumentFileCreateManyWithoutDocumentInput {
   connect: [DocumentFileWhereUniqueInput!]
   connectOrCreate: [DocumentFileCreateOrConnectWithoutDocumentInput!]
   create: [DocumentFileCreateWithoutDocumentInput!]
+}
+
+input DocumentFileCreateManyWithoutFileInput {
+  connect: [DocumentFileWhereUniqueInput!]
+  connectOrCreate: [DocumentFileCreateOrConnectWithoutFileInput!]
+  create: [DocumentFileCreateWithoutFileInput!]
 }
 
 input DocumentFileCreateOrConnectWithoutDocumentInput {
@@ -1393,8 +1448,18 @@ input DocumentFileCreateOrConnectWithoutDocumentInput {
   where: DocumentFileWhereUniqueInput!
 }
 
+input DocumentFileCreateOrConnectWithoutFileInput {
+  create: DocumentFileCreateWithoutFileInput!
+  where: DocumentFileWhereUniqueInput!
+}
+
 input DocumentFileCreateWithoutDocumentInput {
   File: FileCreateOneWithoutDocumentsIncludedInInput!
+  id: String
+}
+
+input DocumentFileCreateWithoutFileInput {
+  Document: DocumentCreateOneWithoutDocumentFilesInput!
   id: String
 }
 
@@ -2487,7 +2552,22 @@ input EventWhereUniqueInput {
 }
 
 type File {
+  contentType: String!
   id: String!
+  name: String!
+  size: Int!
+  url: String!
+}
+
+input FileCreateInput {
+  contentType: String!
+  createdAt: DateTime
+  documentsIncludedIn: DocumentFileCreateManyWithoutFileInput
+  id: String
+  name: String!
+  secret: String
+  size: Int!
+  updatedAt: DateTime
   url: String!
 }
 
@@ -2505,9 +2585,9 @@ input FileCreateOrConnectWithoutDocumentFileInput {
 input FileCreateWithoutDocumentsIncludedInInput {
   contentType: String!
   createdAt: DateTime
-  id: String!
+  id: String
   name: String!
-  secret: String!
+  secret: String
   size: Int!
   updatedAt: DateTime
   url: String!
@@ -3110,9 +3190,11 @@ type Mutation {
   createOneDocument(data: DocumentCreateInput!): Document!
   createOneDocumentAuthor(data: DocumentAuthorCreateInput!): DocumentAuthor!
   createOneDocumentEvent(data: DocumentEventCreateInput!): DocumentEvent!
+  createOneDocumentFile(data: DocumentFileCreateInput!): DocumentFile!
   createOneDocumentInvolvedStakeholder(data: DocumentInvolvedStakeholderCreateInput!): DocumentInvolvedStakeholder!
   createOneDocumentLocation(data: DocumentLocationCreateInput!): DocumentLocation!
   createOneEvent(data: EventCreateInput!): Event!
+  createOneFile(data: FileCreateInput!): File!
   createOneKindOnDocument(data: KindOnDocumentCreateInput!): KindOnDocument!
   createOneLocation(data: LocationCreateInput!): Location!
   createOneLocationOnEvent(data: LocationOnEventCreateInput!): LocationOnEvent!

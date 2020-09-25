@@ -176,6 +176,9 @@ schema.objectType({
   definition(t) {
     t.model.id()
     t.model.url()
+    t.model.size()
+    t.model.name()
+    t.model.contentType()
   },
 })
 
@@ -552,6 +555,9 @@ schema.mutationType({
     t.crud.createOneTag({
       authorize: (root, args, ctx) => userIsEditor(ctx)
     })
+    t.crud.createOneFile({
+      authorize: (root, args, ctx) => userIsEditor(ctx)
+    })
 
     t.crud.createOneClassificationOnDocument({
       authorize: (root, args, ctx) => userIsEditor(ctx)
@@ -560,6 +566,9 @@ schema.mutationType({
       authorize: (root, args, ctx) => userIsEditor(ctx)
     })
     t.crud.createOneDocumentEvent({
+      authorize: (root, args, ctx) => userIsEditor(ctx)
+    })
+    t.crud.createOneDocumentFile({
       authorize: (root, args, ctx) => userIsEditor(ctx)
     })
     t.crud.createOneDocumentInvolvedStakeholder({

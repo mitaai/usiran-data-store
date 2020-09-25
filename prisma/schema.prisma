@@ -254,9 +254,9 @@ model Event {
 model File {
   contentType               String
   createdAt                 DateTime                    @default(now())
-  id                        String                      @id
+  id                        String                      @id @default(cuid())
   name                      String
-  secret                    String                      @unique
+  secret                    String                      @unique @default(cuid())
   size                      Int
   updatedAt                 DateTime                    @default(now())
   url                       String                      @unique
