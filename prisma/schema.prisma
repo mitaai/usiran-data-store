@@ -1,6 +1,5 @@
 generator client {
   provider = "prisma-client-js"
-  previewFeatures = ["connectOrCreate","insensitiveFilters"]
 }
 
 datasource db {
@@ -16,308 +15,308 @@ model RelayId {
 }
 
 model BriefingBook {
-  briefingBookDescription   String?
-  briefingBookTitle         String                      @unique
-  createdAt                 DateTime                    @default(now())
-  id                        String                      @id
-  updatedAt                 DateTime                    @default(now())
-  mentionedDocuments        BriefingBookDocument[]
-  mentionedEvents           BriefingBookEvent[]
-  mentionedStakeholders     StakeholderBriefingBook[]
+  id                      String                    @id
+  createdAt               DateTime                  @default(now())
+  updatedAt               DateTime                  @default(now())
+  briefingBookDescription String?
+  briefingBookTitle       String                    @unique
+  mentionedDocuments      BriefingBookDocument[]
+  mentionedEvents         BriefingBookEvent[]
+  mentionedStakeholders   StakeholderBriefingBook[]
 }
 
 model BriefingBookDocument {
+  id           String       @id @default(cuid())
   A            String
   B            String
-  id           String       @id @default(cuid())
   BriefingBook BriefingBook @relation(fields: [A], references: [id])
   Document     Document     @relation(fields: [B], references: [id])
 
+  @@unique([A, B], name: "BriefingBookDocument_AB_unique")
   @@index([A], name: "BriefingBookDocument_BriefingBookId")
   @@index([B], name: "BriefingBookDocument_DocumentId")
-  @@unique([A, B], name: "BriefingBookDocument_AB_unique")
 }
 
 model BriefingBookEvent {
+  id           String       @id @default(cuid())
   A            String
   B            String
-  id           String       @id @default(cuid())
   Event        Event        @relation(fields: [A], references: [id])
   BriefingBook BriefingBook @relation(fields: [B], references: [id])
 
-  @@index([A], name: "BriefingBookEvent_EventId")
-  @@index([B], name: "BriefingBookEvent_BriefingBookId")
   @@unique([A, B], name: "BriefingBookEvent_AB_unique")
+  @@index([B], name: "BriefingBookEvent_BriefingBookId")
+  @@index([A], name: "BriefingBookEvent_EventId")
 }
 
 model ClassificationOnDocument {
+  id             String         @id @default(cuid())
   A              String
   B              String
-  id             String         @id @default(cuid())
   Classification Classification @relation(fields: [A], references: [id])
   Document       Document       @relation(fields: [B], references: [id])
 
+  @@unique([A, B], name: "ClassificationOnDocument_AB_unique")
   @@index([A], name: "ClassificationOnDocument_ClassificationId")
   @@index([B], name: "ClassificationOnDocument_DocumentId")
-  @@unique([A, B], name: "ClassificationOnDocument_AB_unique")
 }
 
 model DocumentAuthor {
+  id          String      @id @default(cuid())
   A           String
   B           String
-  id          String      @id @default(cuid())
   Document    Document    @relation(fields: [A], references: [id])
   Stakeholder Stakeholder @relation(fields: [B], references: [id])
 
+  @@unique([A, B], name: "DocumentAuthor_AB_unique")
   @@index([A], name: "DocumentAuthor_DocumentId")
   @@index([B], name: "DocumentAuthor_StakeholderId")
-  @@unique([A, B], name: "DocumentAuthor_AB_unique")
 }
 
 model DocumentEvent {
+  id       String   @id @default(cuid())
   A        String
   B        String
-  id       String   @id @default(cuid())
   Document Document @relation(fields: [A], references: [id])
   Event    Event    @relation(fields: [B], references: [id])
 
+  @@unique([A, B], name: "DocumentEvent_AB_unique")
   @@index([A], name: "DocumentEvent_DocumentId")
   @@index([B], name: "DocumentEvent_EventId")
-  @@unique([A, B], name: "DocumentEvent_AB_unique")
 }
 
 model DocumentFile {
+  id       String   @id @default(cuid())
   A        String
   B        String
-  id       String   @id @default(cuid())
   Document Document @relation(fields: [A], references: [id])
   File     File     @relation(fields: [B], references: [id])
 
+  @@unique([A, B], name: "DocumentFile_AB_unique")
   @@index([A], name: "DocumentFile_DocumentId")
   @@index([B], name: "DocumentFile_FileId")
-  @@unique([A, B], name: "DocumentFile_AB_unique")
 }
 
 model DocumentInvolvedStakeholder {
+  id          String      @id @default(cuid())
   A           String
   B           String
-  id          String      @id @default(cuid())
   Stakeholder Stakeholder @relation(fields: [A], references: [id])
   Document    Document    @relation(fields: [B], references: [id])
 
-  @@index([A], name: "DocumentInvolvedStakeholder_StakeholderId")
-  @@index([B], name: "DocumentInvolvedStakeholder_DocumentId")
   @@unique([A, B], name: "DocumentInvolvedStakeholder_AB_unique")
+  @@index([B], name: "DocumentInvolvedStakeholder_DocumentId")
+  @@index([A], name: "DocumentInvolvedStakeholder_StakeholderId")
 }
 
 model DocumentLocation {
+  id       String   @id @default(cuid())
   A        String
   B        String
-  id       String   @id @default(cuid())
   Location Location @relation(fields: [A], references: [id])
   Document Document @relation(fields: [B], references: [id])
 
-  @@index([A], name: "DocumentLocation_LocationId")
-  @@index([B], name: "DocumentLocation_DocumentId")
   @@unique([A, B], name: "DocumentLocation_AB_unique")
+  @@index([B], name: "DocumentLocation_DocumentId")
+  @@index([A], name: "DocumentLocation_LocationId")
 }
 
 model KindOnDocument {
+  id       String   @id @default(cuid())
   A        String
   B        String
-  id       String   @id @default(cuid())
   Kind     Kind     @relation(fields: [A], references: [id])
   Document Document @relation(fields: [B], references: [id])
 
-  @@index([A], name: "KindOnDocument_KindId")
-  @@index([B], name: "KindOnDocument_DocumentId")
   @@unique([A, B], name: "KindOnDocument_AB_unique")
+  @@index([B], name: "KindOnDocument_DocumentId")
+  @@index([A], name: "KindOnDocument_KindId")
 }
 
 model LocationOnEvent {
+  id       String   @id @default(cuid())
   A        String
   B        String
-  id       String   @id @default(cuid())
   Location Location @relation(fields: [A], references: [id])
   Event    Event    @relation(fields: [B], references: [id])
 
-  @@index([A], name: "LocationOnEvent_LocationId")
-  @@index([B], name: "LocationOnEvent_EventId")
   @@unique([A, B], name: "LocationOnEvent_AB_unique")
+  @@index([B], name: "LocationOnEvent_EventId")
+  @@index([A], name: "LocationOnEvent_LocationId")
 }
 
 model StakeholderBriefingBook {
+  id           String       @id @default(cuid())
   A            String
   B            String
-  id           String       @id @default(cuid())
   Stakeholder  Stakeholder  @relation(fields: [A], references: [id])
   BriefingBook BriefingBook @relation(fields: [B], references: [id])
 
-  @@index([A], name: "StakeholderBriefingBook_StakeholderId")
-  @@index([B], name: "StakeholderBriefingBook_BriefingBookId")
   @@unique([A, B], name: "StakeholderBriefingBook_AB_unique")
+  @@index([B], name: "StakeholderBriefingBook_BriefingBookId")
+  @@index([A], name: "StakeholderBriefingBook_StakeholderId")
 }
 
 model StakeholderEvent {
+  id          String      @id @default(cuid())
   A           String
   B           String
-  id          String      @id @default(cuid())
   Stakeholder Stakeholder @relation(fields: [A], references: [id])
   Event       Event       @relation(fields: [B], references: [id])
 
-  @@index([A], name: "StakeholderEvent_StakeholderId")
-  @@index([B], name: "StakeholderEvent_EventId")
   @@unique([A, B], name: "StakeholderEvent_AB_unique")
+  @@index([B], name: "StakeholderEvent_EventId")
+  @@index([A], name: "StakeholderEvent_StakeholderId")
 }
 
 model TagOnDocument {
+  id       String   @id @default(cuid())
   A        String
   B        String
-  id       String   @id @default(cuid())
   Tag      Tag      @relation(fields: [A], references: [id])
   Document Document @relation(fields: [B], references: [id])
 
-  @@index([A], name: "TagOnDocument_TagId")
-  @@index([B], name: "TagOnDocument_DocumentId")
   @@unique([A, B], name: "TagOnDocument_AB_unique")
+  @@index([B], name: "TagOnDocument_DocumentId")
+  @@index([A], name: "TagOnDocument_TagId")
 }
 
 model TagOnEvent {
+  id    String @id @default(cuid())
   A     String
   B     String
-  id    String @id @default(cuid())
   Tag   Tag    @relation(fields: [A], references: [id])
   Event Event  @relation(fields: [B], references: [id])
 
-  @@index([A], name: "TagOnEvent_TagId")
-  @@index([B], name: "TagOnEvent_EventId")
   @@unique([A, B], name: "TagOnEvent_AB_unique")
+  @@index([B], name: "TagOnEvent_EventId")
+  @@index([A], name: "TagOnEvent_TagId")
 }
 
 model Classification {
-  createdAt                   DateTime                    @default(now())
-  id                          String                      @id
-  name                        String                      @unique
-  updatedAt                   DateTime                    @default(now())
+  id                          String                     @id
+  createdAt                   DateTime                   @default(now())
+  updatedAt                   DateTime                   @default(now())
+  name                        String                     @unique
   documentsWithClassification ClassificationOnDocument[]
 }
 
 model Document {
-  createdAt                                                       DateTime                    @default(now())
-  dnsaAbstract                                                    String?
-  dnsaCitation                                                    String?
-  dnsaCollection                                                  String?
-  dnsaFrom                                                        String?
-  dnsaItemNumber                                                  String?
-  dnsaOrigin                                                      String?
-  dnsaStakeholder                                                 String?
-  dnsaSubject                                                     String?
-  dnsaTo                                                          String?
-  dnsaURL                                                         String?
-  documentCreationDate                                            DateTime?
-  documentDescription                                             String?
-  documentMediaType                                               String                      @default("RawText")
-  documentOriginalID                                              String
-  documentPublicationDate                                         DateTime?
-  documentTitle                                                   String
-  documentTranscript                                              String?
-  id                                                              String                      @id
-  sessionNumber                                                   Int?
-  updatedAt                                                       DateTime                    @default(now())
-  briefingBooksMentionedIn                                        BriefingBookDocument[]
-  documentClassification                                          ClassificationOnDocument[]
-  documentAuthors                                                 DocumentAuthor[]
-  mentionedEvents                                                 DocumentEvent[]
-  documentFiles                                                   DocumentFile[]
-  mentionedStakeholders                                           DocumentInvolvedStakeholder[]
-  mentionedLocations                                              DocumentLocation[]
-  documentKind                                                    KindOnDocument[]
-  documentTags                                                    TagOnDocument[]
+  id                       String                        @id
+  createdAt                DateTime                      @default(now())
+  updatedAt                DateTime                      @default(now())
+  dnsaAbstract             String?
+  dnsaCitation             String?
+  dnsaCollection           String?
+  dnsaFrom                 String?
+  dnsaItemNumber           String?
+  dnsaOrigin               String?
+  dnsaStakeholder          String?
+  dnsaSubject              String?
+  dnsaTo                   String?
+  dnsaURL                  String?
+  documentCreationDate     DateTime?
+  documentDescription      String?
+  documentMediaType        String                        @default("RawText")
+  documentOriginalID       String
+  documentPublicationDate  DateTime?
+  documentTitle            String
+  documentTranscript       String?
+  sessionNumber            Int?
+  briefingBooksMentionedIn BriefingBookDocument[]
+  documentClassification   ClassificationOnDocument[]
+  documentAuthors          DocumentAuthor[]
+  mentionedEvents          DocumentEvent[]
+  documentFiles            DocumentFile[]
+  mentionedStakeholders    DocumentInvolvedStakeholder[]
+  mentionedLocations       DocumentLocation[]
+  documentKind             KindOnDocument[]
+  documentTags             TagOnDocument[]
 }
 
 model Event {
-  createdAt                 DateTime                    @default(now())
-  eventDescription          String?
-  eventEndDate              DateTime?
-  eventStartDate            DateTime
-  eventTitle                String
-  id                        String                      @id @default(cuid())
-  eventIdSeq                Int                         @default(autoincrement())
-  updatedAt                 DateTime                    @default(now())
-  briefingBooksMentionedIn  BriefingBookEvent[]
-  documentsMentionedIn      DocumentEvent[]
-  eventLocations            LocationOnEvent[]
-  eventStakeholders         StakeholderEvent[]
-  eventTags                 TagOnEvent[]
+  id                       String              @id @default(cuid())
+  createdAt                DateTime            @default(now())
+  updatedAt                DateTime            @default(now())
+  eventDescription         String?
+  eventEndDate             DateTime?
+  eventStartDate           DateTime
+  eventTitle               String
+  eventIdSeq               Int                 @default(autoincrement())
+  briefingBooksMentionedIn BriefingBookEvent[]
+  documentsMentionedIn     DocumentEvent[]
+  eventLocations           LocationOnEvent[]
+  eventStakeholders        StakeholderEvent[]
+  eventTags                TagOnEvent[]
 }
 
 model File {
-  contentType               String
-  createdAt                 DateTime                    @default(now())
-  id                        String                      @id @default(cuid())
-  name                      String
-  secret                    String                      @unique @default(cuid())
-  size                      Int
-  updatedAt                 DateTime                    @default(now())
-  url                       String                      @unique
-  documentsIncludedIn       DocumentFile[]
+  id                  String         @id @default(cuid())
+  createdAt           DateTime       @default(now())
+  updatedAt           DateTime       @default(now())
+  contentType         String
+  name                String
+  secret              String         @unique @default(cuid())
+  size                Int
+  url                 String         @unique
+  documentsIncludedIn DocumentFile[]
 }
 
 model Kind {
-  createdAt                 DateTime                    @default(now())
-  id                        String                      @id
-  name                      String                      @unique
-  updatedAt                 DateTime                    @default(now())
-  documentsWithKind         KindOnDocument[]
+  id                String           @id
+  createdAt         DateTime         @default(now())
+  updatedAt         DateTime         @default(now())
+  name              String           @unique
+  documentsWithKind KindOnDocument[]
 }
 
 model Location {
-  createdAt                 DateTime                    @default(now())
-  id                        String                      @id @default(cuid())
-  locationDescription       String?
-  locationLatitude          Int?
-  locationLongitude         Int?
-  locationName              String                      @unique
-  locationWikipediaUri      String?
-  updatedAt                 DateTime                    @default(now())
-  documentsMentionedIn      DocumentLocation[]
-  locationEvents            LocationOnEvent[]
+  id                   String             @id @default(cuid())
+  createdAt            DateTime           @default(now())
+  updatedAt            DateTime           @default(now())
+  locationDescription  String?
+  locationLatitude     Int?
+  locationLongitude    Int?
+  locationName         String             @unique
+  locationWikipediaUri String?
+  documentsMentionedIn DocumentLocation[]
+  locationEvents       LocationOnEvent[]
 }
 
 model Stakeholder {
-  createdAt                 DateTime                    @default(now())
-  id                        String                      @id @default(cuid())
-  isStakeholderInstitution  Int                         @default(0)
-  stakeholderDescription    String?
-  stakeholderFullName       String                      @unique
-  stakeholderWikipediaUri   String?
-  updatedAt                 DateTime                    @default(now())
-  documents                 DocumentAuthor[]
-  documentsMentionedIn      DocumentInvolvedStakeholder[]
-  briefingBooksMentionedIn  StakeholderBriefingBook[]
-  eventsInvolvedIn          StakeholderEvent[]
+  id                       String                        @id @default(cuid())
+  createdAt                DateTime                      @default(now())
+  updatedAt                DateTime                      @default(now())
+  isStakeholderInstitution Int                           @default(0)
+  stakeholderDescription   String?
+  stakeholderFullName      String                        @unique
+  stakeholderWikipediaUri  String?
+  documents                DocumentAuthor[]
+  documentsMentionedIn     DocumentInvolvedStakeholder[]
+  briefingBooksMentionedIn StakeholderBriefingBook[]
+  eventsInvolvedIn         StakeholderEvent[]
 }
 
 model Tag {
-  createdAt                 DateTime                    @default(now())
-  description               String?
-  id                        String                      @id @default(cuid())
-  name                      String                      @unique
-  tagWikipediaUri           String?                     @unique
-  type                      String?
-  updatedAt                 DateTime                    @default(now())
-  documentsWithTag          TagOnDocument[]
-  eventsWithTag             TagOnEvent[]
+  id               String          @id @default(cuid())
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @default(now())
+  description      String?
+  name             String          @unique
+  tagWikipediaUri  String?         @unique
+  type             String?
+  documentsWithTag TagOnDocument[]
+  eventsWithTag    TagOnEvent[]
 }
 
 model User {
+  id        String   @id @default(cuid())
   createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
   email     String?  @unique
   firstName String?
-  id        String   @id @default(cuid())
   lastName  String?
   password  String?
   role      String?
-  updatedAt DateTime @default(now())
   userName  String   @unique
 }
