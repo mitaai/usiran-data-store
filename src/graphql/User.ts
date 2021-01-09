@@ -61,15 +61,15 @@ async function userIsAdmin(context: Context) {
 export const User = objectType({
   name: 'User',
   definition(t) {
-    model(t).createdAt()
-    model(t).email()
-    model(t).password()
-    model(t).firstName()
-    model(t).id()
-    model(t).lastName()
-    model(t).role()
-    model(t).updatedAt()
-    model(t).userName()
+    t.model.createdAt()
+    t.model.email()
+    t.model.password()
+    t.model.firstName()
+    t.model.id()
+    t.model.lastName()
+    t.model.role()
+    t.model.updatedAt()
+    t.model.userName()
   },
 });
 
@@ -84,15 +84,15 @@ export const UserAuthPayload = objectType({
 export const Event = objectType({
   name: 'Event',
   definition(t) {
-    model(t).id()
-    model(t).eventIdSeq()
-    model(t).eventTitle()
-    model(t).eventStartDate()
-    model(t).eventEndDate()
-    model(t).eventTags()
-    model(t).eventStakeholders()
-    model(t).eventDescription()
-    model(t).eventLocations()
+    t.model.id()
+    t.model.eventIdSeq()
+    t.model.eventTitle()
+    t.model.eventStartDate()
+    t.model.eventEndDate()
+    t.model.eventTags()
+    t.model.eventStakeholders()
+    t.model.eventDescription()
+    t.model.eventLocations()
   },
 });
 
@@ -100,14 +100,14 @@ export const Event = objectType({
 export const Stakeholder = objectType({
   name: 'Stakeholder',
   definition(t) {
-    model(t).id()
-    model(t).stakeholderFullName()
-    model(t).stakeholderDescription()
-    model(t).documents()
-    model(t).documentsMentionedIn()
-    model(t).eventsInvolvedIn()
-    model(t).stakeholderWikipediaUri()
-    model(t).isStakeholderInstitution()
+    t.model.id()
+    t.model.stakeholderFullName()
+    t.model.stakeholderDescription()
+    t.model.documents()
+    t.model.documentsMentionedIn()
+    t.model.eventsInvolvedIn()
+    t.model.stakeholderWikipediaUri()
+    t.model.isStakeholderInstitution()
   },
 });
 
@@ -115,12 +115,12 @@ export const Stakeholder = objectType({
 export const Location = objectType({
   name: 'Location',
   definition(t) {
-    model(t).id()
-    model(t).locationName()
-    model(t).locationDescription()
-    model(t).documentsMentionedIn()
-    model(t).locationEvents()
-    model(t).locationWikipediaUri()
+    t.model.id()
+    t.model.locationName()
+    t.model.locationDescription()
+    t.model.documentsMentionedIn()
+    t.model.locationEvents()
+    t.model.locationWikipediaUri()
   },
 });
 
@@ -128,62 +128,62 @@ export const Location = objectType({
 export const File = objectType({
   name: 'File',
   definition(t) {
-    model(t).id()
-    model(t).url()
-    model(t).size()
-    model(t).name()
-    model(t).contentType()
+    t.model.id()
+    t.model.url()
+    t.model.size()
+    t.model.name()
+    t.model.contentType()
   },
 });
 
 export const Kind = objectType({
   name: 'Kind',
   definition(t) {
-    model(t).id()
-    model(t).name()
-    model(t).createdAt()
-    model(t).updatedAt()
-    model(t).documentsWithKind()
+    t.model.id()
+    t.model.name()
+    t.model.createdAt()
+    t.model.updatedAt()
+    t.model.documentsWithKind()
   },
 });
 
 export const Tag = objectType({
   name: 'Tag',
   definition(t) {
-    model(t).id()
-    model(t).name()
-    model(t).description()
-    model(t).tagWikipediaUri()
-    model(t).documentsWithTag()
-    model(t).eventsWithTag()
-    model(t).type()
-    model(t).createdAt()
-    model(t).updatedAt()
+    t.model.id()
+    t.model.name()
+    t.model.description()
+    t.model.tagWikipediaUri()
+    t.model.documentsWithTag()
+    t.model.eventsWithTag()
+    t.model.type()
+    t.model.createdAt()
+    t.model.updatedAt()
   },
 });
 
 export const BriefingBook = objectType({
   name: 'BriefingBook',
   definition(t) {
-    model(t).id()
-    model(t).briefingBookDescription()
-    model(t).briefingBookTitle()
-    model(t).mentionedDocuments()
-    model(t).mentionedEvents()
-    model(t).mentionedStakeholders()
-    model(t).createdAt()
-    model(t).updatedAt()
+    t.model.id()
+    t.model.briefingBookDescription()
+    t.model.briefingBookTitle()
+    t.model.mentionedDocuments()
+    t.model.mentionedEvents()
+    t.model.mentionedStakeholders()
+    t.model.createdAt()
+    t.model.updatedAt()
   },
 });
 
 export const Classification = objectType({
   name: 'Classification',
   definition(t) {
-    model(t).id()
-    model(t).name()
-    model(t).documentsWithClassification()
-    model(t).createdAt()
-    model(t).updatedAt()
+    t.model.id()
+    t.model.name()
+    t.model.documentsWithClassification()
+    t.model.createdAt()
+    t.model.updatedAt()
   },
 });
 
@@ -199,154 +199,154 @@ export const Classification = objectType({
 export const BriefingBookDocument = objectType({
   name: 'BriefingBookDocument',
   definition(t) {
-    model(t).id()
-    model(t).A({alias:"BriefingBookId"})
-    model(t).B({alias:"DocumentId"})
-    model(t).BriefingBook()
-    model(t).Document()
+    t.model.id()
+    t.model.A({alias:"BriefingBookId"})
+    t.model.B({alias:"DocumentId"})
+    t.model.BriefingBook()
+    t.model.Document()
   }
 })
 
 export const BriefingBookEvent = objectType({
   name: 'BriefingBookEvent',
   definition(t){
-    model(t).id()
-    model(t).A({alias:"EventId"})
-    model(t).B({alias:"BriefingBookId"})
-    model(t).Event()
-    model(t).BriefingBook()
+    t.model.id()
+    t.model.A({alias:"EventId"})
+    t.model.B({alias:"BriefingBookId"})
+    t.model.Event()
+    t.model.BriefingBook()
   }
 })
 
 export const ClassificationOnDocument = objectType({
   name: 'ClassificationOnDocument',
   definition(t) {
-    model(t).id()
-    model(t).A({alias:"ClassificationId"})
-    model(t).B({alias:"DocumentId"})
-    model(t).Classification()
-    model(t).Document()
+    t.model.id()
+    t.model.A({alias:"ClassificationId"})
+    t.model.B({alias:"DocumentId"})
+    t.model.Classification()
+    t.model.Document()
   }
 })
 
 export const DocumentAuthor = objectType({
   name: 'DocumentAuthor',
   definition(t){
-    model(t).id()
-    model(t).A({alias:"DocumentId"})
-    model(t).B({alias:"StakeholderId"})
-    model(t).Document()
-    model(t).Stakeholder()
+    t.model.id()
+    t.model.A({alias:"DocumentId"})
+    t.model.B({alias:"StakeholderId"})
+    t.model.Document()
+    t.model.Stakeholder()
   }
 })
 
 export const DocumentEvent = objectType({
   name: 'DocumentEvent',
   definition(t) {
-    model(t).id()
-    model(t).A({alias:"DocumentId"})
-    model(t).B({alias:"EventId"})
-    model(t).Document()
-    model(t).Event()
+    t.model.id()
+    t.model.A({alias:"DocumentId"})
+    t.model.B({alias:"EventId"})
+    t.model.Document()
+    t.model.Event()
   }
 })
 
 export const DocumentFile = objectType({
   name: 'DocumentFile',
   definition(t){
-    model(t).id()
-    model(t).A({alias:"DocumentId"})
-    model(t).B({alias:"FileId"})
-    model(t).Document()
-    model(t).File()
+    t.model.id()
+    t.model.A({alias:"DocumentId"})
+    t.model.B({alias:"FileId"})
+    t.model.Document()
+    t.model.File()
   }
 })
 
 export const DocumentInvolvedStakeholder = objectType({
   name: 'DocumentInvolvedStakeholder',
   definition(t) {
-    model(t).id()
-    model(t).A({alias:"StakeholderId"})
-    model(t).B({alias:"DocumentId"})
-    model(t).Stakeholder()
-    model(t).Document()
+    t.model.id()
+    t.model.A({alias:"StakeholderId"})
+    t.model.B({alias:"DocumentId"})
+    t.model.Stakeholder()
+    t.model.Document()
   }
 })
 
 export const DocumentLocation = objectType({
   name: 'DocumentLocation',
   definition(t){
-    model(t).id()
-    model(t).A({alias:"LocationId"})
-    model(t).B({alias:"DocumentId"})
-    model(t).Location()
-    model(t).Document()
+    t.model.id()
+    t.model.A({alias:"LocationId"})
+    t.model.B({alias:"DocumentId"})
+    t.model.Location()
+    t.model.Document()
   }
 })
 
 export const KindOnDocument = objectType({
   name: 'KindOnDocument',
   definition(t) {
-    model(t).id()
-    model(t).A({alias:"KindId"})
-    model(t).B({alias:"DocumentId"})
-    model(t).Kind()
-    model(t).Document()
+    t.model.id()
+    t.model.A({alias:"KindId"})
+    t.model.B({alias:"DocumentId"})
+    t.model.Kind()
+    t.model.Document()
   }
 })
 
 export const LocationOnEvent = objectType({
   name: 'LocationOnEvent',
   definition(t) {
-    model(t).id()
-    model(t).A({alias: "LocationId"})
-    model(t).B({alias: "EventId"})
-    model(t).Location()
-    model(t).Event()
+    t.model.id()
+    t.model.A({alias: "LocationId"})
+    t.model.B({alias: "EventId"})
+    t.model.Location()
+    t.model.Event()
   }
 })
 
 export const StakeholderBriefingBook = objectType({
   name: 'StakeholderBriefingBook',
   definition(t){
-    model(t).id()
-    model(t).A({alias: "StakeholderId"})
-    model(t).B({alias: "BriefingBookId"})
-    model(t).Stakeholder()
-    model(t).BriefingBook()
+    t.model.id()
+    t.model.A({alias: "StakeholderId"})
+    t.model.B({alias: "BriefingBookId"})
+    t.model.Stakeholder()
+    t.model.BriefingBook()
   }
 })
 
 export const StakeholderEvent = objectType({
   name: 'StakeholderEvent',
   definition(t){
-    model(t).id()
-    model(t).A({alias: "StakeholderId"})
-    model(t).B({alias: "EventId"})
-    model(t).Stakeholder()
-    model(t).Event()
+    t.model.id()
+    t.model.A({alias: "StakeholderId"})
+    t.model.B({alias: "EventId"})
+    t.model.Stakeholder()
+    t.model.Event()
   }
 })
 
 export const TagOnDocument = objectType({
   name: 'TagOnDocument',
   definition(t){
-    model(t).id()
-    model(t).A({alias:"TagId"})
-    model(t).B({alias:"DocumentId"})
-    model(t).Tag()
-    model(t).Document()
+    t.model.id()
+    t.model.A({alias:"TagId"})
+    t.model.B({alias:"DocumentId"})
+    t.model.Tag()
+    t.model.Document()
   }
 })
 
 export const TagOnEvent = objectType({
   name: 'TagOnEvent',
   definition(t){
-    model(t).id()
-    model(t).A({alias: "TagId"})
-    model(t).B({alias: "EventId"})
-    model(t).Tag()
-    model(t).Event()
+    t.model.id()
+    t.model.A({alias: "TagId"})
+    t.model.B({alias: "EventId"})
+    t.model.Tag()
+    t.model.Event()
   }
 })
 
@@ -362,7 +362,7 @@ export const TagOnEvent = objectType({
 //
 // Queries
 
-export const Queries = extendType({
+export const queries = extendType({
   type: 'Query',
   definition(t) {
     t.crud.user()
@@ -477,12 +477,12 @@ export const mutations  = extendType({
     // Create
 
     t.crud.createOneDocument({
-      authorize: (root, args, ctx) => userIsEditor(ctx)
+      authorize: (_root: any, _args: any, ctx: Context) => userIsEditor(ctx)
     })
     t.crud.createOneEvent({
       async resolve(root, args, ctx, info, originalResolve) {
         const res = await originalResolve(root, args, ctx, info)
-        const id = `9-${res.eventIdSeq-1573}`;
+        const id = `9-${(res.eventIdSeq as number)-1573}`;
         const newRes = await ctx.db.event.update({
           where: {
             id: res.id,
@@ -493,53 +493,53 @@ export const mutations  = extendType({
         })
         return newRes
       },
-      authorize: (root, args, ctx) => userIsEditor(ctx)
+      authorize: (_root: any, _args: any, ctx: Context) => userIsEditor(ctx)
     })
     t.crud.createOneLocation({
-      authorize: (root, args, ctx) => userIsEditor(ctx)
+      authorize: (_root: any, _args: any, ctx: Context) => userIsEditor(ctx)
     })
     t.crud.createOneStakeholder({
-      authorize: (root, args, ctx) => userIsEditor(ctx)
+      authorize: (_root: any, _args: any, ctx: Context) => userIsEditor(ctx)
     })
     t.crud.createOneTag({
-      authorize: (root, args, ctx) => userIsEditor(ctx)
+      authorize: (_root: any, _args: any, ctx: Context) => userIsEditor(ctx)
     })
     t.crud.createOneFile({
-      authorize: (root, args, ctx) => userIsEditor(ctx)
+      authorize: (_root: any, _args: any, ctx: Context) => userIsEditor(ctx)
     })
 
     t.crud.createOneClassificationOnDocument({
-      authorize: (root, args, ctx) => userIsEditor(ctx)
+      authorize: (_root: any, _args: any, ctx: Context) => userIsEditor(ctx)
     })
     t.crud.createOneDocumentAuthor({
-      authorize: (root, args, ctx) => userIsEditor(ctx)
+      authorize: (_root: any, _args: any, ctx: Context) => userIsEditor(ctx)
     })
     t.crud.createOneDocumentEvent({
-      authorize: (root, args, ctx) => userIsEditor(ctx)
+      authorize: (_root: any, _args: any, ctx: Context) => userIsEditor(ctx)
     })
     t.crud.createOneDocumentFile({
-      authorize: (root, args, ctx) => userIsEditor(ctx)
+      authorize: (_root: any, _args: any, ctx: Context) => userIsEditor(ctx)
     })
     t.crud.createOneDocumentInvolvedStakeholder({
-      authorize: (root, args, ctx) => userIsEditor(ctx)
+      authorize: (_root: any, _args: any, ctx: Context) => userIsEditor(ctx)
     })
     t.crud.createOneDocumentLocation({
-      authorize: (root, args, ctx) => userIsEditor(ctx)
+      authorize: (_root: any, _args: any, ctx: Context) => userIsEditor(ctx)
     })
     t.crud.createOneKindOnDocument({
-      authorize: (root, args, ctx) => userIsEditor(ctx)
+      authorize: (_root: any, _args: any, ctx: Context) => userIsEditor(ctx)
     })
     t.crud.createOneLocationOnEvent({
-      authorize: (root, args, ctx) => userIsEditor(ctx)
+      authorize: (_root: any, _args: any, ctx: Context) => userIsEditor(ctx)
     })
     t.crud.createOneStakeholderEvent({
-      authorize: (root, args, ctx) => userIsEditor(ctx)
+      authorize: (_root: any, _args: any, ctx: Context) => userIsEditor(ctx)
     })
     t.crud.createOneTagOnDocument({
-      authorize: (root, args, ctx) => userIsEditor(ctx)
+      authorize: (_root: any, _args: any, ctx: Context) => userIsEditor(ctx)
     })
     t.crud.createOneTagOnEvent({
-      authorize: (root, args, ctx) => userIsEditor(ctx)
+      authorize: (_root: any, _args: any, ctx: Context) => userIsEditor(ctx)
     })
 
     t.field('createUser', {
@@ -561,7 +561,7 @@ export const mutations  = extendType({
           },
         })
         return {
-          token: sign({ userId: user.id }, process.env.AUTH_SECRET),
+          token: sign({ userId: user.id }, process.env.AUTH_SECRET as Secret),
           user,
         }
       },
@@ -575,7 +575,7 @@ export const mutations  = extendType({
     // Update
 
     t.crud.updateOneUser({
-      authorize: (root, args, ctx) => userIsAdmin(ctx)
+      authorize: (_root: any, _args: any, ctx: Context) => userIsAdmin(ctx)
     })
     t.crud.updateOneDocument({
       async resolve(root, args, ctx, info, originalResolve) {
@@ -588,7 +588,7 @@ export const mutations  = extendType({
         const res = await originalResolve(root, args, ctx, info)
         return res
       },
-      authorize: (root, args, ctx) => userIsEditor(ctx)
+      authorize: (_root: any, _args: any, ctx: Context) => userIsEditor(ctx)
     })
     t.crud.updateOneEvent({
       async resolve(root, args, ctx, info, originalResolve) {
@@ -598,7 +598,7 @@ export const mutations  = extendType({
         const res = await originalResolve(root, args, ctx, info)
         return res
       },
-      authorize: (root, args, ctx) => userIsEditor(ctx)
+      authorize: (_root: any, _args: any, ctx: Context) => userIsEditor(ctx)
     })
     t.crud.updateOneStakeholder({
       async resolve(root, args, ctx, info, originalResolve) {
@@ -608,7 +608,7 @@ export const mutations  = extendType({
         const res = await originalResolve(root, args, ctx, info)
         return res
       },
-      authorize: (root, args, ctx) => userIsEditor(ctx)
+      authorize: (_root: any, _args: any, ctx: Context) => userIsEditor(ctx)
     })
     t.crud.updateOneLocation({
       async resolve(root, args, ctx, info, originalResolve) {
@@ -617,7 +617,7 @@ export const mutations  = extendType({
         const res = await originalResolve(root, args, ctx, info)
         return res
       },
-      authorize: (root, args, ctx) => userIsEditor(ctx)
+      authorize: (_root: any, _args: any, ctx: Context) => userIsEditor(ctx)
     })
 
     //    ___        _       _        
@@ -628,7 +628,7 @@ export const mutations  = extendType({
     // Delete
 
     t.crud.deleteOneUser({
-      authorize: (root, args, ctx) => userIsAdmin(ctx)
+      authorize: (_root: any, _args: any, ctx: Context) => userIsAdmin(ctx)
     })
     t.crud.deleteOneDocument({
       async resolve(root, args, ctx, info, originalResolve) {
@@ -644,7 +644,7 @@ export const mutations  = extendType({
         const res = await originalResolve(root, args, ctx, info)
         return res
       },
-      authorize: (root, args, ctx) => userIsEditor(ctx)
+      authorize: (_root: any, _args: any, ctx: Context) => userIsEditor(ctx)
     })
     t.crud.deleteOneEvent({
       async resolve(root, args, ctx, info, originalResolve) {
@@ -656,7 +656,7 @@ export const mutations  = extendType({
         const res = await originalResolve(root, args, ctx, info)
         return res
       },
-      authorize: (root, args, ctx) => userIsEditor(ctx)
+      authorize: (_root: any, _args: any, ctx: Context) => userIsEditor(ctx)
     })
     t.crud.deleteOneLocation({
       async resolve(root, args, ctx, info, originalResolve) {
@@ -665,7 +665,7 @@ export const mutations  = extendType({
         const res = await originalResolve(root, args, ctx, info)
         return res
       },
-      authorize: (root, args, ctx) => userIsEditor(ctx)
+      authorize: (_root: any, _args: any, ctx: Context) => userIsEditor(ctx)
     })
     t.crud.deleteOneStakeholder({
       async resolve(root, args, ctx, info, originalResolve) {
@@ -676,7 +676,7 @@ export const mutations  = extendType({
         const res = await originalResolve(root, args, ctx, info)
         return res
       },
-      authorize: (root, args, ctx) => userIsEditor(ctx)
+      authorize: (_root: any, _args: any, ctx: Context) => userIsEditor(ctx)
     })
 
     //     ___           _               

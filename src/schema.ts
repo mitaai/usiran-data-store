@@ -22,11 +22,11 @@ export const schema = makeSchema({
     ]
   },
   contextType: {
-    module: './context',
+    module: require.resolve('./context'),
     export: 'context',
     alias: 'ContextModule'
   },
-  shouldGenerateArtifacts: process.env.NODE_ENV === 'development',
+  shouldGenerateArtifacts: true,
   shouldExitAfterGenerateArtifacts: process.env.NEXUS_SHOULD_EXIT_AFTER_GENERATE_ARTIFACTS === 'true',
   plugins: [nexusPrisma({
     experimentalCRUD: true,
@@ -35,7 +35,7 @@ export const schema = makeSchema({
     }
   })],
   outputs: {
-    typegen: path.join(__dirname, 'node_modules/@types/typegen-nexus/index.d.ts'),
+    typegen: path.join(__dirname, '../node_modules/@types/typegen-nexus/index.d.ts'),
     schema: path.join(__dirname, './schema.graphql'),
   },
 });
@@ -50,7 +50,6 @@ const app = express()
 const http = HTTP.createServer(app)
 
 apollo.applyMiddleware({ app })
-apollo.installSubscriptionHandlers(http)
 
 http.listen(4000, () => {
   console.log(`🚀 GraphQL service ready at http://localhost:4000/graphql`)

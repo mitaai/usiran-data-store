@@ -15,33 +15,33 @@ type BriefingBook {
 
 input BriefingBookCreateOneWithoutMentionedDocumentsInput {
   connect: BriefingBookWhereUniqueInput
-  connectOrCreate: BriefingBookCreateOrConnectWithoutBriefingBookDocumentInput
+  connectOrCreate: BriefingBookCreateOrConnectWithoutmentionedDocumentsInput
   create: BriefingBookCreateWithoutMentionedDocumentsInput
 }
 
 input BriefingBookCreateOneWithoutMentionedEventsInput {
   connect: BriefingBookWhereUniqueInput
-  connectOrCreate: BriefingBookCreateOrConnectWithoutBriefingBookEventInput
+  connectOrCreate: BriefingBookCreateOrConnectWithoutmentionedEventsInput
   create: BriefingBookCreateWithoutMentionedEventsInput
 }
 
 input BriefingBookCreateOneWithoutMentionedStakeholdersInput {
   connect: BriefingBookWhereUniqueInput
-  connectOrCreate: BriefingBookCreateOrConnectWithoutStakeholderBriefingBookInput
+  connectOrCreate: BriefingBookCreateOrConnectWithoutmentionedStakeholdersInput
   create: BriefingBookCreateWithoutMentionedStakeholdersInput
 }
 
-input BriefingBookCreateOrConnectWithoutBriefingBookDocumentInput {
+input BriefingBookCreateOrConnectWithoutmentionedDocumentsInput {
   create: BriefingBookCreateWithoutMentionedDocumentsInput!
   where: BriefingBookWhereUniqueInput!
 }
 
-input BriefingBookCreateOrConnectWithoutBriefingBookEventInput {
+input BriefingBookCreateOrConnectWithoutmentionedEventsInput {
   create: BriefingBookCreateWithoutMentionedEventsInput!
   where: BriefingBookWhereUniqueInput!
 }
 
-input BriefingBookCreateOrConnectWithoutStakeholderBriefingBookInput {
+input BriefingBookCreateOrConnectWithoutmentionedStakeholdersInput {
   create: BriefingBookCreateWithoutMentionedStakeholdersInput!
   where: BriefingBookWhereUniqueInput!
 }
@@ -84,7 +84,7 @@ type BriefingBookDocument {
   id: String!
 }
 
-input BriefingBookDocument_AB_uniqueCompoundUniqueInput {
+input BriefingBookDocumentBriefingBookDocument_AB_uniqueCompoundUniqueInput {
   A: String!
   B: String!
 }
@@ -136,7 +136,7 @@ input BriefingBookDocumentScalarWhereInput {
   OR: [BriefingBookDocumentScalarWhereInput!]
 }
 
-input BriefingBookDocumentUpdateManyDataInput {
+input BriefingBookDocumentUpdateManyMutationInput {
   id: StringFieldUpdateOperationsInput
 }
 
@@ -149,7 +149,7 @@ input BriefingBookDocumentUpdateManyWithoutBriefingBookInput {
   disconnect: [BriefingBookDocumentWhereUniqueInput!]
   set: [BriefingBookDocumentWhereUniqueInput!]
   update: [BriefingBookDocumentUpdateWithWhereUniqueWithoutBriefingBookInput!]
-  updateMany: [BriefingBookDocumentUpdateManyWithWhereNestedInput!]
+  updateMany: [BriefingBookDocumentUpdateManyWithWhereWithoutBriefingBookInput!]
   upsert: [BriefingBookDocumentUpsertWithWhereUniqueWithoutBriefingBookInput!]
 }
 
@@ -162,44 +162,49 @@ input BriefingBookDocumentUpdateManyWithoutDocumentInput {
   disconnect: [BriefingBookDocumentWhereUniqueInput!]
   set: [BriefingBookDocumentWhereUniqueInput!]
   update: [BriefingBookDocumentUpdateWithWhereUniqueWithoutDocumentInput!]
-  updateMany: [BriefingBookDocumentUpdateManyWithWhereNestedInput!]
+  updateMany: [BriefingBookDocumentUpdateManyWithWhereWithoutDocumentInput!]
   upsert: [BriefingBookDocumentUpsertWithWhereUniqueWithoutDocumentInput!]
 }
 
-input BriefingBookDocumentUpdateManyWithWhereNestedInput {
-  data: BriefingBookDocumentUpdateManyDataInput!
+input BriefingBookDocumentUpdateManyWithWhereWithoutBriefingBookInput {
+  data: BriefingBookDocumentUpdateManyMutationInput!
   where: BriefingBookDocumentScalarWhereInput!
 }
 
-input BriefingBookDocumentUpdateWithoutBriefingBookDataInput {
+input BriefingBookDocumentUpdateManyWithWhereWithoutDocumentInput {
+  data: BriefingBookDocumentUpdateManyMutationInput!
+  where: BriefingBookDocumentScalarWhereInput!
+}
+
+input BriefingBookDocumentUpdateWithoutBriefingBookInput {
   Document: DocumentUpdateOneRequiredWithoutBriefingBooksMentionedInInput
   id: StringFieldUpdateOperationsInput
 }
 
-input BriefingBookDocumentUpdateWithoutDocumentDataInput {
+input BriefingBookDocumentUpdateWithoutDocumentInput {
   BriefingBook: BriefingBookUpdateOneRequiredWithoutMentionedDocumentsInput
   id: StringFieldUpdateOperationsInput
 }
 
 input BriefingBookDocumentUpdateWithWhereUniqueWithoutBriefingBookInput {
-  data: BriefingBookDocumentUpdateWithoutBriefingBookDataInput!
+  data: BriefingBookDocumentUpdateWithoutBriefingBookInput!
   where: BriefingBookDocumentWhereUniqueInput!
 }
 
 input BriefingBookDocumentUpdateWithWhereUniqueWithoutDocumentInput {
-  data: BriefingBookDocumentUpdateWithoutDocumentDataInput!
+  data: BriefingBookDocumentUpdateWithoutDocumentInput!
   where: BriefingBookDocumentWhereUniqueInput!
 }
 
 input BriefingBookDocumentUpsertWithWhereUniqueWithoutBriefingBookInput {
   create: BriefingBookDocumentCreateWithoutBriefingBookInput!
-  update: BriefingBookDocumentUpdateWithoutBriefingBookDataInput!
+  update: BriefingBookDocumentUpdateWithoutBriefingBookInput!
   where: BriefingBookDocumentWhereUniqueInput!
 }
 
 input BriefingBookDocumentUpsertWithWhereUniqueWithoutDocumentInput {
   create: BriefingBookDocumentCreateWithoutDocumentInput!
-  update: BriefingBookDocumentUpdateWithoutDocumentDataInput!
+  update: BriefingBookDocumentUpdateWithoutDocumentInput!
   where: BriefingBookDocumentWhereUniqueInput!
 }
 
@@ -215,9 +220,7 @@ input BriefingBookDocumentWhereInput {
 }
 
 input BriefingBookDocumentWhereUniqueInput {
-  A: String
-  B: String
-  BriefingBookDocument_AB_unique: BriefingBookDocument_AB_uniqueCompoundUniqueInput
+  BriefingBookDocument_AB_unique: BriefingBookDocumentBriefingBookDocument_AB_uniqueCompoundUniqueInput
   id: String
 }
 
@@ -229,7 +232,7 @@ type BriefingBookEvent {
   id: String!
 }
 
-input BriefingBookEvent_AB_uniqueCompoundUniqueInput {
+input BriefingBookEventBriefingBookEvent_AB_uniqueCompoundUniqueInput {
   A: String!
   B: String!
 }
@@ -281,7 +284,7 @@ input BriefingBookEventScalarWhereInput {
   OR: [BriefingBookEventScalarWhereInput!]
 }
 
-input BriefingBookEventUpdateManyDataInput {
+input BriefingBookEventUpdateManyMutationInput {
   id: StringFieldUpdateOperationsInput
 }
 
@@ -294,7 +297,7 @@ input BriefingBookEventUpdateManyWithoutBriefingBookInput {
   disconnect: [BriefingBookEventWhereUniqueInput!]
   set: [BriefingBookEventWhereUniqueInput!]
   update: [BriefingBookEventUpdateWithWhereUniqueWithoutBriefingBookInput!]
-  updateMany: [BriefingBookEventUpdateManyWithWhereNestedInput!]
+  updateMany: [BriefingBookEventUpdateManyWithWhereWithoutBriefingBookInput!]
   upsert: [BriefingBookEventUpsertWithWhereUniqueWithoutBriefingBookInput!]
 }
 
@@ -307,44 +310,49 @@ input BriefingBookEventUpdateManyWithoutEventInput {
   disconnect: [BriefingBookEventWhereUniqueInput!]
   set: [BriefingBookEventWhereUniqueInput!]
   update: [BriefingBookEventUpdateWithWhereUniqueWithoutEventInput!]
-  updateMany: [BriefingBookEventUpdateManyWithWhereNestedInput!]
+  updateMany: [BriefingBookEventUpdateManyWithWhereWithoutEventInput!]
   upsert: [BriefingBookEventUpsertWithWhereUniqueWithoutEventInput!]
 }
 
-input BriefingBookEventUpdateManyWithWhereNestedInput {
-  data: BriefingBookEventUpdateManyDataInput!
+input BriefingBookEventUpdateManyWithWhereWithoutBriefingBookInput {
+  data: BriefingBookEventUpdateManyMutationInput!
   where: BriefingBookEventScalarWhereInput!
 }
 
-input BriefingBookEventUpdateWithoutBriefingBookDataInput {
+input BriefingBookEventUpdateManyWithWhereWithoutEventInput {
+  data: BriefingBookEventUpdateManyMutationInput!
+  where: BriefingBookEventScalarWhereInput!
+}
+
+input BriefingBookEventUpdateWithoutBriefingBookInput {
   Event: EventUpdateOneRequiredWithoutBriefingBooksMentionedInInput
   id: StringFieldUpdateOperationsInput
 }
 
-input BriefingBookEventUpdateWithoutEventDataInput {
+input BriefingBookEventUpdateWithoutEventInput {
   BriefingBook: BriefingBookUpdateOneRequiredWithoutMentionedEventsInput
   id: StringFieldUpdateOperationsInput
 }
 
 input BriefingBookEventUpdateWithWhereUniqueWithoutBriefingBookInput {
-  data: BriefingBookEventUpdateWithoutBriefingBookDataInput!
+  data: BriefingBookEventUpdateWithoutBriefingBookInput!
   where: BriefingBookEventWhereUniqueInput!
 }
 
 input BriefingBookEventUpdateWithWhereUniqueWithoutEventInput {
-  data: BriefingBookEventUpdateWithoutEventDataInput!
+  data: BriefingBookEventUpdateWithoutEventInput!
   where: BriefingBookEventWhereUniqueInput!
 }
 
 input BriefingBookEventUpsertWithWhereUniqueWithoutBriefingBookInput {
   create: BriefingBookEventCreateWithoutBriefingBookInput!
-  update: BriefingBookEventUpdateWithoutBriefingBookDataInput!
+  update: BriefingBookEventUpdateWithoutBriefingBookInput!
   where: BriefingBookEventWhereUniqueInput!
 }
 
 input BriefingBookEventUpsertWithWhereUniqueWithoutEventInput {
   create: BriefingBookEventCreateWithoutEventInput!
-  update: BriefingBookEventUpdateWithoutEventDataInput!
+  update: BriefingBookEventUpdateWithoutEventInput!
   where: BriefingBookEventWhereUniqueInput!
 }
 
@@ -360,9 +368,7 @@ input BriefingBookEventWhereInput {
 }
 
 input BriefingBookEventWhereUniqueInput {
-  A: String
-  B: String
-  BriefingBookEvent_AB_unique: BriefingBookEvent_AB_uniqueCompoundUniqueInput
+  BriefingBookEvent_AB_unique: BriefingBookEventBriefingBookEvent_AB_uniqueCompoundUniqueInput
   id: String
 }
 
@@ -376,29 +382,29 @@ input BriefingBookOrderByInput {
 
 input BriefingBookUpdateOneRequiredWithoutMentionedDocumentsInput {
   connect: BriefingBookWhereUniqueInput
-  connectOrCreate: BriefingBookCreateOrConnectWithoutBriefingBookDocumentInput
+  connectOrCreate: BriefingBookCreateOrConnectWithoutmentionedDocumentsInput
   create: BriefingBookCreateWithoutMentionedDocumentsInput
-  update: BriefingBookUpdateWithoutMentionedDocumentsDataInput
+  update: BriefingBookUpdateWithoutMentionedDocumentsInput
   upsert: BriefingBookUpsertWithoutMentionedDocumentsInput
 }
 
 input BriefingBookUpdateOneRequiredWithoutMentionedEventsInput {
   connect: BriefingBookWhereUniqueInput
-  connectOrCreate: BriefingBookCreateOrConnectWithoutBriefingBookEventInput
+  connectOrCreate: BriefingBookCreateOrConnectWithoutmentionedEventsInput
   create: BriefingBookCreateWithoutMentionedEventsInput
-  update: BriefingBookUpdateWithoutMentionedEventsDataInput
+  update: BriefingBookUpdateWithoutMentionedEventsInput
   upsert: BriefingBookUpsertWithoutMentionedEventsInput
 }
 
 input BriefingBookUpdateOneRequiredWithoutMentionedStakeholdersInput {
   connect: BriefingBookWhereUniqueInput
-  connectOrCreate: BriefingBookCreateOrConnectWithoutStakeholderBriefingBookInput
+  connectOrCreate: BriefingBookCreateOrConnectWithoutmentionedStakeholdersInput
   create: BriefingBookCreateWithoutMentionedStakeholdersInput
-  update: BriefingBookUpdateWithoutMentionedStakeholdersDataInput
+  update: BriefingBookUpdateWithoutMentionedStakeholdersInput
   upsert: BriefingBookUpsertWithoutMentionedStakeholdersInput
 }
 
-input BriefingBookUpdateWithoutMentionedDocumentsDataInput {
+input BriefingBookUpdateWithoutMentionedDocumentsInput {
   briefingBookDescription: NullableStringFieldUpdateOperationsInput
   briefingBookTitle: StringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
@@ -408,7 +414,7 @@ input BriefingBookUpdateWithoutMentionedDocumentsDataInput {
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
-input BriefingBookUpdateWithoutMentionedEventsDataInput {
+input BriefingBookUpdateWithoutMentionedEventsInput {
   briefingBookDescription: NullableStringFieldUpdateOperationsInput
   briefingBookTitle: StringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
@@ -418,7 +424,7 @@ input BriefingBookUpdateWithoutMentionedEventsDataInput {
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
-input BriefingBookUpdateWithoutMentionedStakeholdersDataInput {
+input BriefingBookUpdateWithoutMentionedStakeholdersInput {
   briefingBookDescription: NullableStringFieldUpdateOperationsInput
   briefingBookTitle: StringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
@@ -430,17 +436,17 @@ input BriefingBookUpdateWithoutMentionedStakeholdersDataInput {
 
 input BriefingBookUpsertWithoutMentionedDocumentsInput {
   create: BriefingBookCreateWithoutMentionedDocumentsInput!
-  update: BriefingBookUpdateWithoutMentionedDocumentsDataInput!
+  update: BriefingBookUpdateWithoutMentionedDocumentsInput!
 }
 
 input BriefingBookUpsertWithoutMentionedEventsInput {
   create: BriefingBookCreateWithoutMentionedEventsInput!
-  update: BriefingBookUpdateWithoutMentionedEventsDataInput!
+  update: BriefingBookUpdateWithoutMentionedEventsInput!
 }
 
 input BriefingBookUpsertWithoutMentionedStakeholdersInput {
   create: BriefingBookCreateWithoutMentionedStakeholdersInput!
-  update: BriefingBookUpdateWithoutMentionedStakeholdersDataInput!
+  update: BriefingBookUpdateWithoutMentionedStakeholdersInput!
 }
 
 input BriefingBookWhereInput {
@@ -472,11 +478,11 @@ type Classification {
 
 input ClassificationCreateOneWithoutDocumentsWithClassificationInput {
   connect: ClassificationWhereUniqueInput
-  connectOrCreate: ClassificationCreateOrConnectWithoutClassificationOnDocumentInput
+  connectOrCreate: ClassificationCreateOrConnectWithoutdocumentsWithClassificationInput
   create: ClassificationCreateWithoutDocumentsWithClassificationInput
 }
 
-input ClassificationCreateOrConnectWithoutClassificationOnDocumentInput {
+input ClassificationCreateOrConnectWithoutdocumentsWithClassificationInput {
   create: ClassificationCreateWithoutDocumentsWithClassificationInput!
   where: ClassificationWhereUniqueInput!
 }
@@ -496,7 +502,7 @@ type ClassificationOnDocument {
   id: String!
 }
 
-input ClassificationOnDocument_AB_uniqueCompoundUniqueInput {
+input ClassificationOnDocumentClassificationOnDocument_AB_uniqueCompoundUniqueInput {
   A: String!
   B: String!
 }
@@ -538,7 +544,7 @@ input ClassificationOnDocumentScalarWhereInput {
   OR: [ClassificationOnDocumentScalarWhereInput!]
 }
 
-input ClassificationOnDocumentUpdateManyDataInput {
+input ClassificationOnDocumentUpdateManyMutationInput {
   id: StringFieldUpdateOperationsInput
 }
 
@@ -551,28 +557,28 @@ input ClassificationOnDocumentUpdateManyWithoutDocumentInput {
   disconnect: [ClassificationOnDocumentWhereUniqueInput!]
   set: [ClassificationOnDocumentWhereUniqueInput!]
   update: [ClassificationOnDocumentUpdateWithWhereUniqueWithoutDocumentInput!]
-  updateMany: [ClassificationOnDocumentUpdateManyWithWhereNestedInput!]
+  updateMany: [ClassificationOnDocumentUpdateManyWithWhereWithoutDocumentInput!]
   upsert: [ClassificationOnDocumentUpsertWithWhereUniqueWithoutDocumentInput!]
 }
 
-input ClassificationOnDocumentUpdateManyWithWhereNestedInput {
-  data: ClassificationOnDocumentUpdateManyDataInput!
+input ClassificationOnDocumentUpdateManyWithWhereWithoutDocumentInput {
+  data: ClassificationOnDocumentUpdateManyMutationInput!
   where: ClassificationOnDocumentScalarWhereInput!
 }
 
-input ClassificationOnDocumentUpdateWithoutDocumentDataInput {
+input ClassificationOnDocumentUpdateWithoutDocumentInput {
   Classification: ClassificationUpdateOneRequiredWithoutDocumentsWithClassificationInput
   id: StringFieldUpdateOperationsInput
 }
 
 input ClassificationOnDocumentUpdateWithWhereUniqueWithoutDocumentInput {
-  data: ClassificationOnDocumentUpdateWithoutDocumentDataInput!
+  data: ClassificationOnDocumentUpdateWithoutDocumentInput!
   where: ClassificationOnDocumentWhereUniqueInput!
 }
 
 input ClassificationOnDocumentUpsertWithWhereUniqueWithoutDocumentInput {
   create: ClassificationOnDocumentCreateWithoutDocumentInput!
-  update: ClassificationOnDocumentUpdateWithoutDocumentDataInput!
+  update: ClassificationOnDocumentUpdateWithoutDocumentInput!
   where: ClassificationOnDocumentWhereUniqueInput!
 }
 
@@ -588,21 +594,19 @@ input ClassificationOnDocumentWhereInput {
 }
 
 input ClassificationOnDocumentWhereUniqueInput {
-  A: String
-  B: String
-  ClassificationOnDocument_AB_unique: ClassificationOnDocument_AB_uniqueCompoundUniqueInput
+  ClassificationOnDocument_AB_unique: ClassificationOnDocumentClassificationOnDocument_AB_uniqueCompoundUniqueInput
   id: String
 }
 
 input ClassificationUpdateOneRequiredWithoutDocumentsWithClassificationInput {
   connect: ClassificationWhereUniqueInput
-  connectOrCreate: ClassificationCreateOrConnectWithoutClassificationOnDocumentInput
+  connectOrCreate: ClassificationCreateOrConnectWithoutdocumentsWithClassificationInput
   create: ClassificationCreateWithoutDocumentsWithClassificationInput
-  update: ClassificationUpdateWithoutDocumentsWithClassificationDataInput
+  update: ClassificationUpdateWithoutDocumentsWithClassificationInput
   upsert: ClassificationUpsertWithoutDocumentsWithClassificationInput
 }
 
-input ClassificationUpdateWithoutDocumentsWithClassificationDataInput {
+input ClassificationUpdateWithoutDocumentsWithClassificationInput {
   createdAt: DateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
@@ -611,7 +615,7 @@ input ClassificationUpdateWithoutDocumentsWithClassificationDataInput {
 
 input ClassificationUpsertWithoutDocumentsWithClassificationInput {
   create: ClassificationCreateWithoutDocumentsWithClassificationInput!
-  update: ClassificationUpdateWithoutDocumentsWithClassificationDataInput!
+  update: ClassificationUpdateWithoutDocumentsWithClassificationInput!
 }
 
 input ClassificationWhereInput {
@@ -631,9 +635,7 @@ input ClassificationWhereUniqueInput {
 }
 
 """
-A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the
-`date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO
-8601 standard for representation of dates and times using the Gregorian calendar.
+A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
 """
 scalar DateTime
 
@@ -698,11 +700,6 @@ type DocumentAuthor {
   StakeholderId: String!
 }
 
-input DocumentAuthor_AB_uniqueCompoundUniqueInput {
-  A: String!
-  B: String!
-}
-
 input DocumentAuthorCreateInput {
   Document: DocumentCreateOneWithoutDocumentAuthorsInput!
   id: String
@@ -741,6 +738,11 @@ input DocumentAuthorCreateWithoutStakeholderInput {
   id: String
 }
 
+input DocumentAuthorDocumentAuthor_AB_uniqueCompoundUniqueInput {
+  A: String!
+  B: String!
+}
+
 input DocumentAuthorListRelationFilter {
   every: DocumentAuthorWhereInput
   none: DocumentAuthorWhereInput
@@ -756,7 +758,7 @@ input DocumentAuthorScalarWhereInput {
   OR: [DocumentAuthorScalarWhereInput!]
 }
 
-input DocumentAuthorUpdateManyDataInput {
+input DocumentAuthorUpdateManyMutationInput {
   id: StringFieldUpdateOperationsInput
 }
 
@@ -769,7 +771,7 @@ input DocumentAuthorUpdateManyWithoutDocumentInput {
   disconnect: [DocumentAuthorWhereUniqueInput!]
   set: [DocumentAuthorWhereUniqueInput!]
   update: [DocumentAuthorUpdateWithWhereUniqueWithoutDocumentInput!]
-  updateMany: [DocumentAuthorUpdateManyWithWhereNestedInput!]
+  updateMany: [DocumentAuthorUpdateManyWithWhereWithoutDocumentInput!]
   upsert: [DocumentAuthorUpsertWithWhereUniqueWithoutDocumentInput!]
 }
 
@@ -782,44 +784,49 @@ input DocumentAuthorUpdateManyWithoutStakeholderInput {
   disconnect: [DocumentAuthorWhereUniqueInput!]
   set: [DocumentAuthorWhereUniqueInput!]
   update: [DocumentAuthorUpdateWithWhereUniqueWithoutStakeholderInput!]
-  updateMany: [DocumentAuthorUpdateManyWithWhereNestedInput!]
+  updateMany: [DocumentAuthorUpdateManyWithWhereWithoutStakeholderInput!]
   upsert: [DocumentAuthorUpsertWithWhereUniqueWithoutStakeholderInput!]
 }
 
-input DocumentAuthorUpdateManyWithWhereNestedInput {
-  data: DocumentAuthorUpdateManyDataInput!
+input DocumentAuthorUpdateManyWithWhereWithoutDocumentInput {
+  data: DocumentAuthorUpdateManyMutationInput!
   where: DocumentAuthorScalarWhereInput!
 }
 
-input DocumentAuthorUpdateWithoutDocumentDataInput {
+input DocumentAuthorUpdateManyWithWhereWithoutStakeholderInput {
+  data: DocumentAuthorUpdateManyMutationInput!
+  where: DocumentAuthorScalarWhereInput!
+}
+
+input DocumentAuthorUpdateWithoutDocumentInput {
   id: StringFieldUpdateOperationsInput
   Stakeholder: StakeholderUpdateOneRequiredWithoutDocumentsInput
 }
 
-input DocumentAuthorUpdateWithoutStakeholderDataInput {
+input DocumentAuthorUpdateWithoutStakeholderInput {
   Document: DocumentUpdateOneRequiredWithoutDocumentAuthorsInput
   id: StringFieldUpdateOperationsInput
 }
 
 input DocumentAuthorUpdateWithWhereUniqueWithoutDocumentInput {
-  data: DocumentAuthorUpdateWithoutDocumentDataInput!
+  data: DocumentAuthorUpdateWithoutDocumentInput!
   where: DocumentAuthorWhereUniqueInput!
 }
 
 input DocumentAuthorUpdateWithWhereUniqueWithoutStakeholderInput {
-  data: DocumentAuthorUpdateWithoutStakeholderDataInput!
+  data: DocumentAuthorUpdateWithoutStakeholderInput!
   where: DocumentAuthorWhereUniqueInput!
 }
 
 input DocumentAuthorUpsertWithWhereUniqueWithoutDocumentInput {
   create: DocumentAuthorCreateWithoutDocumentInput!
-  update: DocumentAuthorUpdateWithoutDocumentDataInput!
+  update: DocumentAuthorUpdateWithoutDocumentInput!
   where: DocumentAuthorWhereUniqueInput!
 }
 
 input DocumentAuthorUpsertWithWhereUniqueWithoutStakeholderInput {
   create: DocumentAuthorCreateWithoutStakeholderInput!
-  update: DocumentAuthorUpdateWithoutStakeholderDataInput!
+  update: DocumentAuthorUpdateWithoutStakeholderInput!
   where: DocumentAuthorWhereUniqueInput!
 }
 
@@ -835,9 +842,7 @@ input DocumentAuthorWhereInput {
 }
 
 input DocumentAuthorWhereUniqueInput {
-  A: String
-  B: String
-  DocumentAuthor_AB_unique: DocumentAuthor_AB_uniqueCompoundUniqueInput
+  DocumentAuthor_AB_unique: DocumentAuthorDocumentAuthor_AB_uniqueCompoundUniqueInput
   id: String
 }
 
@@ -876,100 +881,100 @@ input DocumentCreateInput {
 
 input DocumentCreateOneWithoutBriefingBooksMentionedInInput {
   connect: DocumentWhereUniqueInput
-  connectOrCreate: DocumentCreateOrConnectWithoutBriefingBookDocumentInput
+  connectOrCreate: DocumentCreateOrConnectWithoutbriefingBooksMentionedInInput
   create: DocumentCreateWithoutBriefingBooksMentionedInInput
 }
 
 input DocumentCreateOneWithoutDocumentAuthorsInput {
   connect: DocumentWhereUniqueInput
-  connectOrCreate: DocumentCreateOrConnectWithoutDocumentAuthorInput
+  connectOrCreate: DocumentCreateOrConnectWithoutdocumentAuthorsInput
   create: DocumentCreateWithoutDocumentAuthorsInput
 }
 
 input DocumentCreateOneWithoutDocumentClassificationInput {
   connect: DocumentWhereUniqueInput
-  connectOrCreate: DocumentCreateOrConnectWithoutClassificationOnDocumentInput
+  connectOrCreate: DocumentCreateOrConnectWithoutdocumentClassificationInput
   create: DocumentCreateWithoutDocumentClassificationInput
 }
 
 input DocumentCreateOneWithoutDocumentFilesInput {
   connect: DocumentWhereUniqueInput
-  connectOrCreate: DocumentCreateOrConnectWithoutDocumentFileInput
+  connectOrCreate: DocumentCreateOrConnectWithoutdocumentFilesInput
   create: DocumentCreateWithoutDocumentFilesInput
 }
 
 input DocumentCreateOneWithoutDocumentKindInput {
   connect: DocumentWhereUniqueInput
-  connectOrCreate: DocumentCreateOrConnectWithoutKindOnDocumentInput
+  connectOrCreate: DocumentCreateOrConnectWithoutdocumentKindInput
   create: DocumentCreateWithoutDocumentKindInput
 }
 
 input DocumentCreateOneWithoutDocumentTagsInput {
   connect: DocumentWhereUniqueInput
-  connectOrCreate: DocumentCreateOrConnectWithoutTagOnDocumentInput
+  connectOrCreate: DocumentCreateOrConnectWithoutdocumentTagsInput
   create: DocumentCreateWithoutDocumentTagsInput
 }
 
 input DocumentCreateOneWithoutMentionedEventsInput {
   connect: DocumentWhereUniqueInput
-  connectOrCreate: DocumentCreateOrConnectWithoutDocumentEventInput
+  connectOrCreate: DocumentCreateOrConnectWithoutmentionedEventsInput
   create: DocumentCreateWithoutMentionedEventsInput
 }
 
 input DocumentCreateOneWithoutMentionedLocationsInput {
   connect: DocumentWhereUniqueInput
-  connectOrCreate: DocumentCreateOrConnectWithoutDocumentLocationInput
+  connectOrCreate: DocumentCreateOrConnectWithoutmentionedLocationsInput
   create: DocumentCreateWithoutMentionedLocationsInput
 }
 
 input DocumentCreateOneWithoutMentionedStakeholdersInput {
   connect: DocumentWhereUniqueInput
-  connectOrCreate: DocumentCreateOrConnectWithoutDocumentInvolvedStakeholderInput
+  connectOrCreate: DocumentCreateOrConnectWithoutmentionedStakeholdersInput
   create: DocumentCreateWithoutMentionedStakeholdersInput
 }
 
-input DocumentCreateOrConnectWithoutBriefingBookDocumentInput {
+input DocumentCreateOrConnectWithoutbriefingBooksMentionedInInput {
   create: DocumentCreateWithoutBriefingBooksMentionedInInput!
   where: DocumentWhereUniqueInput!
 }
 
-input DocumentCreateOrConnectWithoutClassificationOnDocumentInput {
-  create: DocumentCreateWithoutDocumentClassificationInput!
-  where: DocumentWhereUniqueInput!
-}
-
-input DocumentCreateOrConnectWithoutDocumentAuthorInput {
+input DocumentCreateOrConnectWithoutdocumentAuthorsInput {
   create: DocumentCreateWithoutDocumentAuthorsInput!
   where: DocumentWhereUniqueInput!
 }
 
-input DocumentCreateOrConnectWithoutDocumentEventInput {
-  create: DocumentCreateWithoutMentionedEventsInput!
+input DocumentCreateOrConnectWithoutdocumentClassificationInput {
+  create: DocumentCreateWithoutDocumentClassificationInput!
   where: DocumentWhereUniqueInput!
 }
 
-input DocumentCreateOrConnectWithoutDocumentFileInput {
+input DocumentCreateOrConnectWithoutdocumentFilesInput {
   create: DocumentCreateWithoutDocumentFilesInput!
   where: DocumentWhereUniqueInput!
 }
 
-input DocumentCreateOrConnectWithoutDocumentInvolvedStakeholderInput {
-  create: DocumentCreateWithoutMentionedStakeholdersInput!
-  where: DocumentWhereUniqueInput!
-}
-
-input DocumentCreateOrConnectWithoutDocumentLocationInput {
-  create: DocumentCreateWithoutMentionedLocationsInput!
-  where: DocumentWhereUniqueInput!
-}
-
-input DocumentCreateOrConnectWithoutKindOnDocumentInput {
+input DocumentCreateOrConnectWithoutdocumentKindInput {
   create: DocumentCreateWithoutDocumentKindInput!
   where: DocumentWhereUniqueInput!
 }
 
-input DocumentCreateOrConnectWithoutTagOnDocumentInput {
+input DocumentCreateOrConnectWithoutdocumentTagsInput {
   create: DocumentCreateWithoutDocumentTagsInput!
+  where: DocumentWhereUniqueInput!
+}
+
+input DocumentCreateOrConnectWithoutmentionedEventsInput {
+  create: DocumentCreateWithoutMentionedEventsInput!
+  where: DocumentWhereUniqueInput!
+}
+
+input DocumentCreateOrConnectWithoutmentionedLocationsInput {
+  create: DocumentCreateWithoutMentionedLocationsInput!
+  where: DocumentWhereUniqueInput!
+}
+
+input DocumentCreateOrConnectWithoutmentionedStakeholdersInput {
+  create: DocumentCreateWithoutMentionedStakeholdersInput!
   where: DocumentWhereUniqueInput!
 }
 
@@ -1269,11 +1274,6 @@ type DocumentEvent {
   id: String!
 }
 
-input DocumentEvent_AB_uniqueCompoundUniqueInput {
-  A: String!
-  B: String!
-}
-
 input DocumentEventCreateInput {
   Document: DocumentCreateOneWithoutMentionedEventsInput!
   Event: EventCreateOneWithoutDocumentsMentionedInInput!
@@ -1312,6 +1312,11 @@ input DocumentEventCreateWithoutEventInput {
   id: String
 }
 
+input DocumentEventDocumentEvent_AB_uniqueCompoundUniqueInput {
+  A: String!
+  B: String!
+}
+
 input DocumentEventListRelationFilter {
   every: DocumentEventWhereInput
   none: DocumentEventWhereInput
@@ -1327,7 +1332,7 @@ input DocumentEventScalarWhereInput {
   OR: [DocumentEventScalarWhereInput!]
 }
 
-input DocumentEventUpdateManyDataInput {
+input DocumentEventUpdateManyMutationInput {
   id: StringFieldUpdateOperationsInput
 }
 
@@ -1340,7 +1345,7 @@ input DocumentEventUpdateManyWithoutDocumentInput {
   disconnect: [DocumentEventWhereUniqueInput!]
   set: [DocumentEventWhereUniqueInput!]
   update: [DocumentEventUpdateWithWhereUniqueWithoutDocumentInput!]
-  updateMany: [DocumentEventUpdateManyWithWhereNestedInput!]
+  updateMany: [DocumentEventUpdateManyWithWhereWithoutDocumentInput!]
   upsert: [DocumentEventUpsertWithWhereUniqueWithoutDocumentInput!]
 }
 
@@ -1353,44 +1358,49 @@ input DocumentEventUpdateManyWithoutEventInput {
   disconnect: [DocumentEventWhereUniqueInput!]
   set: [DocumentEventWhereUniqueInput!]
   update: [DocumentEventUpdateWithWhereUniqueWithoutEventInput!]
-  updateMany: [DocumentEventUpdateManyWithWhereNestedInput!]
+  updateMany: [DocumentEventUpdateManyWithWhereWithoutEventInput!]
   upsert: [DocumentEventUpsertWithWhereUniqueWithoutEventInput!]
 }
 
-input DocumentEventUpdateManyWithWhereNestedInput {
-  data: DocumentEventUpdateManyDataInput!
+input DocumentEventUpdateManyWithWhereWithoutDocumentInput {
+  data: DocumentEventUpdateManyMutationInput!
   where: DocumentEventScalarWhereInput!
 }
 
-input DocumentEventUpdateWithoutDocumentDataInput {
+input DocumentEventUpdateManyWithWhereWithoutEventInput {
+  data: DocumentEventUpdateManyMutationInput!
+  where: DocumentEventScalarWhereInput!
+}
+
+input DocumentEventUpdateWithoutDocumentInput {
   Event: EventUpdateOneRequiredWithoutDocumentsMentionedInInput
   id: StringFieldUpdateOperationsInput
 }
 
-input DocumentEventUpdateWithoutEventDataInput {
+input DocumentEventUpdateWithoutEventInput {
   Document: DocumentUpdateOneRequiredWithoutMentionedEventsInput
   id: StringFieldUpdateOperationsInput
 }
 
 input DocumentEventUpdateWithWhereUniqueWithoutDocumentInput {
-  data: DocumentEventUpdateWithoutDocumentDataInput!
+  data: DocumentEventUpdateWithoutDocumentInput!
   where: DocumentEventWhereUniqueInput!
 }
 
 input DocumentEventUpdateWithWhereUniqueWithoutEventInput {
-  data: DocumentEventUpdateWithoutEventDataInput!
+  data: DocumentEventUpdateWithoutEventInput!
   where: DocumentEventWhereUniqueInput!
 }
 
 input DocumentEventUpsertWithWhereUniqueWithoutDocumentInput {
   create: DocumentEventCreateWithoutDocumentInput!
-  update: DocumentEventUpdateWithoutDocumentDataInput!
+  update: DocumentEventUpdateWithoutDocumentInput!
   where: DocumentEventWhereUniqueInput!
 }
 
 input DocumentEventUpsertWithWhereUniqueWithoutEventInput {
   create: DocumentEventCreateWithoutEventInput!
-  update: DocumentEventUpdateWithoutEventDataInput!
+  update: DocumentEventUpdateWithoutEventInput!
   where: DocumentEventWhereUniqueInput!
 }
 
@@ -1406,9 +1416,7 @@ input DocumentEventWhereInput {
 }
 
 input DocumentEventWhereUniqueInput {
-  A: String
-  B: String
-  DocumentEvent_AB_unique: DocumentEvent_AB_uniqueCompoundUniqueInput
+  DocumentEvent_AB_unique: DocumentEventDocumentEvent_AB_uniqueCompoundUniqueInput
   id: String
 }
 
@@ -1418,11 +1426,6 @@ type DocumentFile {
   File: File!
   FileId: String!
   id: String!
-}
-
-input DocumentFile_AB_uniqueCompoundUniqueInput {
-  A: String!
-  B: String!
 }
 
 input DocumentFileCreateInput {
@@ -1463,6 +1466,11 @@ input DocumentFileCreateWithoutFileInput {
   id: String
 }
 
+input DocumentFileDocumentFile_AB_uniqueCompoundUniqueInput {
+  A: String!
+  B: String!
+}
+
 input DocumentFileListRelationFilter {
   every: DocumentFileWhereInput
   none: DocumentFileWhereInput
@@ -1478,7 +1486,7 @@ input DocumentFileScalarWhereInput {
   OR: [DocumentFileScalarWhereInput!]
 }
 
-input DocumentFileUpdateManyDataInput {
+input DocumentFileUpdateManyMutationInput {
   id: StringFieldUpdateOperationsInput
 }
 
@@ -1491,28 +1499,28 @@ input DocumentFileUpdateManyWithoutDocumentInput {
   disconnect: [DocumentFileWhereUniqueInput!]
   set: [DocumentFileWhereUniqueInput!]
   update: [DocumentFileUpdateWithWhereUniqueWithoutDocumentInput!]
-  updateMany: [DocumentFileUpdateManyWithWhereNestedInput!]
+  updateMany: [DocumentFileUpdateManyWithWhereWithoutDocumentInput!]
   upsert: [DocumentFileUpsertWithWhereUniqueWithoutDocumentInput!]
 }
 
-input DocumentFileUpdateManyWithWhereNestedInput {
-  data: DocumentFileUpdateManyDataInput!
+input DocumentFileUpdateManyWithWhereWithoutDocumentInput {
+  data: DocumentFileUpdateManyMutationInput!
   where: DocumentFileScalarWhereInput!
 }
 
-input DocumentFileUpdateWithoutDocumentDataInput {
+input DocumentFileUpdateWithoutDocumentInput {
   File: FileUpdateOneRequiredWithoutDocumentsIncludedInInput
   id: StringFieldUpdateOperationsInput
 }
 
 input DocumentFileUpdateWithWhereUniqueWithoutDocumentInput {
-  data: DocumentFileUpdateWithoutDocumentDataInput!
+  data: DocumentFileUpdateWithoutDocumentInput!
   where: DocumentFileWhereUniqueInput!
 }
 
 input DocumentFileUpsertWithWhereUniqueWithoutDocumentInput {
   create: DocumentFileCreateWithoutDocumentInput!
-  update: DocumentFileUpdateWithoutDocumentDataInput!
+  update: DocumentFileUpdateWithoutDocumentInput!
   where: DocumentFileWhereUniqueInput!
 }
 
@@ -1528,9 +1536,7 @@ input DocumentFileWhereInput {
 }
 
 input DocumentFileWhereUniqueInput {
-  A: String
-  B: String
-  DocumentFile_AB_unique: DocumentFile_AB_uniqueCompoundUniqueInput
+  DocumentFile_AB_unique: DocumentFileDocumentFile_AB_uniqueCompoundUniqueInput
   id: String
 }
 
@@ -1540,11 +1546,6 @@ type DocumentInvolvedStakeholder {
   id: String!
   Stakeholder: Stakeholder!
   StakeholderId: String!
-}
-
-input DocumentInvolvedStakeholder_AB_uniqueCompoundUniqueInput {
-  A: String!
-  B: String!
 }
 
 input DocumentInvolvedStakeholderCreateInput {
@@ -1585,6 +1586,11 @@ input DocumentInvolvedStakeholderCreateWithoutStakeholderInput {
   id: String
 }
 
+input DocumentInvolvedStakeholderDocumentInvolvedStakeholder_AB_uniqueCompoundUniqueInput {
+  A: String!
+  B: String!
+}
+
 input DocumentInvolvedStakeholderListRelationFilter {
   every: DocumentInvolvedStakeholderWhereInput
   none: DocumentInvolvedStakeholderWhereInput
@@ -1600,7 +1606,7 @@ input DocumentInvolvedStakeholderScalarWhereInput {
   OR: [DocumentInvolvedStakeholderScalarWhereInput!]
 }
 
-input DocumentInvolvedStakeholderUpdateManyDataInput {
+input DocumentInvolvedStakeholderUpdateManyMutationInput {
   id: StringFieldUpdateOperationsInput
 }
 
@@ -1613,7 +1619,7 @@ input DocumentInvolvedStakeholderUpdateManyWithoutDocumentInput {
   disconnect: [DocumentInvolvedStakeholderWhereUniqueInput!]
   set: [DocumentInvolvedStakeholderWhereUniqueInput!]
   update: [DocumentInvolvedStakeholderUpdateWithWhereUniqueWithoutDocumentInput!]
-  updateMany: [DocumentInvolvedStakeholderUpdateManyWithWhereNestedInput!]
+  updateMany: [DocumentInvolvedStakeholderUpdateManyWithWhereWithoutDocumentInput!]
   upsert: [DocumentInvolvedStakeholderUpsertWithWhereUniqueWithoutDocumentInput!]
 }
 
@@ -1626,44 +1632,49 @@ input DocumentInvolvedStakeholderUpdateManyWithoutStakeholderInput {
   disconnect: [DocumentInvolvedStakeholderWhereUniqueInput!]
   set: [DocumentInvolvedStakeholderWhereUniqueInput!]
   update: [DocumentInvolvedStakeholderUpdateWithWhereUniqueWithoutStakeholderInput!]
-  updateMany: [DocumentInvolvedStakeholderUpdateManyWithWhereNestedInput!]
+  updateMany: [DocumentInvolvedStakeholderUpdateManyWithWhereWithoutStakeholderInput!]
   upsert: [DocumentInvolvedStakeholderUpsertWithWhereUniqueWithoutStakeholderInput!]
 }
 
-input DocumentInvolvedStakeholderUpdateManyWithWhereNestedInput {
-  data: DocumentInvolvedStakeholderUpdateManyDataInput!
+input DocumentInvolvedStakeholderUpdateManyWithWhereWithoutDocumentInput {
+  data: DocumentInvolvedStakeholderUpdateManyMutationInput!
   where: DocumentInvolvedStakeholderScalarWhereInput!
 }
 
-input DocumentInvolvedStakeholderUpdateWithoutDocumentDataInput {
+input DocumentInvolvedStakeholderUpdateManyWithWhereWithoutStakeholderInput {
+  data: DocumentInvolvedStakeholderUpdateManyMutationInput!
+  where: DocumentInvolvedStakeholderScalarWhereInput!
+}
+
+input DocumentInvolvedStakeholderUpdateWithoutDocumentInput {
   id: StringFieldUpdateOperationsInput
   Stakeholder: StakeholderUpdateOneRequiredWithoutDocumentsMentionedInInput
 }
 
-input DocumentInvolvedStakeholderUpdateWithoutStakeholderDataInput {
+input DocumentInvolvedStakeholderUpdateWithoutStakeholderInput {
   Document: DocumentUpdateOneRequiredWithoutMentionedStakeholdersInput
   id: StringFieldUpdateOperationsInput
 }
 
 input DocumentInvolvedStakeholderUpdateWithWhereUniqueWithoutDocumentInput {
-  data: DocumentInvolvedStakeholderUpdateWithoutDocumentDataInput!
+  data: DocumentInvolvedStakeholderUpdateWithoutDocumentInput!
   where: DocumentInvolvedStakeholderWhereUniqueInput!
 }
 
 input DocumentInvolvedStakeholderUpdateWithWhereUniqueWithoutStakeholderInput {
-  data: DocumentInvolvedStakeholderUpdateWithoutStakeholderDataInput!
+  data: DocumentInvolvedStakeholderUpdateWithoutStakeholderInput!
   where: DocumentInvolvedStakeholderWhereUniqueInput!
 }
 
 input DocumentInvolvedStakeholderUpsertWithWhereUniqueWithoutDocumentInput {
   create: DocumentInvolvedStakeholderCreateWithoutDocumentInput!
-  update: DocumentInvolvedStakeholderUpdateWithoutDocumentDataInput!
+  update: DocumentInvolvedStakeholderUpdateWithoutDocumentInput!
   where: DocumentInvolvedStakeholderWhereUniqueInput!
 }
 
 input DocumentInvolvedStakeholderUpsertWithWhereUniqueWithoutStakeholderInput {
   create: DocumentInvolvedStakeholderCreateWithoutStakeholderInput!
-  update: DocumentInvolvedStakeholderUpdateWithoutStakeholderDataInput!
+  update: DocumentInvolvedStakeholderUpdateWithoutStakeholderInput!
   where: DocumentInvolvedStakeholderWhereUniqueInput!
 }
 
@@ -1679,9 +1690,7 @@ input DocumentInvolvedStakeholderWhereInput {
 }
 
 input DocumentInvolvedStakeholderWhereUniqueInput {
-  A: String
-  B: String
-  DocumentInvolvedStakeholder_AB_unique: DocumentInvolvedStakeholder_AB_uniqueCompoundUniqueInput
+  DocumentInvolvedStakeholder_AB_unique: DocumentInvolvedStakeholderDocumentInvolvedStakeholder_AB_uniqueCompoundUniqueInput
   id: String
 }
 
@@ -1691,11 +1700,6 @@ type DocumentLocation {
   id: String!
   Location: Location!
   LocationId: String!
-}
-
-input DocumentLocation_AB_uniqueCompoundUniqueInput {
-  A: String!
-  B: String!
 }
 
 input DocumentLocationCreateInput {
@@ -1736,6 +1740,11 @@ input DocumentLocationCreateWithoutLocationInput {
   id: String
 }
 
+input DocumentLocationDocumentLocation_AB_uniqueCompoundUniqueInput {
+  A: String!
+  B: String!
+}
+
 input DocumentLocationListRelationFilter {
   every: DocumentLocationWhereInput
   none: DocumentLocationWhereInput
@@ -1751,7 +1760,7 @@ input DocumentLocationScalarWhereInput {
   OR: [DocumentLocationScalarWhereInput!]
 }
 
-input DocumentLocationUpdateManyDataInput {
+input DocumentLocationUpdateManyMutationInput {
   id: StringFieldUpdateOperationsInput
 }
 
@@ -1764,7 +1773,7 @@ input DocumentLocationUpdateManyWithoutDocumentInput {
   disconnect: [DocumentLocationWhereUniqueInput!]
   set: [DocumentLocationWhereUniqueInput!]
   update: [DocumentLocationUpdateWithWhereUniqueWithoutDocumentInput!]
-  updateMany: [DocumentLocationUpdateManyWithWhereNestedInput!]
+  updateMany: [DocumentLocationUpdateManyWithWhereWithoutDocumentInput!]
   upsert: [DocumentLocationUpsertWithWhereUniqueWithoutDocumentInput!]
 }
 
@@ -1777,44 +1786,49 @@ input DocumentLocationUpdateManyWithoutLocationInput {
   disconnect: [DocumentLocationWhereUniqueInput!]
   set: [DocumentLocationWhereUniqueInput!]
   update: [DocumentLocationUpdateWithWhereUniqueWithoutLocationInput!]
-  updateMany: [DocumentLocationUpdateManyWithWhereNestedInput!]
+  updateMany: [DocumentLocationUpdateManyWithWhereWithoutLocationInput!]
   upsert: [DocumentLocationUpsertWithWhereUniqueWithoutLocationInput!]
 }
 
-input DocumentLocationUpdateManyWithWhereNestedInput {
-  data: DocumentLocationUpdateManyDataInput!
+input DocumentLocationUpdateManyWithWhereWithoutDocumentInput {
+  data: DocumentLocationUpdateManyMutationInput!
   where: DocumentLocationScalarWhereInput!
 }
 
-input DocumentLocationUpdateWithoutDocumentDataInput {
+input DocumentLocationUpdateManyWithWhereWithoutLocationInput {
+  data: DocumentLocationUpdateManyMutationInput!
+  where: DocumentLocationScalarWhereInput!
+}
+
+input DocumentLocationUpdateWithoutDocumentInput {
   id: StringFieldUpdateOperationsInput
   Location: LocationUpdateOneRequiredWithoutDocumentsMentionedInInput
 }
 
-input DocumentLocationUpdateWithoutLocationDataInput {
+input DocumentLocationUpdateWithoutLocationInput {
   Document: DocumentUpdateOneRequiredWithoutMentionedLocationsInput
   id: StringFieldUpdateOperationsInput
 }
 
 input DocumentLocationUpdateWithWhereUniqueWithoutDocumentInput {
-  data: DocumentLocationUpdateWithoutDocumentDataInput!
+  data: DocumentLocationUpdateWithoutDocumentInput!
   where: DocumentLocationWhereUniqueInput!
 }
 
 input DocumentLocationUpdateWithWhereUniqueWithoutLocationInput {
-  data: DocumentLocationUpdateWithoutLocationDataInput!
+  data: DocumentLocationUpdateWithoutLocationInput!
   where: DocumentLocationWhereUniqueInput!
 }
 
 input DocumentLocationUpsertWithWhereUniqueWithoutDocumentInput {
   create: DocumentLocationCreateWithoutDocumentInput!
-  update: DocumentLocationUpdateWithoutDocumentDataInput!
+  update: DocumentLocationUpdateWithoutDocumentInput!
   where: DocumentLocationWhereUniqueInput!
 }
 
 input DocumentLocationUpsertWithWhereUniqueWithoutLocationInput {
   create: DocumentLocationCreateWithoutLocationInput!
-  update: DocumentLocationUpdateWithoutLocationDataInput!
+  update: DocumentLocationUpdateWithoutLocationInput!
   where: DocumentLocationWhereUniqueInput!
 }
 
@@ -1830,9 +1844,7 @@ input DocumentLocationWhereInput {
 }
 
 input DocumentLocationWhereUniqueInput {
-  A: String
-  B: String
-  DocumentLocation_AB_unique: DocumentLocation_AB_uniqueCompoundUniqueInput
+  DocumentLocation_AB_unique: DocumentLocationDocumentLocation_AB_uniqueCompoundUniqueInput
   id: String
 }
 
@@ -1895,53 +1907,53 @@ input DocumentUpdateInput {
 
 input DocumentUpdateOneRequiredWithoutBriefingBooksMentionedInInput {
   connect: DocumentWhereUniqueInput
-  connectOrCreate: DocumentCreateOrConnectWithoutBriefingBookDocumentInput
+  connectOrCreate: DocumentCreateOrConnectWithoutbriefingBooksMentionedInInput
   create: DocumentCreateWithoutBriefingBooksMentionedInInput
-  update: DocumentUpdateWithoutBriefingBooksMentionedInDataInput
+  update: DocumentUpdateWithoutBriefingBooksMentionedInInput
   upsert: DocumentUpsertWithoutBriefingBooksMentionedInInput
 }
 
 input DocumentUpdateOneRequiredWithoutDocumentAuthorsInput {
   connect: DocumentWhereUniqueInput
-  connectOrCreate: DocumentCreateOrConnectWithoutDocumentAuthorInput
+  connectOrCreate: DocumentCreateOrConnectWithoutdocumentAuthorsInput
   create: DocumentCreateWithoutDocumentAuthorsInput
-  update: DocumentUpdateWithoutDocumentAuthorsDataInput
+  update: DocumentUpdateWithoutDocumentAuthorsInput
   upsert: DocumentUpsertWithoutDocumentAuthorsInput
 }
 
 input DocumentUpdateOneRequiredWithoutDocumentTagsInput {
   connect: DocumentWhereUniqueInput
-  connectOrCreate: DocumentCreateOrConnectWithoutTagOnDocumentInput
+  connectOrCreate: DocumentCreateOrConnectWithoutdocumentTagsInput
   create: DocumentCreateWithoutDocumentTagsInput
-  update: DocumentUpdateWithoutDocumentTagsDataInput
+  update: DocumentUpdateWithoutDocumentTagsInput
   upsert: DocumentUpsertWithoutDocumentTagsInput
 }
 
 input DocumentUpdateOneRequiredWithoutMentionedEventsInput {
   connect: DocumentWhereUniqueInput
-  connectOrCreate: DocumentCreateOrConnectWithoutDocumentEventInput
+  connectOrCreate: DocumentCreateOrConnectWithoutmentionedEventsInput
   create: DocumentCreateWithoutMentionedEventsInput
-  update: DocumentUpdateWithoutMentionedEventsDataInput
+  update: DocumentUpdateWithoutMentionedEventsInput
   upsert: DocumentUpsertWithoutMentionedEventsInput
 }
 
 input DocumentUpdateOneRequiredWithoutMentionedLocationsInput {
   connect: DocumentWhereUniqueInput
-  connectOrCreate: DocumentCreateOrConnectWithoutDocumentLocationInput
+  connectOrCreate: DocumentCreateOrConnectWithoutmentionedLocationsInput
   create: DocumentCreateWithoutMentionedLocationsInput
-  update: DocumentUpdateWithoutMentionedLocationsDataInput
+  update: DocumentUpdateWithoutMentionedLocationsInput
   upsert: DocumentUpsertWithoutMentionedLocationsInput
 }
 
 input DocumentUpdateOneRequiredWithoutMentionedStakeholdersInput {
   connect: DocumentWhereUniqueInput
-  connectOrCreate: DocumentCreateOrConnectWithoutDocumentInvolvedStakeholderInput
+  connectOrCreate: DocumentCreateOrConnectWithoutmentionedStakeholdersInput
   create: DocumentCreateWithoutMentionedStakeholdersInput
-  update: DocumentUpdateWithoutMentionedStakeholdersDataInput
+  update: DocumentUpdateWithoutMentionedStakeholdersInput
   upsert: DocumentUpsertWithoutMentionedStakeholdersInput
 }
 
-input DocumentUpdateWithoutBriefingBooksMentionedInDataInput {
+input DocumentUpdateWithoutBriefingBooksMentionedInInput {
   createdAt: DateTimeFieldUpdateOperationsInput
   dnsaAbstract: NullableStringFieldUpdateOperationsInput
   dnsaCitation: NullableStringFieldUpdateOperationsInput
@@ -1973,7 +1985,7 @@ input DocumentUpdateWithoutBriefingBooksMentionedInDataInput {
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
-input DocumentUpdateWithoutDocumentAuthorsDataInput {
+input DocumentUpdateWithoutDocumentAuthorsInput {
   briefingBooksMentionedIn: BriefingBookDocumentUpdateManyWithoutDocumentInput
   createdAt: DateTimeFieldUpdateOperationsInput
   dnsaAbstract: NullableStringFieldUpdateOperationsInput
@@ -2005,7 +2017,7 @@ input DocumentUpdateWithoutDocumentAuthorsDataInput {
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
-input DocumentUpdateWithoutDocumentTagsDataInput {
+input DocumentUpdateWithoutDocumentTagsInput {
   briefingBooksMentionedIn: BriefingBookDocumentUpdateManyWithoutDocumentInput
   createdAt: DateTimeFieldUpdateOperationsInput
   dnsaAbstract: NullableStringFieldUpdateOperationsInput
@@ -2037,7 +2049,7 @@ input DocumentUpdateWithoutDocumentTagsDataInput {
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
-input DocumentUpdateWithoutMentionedEventsDataInput {
+input DocumentUpdateWithoutMentionedEventsInput {
   briefingBooksMentionedIn: BriefingBookDocumentUpdateManyWithoutDocumentInput
   createdAt: DateTimeFieldUpdateOperationsInput
   dnsaAbstract: NullableStringFieldUpdateOperationsInput
@@ -2069,7 +2081,7 @@ input DocumentUpdateWithoutMentionedEventsDataInput {
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
-input DocumentUpdateWithoutMentionedLocationsDataInput {
+input DocumentUpdateWithoutMentionedLocationsInput {
   briefingBooksMentionedIn: BriefingBookDocumentUpdateManyWithoutDocumentInput
   createdAt: DateTimeFieldUpdateOperationsInput
   dnsaAbstract: NullableStringFieldUpdateOperationsInput
@@ -2101,7 +2113,7 @@ input DocumentUpdateWithoutMentionedLocationsDataInput {
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
-input DocumentUpdateWithoutMentionedStakeholdersDataInput {
+input DocumentUpdateWithoutMentionedStakeholdersInput {
   briefingBooksMentionedIn: BriefingBookDocumentUpdateManyWithoutDocumentInput
   createdAt: DateTimeFieldUpdateOperationsInput
   dnsaAbstract: NullableStringFieldUpdateOperationsInput
@@ -2135,32 +2147,32 @@ input DocumentUpdateWithoutMentionedStakeholdersDataInput {
 
 input DocumentUpsertWithoutBriefingBooksMentionedInInput {
   create: DocumentCreateWithoutBriefingBooksMentionedInInput!
-  update: DocumentUpdateWithoutBriefingBooksMentionedInDataInput!
+  update: DocumentUpdateWithoutBriefingBooksMentionedInInput!
 }
 
 input DocumentUpsertWithoutDocumentAuthorsInput {
   create: DocumentCreateWithoutDocumentAuthorsInput!
-  update: DocumentUpdateWithoutDocumentAuthorsDataInput!
+  update: DocumentUpdateWithoutDocumentAuthorsInput!
 }
 
 input DocumentUpsertWithoutDocumentTagsInput {
   create: DocumentCreateWithoutDocumentTagsInput!
-  update: DocumentUpdateWithoutDocumentTagsDataInput!
+  update: DocumentUpdateWithoutDocumentTagsInput!
 }
 
 input DocumentUpsertWithoutMentionedEventsInput {
   create: DocumentCreateWithoutMentionedEventsInput!
-  update: DocumentUpdateWithoutMentionedEventsDataInput!
+  update: DocumentUpdateWithoutMentionedEventsInput!
 }
 
 input DocumentUpsertWithoutMentionedLocationsInput {
   create: DocumentCreateWithoutMentionedLocationsInput!
-  update: DocumentUpdateWithoutMentionedLocationsDataInput!
+  update: DocumentUpdateWithoutMentionedLocationsInput!
 }
 
 input DocumentUpsertWithoutMentionedStakeholdersInput {
   create: DocumentCreateWithoutMentionedStakeholdersInput!
-  update: DocumentUpdateWithoutMentionedStakeholdersDataInput!
+  update: DocumentUpdateWithoutMentionedStakeholdersInput!
 }
 
 input DocumentWhereInput {
@@ -2233,55 +2245,55 @@ input EventCreateInput {
 
 input EventCreateOneWithoutBriefingBooksMentionedInInput {
   connect: EventWhereUniqueInput
-  connectOrCreate: EventCreateOrConnectWithoutBriefingBookEventInput
+  connectOrCreate: EventCreateOrConnectWithoutbriefingBooksMentionedInInput
   create: EventCreateWithoutBriefingBooksMentionedInInput
 }
 
 input EventCreateOneWithoutDocumentsMentionedInInput {
   connect: EventWhereUniqueInput
-  connectOrCreate: EventCreateOrConnectWithoutDocumentEventInput
+  connectOrCreate: EventCreateOrConnectWithoutdocumentsMentionedInInput
   create: EventCreateWithoutDocumentsMentionedInInput
 }
 
 input EventCreateOneWithoutEventLocationsInput {
   connect: EventWhereUniqueInput
-  connectOrCreate: EventCreateOrConnectWithoutLocationOnEventInput
+  connectOrCreate: EventCreateOrConnectWithouteventLocationsInput
   create: EventCreateWithoutEventLocationsInput
 }
 
 input EventCreateOneWithoutEventStakeholdersInput {
   connect: EventWhereUniqueInput
-  connectOrCreate: EventCreateOrConnectWithoutStakeholderEventInput
+  connectOrCreate: EventCreateOrConnectWithouteventStakeholdersInput
   create: EventCreateWithoutEventStakeholdersInput
 }
 
 input EventCreateOneWithoutEventTagsInput {
   connect: EventWhereUniqueInput
-  connectOrCreate: EventCreateOrConnectWithoutTagOnEventInput
+  connectOrCreate: EventCreateOrConnectWithouteventTagsInput
   create: EventCreateWithoutEventTagsInput
 }
 
-input EventCreateOrConnectWithoutBriefingBookEventInput {
+input EventCreateOrConnectWithoutbriefingBooksMentionedInInput {
   create: EventCreateWithoutBriefingBooksMentionedInInput!
   where: EventWhereUniqueInput!
 }
 
-input EventCreateOrConnectWithoutDocumentEventInput {
+input EventCreateOrConnectWithoutdocumentsMentionedInInput {
   create: EventCreateWithoutDocumentsMentionedInInput!
   where: EventWhereUniqueInput!
 }
 
-input EventCreateOrConnectWithoutLocationOnEventInput {
+input EventCreateOrConnectWithouteventLocationsInput {
   create: EventCreateWithoutEventLocationsInput!
   where: EventWhereUniqueInput!
 }
 
-input EventCreateOrConnectWithoutStakeholderEventInput {
+input EventCreateOrConnectWithouteventStakeholdersInput {
   create: EventCreateWithoutEventStakeholdersInput!
   where: EventWhereUniqueInput!
 }
 
-input EventCreateOrConnectWithoutTagOnEventInput {
+input EventCreateOrConnectWithouteventTagsInput {
   create: EventCreateWithoutEventTagsInput!
   where: EventWhereUniqueInput!
 }
@@ -2390,45 +2402,45 @@ input EventUpdateInput {
 
 input EventUpdateOneRequiredWithoutBriefingBooksMentionedInInput {
   connect: EventWhereUniqueInput
-  connectOrCreate: EventCreateOrConnectWithoutBriefingBookEventInput
+  connectOrCreate: EventCreateOrConnectWithoutbriefingBooksMentionedInInput
   create: EventCreateWithoutBriefingBooksMentionedInInput
-  update: EventUpdateWithoutBriefingBooksMentionedInDataInput
+  update: EventUpdateWithoutBriefingBooksMentionedInInput
   upsert: EventUpsertWithoutBriefingBooksMentionedInInput
 }
 
 input EventUpdateOneRequiredWithoutDocumentsMentionedInInput {
   connect: EventWhereUniqueInput
-  connectOrCreate: EventCreateOrConnectWithoutDocumentEventInput
+  connectOrCreate: EventCreateOrConnectWithoutdocumentsMentionedInInput
   create: EventCreateWithoutDocumentsMentionedInInput
-  update: EventUpdateWithoutDocumentsMentionedInDataInput
+  update: EventUpdateWithoutDocumentsMentionedInInput
   upsert: EventUpsertWithoutDocumentsMentionedInInput
 }
 
 input EventUpdateOneRequiredWithoutEventLocationsInput {
   connect: EventWhereUniqueInput
-  connectOrCreate: EventCreateOrConnectWithoutLocationOnEventInput
+  connectOrCreate: EventCreateOrConnectWithouteventLocationsInput
   create: EventCreateWithoutEventLocationsInput
-  update: EventUpdateWithoutEventLocationsDataInput
+  update: EventUpdateWithoutEventLocationsInput
   upsert: EventUpsertWithoutEventLocationsInput
 }
 
 input EventUpdateOneRequiredWithoutEventStakeholdersInput {
   connect: EventWhereUniqueInput
-  connectOrCreate: EventCreateOrConnectWithoutStakeholderEventInput
+  connectOrCreate: EventCreateOrConnectWithouteventStakeholdersInput
   create: EventCreateWithoutEventStakeholdersInput
-  update: EventUpdateWithoutEventStakeholdersDataInput
+  update: EventUpdateWithoutEventStakeholdersInput
   upsert: EventUpsertWithoutEventStakeholdersInput
 }
 
 input EventUpdateOneRequiredWithoutEventTagsInput {
   connect: EventWhereUniqueInput
-  connectOrCreate: EventCreateOrConnectWithoutTagOnEventInput
+  connectOrCreate: EventCreateOrConnectWithouteventTagsInput
   create: EventCreateWithoutEventTagsInput
-  update: EventUpdateWithoutEventTagsDataInput
+  update: EventUpdateWithoutEventTagsInput
   upsert: EventUpsertWithoutEventTagsInput
 }
 
-input EventUpdateWithoutBriefingBooksMentionedInDataInput {
+input EventUpdateWithoutBriefingBooksMentionedInInput {
   createdAt: DateTimeFieldUpdateOperationsInput
   documentsMentionedIn: DocumentEventUpdateManyWithoutEventInput
   eventDescription: NullableStringFieldUpdateOperationsInput
@@ -2443,7 +2455,7 @@ input EventUpdateWithoutBriefingBooksMentionedInDataInput {
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
-input EventUpdateWithoutDocumentsMentionedInDataInput {
+input EventUpdateWithoutDocumentsMentionedInInput {
   briefingBooksMentionedIn: BriefingBookEventUpdateManyWithoutEventInput
   createdAt: DateTimeFieldUpdateOperationsInput
   eventDescription: NullableStringFieldUpdateOperationsInput
@@ -2458,7 +2470,7 @@ input EventUpdateWithoutDocumentsMentionedInDataInput {
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
-input EventUpdateWithoutEventLocationsDataInput {
+input EventUpdateWithoutEventLocationsInput {
   briefingBooksMentionedIn: BriefingBookEventUpdateManyWithoutEventInput
   createdAt: DateTimeFieldUpdateOperationsInput
   documentsMentionedIn: DocumentEventUpdateManyWithoutEventInput
@@ -2473,7 +2485,7 @@ input EventUpdateWithoutEventLocationsDataInput {
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
-input EventUpdateWithoutEventStakeholdersDataInput {
+input EventUpdateWithoutEventStakeholdersInput {
   briefingBooksMentionedIn: BriefingBookEventUpdateManyWithoutEventInput
   createdAt: DateTimeFieldUpdateOperationsInput
   documentsMentionedIn: DocumentEventUpdateManyWithoutEventInput
@@ -2488,7 +2500,7 @@ input EventUpdateWithoutEventStakeholdersDataInput {
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
-input EventUpdateWithoutEventTagsDataInput {
+input EventUpdateWithoutEventTagsInput {
   briefingBooksMentionedIn: BriefingBookEventUpdateManyWithoutEventInput
   createdAt: DateTimeFieldUpdateOperationsInput
   documentsMentionedIn: DocumentEventUpdateManyWithoutEventInput
@@ -2505,27 +2517,27 @@ input EventUpdateWithoutEventTagsDataInput {
 
 input EventUpsertWithoutBriefingBooksMentionedInInput {
   create: EventCreateWithoutBriefingBooksMentionedInInput!
-  update: EventUpdateWithoutBriefingBooksMentionedInDataInput!
+  update: EventUpdateWithoutBriefingBooksMentionedInInput!
 }
 
 input EventUpsertWithoutDocumentsMentionedInInput {
   create: EventCreateWithoutDocumentsMentionedInInput!
-  update: EventUpdateWithoutDocumentsMentionedInDataInput!
+  update: EventUpdateWithoutDocumentsMentionedInInput!
 }
 
 input EventUpsertWithoutEventLocationsInput {
   create: EventCreateWithoutEventLocationsInput!
-  update: EventUpdateWithoutEventLocationsDataInput!
+  update: EventUpdateWithoutEventLocationsInput!
 }
 
 input EventUpsertWithoutEventStakeholdersInput {
   create: EventCreateWithoutEventStakeholdersInput!
-  update: EventUpdateWithoutEventStakeholdersDataInput!
+  update: EventUpdateWithoutEventStakeholdersInput!
 }
 
 input EventUpsertWithoutEventTagsInput {
   create: EventCreateWithoutEventTagsInput!
-  update: EventUpdateWithoutEventTagsDataInput!
+  update: EventUpdateWithoutEventTagsInput!
 }
 
 input EventWhereInput {
@@ -2573,11 +2585,11 @@ input FileCreateInput {
 
 input FileCreateOneWithoutDocumentsIncludedInInput {
   connect: FileWhereUniqueInput
-  connectOrCreate: FileCreateOrConnectWithoutDocumentFileInput
+  connectOrCreate: FileCreateOrConnectWithoutdocumentsIncludedInInput
   create: FileCreateWithoutDocumentsIncludedInInput
 }
 
-input FileCreateOrConnectWithoutDocumentFileInput {
+input FileCreateOrConnectWithoutdocumentsIncludedInInput {
   create: FileCreateWithoutDocumentsIncludedInInput!
   where: FileWhereUniqueInput!
 }
@@ -2606,13 +2618,13 @@ input FileOrderByInput {
 
 input FileUpdateOneRequiredWithoutDocumentsIncludedInInput {
   connect: FileWhereUniqueInput
-  connectOrCreate: FileCreateOrConnectWithoutDocumentFileInput
+  connectOrCreate: FileCreateOrConnectWithoutdocumentsIncludedInInput
   create: FileCreateWithoutDocumentsIncludedInInput
-  update: FileUpdateWithoutDocumentsIncludedInDataInput
+  update: FileUpdateWithoutDocumentsIncludedInInput
   upsert: FileUpsertWithoutDocumentsIncludedInInput
 }
 
-input FileUpdateWithoutDocumentsIncludedInDataInput {
+input FileUpdateWithoutDocumentsIncludedInInput {
   contentType: StringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
@@ -2625,7 +2637,7 @@ input FileUpdateWithoutDocumentsIncludedInDataInput {
 
 input FileUpsertWithoutDocumentsIncludedInInput {
   create: FileCreateWithoutDocumentsIncludedInInput!
-  update: FileUpdateWithoutDocumentsIncludedInDataInput!
+  update: FileUpdateWithoutDocumentsIncludedInInput!
 }
 
 input FileWhereInput {
@@ -2650,6 +2662,10 @@ input FileWhereUniqueInput {
 }
 
 input IntFieldUpdateOperationsInput {
+  decrement: Int
+  divide: Int
+  increment: Int
+  multiply: Int
   set: Int
 }
 
@@ -2675,11 +2691,6 @@ input IntNullableFilter {
   notIn: [Int!]
 }
 
-"""
-The `JSON` scalar type represents JSON objects as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
-"""
-scalar Json
-
 type Kind {
   createdAt: DateTime!
   documentsWithKind(after: KindOnDocumentWhereUniqueInput, before: KindOnDocumentWhereUniqueInput, first: Int, last: Int): [KindOnDocument!]!
@@ -2690,11 +2701,11 @@ type Kind {
 
 input KindCreateOneWithoutDocumentsWithKindInput {
   connect: KindWhereUniqueInput
-  connectOrCreate: KindCreateOrConnectWithoutKindOnDocumentInput
+  connectOrCreate: KindCreateOrConnectWithoutdocumentsWithKindInput
   create: KindCreateWithoutDocumentsWithKindInput
 }
 
-input KindCreateOrConnectWithoutKindOnDocumentInput {
+input KindCreateOrConnectWithoutdocumentsWithKindInput {
   create: KindCreateWithoutDocumentsWithKindInput!
   where: KindWhereUniqueInput!
 }
@@ -2712,11 +2723,6 @@ type KindOnDocument {
   id: String!
   Kind: Kind!
   KindId: String!
-}
-
-input KindOnDocument_AB_uniqueCompoundUniqueInput {
-  A: String!
-  B: String!
 }
 
 input KindOnDocumentCreateInput {
@@ -2741,6 +2747,11 @@ input KindOnDocumentCreateWithoutDocumentInput {
   Kind: KindCreateOneWithoutDocumentsWithKindInput!
 }
 
+input KindOnDocumentKindOnDocument_AB_uniqueCompoundUniqueInput {
+  A: String!
+  B: String!
+}
+
 input KindOnDocumentListRelationFilter {
   every: KindOnDocumentWhereInput
   none: KindOnDocumentWhereInput
@@ -2762,7 +2773,7 @@ input KindOnDocumentScalarWhereInput {
   OR: [KindOnDocumentScalarWhereInput!]
 }
 
-input KindOnDocumentUpdateManyDataInput {
+input KindOnDocumentUpdateManyMutationInput {
   id: StringFieldUpdateOperationsInput
 }
 
@@ -2775,28 +2786,28 @@ input KindOnDocumentUpdateManyWithoutDocumentInput {
   disconnect: [KindOnDocumentWhereUniqueInput!]
   set: [KindOnDocumentWhereUniqueInput!]
   update: [KindOnDocumentUpdateWithWhereUniqueWithoutDocumentInput!]
-  updateMany: [KindOnDocumentUpdateManyWithWhereNestedInput!]
+  updateMany: [KindOnDocumentUpdateManyWithWhereWithoutDocumentInput!]
   upsert: [KindOnDocumentUpsertWithWhereUniqueWithoutDocumentInput!]
 }
 
-input KindOnDocumentUpdateManyWithWhereNestedInput {
-  data: KindOnDocumentUpdateManyDataInput!
+input KindOnDocumentUpdateManyWithWhereWithoutDocumentInput {
+  data: KindOnDocumentUpdateManyMutationInput!
   where: KindOnDocumentScalarWhereInput!
 }
 
-input KindOnDocumentUpdateWithoutDocumentDataInput {
+input KindOnDocumentUpdateWithoutDocumentInput {
   id: StringFieldUpdateOperationsInput
   Kind: KindUpdateOneRequiredWithoutDocumentsWithKindInput
 }
 
 input KindOnDocumentUpdateWithWhereUniqueWithoutDocumentInput {
-  data: KindOnDocumentUpdateWithoutDocumentDataInput!
+  data: KindOnDocumentUpdateWithoutDocumentInput!
   where: KindOnDocumentWhereUniqueInput!
 }
 
 input KindOnDocumentUpsertWithWhereUniqueWithoutDocumentInput {
   create: KindOnDocumentCreateWithoutDocumentInput!
-  update: KindOnDocumentUpdateWithoutDocumentDataInput!
+  update: KindOnDocumentUpdateWithoutDocumentInput!
   where: KindOnDocumentWhereUniqueInput!
 }
 
@@ -2812,10 +2823,8 @@ input KindOnDocumentWhereInput {
 }
 
 input KindOnDocumentWhereUniqueInput {
-  A: String
-  B: String
   id: String
-  KindOnDocument_AB_unique: KindOnDocument_AB_uniqueCompoundUniqueInput
+  KindOnDocument_AB_unique: KindOnDocumentKindOnDocument_AB_uniqueCompoundUniqueInput
 }
 
 input KindOrderByInput {
@@ -2827,13 +2836,13 @@ input KindOrderByInput {
 
 input KindUpdateOneRequiredWithoutDocumentsWithKindInput {
   connect: KindWhereUniqueInput
-  connectOrCreate: KindCreateOrConnectWithoutKindOnDocumentInput
+  connectOrCreate: KindCreateOrConnectWithoutdocumentsWithKindInput
   create: KindCreateWithoutDocumentsWithKindInput
-  update: KindUpdateWithoutDocumentsWithKindDataInput
+  update: KindUpdateWithoutDocumentsWithKindInput
   upsert: KindUpsertWithoutDocumentsWithKindInput
 }
 
-input KindUpdateWithoutDocumentsWithKindDataInput {
+input KindUpdateWithoutDocumentsWithKindInput {
   createdAt: DateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
@@ -2842,7 +2851,7 @@ input KindUpdateWithoutDocumentsWithKindDataInput {
 
 input KindUpsertWithoutDocumentsWithKindInput {
   create: KindCreateWithoutDocumentsWithKindInput!
-  update: KindUpdateWithoutDocumentsWithKindDataInput!
+  update: KindUpdateWithoutDocumentsWithKindInput!
 }
 
 input KindWhereInput {
@@ -2885,22 +2894,22 @@ input LocationCreateInput {
 
 input LocationCreateOneWithoutDocumentsMentionedInInput {
   connect: LocationWhereUniqueInput
-  connectOrCreate: LocationCreateOrConnectWithoutDocumentLocationInput
+  connectOrCreate: LocationCreateOrConnectWithoutdocumentsMentionedInInput
   create: LocationCreateWithoutDocumentsMentionedInInput
 }
 
 input LocationCreateOneWithoutLocationEventsInput {
   connect: LocationWhereUniqueInput
-  connectOrCreate: LocationCreateOrConnectWithoutLocationOnEventInput
+  connectOrCreate: LocationCreateOrConnectWithoutlocationEventsInput
   create: LocationCreateWithoutLocationEventsInput
 }
 
-input LocationCreateOrConnectWithoutDocumentLocationInput {
+input LocationCreateOrConnectWithoutdocumentsMentionedInInput {
   create: LocationCreateWithoutDocumentsMentionedInInput!
   where: LocationWhereUniqueInput!
 }
 
-input LocationCreateOrConnectWithoutLocationOnEventInput {
+input LocationCreateOrConnectWithoutlocationEventsInput {
   create: LocationCreateWithoutLocationEventsInput!
   where: LocationWhereUniqueInput!
 }
@@ -2935,11 +2944,6 @@ type LocationOnEvent {
   id: String!
   Location: Location!
   LocationId: String!
-}
-
-input LocationOnEvent_AB_uniqueCompoundUniqueInput {
-  A: String!
-  B: String!
 }
 
 input LocationOnEventCreateInput {
@@ -2986,6 +2990,11 @@ input LocationOnEventListRelationFilter {
   some: LocationOnEventWhereInput
 }
 
+input LocationOnEventLocationOnEvent_AB_uniqueCompoundUniqueInput {
+  A: String!
+  B: String!
+}
+
 input LocationOnEventScalarWhereInput {
   A: StringFilter
   AND: [LocationOnEventScalarWhereInput!]
@@ -2995,7 +3004,7 @@ input LocationOnEventScalarWhereInput {
   OR: [LocationOnEventScalarWhereInput!]
 }
 
-input LocationOnEventUpdateManyDataInput {
+input LocationOnEventUpdateManyMutationInput {
   id: StringFieldUpdateOperationsInput
 }
 
@@ -3008,7 +3017,7 @@ input LocationOnEventUpdateManyWithoutEventInput {
   disconnect: [LocationOnEventWhereUniqueInput!]
   set: [LocationOnEventWhereUniqueInput!]
   update: [LocationOnEventUpdateWithWhereUniqueWithoutEventInput!]
-  updateMany: [LocationOnEventUpdateManyWithWhereNestedInput!]
+  updateMany: [LocationOnEventUpdateManyWithWhereWithoutEventInput!]
   upsert: [LocationOnEventUpsertWithWhereUniqueWithoutEventInput!]
 }
 
@@ -3021,44 +3030,49 @@ input LocationOnEventUpdateManyWithoutLocationInput {
   disconnect: [LocationOnEventWhereUniqueInput!]
   set: [LocationOnEventWhereUniqueInput!]
   update: [LocationOnEventUpdateWithWhereUniqueWithoutLocationInput!]
-  updateMany: [LocationOnEventUpdateManyWithWhereNestedInput!]
+  updateMany: [LocationOnEventUpdateManyWithWhereWithoutLocationInput!]
   upsert: [LocationOnEventUpsertWithWhereUniqueWithoutLocationInput!]
 }
 
-input LocationOnEventUpdateManyWithWhereNestedInput {
-  data: LocationOnEventUpdateManyDataInput!
+input LocationOnEventUpdateManyWithWhereWithoutEventInput {
+  data: LocationOnEventUpdateManyMutationInput!
   where: LocationOnEventScalarWhereInput!
 }
 
-input LocationOnEventUpdateWithoutEventDataInput {
+input LocationOnEventUpdateManyWithWhereWithoutLocationInput {
+  data: LocationOnEventUpdateManyMutationInput!
+  where: LocationOnEventScalarWhereInput!
+}
+
+input LocationOnEventUpdateWithoutEventInput {
   id: StringFieldUpdateOperationsInput
   Location: LocationUpdateOneRequiredWithoutLocationEventsInput
 }
 
-input LocationOnEventUpdateWithoutLocationDataInput {
+input LocationOnEventUpdateWithoutLocationInput {
   Event: EventUpdateOneRequiredWithoutEventLocationsInput
   id: StringFieldUpdateOperationsInput
 }
 
 input LocationOnEventUpdateWithWhereUniqueWithoutEventInput {
-  data: LocationOnEventUpdateWithoutEventDataInput!
+  data: LocationOnEventUpdateWithoutEventInput!
   where: LocationOnEventWhereUniqueInput!
 }
 
 input LocationOnEventUpdateWithWhereUniqueWithoutLocationInput {
-  data: LocationOnEventUpdateWithoutLocationDataInput!
+  data: LocationOnEventUpdateWithoutLocationInput!
   where: LocationOnEventWhereUniqueInput!
 }
 
 input LocationOnEventUpsertWithWhereUniqueWithoutEventInput {
   create: LocationOnEventCreateWithoutEventInput!
-  update: LocationOnEventUpdateWithoutEventDataInput!
+  update: LocationOnEventUpdateWithoutEventInput!
   where: LocationOnEventWhereUniqueInput!
 }
 
 input LocationOnEventUpsertWithWhereUniqueWithoutLocationInput {
   create: LocationOnEventCreateWithoutLocationInput!
-  update: LocationOnEventUpdateWithoutLocationDataInput!
+  update: LocationOnEventUpdateWithoutLocationInput!
   where: LocationOnEventWhereUniqueInput!
 }
 
@@ -3074,10 +3088,8 @@ input LocationOnEventWhereInput {
 }
 
 input LocationOnEventWhereUniqueInput {
-  A: String
-  B: String
   id: String
-  LocationOnEvent_AB_unique: LocationOnEvent_AB_uniqueCompoundUniqueInput
+  LocationOnEvent_AB_unique: LocationOnEventLocationOnEvent_AB_uniqueCompoundUniqueInput
 }
 
 input LocationOrderByInput {
@@ -3106,21 +3118,21 @@ input LocationUpdateInput {
 
 input LocationUpdateOneRequiredWithoutDocumentsMentionedInInput {
   connect: LocationWhereUniqueInput
-  connectOrCreate: LocationCreateOrConnectWithoutDocumentLocationInput
+  connectOrCreate: LocationCreateOrConnectWithoutdocumentsMentionedInInput
   create: LocationCreateWithoutDocumentsMentionedInInput
-  update: LocationUpdateWithoutDocumentsMentionedInDataInput
+  update: LocationUpdateWithoutDocumentsMentionedInInput
   upsert: LocationUpsertWithoutDocumentsMentionedInInput
 }
 
 input LocationUpdateOneRequiredWithoutLocationEventsInput {
   connect: LocationWhereUniqueInput
-  connectOrCreate: LocationCreateOrConnectWithoutLocationOnEventInput
+  connectOrCreate: LocationCreateOrConnectWithoutlocationEventsInput
   create: LocationCreateWithoutLocationEventsInput
-  update: LocationUpdateWithoutLocationEventsDataInput
+  update: LocationUpdateWithoutLocationEventsInput
   upsert: LocationUpsertWithoutLocationEventsInput
 }
 
-input LocationUpdateWithoutDocumentsMentionedInDataInput {
+input LocationUpdateWithoutDocumentsMentionedInInput {
   createdAt: DateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   locationDescription: NullableStringFieldUpdateOperationsInput
@@ -3132,7 +3144,7 @@ input LocationUpdateWithoutDocumentsMentionedInDataInput {
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
-input LocationUpdateWithoutLocationEventsDataInput {
+input LocationUpdateWithoutLocationEventsInput {
   createdAt: DateTimeFieldUpdateOperationsInput
   documentsMentionedIn: DocumentLocationUpdateManyWithoutLocationInput
   id: StringFieldUpdateOperationsInput
@@ -3146,12 +3158,12 @@ input LocationUpdateWithoutLocationEventsDataInput {
 
 input LocationUpsertWithoutDocumentsMentionedInInput {
   create: LocationCreateWithoutDocumentsMentionedInInput!
-  update: LocationUpdateWithoutDocumentsMentionedInDataInput!
+  update: LocationUpdateWithoutDocumentsMentionedInInput!
 }
 
 input LocationUpsertWithoutLocationEventsInput {
   create: LocationCreateWithoutLocationEventsInput!
-  update: LocationUpdateWithoutLocationEventsDataInput!
+  update: LocationUpdateWithoutLocationEventsInput!
 }
 
 input LocationWhereInput {
@@ -3173,16 +3185,6 @@ input LocationWhereInput {
 input LocationWhereUniqueInput {
   id: String
   locationName: String
-}
-
-enum MediaType {
-  Audio
-  Embedd
-  Image
-  Markdown
-  Pdf
-  RawText
-  Video
 }
 
 type Mutation {
@@ -3294,6 +3296,10 @@ input NullableDateTimeFieldUpdateOperationsInput {
 }
 
 input NullableIntFieldUpdateOperationsInput {
+  decrement: Int
+  divide: Int
+  increment: Int
+  multiply: Int
   set: Int
 }
 
@@ -3356,11 +3362,6 @@ type StakeholderBriefingBook {
   StakeholderId: String!
 }
 
-input StakeholderBriefingBook_AB_uniqueCompoundUniqueInput {
-  A: String!
-  B: String!
-}
-
 input StakeholderBriefingBookCreateManyWithoutBriefingBookInput {
   connect: [StakeholderBriefingBookWhereUniqueInput!]
   connectOrCreate: [StakeholderBriefingBookCreateOrConnectWithoutBriefingBookInput!]
@@ -3408,7 +3409,12 @@ input StakeholderBriefingBookScalarWhereInput {
   OR: [StakeholderBriefingBookScalarWhereInput!]
 }
 
-input StakeholderBriefingBookUpdateManyDataInput {
+input StakeholderBriefingBookStakeholderBriefingBook_AB_uniqueCompoundUniqueInput {
+  A: String!
+  B: String!
+}
+
+input StakeholderBriefingBookUpdateManyMutationInput {
   id: StringFieldUpdateOperationsInput
 }
 
@@ -3421,7 +3427,7 @@ input StakeholderBriefingBookUpdateManyWithoutBriefingBookInput {
   disconnect: [StakeholderBriefingBookWhereUniqueInput!]
   set: [StakeholderBriefingBookWhereUniqueInput!]
   update: [StakeholderBriefingBookUpdateWithWhereUniqueWithoutBriefingBookInput!]
-  updateMany: [StakeholderBriefingBookUpdateManyWithWhereNestedInput!]
+  updateMany: [StakeholderBriefingBookUpdateManyWithWhereWithoutBriefingBookInput!]
   upsert: [StakeholderBriefingBookUpsertWithWhereUniqueWithoutBriefingBookInput!]
 }
 
@@ -3434,44 +3440,49 @@ input StakeholderBriefingBookUpdateManyWithoutStakeholderInput {
   disconnect: [StakeholderBriefingBookWhereUniqueInput!]
   set: [StakeholderBriefingBookWhereUniqueInput!]
   update: [StakeholderBriefingBookUpdateWithWhereUniqueWithoutStakeholderInput!]
-  updateMany: [StakeholderBriefingBookUpdateManyWithWhereNestedInput!]
+  updateMany: [StakeholderBriefingBookUpdateManyWithWhereWithoutStakeholderInput!]
   upsert: [StakeholderBriefingBookUpsertWithWhereUniqueWithoutStakeholderInput!]
 }
 
-input StakeholderBriefingBookUpdateManyWithWhereNestedInput {
-  data: StakeholderBriefingBookUpdateManyDataInput!
+input StakeholderBriefingBookUpdateManyWithWhereWithoutBriefingBookInput {
+  data: StakeholderBriefingBookUpdateManyMutationInput!
   where: StakeholderBriefingBookScalarWhereInput!
 }
 
-input StakeholderBriefingBookUpdateWithoutBriefingBookDataInput {
+input StakeholderBriefingBookUpdateManyWithWhereWithoutStakeholderInput {
+  data: StakeholderBriefingBookUpdateManyMutationInput!
+  where: StakeholderBriefingBookScalarWhereInput!
+}
+
+input StakeholderBriefingBookUpdateWithoutBriefingBookInput {
   id: StringFieldUpdateOperationsInput
   Stakeholder: StakeholderUpdateOneRequiredWithoutBriefingBooksMentionedInInput
 }
 
-input StakeholderBriefingBookUpdateWithoutStakeholderDataInput {
+input StakeholderBriefingBookUpdateWithoutStakeholderInput {
   BriefingBook: BriefingBookUpdateOneRequiredWithoutMentionedStakeholdersInput
   id: StringFieldUpdateOperationsInput
 }
 
 input StakeholderBriefingBookUpdateWithWhereUniqueWithoutBriefingBookInput {
-  data: StakeholderBriefingBookUpdateWithoutBriefingBookDataInput!
+  data: StakeholderBriefingBookUpdateWithoutBriefingBookInput!
   where: StakeholderBriefingBookWhereUniqueInput!
 }
 
 input StakeholderBriefingBookUpdateWithWhereUniqueWithoutStakeholderInput {
-  data: StakeholderBriefingBookUpdateWithoutStakeholderDataInput!
+  data: StakeholderBriefingBookUpdateWithoutStakeholderInput!
   where: StakeholderBriefingBookWhereUniqueInput!
 }
 
 input StakeholderBriefingBookUpsertWithWhereUniqueWithoutBriefingBookInput {
   create: StakeholderBriefingBookCreateWithoutBriefingBookInput!
-  update: StakeholderBriefingBookUpdateWithoutBriefingBookDataInput!
+  update: StakeholderBriefingBookUpdateWithoutBriefingBookInput!
   where: StakeholderBriefingBookWhereUniqueInput!
 }
 
 input StakeholderBriefingBookUpsertWithWhereUniqueWithoutStakeholderInput {
   create: StakeholderBriefingBookCreateWithoutStakeholderInput!
-  update: StakeholderBriefingBookUpdateWithoutStakeholderDataInput!
+  update: StakeholderBriefingBookUpdateWithoutStakeholderInput!
   where: StakeholderBriefingBookWhereUniqueInput!
 }
 
@@ -3487,10 +3498,8 @@ input StakeholderBriefingBookWhereInput {
 }
 
 input StakeholderBriefingBookWhereUniqueInput {
-  A: String
-  B: String
   id: String
-  StakeholderBriefingBook_AB_unique: StakeholderBriefingBook_AB_uniqueCompoundUniqueInput
+  StakeholderBriefingBook_AB_unique: StakeholderBriefingBookStakeholderBriefingBook_AB_uniqueCompoundUniqueInput
 }
 
 input StakeholderCreateInput {
@@ -3509,44 +3518,44 @@ input StakeholderCreateInput {
 
 input StakeholderCreateOneWithoutBriefingBooksMentionedInInput {
   connect: StakeholderWhereUniqueInput
-  connectOrCreate: StakeholderCreateOrConnectWithoutStakeholderBriefingBookInput
+  connectOrCreate: StakeholderCreateOrConnectWithoutbriefingBooksMentionedInInput
   create: StakeholderCreateWithoutBriefingBooksMentionedInInput
 }
 
 input StakeholderCreateOneWithoutDocumentsInput {
   connect: StakeholderWhereUniqueInput
-  connectOrCreate: StakeholderCreateOrConnectWithoutDocumentAuthorInput
+  connectOrCreate: StakeholderCreateOrConnectWithoutdocumentsInput
   create: StakeholderCreateWithoutDocumentsInput
 }
 
 input StakeholderCreateOneWithoutDocumentsMentionedInInput {
   connect: StakeholderWhereUniqueInput
-  connectOrCreate: StakeholderCreateOrConnectWithoutDocumentInvolvedStakeholderInput
+  connectOrCreate: StakeholderCreateOrConnectWithoutdocumentsMentionedInInput
   create: StakeholderCreateWithoutDocumentsMentionedInInput
 }
 
 input StakeholderCreateOneWithoutEventsInvolvedInInput {
   connect: StakeholderWhereUniqueInput
-  connectOrCreate: StakeholderCreateOrConnectWithoutStakeholderEventInput
+  connectOrCreate: StakeholderCreateOrConnectWithouteventsInvolvedInInput
   create: StakeholderCreateWithoutEventsInvolvedInInput
 }
 
-input StakeholderCreateOrConnectWithoutDocumentAuthorInput {
-  create: StakeholderCreateWithoutDocumentsInput!
-  where: StakeholderWhereUniqueInput!
-}
-
-input StakeholderCreateOrConnectWithoutDocumentInvolvedStakeholderInput {
-  create: StakeholderCreateWithoutDocumentsMentionedInInput!
-  where: StakeholderWhereUniqueInput!
-}
-
-input StakeholderCreateOrConnectWithoutStakeholderBriefingBookInput {
+input StakeholderCreateOrConnectWithoutbriefingBooksMentionedInInput {
   create: StakeholderCreateWithoutBriefingBooksMentionedInInput!
   where: StakeholderWhereUniqueInput!
 }
 
-input StakeholderCreateOrConnectWithoutStakeholderEventInput {
+input StakeholderCreateOrConnectWithoutdocumentsInput {
+  create: StakeholderCreateWithoutDocumentsInput!
+  where: StakeholderWhereUniqueInput!
+}
+
+input StakeholderCreateOrConnectWithoutdocumentsMentionedInInput {
+  create: StakeholderCreateWithoutDocumentsMentionedInInput!
+  where: StakeholderWhereUniqueInput!
+}
+
+input StakeholderCreateOrConnectWithouteventsInvolvedInInput {
   create: StakeholderCreateWithoutEventsInvolvedInInput!
   where: StakeholderWhereUniqueInput!
 }
@@ -3611,11 +3620,6 @@ type StakeholderEvent {
   StakeholderId: String!
 }
 
-input StakeholderEvent_AB_uniqueCompoundUniqueInput {
-  A: String!
-  B: String!
-}
-
 input StakeholderEventCreateInput {
   Event: EventCreateOneWithoutEventStakeholdersInput!
   id: String
@@ -3669,7 +3673,12 @@ input StakeholderEventScalarWhereInput {
   OR: [StakeholderEventScalarWhereInput!]
 }
 
-input StakeholderEventUpdateManyDataInput {
+input StakeholderEventStakeholderEvent_AB_uniqueCompoundUniqueInput {
+  A: String!
+  B: String!
+}
+
+input StakeholderEventUpdateManyMutationInput {
   id: StringFieldUpdateOperationsInput
 }
 
@@ -3682,7 +3691,7 @@ input StakeholderEventUpdateManyWithoutEventInput {
   disconnect: [StakeholderEventWhereUniqueInput!]
   set: [StakeholderEventWhereUniqueInput!]
   update: [StakeholderEventUpdateWithWhereUniqueWithoutEventInput!]
-  updateMany: [StakeholderEventUpdateManyWithWhereNestedInput!]
+  updateMany: [StakeholderEventUpdateManyWithWhereWithoutEventInput!]
   upsert: [StakeholderEventUpsertWithWhereUniqueWithoutEventInput!]
 }
 
@@ -3695,44 +3704,49 @@ input StakeholderEventUpdateManyWithoutStakeholderInput {
   disconnect: [StakeholderEventWhereUniqueInput!]
   set: [StakeholderEventWhereUniqueInput!]
   update: [StakeholderEventUpdateWithWhereUniqueWithoutStakeholderInput!]
-  updateMany: [StakeholderEventUpdateManyWithWhereNestedInput!]
+  updateMany: [StakeholderEventUpdateManyWithWhereWithoutStakeholderInput!]
   upsert: [StakeholderEventUpsertWithWhereUniqueWithoutStakeholderInput!]
 }
 
-input StakeholderEventUpdateManyWithWhereNestedInput {
-  data: StakeholderEventUpdateManyDataInput!
+input StakeholderEventUpdateManyWithWhereWithoutEventInput {
+  data: StakeholderEventUpdateManyMutationInput!
   where: StakeholderEventScalarWhereInput!
 }
 
-input StakeholderEventUpdateWithoutEventDataInput {
+input StakeholderEventUpdateManyWithWhereWithoutStakeholderInput {
+  data: StakeholderEventUpdateManyMutationInput!
+  where: StakeholderEventScalarWhereInput!
+}
+
+input StakeholderEventUpdateWithoutEventInput {
   id: StringFieldUpdateOperationsInput
   Stakeholder: StakeholderUpdateOneRequiredWithoutEventsInvolvedInInput
 }
 
-input StakeholderEventUpdateWithoutStakeholderDataInput {
+input StakeholderEventUpdateWithoutStakeholderInput {
   Event: EventUpdateOneRequiredWithoutEventStakeholdersInput
   id: StringFieldUpdateOperationsInput
 }
 
 input StakeholderEventUpdateWithWhereUniqueWithoutEventInput {
-  data: StakeholderEventUpdateWithoutEventDataInput!
+  data: StakeholderEventUpdateWithoutEventInput!
   where: StakeholderEventWhereUniqueInput!
 }
 
 input StakeholderEventUpdateWithWhereUniqueWithoutStakeholderInput {
-  data: StakeholderEventUpdateWithoutStakeholderDataInput!
+  data: StakeholderEventUpdateWithoutStakeholderInput!
   where: StakeholderEventWhereUniqueInput!
 }
 
 input StakeholderEventUpsertWithWhereUniqueWithoutEventInput {
   create: StakeholderEventCreateWithoutEventInput!
-  update: StakeholderEventUpdateWithoutEventDataInput!
+  update: StakeholderEventUpdateWithoutEventInput!
   where: StakeholderEventWhereUniqueInput!
 }
 
 input StakeholderEventUpsertWithWhereUniqueWithoutStakeholderInput {
   create: StakeholderEventCreateWithoutStakeholderInput!
-  update: StakeholderEventUpdateWithoutStakeholderDataInput!
+  update: StakeholderEventUpdateWithoutStakeholderInput!
   where: StakeholderEventWhereUniqueInput!
 }
 
@@ -3748,10 +3762,8 @@ input StakeholderEventWhereInput {
 }
 
 input StakeholderEventWhereUniqueInput {
-  A: String
-  B: String
   id: String
-  StakeholderEvent_AB_unique: StakeholderEvent_AB_uniqueCompoundUniqueInput
+  StakeholderEvent_AB_unique: StakeholderEventStakeholderEvent_AB_uniqueCompoundUniqueInput
 }
 
 input StakeholderOrderByInput {
@@ -3780,37 +3792,37 @@ input StakeholderUpdateInput {
 
 input StakeholderUpdateOneRequiredWithoutBriefingBooksMentionedInInput {
   connect: StakeholderWhereUniqueInput
-  connectOrCreate: StakeholderCreateOrConnectWithoutStakeholderBriefingBookInput
+  connectOrCreate: StakeholderCreateOrConnectWithoutbriefingBooksMentionedInInput
   create: StakeholderCreateWithoutBriefingBooksMentionedInInput
-  update: StakeholderUpdateWithoutBriefingBooksMentionedInDataInput
+  update: StakeholderUpdateWithoutBriefingBooksMentionedInInput
   upsert: StakeholderUpsertWithoutBriefingBooksMentionedInInput
 }
 
 input StakeholderUpdateOneRequiredWithoutDocumentsInput {
   connect: StakeholderWhereUniqueInput
-  connectOrCreate: StakeholderCreateOrConnectWithoutDocumentAuthorInput
+  connectOrCreate: StakeholderCreateOrConnectWithoutdocumentsInput
   create: StakeholderCreateWithoutDocumentsInput
-  update: StakeholderUpdateWithoutDocumentsDataInput
+  update: StakeholderUpdateWithoutDocumentsInput
   upsert: StakeholderUpsertWithoutDocumentsInput
 }
 
 input StakeholderUpdateOneRequiredWithoutDocumentsMentionedInInput {
   connect: StakeholderWhereUniqueInput
-  connectOrCreate: StakeholderCreateOrConnectWithoutDocumentInvolvedStakeholderInput
+  connectOrCreate: StakeholderCreateOrConnectWithoutdocumentsMentionedInInput
   create: StakeholderCreateWithoutDocumentsMentionedInInput
-  update: StakeholderUpdateWithoutDocumentsMentionedInDataInput
+  update: StakeholderUpdateWithoutDocumentsMentionedInInput
   upsert: StakeholderUpsertWithoutDocumentsMentionedInInput
 }
 
 input StakeholderUpdateOneRequiredWithoutEventsInvolvedInInput {
   connect: StakeholderWhereUniqueInput
-  connectOrCreate: StakeholderCreateOrConnectWithoutStakeholderEventInput
+  connectOrCreate: StakeholderCreateOrConnectWithouteventsInvolvedInInput
   create: StakeholderCreateWithoutEventsInvolvedInInput
-  update: StakeholderUpdateWithoutEventsInvolvedInDataInput
+  update: StakeholderUpdateWithoutEventsInvolvedInInput
   upsert: StakeholderUpsertWithoutEventsInvolvedInInput
 }
 
-input StakeholderUpdateWithoutBriefingBooksMentionedInDataInput {
+input StakeholderUpdateWithoutBriefingBooksMentionedInInput {
   createdAt: DateTimeFieldUpdateOperationsInput
   documents: DocumentAuthorUpdateManyWithoutStakeholderInput
   documentsMentionedIn: DocumentInvolvedStakeholderUpdateManyWithoutStakeholderInput
@@ -3823,7 +3835,7 @@ input StakeholderUpdateWithoutBriefingBooksMentionedInDataInput {
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
-input StakeholderUpdateWithoutDocumentsDataInput {
+input StakeholderUpdateWithoutDocumentsInput {
   briefingBooksMentionedIn: StakeholderBriefingBookUpdateManyWithoutStakeholderInput
   createdAt: DateTimeFieldUpdateOperationsInput
   documentsMentionedIn: DocumentInvolvedStakeholderUpdateManyWithoutStakeholderInput
@@ -3836,7 +3848,7 @@ input StakeholderUpdateWithoutDocumentsDataInput {
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
-input StakeholderUpdateWithoutDocumentsMentionedInDataInput {
+input StakeholderUpdateWithoutDocumentsMentionedInInput {
   briefingBooksMentionedIn: StakeholderBriefingBookUpdateManyWithoutStakeholderInput
   createdAt: DateTimeFieldUpdateOperationsInput
   documents: DocumentAuthorUpdateManyWithoutStakeholderInput
@@ -3849,7 +3861,7 @@ input StakeholderUpdateWithoutDocumentsMentionedInDataInput {
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
-input StakeholderUpdateWithoutEventsInvolvedInDataInput {
+input StakeholderUpdateWithoutEventsInvolvedInInput {
   briefingBooksMentionedIn: StakeholderBriefingBookUpdateManyWithoutStakeholderInput
   createdAt: DateTimeFieldUpdateOperationsInput
   documents: DocumentAuthorUpdateManyWithoutStakeholderInput
@@ -3864,22 +3876,22 @@ input StakeholderUpdateWithoutEventsInvolvedInDataInput {
 
 input StakeholderUpsertWithoutBriefingBooksMentionedInInput {
   create: StakeholderCreateWithoutBriefingBooksMentionedInInput!
-  update: StakeholderUpdateWithoutBriefingBooksMentionedInDataInput!
+  update: StakeholderUpdateWithoutBriefingBooksMentionedInInput!
 }
 
 input StakeholderUpsertWithoutDocumentsInput {
   create: StakeholderCreateWithoutDocumentsInput!
-  update: StakeholderUpdateWithoutDocumentsDataInput!
+  update: StakeholderUpdateWithoutDocumentsInput!
 }
 
 input StakeholderUpsertWithoutDocumentsMentionedInInput {
   create: StakeholderCreateWithoutDocumentsMentionedInInput!
-  update: StakeholderUpdateWithoutDocumentsMentionedInDataInput!
+  update: StakeholderUpdateWithoutDocumentsMentionedInInput!
 }
 
 input StakeholderUpsertWithoutEventsInvolvedInInput {
   create: StakeholderCreateWithoutEventsInvolvedInInput!
-  update: StakeholderUpdateWithoutEventsInvolvedInDataInput!
+  update: StakeholderUpdateWithoutEventsInvolvedInInput!
 }
 
 input StakeholderWhereInput {
@@ -3964,22 +3976,22 @@ input TagCreateInput {
 
 input TagCreateOneWithoutDocumentsWithTagInput {
   connect: TagWhereUniqueInput
-  connectOrCreate: TagCreateOrConnectWithoutTagOnDocumentInput
+  connectOrCreate: TagCreateOrConnectWithoutdocumentsWithTagInput
   create: TagCreateWithoutDocumentsWithTagInput
 }
 
 input TagCreateOneWithoutEventsWithTagInput {
   connect: TagWhereUniqueInput
-  connectOrCreate: TagCreateOrConnectWithoutTagOnEventInput
+  connectOrCreate: TagCreateOrConnectWithouteventsWithTagInput
   create: TagCreateWithoutEventsWithTagInput
 }
 
-input TagCreateOrConnectWithoutTagOnDocumentInput {
+input TagCreateOrConnectWithoutdocumentsWithTagInput {
   create: TagCreateWithoutDocumentsWithTagInput!
   where: TagWhereUniqueInput!
 }
 
-input TagCreateOrConnectWithoutTagOnEventInput {
+input TagCreateOrConnectWithouteventsWithTagInput {
   create: TagCreateWithoutEventsWithTagInput!
   where: TagWhereUniqueInput!
 }
@@ -4012,11 +4024,6 @@ type TagOnDocument {
   id: String!
   Tag: Tag!
   TagId: String!
-}
-
-input TagOnDocument_AB_uniqueCompoundUniqueInput {
-  A: String!
-  B: String!
 }
 
 input TagOnDocumentCreateInput {
@@ -4072,7 +4079,12 @@ input TagOnDocumentScalarWhereInput {
   OR: [TagOnDocumentScalarWhereInput!]
 }
 
-input TagOnDocumentUpdateManyDataInput {
+input TagOnDocumentTagOnDocument_AB_uniqueCompoundUniqueInput {
+  A: String!
+  B: String!
+}
+
+input TagOnDocumentUpdateManyMutationInput {
   id: StringFieldUpdateOperationsInput
 }
 
@@ -4085,7 +4097,7 @@ input TagOnDocumentUpdateManyWithoutDocumentInput {
   disconnect: [TagOnDocumentWhereUniqueInput!]
   set: [TagOnDocumentWhereUniqueInput!]
   update: [TagOnDocumentUpdateWithWhereUniqueWithoutDocumentInput!]
-  updateMany: [TagOnDocumentUpdateManyWithWhereNestedInput!]
+  updateMany: [TagOnDocumentUpdateManyWithWhereWithoutDocumentInput!]
   upsert: [TagOnDocumentUpsertWithWhereUniqueWithoutDocumentInput!]
 }
 
@@ -4098,44 +4110,49 @@ input TagOnDocumentUpdateManyWithoutTagInput {
   disconnect: [TagOnDocumentWhereUniqueInput!]
   set: [TagOnDocumentWhereUniqueInput!]
   update: [TagOnDocumentUpdateWithWhereUniqueWithoutTagInput!]
-  updateMany: [TagOnDocumentUpdateManyWithWhereNestedInput!]
+  updateMany: [TagOnDocumentUpdateManyWithWhereWithoutTagInput!]
   upsert: [TagOnDocumentUpsertWithWhereUniqueWithoutTagInput!]
 }
 
-input TagOnDocumentUpdateManyWithWhereNestedInput {
-  data: TagOnDocumentUpdateManyDataInput!
+input TagOnDocumentUpdateManyWithWhereWithoutDocumentInput {
+  data: TagOnDocumentUpdateManyMutationInput!
   where: TagOnDocumentScalarWhereInput!
 }
 
-input TagOnDocumentUpdateWithoutDocumentDataInput {
+input TagOnDocumentUpdateManyWithWhereWithoutTagInput {
+  data: TagOnDocumentUpdateManyMutationInput!
+  where: TagOnDocumentScalarWhereInput!
+}
+
+input TagOnDocumentUpdateWithoutDocumentInput {
   id: StringFieldUpdateOperationsInput
   Tag: TagUpdateOneRequiredWithoutDocumentsWithTagInput
 }
 
-input TagOnDocumentUpdateWithoutTagDataInput {
+input TagOnDocumentUpdateWithoutTagInput {
   Document: DocumentUpdateOneRequiredWithoutDocumentTagsInput
   id: StringFieldUpdateOperationsInput
 }
 
 input TagOnDocumentUpdateWithWhereUniqueWithoutDocumentInput {
-  data: TagOnDocumentUpdateWithoutDocumentDataInput!
+  data: TagOnDocumentUpdateWithoutDocumentInput!
   where: TagOnDocumentWhereUniqueInput!
 }
 
 input TagOnDocumentUpdateWithWhereUniqueWithoutTagInput {
-  data: TagOnDocumentUpdateWithoutTagDataInput!
+  data: TagOnDocumentUpdateWithoutTagInput!
   where: TagOnDocumentWhereUniqueInput!
 }
 
 input TagOnDocumentUpsertWithWhereUniqueWithoutDocumentInput {
   create: TagOnDocumentCreateWithoutDocumentInput!
-  update: TagOnDocumentUpdateWithoutDocumentDataInput!
+  update: TagOnDocumentUpdateWithoutDocumentInput!
   where: TagOnDocumentWhereUniqueInput!
 }
 
 input TagOnDocumentUpsertWithWhereUniqueWithoutTagInput {
   create: TagOnDocumentCreateWithoutTagInput!
-  update: TagOnDocumentUpdateWithoutTagDataInput!
+  update: TagOnDocumentUpdateWithoutTagInput!
   where: TagOnDocumentWhereUniqueInput!
 }
 
@@ -4151,10 +4168,8 @@ input TagOnDocumentWhereInput {
 }
 
 input TagOnDocumentWhereUniqueInput {
-  A: String
-  B: String
   id: String
-  TagOnDocument_AB_unique: TagOnDocument_AB_uniqueCompoundUniqueInput
+  TagOnDocument_AB_unique: TagOnDocumentTagOnDocument_AB_uniqueCompoundUniqueInput
 }
 
 type TagOnEvent {
@@ -4163,11 +4178,6 @@ type TagOnEvent {
   id: String!
   Tag: Tag!
   TagId: String!
-}
-
-input TagOnEvent_AB_uniqueCompoundUniqueInput {
-  A: String!
-  B: String!
 }
 
 input TagOnEventCreateInput {
@@ -4223,7 +4233,12 @@ input TagOnEventScalarWhereInput {
   OR: [TagOnEventScalarWhereInput!]
 }
 
-input TagOnEventUpdateManyDataInput {
+input TagOnEventTagOnEvent_AB_uniqueCompoundUniqueInput {
+  A: String!
+  B: String!
+}
+
+input TagOnEventUpdateManyMutationInput {
   id: StringFieldUpdateOperationsInput
 }
 
@@ -4236,7 +4251,7 @@ input TagOnEventUpdateManyWithoutEventInput {
   disconnect: [TagOnEventWhereUniqueInput!]
   set: [TagOnEventWhereUniqueInput!]
   update: [TagOnEventUpdateWithWhereUniqueWithoutEventInput!]
-  updateMany: [TagOnEventUpdateManyWithWhereNestedInput!]
+  updateMany: [TagOnEventUpdateManyWithWhereWithoutEventInput!]
   upsert: [TagOnEventUpsertWithWhereUniqueWithoutEventInput!]
 }
 
@@ -4249,44 +4264,49 @@ input TagOnEventUpdateManyWithoutTagInput {
   disconnect: [TagOnEventWhereUniqueInput!]
   set: [TagOnEventWhereUniqueInput!]
   update: [TagOnEventUpdateWithWhereUniqueWithoutTagInput!]
-  updateMany: [TagOnEventUpdateManyWithWhereNestedInput!]
+  updateMany: [TagOnEventUpdateManyWithWhereWithoutTagInput!]
   upsert: [TagOnEventUpsertWithWhereUniqueWithoutTagInput!]
 }
 
-input TagOnEventUpdateManyWithWhereNestedInput {
-  data: TagOnEventUpdateManyDataInput!
+input TagOnEventUpdateManyWithWhereWithoutEventInput {
+  data: TagOnEventUpdateManyMutationInput!
   where: TagOnEventScalarWhereInput!
 }
 
-input TagOnEventUpdateWithoutEventDataInput {
+input TagOnEventUpdateManyWithWhereWithoutTagInput {
+  data: TagOnEventUpdateManyMutationInput!
+  where: TagOnEventScalarWhereInput!
+}
+
+input TagOnEventUpdateWithoutEventInput {
   id: StringFieldUpdateOperationsInput
   Tag: TagUpdateOneRequiredWithoutEventsWithTagInput
 }
 
-input TagOnEventUpdateWithoutTagDataInput {
+input TagOnEventUpdateWithoutTagInput {
   Event: EventUpdateOneRequiredWithoutEventTagsInput
   id: StringFieldUpdateOperationsInput
 }
 
 input TagOnEventUpdateWithWhereUniqueWithoutEventInput {
-  data: TagOnEventUpdateWithoutEventDataInput!
+  data: TagOnEventUpdateWithoutEventInput!
   where: TagOnEventWhereUniqueInput!
 }
 
 input TagOnEventUpdateWithWhereUniqueWithoutTagInput {
-  data: TagOnEventUpdateWithoutTagDataInput!
+  data: TagOnEventUpdateWithoutTagInput!
   where: TagOnEventWhereUniqueInput!
 }
 
 input TagOnEventUpsertWithWhereUniqueWithoutEventInput {
   create: TagOnEventCreateWithoutEventInput!
-  update: TagOnEventUpdateWithoutEventDataInput!
+  update: TagOnEventUpdateWithoutEventInput!
   where: TagOnEventWhereUniqueInput!
 }
 
 input TagOnEventUpsertWithWhereUniqueWithoutTagInput {
   create: TagOnEventCreateWithoutTagInput!
-  update: TagOnEventUpdateWithoutTagDataInput!
+  update: TagOnEventUpdateWithoutTagInput!
   where: TagOnEventWhereUniqueInput!
 }
 
@@ -4302,10 +4322,8 @@ input TagOnEventWhereInput {
 }
 
 input TagOnEventWhereUniqueInput {
-  A: String
-  B: String
   id: String
-  TagOnEvent_AB_unique: TagOnEvent_AB_uniqueCompoundUniqueInput
+  TagOnEvent_AB_unique: TagOnEventTagOnEvent_AB_uniqueCompoundUniqueInput
 }
 
 input TagOrderByInput {
@@ -4320,21 +4338,21 @@ input TagOrderByInput {
 
 input TagUpdateOneRequiredWithoutDocumentsWithTagInput {
   connect: TagWhereUniqueInput
-  connectOrCreate: TagCreateOrConnectWithoutTagOnDocumentInput
+  connectOrCreate: TagCreateOrConnectWithoutdocumentsWithTagInput
   create: TagCreateWithoutDocumentsWithTagInput
-  update: TagUpdateWithoutDocumentsWithTagDataInput
+  update: TagUpdateWithoutDocumentsWithTagInput
   upsert: TagUpsertWithoutDocumentsWithTagInput
 }
 
 input TagUpdateOneRequiredWithoutEventsWithTagInput {
   connect: TagWhereUniqueInput
-  connectOrCreate: TagCreateOrConnectWithoutTagOnEventInput
+  connectOrCreate: TagCreateOrConnectWithouteventsWithTagInput
   create: TagCreateWithoutEventsWithTagInput
-  update: TagUpdateWithoutEventsWithTagDataInput
+  update: TagUpdateWithoutEventsWithTagInput
   upsert: TagUpsertWithoutEventsWithTagInput
 }
 
-input TagUpdateWithoutDocumentsWithTagDataInput {
+input TagUpdateWithoutDocumentsWithTagInput {
   createdAt: DateTimeFieldUpdateOperationsInput
   description: NullableStringFieldUpdateOperationsInput
   eventsWithTag: TagOnEventUpdateManyWithoutTagInput
@@ -4345,7 +4363,7 @@ input TagUpdateWithoutDocumentsWithTagDataInput {
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
-input TagUpdateWithoutEventsWithTagDataInput {
+input TagUpdateWithoutEventsWithTagInput {
   createdAt: DateTimeFieldUpdateOperationsInput
   description: NullableStringFieldUpdateOperationsInput
   documentsWithTag: TagOnDocumentUpdateManyWithoutTagInput
@@ -4358,12 +4376,12 @@ input TagUpdateWithoutEventsWithTagDataInput {
 
 input TagUpsertWithoutDocumentsWithTagInput {
   create: TagCreateWithoutDocumentsWithTagInput!
-  update: TagUpdateWithoutDocumentsWithTagDataInput!
+  update: TagUpdateWithoutDocumentsWithTagInput!
 }
 
 input TagUpsertWithoutEventsWithTagInput {
   create: TagCreateWithoutEventsWithTagInput!
-  update: TagUpdateWithoutEventsWithTagDataInput!
+  update: TagUpdateWithoutEventsWithTagInput!
 }
 
 input TagWhereInput {
@@ -4414,12 +4432,6 @@ input UserOrderByInput {
   role: SortOrder
   updatedAt: SortOrder
   userName: SortOrder
-}
-
-enum UserRole {
-  Admin
-  Editor
-  Viewer
 }
 
 input UserUpdateInput {
