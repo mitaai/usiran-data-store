@@ -33,12 +33,13 @@ async function getUserRole(context: Context) {
   throw new Error('User not found')
 }
 
-async function userIsEditor(context: Context) {
+async function userIsEditor(context: Context): Promise<boolean> {
   await getUserRole(context)
     .then((role) => {
       if (['Editor', 'Admin'].includes(role as string)) return true
       throw new Error(`Not authorized, user has role: ${role}`)
     })
+  return false
 }
 
 async function userIsAdmin(context: Context) {

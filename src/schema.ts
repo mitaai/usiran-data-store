@@ -3,7 +3,7 @@ import { ApolloServer } from 'apollo-server-express';
 import express from 'express'
 import { nexusPrisma } from 'nexus-plugin-prisma';
 import { DateTimeResolver } from 'graphql-scalars';
-import { asNexusMethod, makeSchema } from 'nexus';
+import { asNexusMethod, makeSchema, fieldAuthorizePlugin } from 'nexus';
 import { db } from './context';
 import * as HTTP from 'http'
 import * as types from './graphql';
@@ -26,14 +26,14 @@ export const schema = makeSchema({
     export: 'context',
     alias: 'ContextModule'
   },
-  shouldGenerateArtifacts: true,
   shouldExitAfterGenerateArtifacts: process.env.NEXUS_SHOULD_EXIT_AFTER_GENERATE_ARTIFACTS === 'true',
   plugins: [nexusPrisma({
     experimentalCRUD: true,
     scalars: {
       DateTime: DateTimeResolver,
     }
-  })],
+  }),
+  fieldAuthorizePlugin()],
   outputs: {
     typegen: path.join(__dirname, '../node_modules/@types/typegen-nexus/index.d.ts'),
     schema: path.join(__dirname, './schema.graphql'),
