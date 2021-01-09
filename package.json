@@ -14,7 +14,7 @@
     "start": "NODE_ENV=production node .nexus/build/api.js",
     "dev": "ts-node-dev --debug --transpile-only ./api.ts",
     "dev:typecheck": "tsc --noEmit --watch",
-    "nexus:reflect": "NEXUS_SHOULD_EXIT_AFTER_GENERATE_ARTIFACTS=true ts-node --transpile-only ./api.ts"
+    "nexus:reflect": "NODE_ENV=production ts-node --transpile-only ./api.ts"
   },
   "keywords": [],
   "author": "",

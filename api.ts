@@ -21,7 +21,6 @@ export const schema = makeSchema({
     export: 'Context',
     alias: 'ContextModule'
   },
-  shouldExitAfterGenerateArtifacts: process.env.NEXUS_SHOULD_EXIT_AFTER_GENERATE_ARTIFACTS === 'true',
   plugins: [nexusPrisma({
     experimentalCRUD: true,
     scalars: {
