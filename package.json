@@ -10,11 +10,11 @@
     "node": "14.x"
   },
   "scripts": {
-    "build": "npm run nexus:reflect && tsc",
+    "build": "tsc",
     "start": "NODE_ENV=production node .nexus/build/api.js",
     "dev": "ts-node-dev --debug --transpile-only ./api.ts",
     "dev:typecheck": "tsc --noEmit --watch",
-    "nexus:reflect": "NODE_ENV=production ts-node --transpile-only ./api.ts"
+    "nexus:reflect": "NEXUS_SHOULD_EXIT_AFTER_REFLECTION=true ts-node ./api.ts"
   },
   "keywords": [],
   "author": "",
