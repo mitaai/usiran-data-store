@@ -1,9 +1,9 @@
-import cors from 'cors';
-import { makeSchema } from 'nexus'
-import { nexusPrisma } from 'nexus-plugin-prisma'
-import { arg, stringArg } from 'nexus';
+import { objectType, extendType, enumType } from 'nexus'
+import { model } from './helper'
+import { Context } from '../context';
+import { arg, stringArg, nonNull } from 'nexus';
 import bcrypt from 'bcrypt';
-import { sign, verify } from 'jsonwebtoken';
+import { sign, verify, Secret } from 'jsonwebtoken';
 
 
 // Authentication and authorization logic
@@ -13,11 +13,11 @@ interface JWTData {
 }
 const isJWTData = (input: object | string): input is JWTData => { return typeof input === "object" && "id" in input; };  
 
-function getUserId(context) {
+function getUserId(context: Context) {
   const Authorization = context.req.get('Authorization')
   if (Authorization) {
     const token = Authorization.replace('Bearer ', '')
-    const verified = verify(token, process.env.AUTH_SECRET)
+    const verified = verify(token, process.env.AUTH_SECRET as Secret)
     if(isJWTData(verified)) {
       const { id } = verified
       return id
@@ -26,25 +26,434 @@ function getUserId(context) {
   throw new Error('Not authenticated')
 }
 
-async function getUserRole(context) {
+async function getUserRole(context: Context) {
   const id = getUserId(context)
-  const user = await context.db.user.findOne({ where: { id } })
+  const user = await context.db.user.findUnique({ where: { id } })
   if (user) return user.role
   throw new Error('User not found')
 }
 
-async function userIsEditor(context) {
-  const role = await getUserRole(context);
-  if (['Editor', 'Admin'].includes(role)) return true
-  throw new Error(`Not authorized, user has role: ${role}`)
+async function userIsEditor(context: Context) {
+  await getUserRole(context)
+    .then((role) => {
+      if (['Editor', 'Admin'].includes(role as string)) return true
+      throw new Error(`Not authorized, user has role: ${role}`)
+    })
 }
 
-async function userIsAdmin(context) {
+async function userIsAdmin(context: Context) {
   const role = await getUserRole(context);
   if (role === 'Admin') return true
   throw new Error(`Not authorized, user has role: ${role}`)
 }
 
+
+
+//                          _        _      
+//                         | |      | |     
+//    _ __ ___    ___    __| |  ___ | | ___ 
+//   | '_ ` _ \  / _ \  / _` | / _ \| |/ __|
+//   | | | | | || (_) || (_| ||  __/| |\__ \
+//   |_| |_| |_| \___/  \__,_| \___||_||___/
+//                                          
+// Models
+
+export const User = objectType({
+  name: 'User',
+  definition(t) {
+    model(t).createdAt()
+    model(t).email()
+    model(t).password()
+    model(t).firstName()
+    model(t).id()
+    model(t).lastName()
+    model(t).role()
+    model(t).updatedAt()
+    model(t).userName()
+  },
+});
+
+export const UserAuthPayload = objectType({
+  name: 'UserAuthPayload',
+  definition(t){
+    t.string("token");
+    t.field("user", { type: "User" });
+  },
+});
+
+export const Event = objectType({
+  name: 'Event',
+  definition(t) {
+    model(t).id()
+    model(t).eventIdSeq()
+    model(t).eventTitle()
+    model(t).eventStartDate()
+    model(t).eventEndDate()
+    model(t).eventTags()
+    model(t).eventStakeholders()
+    model(t).eventDescription()
+    model(t).eventLocations()
+  },
+});
+
+
+export const Stakeholder = objectType({
+  name: 'Stakeholder',
+  definition(t) {
+    model(t).id()
+    model(t).stakeholderFullName()
+    model(t).stakeholderDescription()
+    model(t).documents()
+    model(t).documentsMentionedIn()
+    model(t).eventsInvolvedIn()
+    model(t).stakeholderWikipediaUri()
+    model(t).isStakeholderInstitution()
+  },
+});
+
+
+export const Location = objectType({
+  name: 'Location',
+  definition(t) {
+    model(t).id()
+    model(t).locationName()
+    model(t).locationDescription()
+    model(t).documentsMentionedIn()
+    model(t).locationEvents()
+    model(t).locationWikipediaUri()
+  },
+});
+
+
+export const File = objectType({
+  name: 'File',
+  definition(t) {
+    model(t).id()
+    model(t).url()
+    model(t).size()
+    model(t).name()
+    model(t).contentType()
+  },
+});
+
+export const Kind = objectType({
+  name: 'Kind',
+  definition(t) {
+    model(t).id()
+    model(t).name()
+    model(t).createdAt()
+    model(t).updatedAt()
+    model(t).documentsWithKind()
+  },
+});
+
+export const Tag = objectType({
+  name: 'Tag',
+  definition(t) {
+    model(t).id()
+    model(t).name()
+    model(t).description()
+    model(t).tagWikipediaUri()
+    model(t).documentsWithTag()
+    model(t).eventsWithTag()
+    model(t).type()
+    model(t).createdAt()
+    model(t).updatedAt()
+  },
+});
+
+export const BriefingBook = objectType({
+  name: 'BriefingBook',
+  definition(t) {
+    model(t).id()
+    model(t).briefingBookDescription()
+    model(t).briefingBookTitle()
+    model(t).mentionedDocuments()
+    model(t).mentionedEvents()
+    model(t).mentionedStakeholders()
+    model(t).createdAt()
+    model(t).updatedAt()
+  },
+});
+
+export const Classification = objectType({
+  name: 'Classification',
+  definition(t) {
+    model(t).id()
+    model(t).name()
+    model(t).documentsWithClassification()
+    model(t).createdAt()
+    model(t).updatedAt()
+  },
+});
+
+
+//          .     .                 
+//          |     |   o             
+//  ;-. ,-. | ,-: |-  . ,-. ;-. ,-. 
+//  |   |-' | | | |   | | | | | `-. 
+//  '   `-' ' `-` `-' ' `-' ' ' `-' 
+//                                  
+// Relations
+
+export const BriefingBookDocument = objectType({
+  name: 'BriefingBookDocument',
+  definition(t) {
+    model(t).id()
+    model(t).A({alias:"BriefingBookId"})
+    model(t).B({alias:"DocumentId"})
+    model(t).BriefingBook()
+    model(t).Document()
+  }
+})
+
+export const BriefingBookEvent = objectType({
+  name: 'BriefingBookEvent',
+  definition(t){
+    model(t).id()
+    model(t).A({alias:"EventId"})
+    model(t).B({alias:"BriefingBookId"})
+    model(t).Event()
+    model(t).BriefingBook()
+  }
+})
+
+export const ClassificationOnDocument = objectType({
+  name: 'ClassificationOnDocument',
+  definition(t) {
+    model(t).id()
+    model(t).A({alias:"ClassificationId"})
+    model(t).B({alias:"DocumentId"})
+    model(t).Classification()
+    model(t).Document()
+  }
+})
+
+export const DocumentAuthor = objectType({
+  name: 'DocumentAuthor',
+  definition(t){
+    model(t).id()
+    model(t).A({alias:"DocumentId"})
+    model(t).B({alias:"StakeholderId"})
+    model(t).Document()
+    model(t).Stakeholder()
+  }
+})
+
+export const DocumentEvent = objectType({
+  name: 'DocumentEvent',
+  definition(t) {
+    model(t).id()
+    model(t).A({alias:"DocumentId"})
+    model(t).B({alias:"EventId"})
+    model(t).Document()
+    model(t).Event()
+  }
+})
+
+export const DocumentFile = objectType({
+  name: 'DocumentFile',
+  definition(t){
+    model(t).id()
+    model(t).A({alias:"DocumentId"})
+    model(t).B({alias:"FileId"})
+    model(t).Document()
+    model(t).File()
+  }
+})
+
+export const DocumentInvolvedStakeholder = objectType({
+  name: 'DocumentInvolvedStakeholder',
+  definition(t) {
+    model(t).id()
+    model(t).A({alias:"StakeholderId"})
+    model(t).B({alias:"DocumentId"})
+    model(t).Stakeholder()
+    model(t).Document()
+  }
+})
+
+export const DocumentLocation = objectType({
+  name: 'DocumentLocation',
+  definition(t){
+    model(t).id()
+    model(t).A({alias:"LocationId"})
+    model(t).B({alias:"DocumentId"})
+    model(t).Location()
+    model(t).Document()
+  }
+})
+
+export const KindOnDocument = objectType({
+  name: 'KindOnDocument',
+  definition(t) {
+    model(t).id()
+    model(t).A({alias:"KindId"})
+    model(t).B({alias:"DocumentId"})
+    model(t).Kind()
+    model(t).Document()
+  }
+})
+
+export const LocationOnEvent = objectType({
+  name: 'LocationOnEvent',
+  definition(t) {
+    model(t).id()
+    model(t).A({alias: "LocationId"})
+    model(t).B({alias: "EventId"})
+    model(t).Location()
+    model(t).Event()
+  }
+})
+
+export const StakeholderBriefingBook = objectType({
+  name: 'StakeholderBriefingBook',
+  definition(t){
+    model(t).id()
+    model(t).A({alias: "StakeholderId"})
+    model(t).B({alias: "BriefingBookId"})
+    model(t).Stakeholder()
+    model(t).BriefingBook()
+  }
+})
+
+export const StakeholderEvent = objectType({
+  name: 'StakeholderEvent',
+  definition(t){
+    model(t).id()
+    model(t).A({alias: "StakeholderId"})
+    model(t).B({alias: "EventId"})
+    model(t).Stakeholder()
+    model(t).Event()
+  }
+})
+
+export const TagOnDocument = objectType({
+  name: 'TagOnDocument',
+  definition(t){
+    model(t).id()
+    model(t).A({alias:"TagId"})
+    model(t).B({alias:"DocumentId"})
+    model(t).Tag()
+    model(t).Document()
+  }
+})
+
+export const TagOnEvent = objectType({
+  name: 'TagOnEvent',
+  definition(t){
+    model(t).id()
+    model(t).A({alias: "TagId"})
+    model(t).B({alias: "EventId"})
+    model(t).Tag()
+    model(t).Event()
+  }
+})
+
+
+//                             _            
+//                            (_)           
+//    __ _  _   _   ___  _ __  _   ___  ___ 
+//   / _` || | | | / _ \| '__|| | / _ \/ __|
+//  | (_| || |_| ||  __/| |   | ||  __/\__ \
+//   \__, | \__,_| \___||_|   |_| \___||___/
+//      | |                                 
+//      |_|                                 
+//
+// Queries
+
+export const Queries = extendType({
+  type: 'Query',
+  definition(t) {
+    t.crud.user()
+    t.crud.users({
+      pagination: true,
+      filtering: true,
+      ordering: true,
+    })
+    t.crud.document()
+    t.crud.documents({
+      pagination: true,
+      filtering: true,
+      ordering: true,
+    })
+    t.int('documentsCount', {
+      args: {
+        where: "DocumentWhereInput",
+      },
+      async resolve(_parent, args, ctx) {
+        const result = await ctx.db.document.count(args);
+        return result;
+      }
+    })
+    t.crud.event()
+    t.crud.events({
+      pagination: true,
+      filtering: true,
+      ordering: true,
+    })
+    t.int('eventsCount', {
+        args: {
+        where: "EventWhereInput",
+      },
+      async resolve(_parent, args, ctx) {
+        const result = await ctx.db.event.count(args);
+        return result;
+      }
+    })
+    t.crud.stakeholder()
+    t.crud.stakeholders({
+      pagination: true,
+      filtering: true,
+      ordering: true,
+    })
+    t.int('stakeholdersCount', {
+        args: {
+        where: "StakeholderWhereInput",
+      },
+      async resolve(_parent, args, ctx) {
+        const result = await ctx.db.stakeholder.count(args);
+        return result;
+      }
+    })
+    t.crud.location()
+    t.crud.locations({
+      pagination: true,
+      filtering: true,
+      ordering: true,
+    })
+    t.crud.file()
+    t.crud.files({
+      pagination: true,
+      filtering: true,
+      ordering: true,
+    })
+    t.crud.kind()
+    t.crud.kinds({
+      pagination: true,
+      filtering: true,
+      ordering: true,
+    })
+    t.crud.kindOnDocument()
+    t.crud.kindOnDocuments({
+      pagination: true,
+      filtering: true,
+      ordering: true,
+    })
+    t.crud.tag()
+    t.crud.tags({
+      pagination: true,
+      filtering: true,
+      ordering: true,
+    })
+    t.crud.briefingBook()
+    t.crud.briefingBooks({
+      pagination: true,
+      filtering: true,
+      ordering: true,
+    })
+  },
+})
 
 
 //                      _          _    _                    
@@ -57,7 +466,8 @@ async function userIsAdmin(context) {
 //                                                           
 // Mutations
 
-schema.mutationType({
+export const mutations  = extendType({
+  type: 'Mutation',
   definition(t) {
     //     ___                  _        
     //    / __| _ _  ___  __ _ | |_  ___ 
@@ -136,9 +546,9 @@ schema.mutationType({
       type: 'UserAuthPayload',
       args: {
         userName: stringArg(),
-        email: stringArg({ nullable: false }),
-        password: stringArg({ nullable: false }),
-        role: stringArg({ nullable: false }),
+        email: nonNull(stringArg()),
+        password: nonNull(stringArg()),
+        role: nonNull(stringArg()),
       },
       resolve: async (_parent, { userName, email, password, role }, ctx) => {
         const hashedPassword = await bcrypt.hash(password, 10);
@@ -279,8 +689,8 @@ schema.mutationType({
     t.field('signinUser', {
       type: 'UserAuthPayload',
       args: {
-        email: stringArg({ nullable: false }),
-        password: stringArg({ nullable: false }),
+        email: nonNull(stringArg()),
+        password: nonNull(stringArg()),
       },
       resolve: async (_, { email, password }, ctx): Promise<any> => {
         const user = await ctx.db.user.findOne({ where: { email }});
@@ -299,7 +709,7 @@ schema.mutationType({
             id: user.id,
             email: user.email,
           },
-          process.env.AUTH_SECRET,
+          process.env.AUTH_SECRET as Secret,
           {
             expiresIn: '30d',
           },
@@ -313,6 +723,7 @@ schema.mutationType({
   },
 })
 
+
 //                                       
 //                                       
 //     ___  _ __   _   _  _ __ ___   ___ 
@@ -322,12 +733,12 @@ schema.mutationType({
 //                                       
 // Enums
 
-schema.enumType({
+const MediaType = enumType({
   name: 'MediaType',
   members: ['RawText','Video','Image','Audio','Pdf','Embedd','Markdown'],
 })
 
-schema.enumType({
+const UserRole = enumType({
   name: 'UserRole',
   members: ['Admin', 'Editor', 'Viewer'],
 })
