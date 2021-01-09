@@ -14,7 +14,8 @@
     "build": "nexus build -d heroku",
     "start": "node .nexus/build",
     "dev": "ts-node-dev --debug --transpile-only ./src/schema.ts",
-    "dev:typecheck": "tsc --noEmit --watch"
+    "dev:typecheck": "tsc --noEmit --watch",
+    "nexus:reflect": "NEXUS_SHOULD_EXIT_AFTER_GENERATE_ARTIFACTS=true ts-node --transpile-only ./src/schema.ts"
   },
   "keywords": [],
   "author": "",
