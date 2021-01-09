@@ -23,7 +23,7 @@ export const schema = makeSchema({
   },
   contextType: {
     module: require.resolve('./context'),
-    export: 'context',
+    export: 'Context',
     alias: 'ContextModule'
   },
   shouldExitAfterGenerateArtifacts: process.env.NEXUS_SHOULD_EXIT_AFTER_GENERATE_ARTIFACTS === 'true',

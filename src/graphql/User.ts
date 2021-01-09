@@ -1,9 +1,9 @@
 import { objectType, extendType, enumType } from 'nexus'
-import { model } from './helper'
 import { Context } from '../context';
-import { arg, stringArg, nonNull } from 'nexus';
+import { stringArg, nonNull } from 'nexus';
 import bcrypt from 'bcrypt';
 import { sign, verify, Secret } from 'jsonwebtoken';
+import { Prisma } from '@prisma/client';
 
 
 // Authentication and authorization logic
@@ -383,7 +383,7 @@ export const queries = extendType({
         where: "DocumentWhereInput",
       },
       async resolve(_parent, args, ctx) {
-        const result = await ctx.db.document.count(args);
+        const result = await ctx.db.document.count(args as Prisma.FindManyDocumentArgs);
         return result;
       }
     })
@@ -398,7 +398,7 @@ export const queries = extendType({
         where: "EventWhereInput",
       },
       async resolve(_parent, args, ctx) {
-        const result = await ctx.db.event.count(args);
+        const result = await ctx.db.event.count(args as Prisma.FindManyEventArgs);
         return result;
       }
     })
@@ -413,7 +413,7 @@ export const queries = extendType({
         where: "StakeholderWhereInput",
       },
       async resolve(_parent, args, ctx) {
-        const result = await ctx.db.stakeholder.count(args);
+        const result = await ctx.db.stakeholder.count(args as Prisma.FindManyStakeholderArgs);
         return result;
       }
     })
@@ -486,7 +486,7 @@ export const mutations  = extendType({
         const id = `9-${(res.eventIdSeq as number)-1573}`;
         const newRes = await ctx.db.event.update({
           where: {
-            id: res.id,
+            id: res.id as string,
           },
           data: {
             id: { set: id },
@@ -555,7 +555,7 @@ export const mutations  = extendType({
         const hashedPassword = await bcrypt.hash(password, 10);
         const user = await ctx.db.user.create({
           data: {
-            userName,
+            userName: userName as string,
             email,
             password: hashedPassword,
             role,
@@ -580,12 +580,12 @@ export const mutations  = extendType({
     })
     t.crud.updateOneDocument({
       async resolve(root, args, ctx, info, originalResolve) {
-        if(args.data.documentKind) await ctx.db.queryRaw(`DELETE FROM "KindOnDocument" WHERE "B" = '${args.where.id}';`)
-        if(args.data.documentClassification) await ctx.db.queryRaw(`DELETE FROM "ClassificationOnDocument" WHERE "B" = '${args.where.id}';`)
-        if(args.data.documentTags) await ctx.db.queryRaw(`DELETE FROM "TagOnDocument" WHERE "B" = '${args.where.id}';`)
-        if(args.data.documentAuthors) await ctx.db.queryRaw(`DELETE FROM "DocumentAuthor" WHERE "A" = '${args.where.id}';`)
-        if(args.data.mentionedStakeholders) await ctx.db.queryRaw(`DELETE FROM "DocumentInvolvedStakeholder" WHERE "B" = '${args.where.id}';`)
-        if(args.data.mentionedLocations) await ctx.db.queryRaw(`DELETE FROM "DocumentLocation" WHERE "B" = '${args.where.id}';`);
+        if(args.data.documentKind) await ctx.db.$queryRaw(`DELETE FROM "KindOnDocument" WHERE "B" = '${args.where.id}';`)
+        if(args.data.documentClassification) await ctx.db.$queryRaw(`DELETE FROM "ClassificationOnDocument" WHERE "B" = '${args.where.id}';`)
+        if(args.data.documentTags) await ctx.db.$queryRaw(`DELETE FROM "TagOnDocument" WHERE "B" = '${args.where.id}';`)
+        if(args.data.documentAuthors) await ctx.db.$queryRaw(`DELETE FROM "DocumentAuthor" WHERE "A" = '${args.where.id}';`)
+        if(args.data.mentionedStakeholders) await ctx.db.$queryRaw(`DELETE FROM "DocumentInvolvedStakeholder" WHERE "B" = '${args.where.id}';`)
+        if(args.data.mentionedLocations) await ctx.db.$queryRaw(`DELETE FROM "DocumentLocation" WHERE "B" = '${args.where.id}';`);
         const res = await originalResolve(root, args, ctx, info)
         return res
       },
@@ -593,9 +593,9 @@ export const mutations  = extendType({
     })
     t.crud.updateOneEvent({
       async resolve(root, args, ctx, info, originalResolve) {
-        if(args.data.eventTags) await ctx.db.queryRaw(`DELETE FROM "TagOnEvent" WHERE "B" = '${args.where.id}';`)
-        if(args.data.eventStakeholders) await ctx.db.queryRaw(`DELETE FROM "StakeholderEvent" WHERE "B" = '${args.where.id}';`)
-        if(args.data.eventLocations) await ctx.db.queryRaw(`DELETE FROM "LocationOnEvent" WHERE "B" = '${args.where.id}';`)
+        if(args.data.eventTags) await ctx.db.$queryRaw(`DELETE FROM "TagOnEvent" WHERE "B" = '${args.where.id}';`)
+        if(args.data.eventStakeholders) await ctx.db.$queryRaw(`DELETE FROM "StakeholderEvent" WHERE "B" = '${args.where.id}';`)
+        if(args.data.eventLocations) await ctx.db.$queryRaw(`DELETE FROM "LocationOnEvent" WHERE "B" = '${args.where.id}';`)
         const res = await originalResolve(root, args, ctx, info)
         return res
       },
@@ -603,9 +603,9 @@ export const mutations  = extendType({
     })
     t.crud.updateOneStakeholder({
       async resolve(root, args, ctx, info, originalResolve) {
-        if(args.data.documentsMentionedIn) await ctx.db.queryRaw(`DELETE FROM "DocumentInvolvedStakeholder" WHERE "A" = '${args.where.id}';`)
-        if(args.data.documents) await ctx.db.queryRaw(`DELETE FROM "DocumentAuthor" WHERE "B" = '${args.where.id}';`)
-        if(args.data.eventsInvolvedIn) await ctx.db.queryRaw(`DELETE FROM "StakeholderEvent" WHERE "A" = '${args.where.id}';`)
+        if(args.data.documentsMentionedIn) await ctx.db.$queryRaw(`DELETE FROM "DocumentInvolvedStakeholder" WHERE "A" = '${args.where.id}';`)
+        if(args.data.documents) await ctx.db.$queryRaw(`DELETE FROM "DocumentAuthor" WHERE "B" = '${args.where.id}';`)
+        if(args.data.eventsInvolvedIn) await ctx.db.$queryRaw(`DELETE FROM "StakeholderEvent" WHERE "A" = '${args.where.id}';`)
         const res = await originalResolve(root, args, ctx, info)
         return res
       },
@@ -613,8 +613,8 @@ export const mutations  = extendType({
     })
     t.crud.updateOneLocation({
       async resolve(root, args, ctx, info, originalResolve) {
-        if(args.data.documentsMentionedIn) await ctx.db.queryRaw(`DELETE FROM "DocumentLocation" WHERE "A" = '${args.where.id}';`)
-        if(args.data.locationEvents) await ctx.db.queryRaw(`DELETE FROM "LocationOnEvent" WHERE "A" = '${args.where.id}';`)
+        if(args.data.documentsMentionedIn) await ctx.db.$queryRaw(`DELETE FROM "DocumentLocation" WHERE "A" = '${args.where.id}';`)
+        if(args.data.locationEvents) await ctx.db.$queryRaw(`DELETE FROM "LocationOnEvent" WHERE "A" = '${args.where.id}';`)
         const res = await originalResolve(root, args, ctx, info)
         return res
       },
@@ -633,15 +633,15 @@ export const mutations  = extendType({
     })
     t.crud.deleteOneDocument({
       async resolve(root, args, ctx, info, originalResolve) {
-        await ctx.db.queryRaw(`DELETE FROM "BriefingBookDocument" WHERE "B" = '${args.where.id}';`)
-        await ctx.db.queryRaw(`DELETE FROM "ClassificationOnDocument" WHERE "B" = '${args.where.id}';`)
-        await ctx.db.queryRaw(`DELETE FROM "DocumentAuthor" WHERE "A" = '${args.where.id}';`)
-        await ctx.db.queryRaw(`DELETE FROM "DocumentEvent" WHERE "A" = '${args.where.id}';`)
-        await ctx.db.queryRaw(`DELETE FROM "DocumentFile" WHERE "A" = '${args.where.id}';`)
-        await ctx.db.queryRaw(`DELETE FROM "DocumentInvolvedStakeholder" WHERE "B" = '${args.where.id}';`)
-        await ctx.db.queryRaw(`DELETE FROM "DocumentLocation" WHERE "B" = '${args.where.id}';`)
-        await ctx.db.queryRaw(`DELETE FROM "KindOnDocument" WHERE "B" = '${args.where.id}';`)
-        await ctx.db.queryRaw(`DELETE FROM "TagOnDocument" WHERE "B" = '${args.where.id}';`)
+        await ctx.db.$queryRaw(`DELETE FROM "BriefingBookDocument" WHERE "B" = '${args.where.id}';`)
+        await ctx.db.$queryRaw(`DELETE FROM "ClassificationOnDocument" WHERE "B" = '${args.where.id}';`)
+        await ctx.db.$queryRaw(`DELETE FROM "DocumentAuthor" WHERE "A" = '${args.where.id}';`)
+        await ctx.db.$queryRaw(`DELETE FROM "DocumentEvent" WHERE "A" = '${args.where.id}';`)
+        await ctx.db.$queryRaw(`DELETE FROM "DocumentFile" WHERE "A" = '${args.where.id}';`)
+        await ctx.db.$queryRaw(`DELETE FROM "DocumentInvolvedStakeholder" WHERE "B" = '${args.where.id}';`)
+        await ctx.db.$queryRaw(`DELETE FROM "DocumentLocation" WHERE "B" = '${args.where.id}';`)
+        await ctx.db.$queryRaw(`DELETE FROM "KindOnDocument" WHERE "B" = '${args.where.id}';`)
+        await ctx.db.$queryRaw(`DELETE FROM "TagOnDocument" WHERE "B" = '${args.where.id}';`)
         const res = await originalResolve(root, args, ctx, info)
         return res
       },
@@ -649,11 +649,11 @@ export const mutations  = extendType({
     })
     t.crud.deleteOneEvent({
       async resolve(root, args, ctx, info, originalResolve) {
-        await ctx.db.queryRaw(`DELETE FROM "BriefingBookEvent" WHERE "A" = '${args.where.id}';`)
-        await ctx.db.queryRaw(`DELETE FROM "DocumentEvent" WHERE "B" = '${args.where.id}';`)
-        await ctx.db.queryRaw(`DELETE FROM "LocationOnEvent" WHERE "B" = '${args.where.id}';`)
-        await ctx.db.queryRaw(`DELETE FROM "StakeholderEvent" WHERE "B" = '${args.where.id}';`)
-        await ctx.db.queryRaw(`DELETE FROM "TagOnEvent" WHERE "B" = '${args.where.id}';`)
+        await ctx.db.$queryRaw(`DELETE FROM "BriefingBookEvent" WHERE "A" = '${args.where.id}';`)
+        await ctx.db.$queryRaw(`DELETE FROM "DocumentEvent" WHERE "B" = '${args.where.id}';`)
+        await ctx.db.$queryRaw(`DELETE FROM "LocationOnEvent" WHERE "B" = '${args.where.id}';`)
+        await ctx.db.$queryRaw(`DELETE FROM "StakeholderEvent" WHERE "B" = '${args.where.id}';`)
+        await ctx.db.$queryRaw(`DELETE FROM "TagOnEvent" WHERE "B" = '${args.where.id}';`)
         const res = await originalResolve(root, args, ctx, info)
         return res
       },
@@ -661,8 +661,8 @@ export const mutations  = extendType({
     })
     t.crud.deleteOneLocation({
       async resolve(root, args, ctx, info, originalResolve) {
-        await ctx.db.queryRaw(`DELETE FROM "DocumentLocation" WHERE "A" = '${args.where.id}';`)
-        await ctx.db.queryRaw(`DELETE FROM "LocationOnEvent" WHERE "A" = '${args.where.id}';`)
+        await ctx.db.$queryRaw(`DELETE FROM "DocumentLocation" WHERE "A" = '${args.where.id}';`)
+        await ctx.db.$queryRaw(`DELETE FROM "LocationOnEvent" WHERE "A" = '${args.where.id}';`)
         const res = await originalResolve(root, args, ctx, info)
         return res
       },
@@ -670,10 +670,10 @@ export const mutations  = extendType({
     })
     t.crud.deleteOneStakeholder({
       async resolve(root, args, ctx, info, originalResolve) {
-        await ctx.db.queryRaw(`DELETE FROM "DocumentAuthor" WHERE "B" = '${args.where.id}';`)
-        await ctx.db.queryRaw(`DELETE FROM "DocumentInvolvedStakeholder" WHERE "A" = '${args.where.id}';`)
-        await ctx.db.queryRaw(`DELETE FROM "StakeholderBriefingBook" WHERE "A" = '${args.where.id}';`)
-        await ctx.db.queryRaw(`DELETE FROM "StakeholderEvent" WHERE "A" = '${args.where.id}';`)
+        await ctx.db.$queryRaw(`DELETE FROM "DocumentAuthor" WHERE "B" = '${args.where.id}';`)
+        await ctx.db.$queryRaw(`DELETE FROM "DocumentInvolvedStakeholder" WHERE "A" = '${args.where.id}';`)
+        await ctx.db.$queryRaw(`DELETE FROM "StakeholderBriefingBook" WHERE "A" = '${args.where.id}';`)
+        await ctx.db.$queryRaw(`DELETE FROM "StakeholderEvent" WHERE "A" = '${args.where.id}';`)
         const res = await originalResolve(root, args, ctx, info)
         return res
       },
@@ -694,12 +694,12 @@ export const mutations  = extendType({
         password: nonNull(stringArg()),
       },
       resolve: async (_, { email, password }, ctx): Promise<any> => {
-        const user = await ctx.db.user.findOne({ where: { email }});
+        const user = await ctx.db.user.findUnique({ where: { email }});
         if (!user) {
           throw new Error('Invalid Login');
         }
     
-        const passwordMatch = await bcrypt.compare(password, user.password);
+        const passwordMatch = await bcrypt.compare(password, user.password as string);
     
         if (!passwordMatch) {
           throw new Error('Invalid Login');
