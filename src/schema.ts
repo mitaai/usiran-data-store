@@ -51,6 +51,8 @@ const http = HTTP.createServer(app)
 
 apollo.applyMiddleware({ app })
 
-http.listen(4000, () => {
+const PORT = process.env.PORT || 4000;
+
+http.listen(PORT, () => {
   console.log(`🚀 GraphQL service ready at http://localhost:4000/graphql`)
 })
