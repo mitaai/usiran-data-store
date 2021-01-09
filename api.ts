@@ -24,11 +24,13 @@ export const schema = makeSchema({
   shouldExitAfterGenerateArtifacts: Boolean(
     process.env.NEXUS_SHOULD_EXIT_AFTER_REFLECTION,
   ),
+  shouldGenerateArtifacts: true,
     plugins: [nexusPrisma({
     experimentalCRUD: true,
     scalars: {
       DateTime: DateTimeResolver,
-    }
+    },
+    shouldGenerateArtifacts: true
   }),
   fieldAuthorizePlugin()],
   outputs: {
