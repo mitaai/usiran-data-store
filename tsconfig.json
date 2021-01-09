@@ -3,7 +3,8 @@
     "esModuleInterop": true,
     "target": "esnext",
     "module": "commonjs",
-    "strict": true
+    "strict": true,
+    "outDir": ".nexus/build"
   },
   "exclude": ["prisma"]
 }

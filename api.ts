@@ -14,12 +14,7 @@ export const schema = makeSchema({
     types,
   ],
   sourceTypes: {
-    modules: [
-      {
-        module: require.resolve('../node_modules/.prisma/client/index.d.ts'),
-        alias: "prisma",
-      }
-    ]
+    modules: [{ module: '.prisma/client', alias: 'PrismaClient' }],
   },
   contextType: {
     module: require.resolve('./context'),
@@ -35,8 +30,11 @@ export const schema = makeSchema({
   }),
   fieldAuthorizePlugin()],
   outputs: {
-    typegen: path.join(__dirname, '../node_modules/@types/typegen-nexus/index.d.ts'),
-    schema: path.join(__dirname, './schema.graphql'),
+    typegen: path.join(
+      __dirname,
+      'node_modules/@types/nexus-typegen/index.d.ts',
+    ),
+    schema: path.join(__dirname, './api.graphql'),
   },
 });
 
@@ -49,7 +47,13 @@ const apollo = new ApolloServer({
 const app = express()
 const http = HTTP.createServer(app)
 
-apollo.applyMiddleware({ app })
+apollo.applyMiddleware({ 
+  app,
+  cors: {
+    origin: "https://irus.vercel.app",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE"
+  }
+})
 
 const PORT = process.env.PORT || 4000;
 
