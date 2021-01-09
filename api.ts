@@ -21,7 +21,10 @@ export const schema = makeSchema({
     export: 'Context',
     alias: 'ContextModule'
   },
-  plugins: [nexusPrisma({
+  shouldExitAfterGenerateArtifacts: Boolean(
+    process.env.NEXUS_SHOULD_EXIT_AFTER_REFLECTION,
+  ),
+    plugins: [nexusPrisma({
     experimentalCRUD: true,
     scalars: {
       DateTime: DateTimeResolver,
