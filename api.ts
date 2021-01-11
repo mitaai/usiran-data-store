@@ -27,11 +27,15 @@ export const schema = makeSchema({
   ),
   shouldGenerateArtifacts: true,
     plugins: [nexusPrisma({
-    experimentalCRUD: true,
+    experimentalCRUD: Boolean(
+      process.env.NEXUS_SHOULD_GENERATE_ARTIFACTS,
+    ),
     scalars: {
       DateTime: DateTimeResolver,
     },
-    shouldGenerateArtifacts: true
+    shouldGenerateArtifacts: Boolean(
+      process.env.NEXUS_SHOULD_GENERATE_ARTIFACTS,
+    )
   }),
   fieldAuthorizePlugin()],
   outputs: {
