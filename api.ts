@@ -7,6 +7,7 @@ import { asNexusMethod, makeSchema, fieldAuthorizePlugin } from 'nexus';
 import { db } from './context';
 import * as HTTP from 'http'
 import * as types from './graphql';
+import cors from 'cors';
 
 export const schema = makeSchema({
   types: [
@@ -49,14 +50,12 @@ const apollo = new ApolloServer({
   schema,
 })
 const app = express()
+app.use(cors({ credentials: true, origin: "https://irus.vercel.app" }));
 const http = HTTP.createServer(app)
 
 apollo.applyMiddleware({ 
   app,
-  cors: {
-    origin: "https://irus.vercel.app",
-    credentials: true
-  }
+  cors: false,
 })
 
 const PORT = process.env.PORT || 4000;
