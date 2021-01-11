@@ -7,6 +7,7 @@ export const loggingPlugin: ApolloServerPlugin = ({
   requestDidStart(requestContext: GraphQLRequestContext) {
     console.log('Request started! Query:\n' +
       requestContext.request.query);
+    console.log(requestContext.request.http?.headers)
 
     return {
 
