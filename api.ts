@@ -25,11 +25,11 @@ export const schema = makeSchema({
   shouldExitAfterGenerateArtifacts: Boolean(
     process.env.NEXUS_SHOULD_EXIT_AFTER_REFLECTION,
   ),
-  shouldGenerateArtifacts: true,
-    plugins: [nexusPrisma({
-    experimentalCRUD: Boolean(
-      process.env.NEXUS_SHOULD_GENERATE_ARTIFACTS,
-    ),
+  shouldGenerateArtifacts: Boolean(
+    process.env.NEXUS_SHOULD_GENERATE_ARTIFACTS,
+  ),
+  plugins: [nexusPrisma({
+    experimentalCRUD: true,
     scalars: {
       DateTime: DateTimeResolver,
     },
@@ -57,7 +57,7 @@ const app = express()
 app.use(cors({ credentials: true, origin: "https://irus.vercel.app" }));
 const http = HTTP.createServer(app)
 
-apollo.applyMiddleware({ 
+apollo.applyMiddleware({
   app,
   cors: false,
 })
