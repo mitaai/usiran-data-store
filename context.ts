@@ -1,10 +1,9 @@
 // context.ts
+import express from 'express';
 import { PrismaClient } from '@prisma/client'
-import { GraphQLRequest, GraphQLResponse, Logger } from 'apollo-server-types';
 export type Context = {
   db: PrismaClient,
-  request: GraphQLRequest,
-  response: GraphQLResponse,
-  log: Logger,
+  req: express.Request,
+  res: express.Response,
 }
 export const db = new PrismaClient();

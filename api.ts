@@ -3,12 +3,13 @@ import { ApolloServer } from 'apollo-server-express';
 import express from 'express'
 import { nexusPrisma } from 'nexus-plugin-prisma';
 import { DateTimeResolver } from 'graphql-scalars';
-import { asNexusMethod, makeSchema, fieldAuthorizePlugin } from 'nexus';
+import { asNexusMethod, makeSchema, fieldAuthorizePlugin, connectionPluginCore } from 'nexus';
 import { db } from './context';
 import * as HTTP from 'http'
 import * as types from './graphql';
 import cors from 'cors';
 import { loggingPlugin } from './loggingPlugin'
+import pino from 'pino'
 
 export const schema = makeSchema({
   types: [
@@ -49,8 +50,6 @@ export const schema = makeSchema({
   },
 });
 
-
-
 const apollo = new ApolloServer({
   context: (ctx) => {
     return { 
@@ -61,6 +60,7 @@ const apollo = new ApolloServer({
   plugins: [
     loggingPlugin,
   ],
+  logger: pino(),
 })
 
 const app = express()

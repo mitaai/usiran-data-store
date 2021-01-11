@@ -33,6 +33,7 @@
   },
   "dependencies": {
     "@prisma/client": "^2.14.0",
+    "@types/pino": "^6.3.5",
     "apollo-server-express": "^2.19.1",
     "apollo-server-plugin-base": "^0.10.3",
     "bcrypt": "^5.0.0",
@@ -42,6 +43,7 @@
     "graphql-scalars": "^1.7.0",
     "jsonwebtoken": "^8.5.1",
     "nexus": "^1.0.0",
-    "nexus-plugin-prisma": "^0.28.0"
+    "nexus-plugin-prisma": "^0.28.0",
+    "pino": "^6.10.0"
   }
 }

@@ -14,8 +14,9 @@ interface JWTData {
 const isJWTData = (input: object | string): input is JWTData => { return typeof input === "object" && "id" in input; };  
 
 function getUserId(context: Context) {
-  context.log.info('Log in getUserId function')
-  const Authorization = context.request.http?.headers.get('Authorization')
+  console.log('regular console log 2')
+  context.req.log.info('test pino 2')
+  const Authorization = context.req.get('Authorization')
   if (Authorization) {
     const token = Authorization.replace('Bearer ', '')
     const verified = verify(token, process.env.AUTH_SECRET as Secret)
@@ -28,7 +29,8 @@ function getUserId(context: Context) {
 }
 
 async function getUserRole(context: Context) {
-  context.log.info('Test pino logger')
+  console.log('regular console log 1')
+  context.req.log.info('test pino 1')
   const id = getUserId(context)
   const user = await context.db.user.findUnique({ where: { id } })
   if (user) return user.role
