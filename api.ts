@@ -55,7 +55,7 @@ apollo.applyMiddleware({
   app,
   cors: {
     origin: "https://irus.vercel.app",
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE"
+    credentials: true
   }
 })
 
