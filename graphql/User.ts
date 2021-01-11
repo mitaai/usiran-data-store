@@ -602,11 +602,7 @@ export const mutations  = extendType({
         const res = await originalResolve(root, args, ctx, info)
         return res
       },
-      authorize: (_root: any, _args: any, ctx: Context) => {
-        console.log(ctx);
-        console.log('ctx in authorize ^')
-        return userIsEditor(ctx)
-      }
+      authorize: (_root: any, _args: any, ctx: Context) => userIsEditor(ctx)
     })
     t.crud.updateOneStakeholder({
       async resolve(root, args, ctx, info, originalResolve) {

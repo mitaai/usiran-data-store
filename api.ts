@@ -53,6 +53,8 @@ const apollo = new ApolloServer({
   context: (ctx) => {
     return { 
       db,
+      req: ctx.req,
+      res: ctx.res,
     }
   },
   schema,
