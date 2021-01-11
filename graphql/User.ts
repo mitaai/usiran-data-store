@@ -15,9 +15,9 @@ const isJWTData = (input: object | string): input is JWTData => { return typeof 
 
 function getUserId(context: Context) {
   const Authorization = context.req.get('Authorization')
-  context.log.info('get user id');
+  context.log.debug('get user id');
   if (Authorization) {
-    context.log.info('authorization found');
+    context.log.debug('authorization found');
     const token = Authorization.replace('Bearer ', '')
     const verified = verify(token, process.env.AUTH_SECRET as Secret)
     if(isJWTData(verified)) {
