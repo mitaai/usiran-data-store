@@ -34,16 +34,13 @@ async function getUserRole(context: Context) {
 }
 
 async function userIsEditor(context: Context): Promise<boolean> {
-  await getUserRole(context)
-    .then((role) => {
-      if (['Editor', 'Admin'].includes(role as string)) return true
-      throw new Error(`Not authorized, user has role: ${role}`)
-    })
-  return false
+  const role = await getUserRole(context)
+  if (['Editor', 'Admin'].includes(role as string)) return true
+  throw new Error(`Not authorized, user has role: ${role}`)
 }
 
 async function userIsAdmin(context: Context) {
-  const role = await getUserRole(context);
+  const role = await getUserRole(context)
   if (role === 'Admin') return true
   throw new Error(`Not authorized, user has role: ${role}`)
 }
