@@ -53,7 +53,7 @@ export const schema = makeSchema({
 
 const apollo = new ApolloServer({
   context: (ctx) => {
-    const requestLogger = log.child('request')
+    const requestLogger = log
     requestLogger.addToContext({ Authorization: ctx.req.get('Authorization') })
     return { 
       db,
