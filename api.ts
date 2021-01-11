@@ -9,7 +9,6 @@ import * as HTTP from 'http'
 import * as types from './graphql';
 import cors from 'cors';
 import { loggingPlugin } from './loggingPlugin'
-import pino from 'pino'
 
 export const schema = makeSchema({
   types: [
@@ -60,7 +59,6 @@ const apollo = new ApolloServer({
   plugins: [
     loggingPlugin,
   ],
-  logger: pino(),
 })
 
 const app = express()
