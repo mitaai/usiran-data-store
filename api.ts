@@ -29,6 +29,7 @@ export const schema = makeSchema({
     process.env.NEXUS_SHOULD_GENERATE_ARTIFACTS,
   ),
   plugins: [nexusPrisma({
+    prismaClient: (ctx) => ctx.db,
     experimentalCRUD: true,
     scalars: {
       DateTime: DateTimeResolver,
