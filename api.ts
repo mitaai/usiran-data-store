@@ -61,7 +61,7 @@ const apollo = new ApolloServer({
 })
 
 const app = express()
-app.use([cors({ credentials: true, origin: "https://irus.vercel.app" }), pino])
+app.use(cors({ credentials: true, origin: "https://irus.vercel.app" }))
 const http = HTTP.createServer(app)
 
 apollo.applyMiddleware({
