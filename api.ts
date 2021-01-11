@@ -5,10 +5,10 @@ import { nexusPrisma } from 'nexus-plugin-prisma';
 import { DateTimeResolver } from 'graphql-scalars';
 import { asNexusMethod, makeSchema, fieldAuthorizePlugin } from 'nexus';
 import { db } from './context';
-import { log } from './util/logger';
 import * as HTTP from 'http'
 import * as types from './graphql';
 import cors from 'cors';
+import pino from 'pino-http';
 
 export const schema = makeSchema({
   types: [
@@ -53,11 +53,8 @@ export const schema = makeSchema({
 
 const apollo = new ApolloServer({
   context: (ctx) => {
-    const requestLogger = log
-    requestLogger.addToContext({ Authorization: ctx.req.get('Authorization') })
     return { 
       db,
-      log: requestLogger,
     }
   },
   schema,
@@ -65,6 +62,7 @@ const apollo = new ApolloServer({
 
 const app = express()
 app.use(cors({ credentials: true, origin: "https://irus.vercel.app" }));
+app.use(pino)
 const http = HTTP.createServer(app)
 
 apollo.applyMiddleware({
