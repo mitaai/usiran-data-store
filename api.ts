@@ -8,7 +8,7 @@ import { db } from './context';
 import * as HTTP from 'http'
 import * as types from './graphql';
 import cors from 'cors';
-import pino from 'express-pino-logger';
+import { loggingPlugin } from './loggingPlugin'
 
 export const schema = makeSchema({
   types: [
@@ -58,11 +58,13 @@ const apollo = new ApolloServer({
     }
   },
   schema,
+  plugins: [
+    loggingPlugin,
+  ],
 })
 
 const app = express()
 app.use(cors({ credentials: true, origin: "https://irus.vercel.app" }))
-app.use('/graphql', pino)
 const http = HTTP.createServer(app)
 
 apollo.applyMiddleware({
