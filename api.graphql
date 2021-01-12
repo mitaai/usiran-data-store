@@ -3367,6 +3367,7 @@ type Query {
   kinds(after: KindWhereUniqueInput, before: KindWhereUniqueInput, first: Int, last: Int, orderBy: [KindOrderByInput!], where: KindWhereInput): [Kind!]!
   location(where: LocationWhereUniqueInput!): Location
   locations(after: LocationWhereUniqueInput, before: LocationWhereUniqueInput, first: Int, last: Int, orderBy: [LocationOrderByInput!], where: LocationWhereInput): [Location!]!
+  searchQuery(limit: Int, searchQuery: String!): SearchResult
   stakeholder(where: StakeholderWhereUniqueInput!): Stakeholder
   stakeholders(after: StakeholderWhereUniqueInput, before: StakeholderWhereUniqueInput, first: Int, last: Int, orderBy: [StakeholderOrderByInput!], where: StakeholderWhereInput): [Stakeholder!]!
   stakeholdersCount(where: StakeholderWhereInput): Int
