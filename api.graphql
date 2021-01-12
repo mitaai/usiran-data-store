@@ -871,6 +871,7 @@ input DocumentCreateInput {
   documentTags: TagOnDocumentCreateManyWithoutDocumentInput
   documentTitle: String!
   documentTranscript: String
+  documentTsVector: String
   id: String!
   mentionedEvents: DocumentEventCreateManyWithoutDocumentInput
   mentionedLocations: DocumentLocationCreateManyWithoutDocumentInput
@@ -1002,6 +1003,7 @@ input DocumentCreateWithoutBriefingBooksMentionedInInput {
   documentTags: TagOnDocumentCreateManyWithoutDocumentInput
   documentTitle: String!
   documentTranscript: String
+  documentTsVector: String
   id: String!
   mentionedEvents: DocumentEventCreateManyWithoutDocumentInput
   mentionedLocations: DocumentLocationCreateManyWithoutDocumentInput
@@ -1034,6 +1036,7 @@ input DocumentCreateWithoutDocumentAuthorsInput {
   documentTags: TagOnDocumentCreateManyWithoutDocumentInput
   documentTitle: String!
   documentTranscript: String
+  documentTsVector: String
   id: String!
   mentionedEvents: DocumentEventCreateManyWithoutDocumentInput
   mentionedLocations: DocumentLocationCreateManyWithoutDocumentInput
@@ -1066,6 +1069,7 @@ input DocumentCreateWithoutDocumentClassificationInput {
   documentTags: TagOnDocumentCreateManyWithoutDocumentInput
   documentTitle: String!
   documentTranscript: String
+  documentTsVector: String
   id: String!
   mentionedEvents: DocumentEventCreateManyWithoutDocumentInput
   mentionedLocations: DocumentLocationCreateManyWithoutDocumentInput
@@ -1098,6 +1102,7 @@ input DocumentCreateWithoutDocumentFilesInput {
   documentTags: TagOnDocumentCreateManyWithoutDocumentInput
   documentTitle: String!
   documentTranscript: String
+  documentTsVector: String
   id: String!
   mentionedEvents: DocumentEventCreateManyWithoutDocumentInput
   mentionedLocations: DocumentLocationCreateManyWithoutDocumentInput
@@ -1130,6 +1135,7 @@ input DocumentCreateWithoutDocumentKindInput {
   documentTags: TagOnDocumentCreateManyWithoutDocumentInput
   documentTitle: String!
   documentTranscript: String
+  documentTsVector: String
   id: String!
   mentionedEvents: DocumentEventCreateManyWithoutDocumentInput
   mentionedLocations: DocumentLocationCreateManyWithoutDocumentInput
@@ -1162,6 +1168,7 @@ input DocumentCreateWithoutDocumentTagsInput {
   documentPublicationDate: DateTime
   documentTitle: String!
   documentTranscript: String
+  documentTsVector: String
   id: String!
   mentionedEvents: DocumentEventCreateManyWithoutDocumentInput
   mentionedLocations: DocumentLocationCreateManyWithoutDocumentInput
@@ -1195,6 +1202,7 @@ input DocumentCreateWithoutMentionedEventsInput {
   documentTags: TagOnDocumentCreateManyWithoutDocumentInput
   documentTitle: String!
   documentTranscript: String
+  documentTsVector: String
   id: String!
   mentionedLocations: DocumentLocationCreateManyWithoutDocumentInput
   mentionedStakeholders: DocumentInvolvedStakeholderCreateManyWithoutDocumentInput
@@ -1227,6 +1235,7 @@ input DocumentCreateWithoutMentionedLocationsInput {
   documentTags: TagOnDocumentCreateManyWithoutDocumentInput
   documentTitle: String!
   documentTranscript: String
+  documentTsVector: String
   id: String!
   mentionedEvents: DocumentEventCreateManyWithoutDocumentInput
   mentionedStakeholders: DocumentInvolvedStakeholderCreateManyWithoutDocumentInput
@@ -1259,6 +1268,7 @@ input DocumentCreateWithoutMentionedStakeholdersInput {
   documentTags: TagOnDocumentCreateManyWithoutDocumentInput
   documentTitle: String!
   documentTranscript: String
+  documentTsVector: String
   id: String!
   mentionedEvents: DocumentEventCreateManyWithoutDocumentInput
   mentionedLocations: DocumentLocationCreateManyWithoutDocumentInput
@@ -1867,6 +1877,7 @@ input DocumentOrderByInput {
   documentPublicationDate: SortOrder
   documentTitle: SortOrder
   documentTranscript: SortOrder
+  documentTsVector: SortOrder
   id: SortOrder
   sessionNumber: SortOrder
   updatedAt: SortOrder
@@ -1897,6 +1908,7 @@ input DocumentUpdateInput {
   documentTags: TagOnDocumentUpdateManyWithoutDocumentInput
   documentTitle: StringFieldUpdateOperationsInput
   documentTranscript: NullableStringFieldUpdateOperationsInput
+  documentTsVector: NullableStringFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   mentionedEvents: DocumentEventUpdateManyWithoutDocumentInput
   mentionedLocations: DocumentLocationUpdateManyWithoutDocumentInput
@@ -1977,6 +1989,7 @@ input DocumentUpdateWithoutBriefingBooksMentionedInInput {
   documentTags: TagOnDocumentUpdateManyWithoutDocumentInput
   documentTitle: StringFieldUpdateOperationsInput
   documentTranscript: NullableStringFieldUpdateOperationsInput
+  documentTsVector: NullableStringFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   mentionedEvents: DocumentEventUpdateManyWithoutDocumentInput
   mentionedLocations: DocumentLocationUpdateManyWithoutDocumentInput
@@ -2009,6 +2022,7 @@ input DocumentUpdateWithoutDocumentAuthorsInput {
   documentTags: TagOnDocumentUpdateManyWithoutDocumentInput
   documentTitle: StringFieldUpdateOperationsInput
   documentTranscript: NullableStringFieldUpdateOperationsInput
+  documentTsVector: NullableStringFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   mentionedEvents: DocumentEventUpdateManyWithoutDocumentInput
   mentionedLocations: DocumentLocationUpdateManyWithoutDocumentInput
@@ -2041,6 +2055,7 @@ input DocumentUpdateWithoutDocumentTagsInput {
   documentPublicationDate: NullableDateTimeFieldUpdateOperationsInput
   documentTitle: StringFieldUpdateOperationsInput
   documentTranscript: NullableStringFieldUpdateOperationsInput
+  documentTsVector: NullableStringFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   mentionedEvents: DocumentEventUpdateManyWithoutDocumentInput
   mentionedLocations: DocumentLocationUpdateManyWithoutDocumentInput
@@ -2074,6 +2089,7 @@ input DocumentUpdateWithoutMentionedEventsInput {
   documentTags: TagOnDocumentUpdateManyWithoutDocumentInput
   documentTitle: StringFieldUpdateOperationsInput
   documentTranscript: NullableStringFieldUpdateOperationsInput
+  documentTsVector: NullableStringFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   mentionedLocations: DocumentLocationUpdateManyWithoutDocumentInput
   mentionedStakeholders: DocumentInvolvedStakeholderUpdateManyWithoutDocumentInput
@@ -2106,6 +2122,7 @@ input DocumentUpdateWithoutMentionedLocationsInput {
   documentTags: TagOnDocumentUpdateManyWithoutDocumentInput
   documentTitle: StringFieldUpdateOperationsInput
   documentTranscript: NullableStringFieldUpdateOperationsInput
+  documentTsVector: NullableStringFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   mentionedEvents: DocumentEventUpdateManyWithoutDocumentInput
   mentionedStakeholders: DocumentInvolvedStakeholderUpdateManyWithoutDocumentInput
@@ -2138,6 +2155,7 @@ input DocumentUpdateWithoutMentionedStakeholdersInput {
   documentTags: TagOnDocumentUpdateManyWithoutDocumentInput
   documentTitle: StringFieldUpdateOperationsInput
   documentTranscript: NullableStringFieldUpdateOperationsInput
+  documentTsVector: NullableStringFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   mentionedEvents: DocumentEventUpdateManyWithoutDocumentInput
   mentionedLocations: DocumentLocationUpdateManyWithoutDocumentInput
@@ -2201,6 +2219,7 @@ input DocumentWhereInput {
   documentTags: TagOnDocumentListRelationFilter
   documentTitle: StringFilter
   documentTranscript: StringNullableFilter
+  documentTsVector: StringNullableFilter
   id: StringFilter
   mentionedEvents: DocumentEventListRelationFilter
   mentionedLocations: DocumentLocationListRelationFilter
@@ -2239,6 +2258,7 @@ input EventCreateInput {
   eventStartDate: DateTime!
   eventTags: TagOnEventCreateManyWithoutEventInput
   eventTitle: String!
+  eventTsVector: String
   id: String
   updatedAt: DateTime
 }
@@ -2309,6 +2329,7 @@ input EventCreateWithoutBriefingBooksMentionedInInput {
   eventStartDate: DateTime!
   eventTags: TagOnEventCreateManyWithoutEventInput
   eventTitle: String!
+  eventTsVector: String
   id: String
   updatedAt: DateTime
 }
@@ -2324,6 +2345,7 @@ input EventCreateWithoutDocumentsMentionedInInput {
   eventStartDate: DateTime!
   eventTags: TagOnEventCreateManyWithoutEventInput
   eventTitle: String!
+  eventTsVector: String
   id: String
   updatedAt: DateTime
 }
@@ -2339,6 +2361,7 @@ input EventCreateWithoutEventLocationsInput {
   eventStartDate: DateTime!
   eventTags: TagOnEventCreateManyWithoutEventInput
   eventTitle: String!
+  eventTsVector: String
   id: String
   updatedAt: DateTime
 }
@@ -2354,6 +2377,7 @@ input EventCreateWithoutEventStakeholdersInput {
   eventStartDate: DateTime!
   eventTags: TagOnEventCreateManyWithoutEventInput
   eventTitle: String!
+  eventTsVector: String
   id: String
   updatedAt: DateTime
 }
@@ -2369,6 +2393,7 @@ input EventCreateWithoutEventTagsInput {
   eventStakeholders: StakeholderEventCreateManyWithoutEventInput
   eventStartDate: DateTime!
   eventTitle: String!
+  eventTsVector: String
   id: String
   updatedAt: DateTime
 }
@@ -2380,6 +2405,7 @@ input EventOrderByInput {
   eventIdSeq: SortOrder
   eventStartDate: SortOrder
   eventTitle: SortOrder
+  eventTsVector: SortOrder
   id: SortOrder
   updatedAt: SortOrder
 }
@@ -2396,6 +2422,7 @@ input EventUpdateInput {
   eventStartDate: DateTimeFieldUpdateOperationsInput
   eventTags: TagOnEventUpdateManyWithoutEventInput
   eventTitle: StringFieldUpdateOperationsInput
+  eventTsVector: NullableStringFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
@@ -2451,6 +2478,7 @@ input EventUpdateWithoutBriefingBooksMentionedInInput {
   eventStartDate: DateTimeFieldUpdateOperationsInput
   eventTags: TagOnEventUpdateManyWithoutEventInput
   eventTitle: StringFieldUpdateOperationsInput
+  eventTsVector: NullableStringFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
@@ -2466,6 +2494,7 @@ input EventUpdateWithoutDocumentsMentionedInInput {
   eventStartDate: DateTimeFieldUpdateOperationsInput
   eventTags: TagOnEventUpdateManyWithoutEventInput
   eventTitle: StringFieldUpdateOperationsInput
+  eventTsVector: NullableStringFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
@@ -2481,6 +2510,7 @@ input EventUpdateWithoutEventLocationsInput {
   eventStartDate: DateTimeFieldUpdateOperationsInput
   eventTags: TagOnEventUpdateManyWithoutEventInput
   eventTitle: StringFieldUpdateOperationsInput
+  eventTsVector: NullableStringFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
@@ -2496,6 +2526,7 @@ input EventUpdateWithoutEventStakeholdersInput {
   eventStartDate: DateTimeFieldUpdateOperationsInput
   eventTags: TagOnEventUpdateManyWithoutEventInput
   eventTitle: StringFieldUpdateOperationsInput
+  eventTsVector: NullableStringFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
@@ -2511,6 +2542,7 @@ input EventUpdateWithoutEventTagsInput {
   eventStakeholders: StakeholderEventUpdateManyWithoutEventInput
   eventStartDate: DateTimeFieldUpdateOperationsInput
   eventTitle: StringFieldUpdateOperationsInput
+  eventTsVector: NullableStringFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
@@ -2553,6 +2585,7 @@ input EventWhereInput {
   eventStartDate: DateTimeFilter
   eventTags: TagOnEventListRelationFilter
   eventTitle: StringFilter
+  eventTsVector: StringNullableFilter
   id: StringFilter
   NOT: [EventWhereInput!]
   OR: [EventWhereInput!]
@@ -3528,6 +3561,7 @@ input StakeholderCreateInput {
   isStakeholderInstitution: Int
   stakeholderDescription: String
   stakeholderFullName: String!
+  stakeholderTsVector: String
   stakeholderWikipediaUri: String
   updatedAt: DateTime
 }
@@ -3585,6 +3619,7 @@ input StakeholderCreateWithoutBriefingBooksMentionedInInput {
   isStakeholderInstitution: Int
   stakeholderDescription: String
   stakeholderFullName: String!
+  stakeholderTsVector: String
   stakeholderWikipediaUri: String
   updatedAt: DateTime
 }
@@ -3598,6 +3633,7 @@ input StakeholderCreateWithoutDocumentsInput {
   isStakeholderInstitution: Int
   stakeholderDescription: String
   stakeholderFullName: String!
+  stakeholderTsVector: String
   stakeholderWikipediaUri: String
   updatedAt: DateTime
 }
@@ -3611,6 +3647,7 @@ input StakeholderCreateWithoutDocumentsMentionedInInput {
   isStakeholderInstitution: Int
   stakeholderDescription: String
   stakeholderFullName: String!
+  stakeholderTsVector: String
   stakeholderWikipediaUri: String
   updatedAt: DateTime
 }
@@ -3624,6 +3661,7 @@ input StakeholderCreateWithoutEventsInvolvedInInput {
   isStakeholderInstitution: Int
   stakeholderDescription: String
   stakeholderFullName: String!
+  stakeholderTsVector: String
   stakeholderWikipediaUri: String
   updatedAt: DateTime
 }
@@ -3788,6 +3826,7 @@ input StakeholderOrderByInput {
   isStakeholderInstitution: SortOrder
   stakeholderDescription: SortOrder
   stakeholderFullName: SortOrder
+  stakeholderTsVector: SortOrder
   stakeholderWikipediaUri: SortOrder
   updatedAt: SortOrder
 }
@@ -3802,6 +3841,7 @@ input StakeholderUpdateInput {
   isStakeholderInstitution: IntFieldUpdateOperationsInput
   stakeholderDescription: NullableStringFieldUpdateOperationsInput
   stakeholderFullName: StringFieldUpdateOperationsInput
+  stakeholderTsVector: NullableStringFieldUpdateOperationsInput
   stakeholderWikipediaUri: NullableStringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
@@ -3847,6 +3887,7 @@ input StakeholderUpdateWithoutBriefingBooksMentionedInInput {
   isStakeholderInstitution: IntFieldUpdateOperationsInput
   stakeholderDescription: NullableStringFieldUpdateOperationsInput
   stakeholderFullName: StringFieldUpdateOperationsInput
+  stakeholderTsVector: NullableStringFieldUpdateOperationsInput
   stakeholderWikipediaUri: NullableStringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
@@ -3860,6 +3901,7 @@ input StakeholderUpdateWithoutDocumentsInput {
   isStakeholderInstitution: IntFieldUpdateOperationsInput
   stakeholderDescription: NullableStringFieldUpdateOperationsInput
   stakeholderFullName: StringFieldUpdateOperationsInput
+  stakeholderTsVector: NullableStringFieldUpdateOperationsInput
   stakeholderWikipediaUri: NullableStringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
@@ -3873,6 +3915,7 @@ input StakeholderUpdateWithoutDocumentsMentionedInInput {
   isStakeholderInstitution: IntFieldUpdateOperationsInput
   stakeholderDescription: NullableStringFieldUpdateOperationsInput
   stakeholderFullName: StringFieldUpdateOperationsInput
+  stakeholderTsVector: NullableStringFieldUpdateOperationsInput
   stakeholderWikipediaUri: NullableStringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
@@ -3886,6 +3929,7 @@ input StakeholderUpdateWithoutEventsInvolvedInInput {
   isStakeholderInstitution: IntFieldUpdateOperationsInput
   stakeholderDescription: NullableStringFieldUpdateOperationsInput
   stakeholderFullName: StringFieldUpdateOperationsInput
+  stakeholderTsVector: NullableStringFieldUpdateOperationsInput
   stakeholderWikipediaUri: NullableStringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
@@ -3923,6 +3967,7 @@ input StakeholderWhereInput {
   OR: [StakeholderWhereInput!]
   stakeholderDescription: StringNullableFilter
   stakeholderFullName: StringFilter
+  stakeholderTsVector: StringNullableFilter
   stakeholderWikipediaUri: StringNullableFilter
   updatedAt: DateTimeFilter
 }
