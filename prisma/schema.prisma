@@ -232,6 +232,7 @@ model Document {
   mentionedLocations       DocumentLocation[]
   documentKind             KindOnDocument[]
   documentTags             TagOnDocument[]
+  documentTsVector         String?
 }
 
 model Event {
@@ -248,6 +249,7 @@ model Event {
   eventLocations           LocationOnEvent[]
   eventStakeholders        StakeholderEvent[]
   eventTags                TagOnEvent[]
+  eventTsVector            String?
 }
 
 model File {
@@ -295,6 +297,7 @@ model Stakeholder {
   documentsMentionedIn     DocumentInvolvedStakeholder[]
   briefingBooksMentionedIn StakeholderBriefingBook[]
   eventsInvolvedIn         StakeholderEvent[]
+  stakeholderTsVector      String?
 }
 
 model Tag {
