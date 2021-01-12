@@ -10,28 +10,49 @@ export const searchQueries = extendType({
         limit: intArg()
       },
       resolve: async (_parent, { searchQuery, limit }, ctx) => {
+        let documents;
+        let events;
+        let stakeholders;
+        if (limit) {
+          documents = await ctx.db.$queryRaw`
+          SELECT id, "documentTitle", ts_rank_cd("documentTsVector"::tsvector, query) AS rank
+          FROM "Document", plainto_tsquery('english', ${searchQuery}) query
+          WHERE query @@ "documentTsVector"::tsvector
+          ORDER BY rank DESC
+          LIMIT ${limit};`
 
-        const documents = await ctx.db.$queryRaw`
-        SELECT id, "documentTitle", ts_rank_cd("documentTsVector"::tsvector, query) AS rank
-        FROM "Document", plainto_tsquery('english', ${searchQuery}) query
-        WHERE query @@ "documentTsVector"::tsvector
-        ORDER BY rank DESC
-        ${limit ? `LIMIT ${limit}` : ''};`
+          events = await ctx.db.$queryRaw`
+          SELECT id, "eventTitle", ts_rank_cd("eventTsVector"::tsvector, query) AS rank
+          FROM "Event", plainto_tsquery('english', ${searchQuery}) query
+          WHERE query @@ "eventTsVector"::tsvector
+          ORDER BY rank DESC
+          LIMIT ${limit};`
 
-        const events = await ctx.db.$queryRaw`
-        SELECT id, "eventTitle", ts_rank_cd("eventTsVector"::tsvector, query) AS rank
-        FROM "Event", plainto_tsquery('english', ${searchQuery}) query
-        WHERE query @@ "eventTsVector"::tsvector
-        ORDER BY rank DESC
-        ${limit ? `LIMIT ${limit}` : ''};`
+          stakeholders = await ctx.db.$queryRaw`
+          SELECT id, "stakeholderFullName", ts_rank_cd("stakeholderTsVector"::tsvector, query) AS rank
+          FROM "Stakeholder", plainto_tsquery('english', ${searchQuery}) query
+          WHERE query @@ "stakeholderTsVector"::tsvector
+          ORDER BY rank DESC
+          LIMIT ${limit};`
+        } else {
+          documents = await ctx.db.$queryRaw`
+          SELECT id, "documentTitle", ts_rank_cd("documentTsVector"::tsvector, query) AS rank
+          FROM "Document", plainto_tsquery('english', ${searchQuery}) query
+          WHERE query @@ "documentTsVector"::tsvector
+          ORDER BY rank DESC;`
 
-        const stakeholders = await ctx.db.$queryRaw`
-        SELECT id, "stakeholderFullName", ts_rank_cd("stakeholderTsVector"::tsvector, query) AS rank
-        FROM "Stakeholder", plainto_tsquery('english', ${searchQuery}) query
-        WHERE query @@ "stakeholderTsVector"::tsvector
-        ORDER BY rank DESC
-        ${limit ? `LIMIT ${limit}` : ''};`
+          events = await ctx.db.$queryRaw`
+          SELECT id, "eventTitle", ts_rank_cd("eventTsVector"::tsvector, query) AS rank
+          FROM "Event", plainto_tsquery('english', ${searchQuery}) query
+          WHERE query @@ "eventTsVector"::tsvector
+          ORDER BY rank DESC;`
 
+          stakeholders = await ctx.db.$queryRaw`
+          SELECT id, "stakeholderFullName", ts_rank_cd("stakeholderTsVector"::tsvector, query) AS rank
+          FROM "Stakeholder", plainto_tsquery('english', ${searchQuery}) query
+          WHERE query @@ "stakeholderTsVector"::tsvector
+          ORDER BY rank DESC;`
+        }
         return {
           documents,
           events,
