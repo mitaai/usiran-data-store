@@ -3187,6 +3187,16 @@ input LocationWhereUniqueInput {
   locationName: String
 }
 
+enum MediaType {
+  Audio
+  Embedd
+  Image
+  Markdown
+  Pdf
+  RawText
+  Video
+}
+
 type Mutation {
   createOneClassificationOnDocument(data: ClassificationOnDocumentCreateInput!): ClassificationOnDocument!
   createOneDocument(data: DocumentCreateInput!): Document!
@@ -4432,6 +4442,12 @@ input UserOrderByInput {
   role: SortOrder
   updatedAt: SortOrder
   userName: SortOrder
+}
+
+enum UserRole {
+  Admin
+  Editor
+  Viewer
 }
 
 input UserUpdateInput {
