@@ -3348,6 +3348,12 @@ enum QueryMode {
   insensitive
 }
 
+type SearchResult {
+  documents: [Document!]!
+  events: [Event!]!
+  stakeholders: [Stakeholder!]!
+}
+
 enum SortOrder {
   asc
   desc
