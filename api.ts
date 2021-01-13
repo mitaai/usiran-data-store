@@ -58,9 +58,9 @@ const apollo = new ApolloServer({
     }
   },
   schema,
-  plugins: [
-    loggingPlugin,
-  ],
+  // plugins: [
+  //   loggingPlugin, <--- Enable for GraphQL query logs
+  // ],
 })
 
 const app = express()
