@@ -60,5 +60,38 @@ export const searchQueries = extendType({
         }
       },
     })
+    t.int('searchQueryDocumentsCount', {
+      args: {
+        searchQuery: nonNull(stringArg()),
+      },
+      resolve: async (_parent, { searchQuery }, ctx) => {
+        return ctx.db.$queryRaw`
+        SELECT COUNT(id)
+        FROM "Document", plainto_tsquery('english', ${searchQuery}) query
+        WHERE query @@ "documentTsVector"::tsvector;`;
+      },
+    })
+    t.int('searchQueryEventsCount', {
+      args: {
+        searchQuery: nonNull(stringArg()),
+      },
+      resolve: async (_parent, { searchQuery }, ctx) => {
+        return ctx.db.$queryRaw`
+        SELECT COUNT(id)
+        FROM "Event", plainto_tsquery('english', ${searchQuery}) query
+        WHERE query @@ "eventTsVector"::tsvector;`;
+      },
+    })
+    t.int('searchQueryStakeholdersCount', {
+      args: {
+        searchQuery: nonNull(stringArg()),
+      },
+      resolve: async (_parent, { searchQuery }, ctx) => {
+        return ctx.db.$queryRaw`
+        SELECT COUNT(id)
+        FROM "Stakeholder", plainto_tsquery('english', ${searchQuery}) query
+        WHERE query @@ "stakeholderTsVector"::tsvector;`;
+      },
+    })
   }
 })

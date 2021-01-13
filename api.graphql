@@ -3368,6 +3368,9 @@ type Query {
   location(where: LocationWhereUniqueInput!): Location
   locations(after: LocationWhereUniqueInput, before: LocationWhereUniqueInput, first: Int, last: Int, orderBy: [LocationOrderByInput!], where: LocationWhereInput): [Location!]!
   searchQuery(limit: Int, searchQuery: String!): SearchResult
+  searchQueryDocumentsCount(searchQuery: String!): Int
+  searchQueryEventsCount(searchQuery: String!): Int
+  searchQueryStakeholdersCount(searchQuery: String!): Int
   stakeholder(where: StakeholderWhereUniqueInput!): Stakeholder
   stakeholders(after: StakeholderWhereUniqueInput, before: StakeholderWhereUniqueInput, first: Int, last: Int, orderBy: [StakeholderOrderByInput!], where: StakeholderWhereInput): [Stakeholder!]!
   stakeholdersCount(where: StakeholderWhereInput): Int
