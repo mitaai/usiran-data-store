@@ -65,8 +65,8 @@ export const searchQueries = extendType({
         searchQuery: nonNull(stringArg()),
       },
       resolve: async (_parent, { searchQuery }, ctx) => {
-        const { count } = await  ctx.db.$queryRaw`
-        SELECT COUNT(id)
+        const count = await ctx.db.$executeRaw`
+        SELECT id
         FROM "Document", plainto_tsquery('english', ${searchQuery}) query
         WHERE query @@ "documentTsVector"::tsvector;`;
         return count;
@@ -77,8 +77,8 @@ export const searchQueries = extendType({
         searchQuery: nonNull(stringArg()),
       },
       resolve: async (_parent, { searchQuery }, ctx) => {
-        const { count } = await  ctx.db.$queryRaw`
-        SELECT COUNT(id)
+        const count = await ctx.db.$executeRaw`
+        SELECT id
         FROM "Event", plainto_tsquery('english', ${searchQuery}) query
         WHERE query @@ "eventTsVector"::tsvector;`;
         return count;
@@ -89,8 +89,8 @@ export const searchQueries = extendType({
         searchQuery: nonNull(stringArg()),
       },
       resolve: async (_parent, { searchQuery }, ctx) => {
-        const { count } = await ctx.db.$queryRaw`
-        SELECT COUNT(id)
+        const count = await ctx.db.$executeRaw`
+        SELECT id
         FROM "Stakeholder", plainto_tsquery('english', ${searchQuery}) query
         WHERE query @@ "stakeholderTsVector"::tsvector;`;
         return count;
